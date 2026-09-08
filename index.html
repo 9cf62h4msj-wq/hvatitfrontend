@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Хватит всем</title>
+    <style>
+        /* ===== БАЗОВЫЙ ДИЗАЙН ===== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            background: #f7f6f3;
+            color: #1e1e1e;
+            padding: 16px 12px 40px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .app {
+            max-width: 720px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 32px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+            padding: 24px 20px 32px;
+        }
+
+        h1 {
+            font-size: 26px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 4px;
+        }
+
+        h1 span {
+            background: #f0ede8;
+            font-size: 14px;
+            font-weight: 400;
+            padding: 2px 12px;
+            border-radius: 40px;
+            color: #4a4a4a;
+        }
+
+        .subhead {
+            color: #6b6b6b;
+            font-size: 14px;
+            margin-bottom: 18px;
+            border-left: 3px solid #d4d0c8;
+            padding-left: 14px;
+        }
+
+        .progress {
+            display: flex;
+            gap: 8px;
+            margin: 20px 0 24px;
+        }
+
+        .progress .dot {
+            height: 6px;
+            flex: 1;
+            background: #e6e3dc;
+            border-radius: 12px;
+            transition: 0.25s;
+        }
+
+        .progress .dot.active {
+            background: #2b2b2b;
+        }
+
+        .progress .dot.done {
+            background: #b3b0a7;
+        }
+
+        .step {
+            display: none;
+            animation: fade 0.25s ease;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        @keyframes fade {
+            0% {
+                opacity: 0.4;
+                transform: translateY(6px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .step-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .step-desc {
+            color: #5e5e5e;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 16px 0 10px;
+        }
+
+        .option {
+            background: #f4f2ee;
+            padding: 12px 18px;
+            border-radius: 40px;
+            font-size: 15px;
+            font-weight: 500;
+            border: 2px solid transparent;
+            transition: 0.15s;
+            cursor: pointer;
+            user-select: none;
+            flex: 1 0 auto;
+            text-align: center;
+            min-width: 100px;
+        }
+
+        .option.selected {
+            background: #1e1e1e;
+            color: #fff;
+            border-color: #1e1e1e;
+        }
+
+        .option:active {
+            transform: scale(0.96);
+        }
+
+        .counter {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin: 12px 0 8px;
+        }
+
+        .counter button {
+            width: 48px;
+            height: 48px;
+            border-radius: 40px;
+            border: 2px solid #dbd7d0;
+            background: #fff;
+            font-size: 24px;
+            font-weight: 300;
+            cursor: pointer;
+        }
+
+        .counter button:active {
+            background: #eae7e1;
+        }
+
+        .counter .value {
+            font-size: 32px;
+            font-weight: 500;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .budget-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 10px;
+            margin: 12px 0 10px;
+        }
+
+        .budget-item {
+            background: #f4f2ee;
+            padding: 12px 6px;
+            border-radius: 40px;
+            text-align: center;
+            font-weight: 500;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: 0.1s;
+        }
+
+        .budget-item.selected {
+            background: #1e1e1e;
+            color: #fff;
+            border-color: #1e1e1e;
+        }
+
+        .budget-custom {
+            margin-top: 10px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .budget-custom input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid #e2ded7;
+            border-radius: 12px;
+            font-size: 16px;
+            background: #fafaf8;
+        }
+
+        .budget-custom input:focus {
+            outline: none;
+            border-color: #1e1e1e;
+        }
+
+        .budget-custom .btn {
+            flex: 0 0 auto;
+            padding: 12px 24px;
+            min-width: auto;
+        }
+
+        .pref-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 12px 0 10px;
+        }
+
+        .pref-item {
+            background: #f4f2ee;
+            padding: 10px 18px;
+            border-radius: 40px;
+            font-size: 15px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: 0.1s;
+        }
+
+        .pref-item.selected {
+            background: #1e1e1e;
+            color: #fff;
+            border-color: #1e1e1e;
+        }
+
+        .result-card {
+            background: #f9f8f5;
+            border-radius: 24px;
+            padding: 18px 16px;
+            margin: 20px 0 16px;
+        }
+
+        .result-summary {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px 18px;
+            font-size: 14px;
+            color: #3c3c3c;
+            border-bottom: 1px solid #e2ded7;
+            padding-bottom: 14px;
+            margin-bottom: 16px;
+        }
+
+        .result-summary strong {
+            font-weight: 600;
+            color: #000;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #efebe6;
+            font-size: 15px;
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 18px;
+            font-weight: 600;
+            padding-top: 16px;
+            margin-top: 8px;
+            border-top: 2px solid #d4d0c8;
+        }
+
+        .total-row .budget-status {
+            font-size: 14px;
+            font-weight: 400;
+            color: #4f8b4f;
+        }
+
+        .total-row .over {
+            color: #b13e3e;
+        }
+
+        .actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 24px;
+        }
+
+        .btn {
+            background: #1e1e1e;
+            color: #fff;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 60px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            flex: 1;
+            min-width: 120px;
+            text-align: center;
+        }
+
+        .btn:active {
+            transform: scale(0.96);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #1e1e1e;
+            border: 2px solid #dbd7d0;
+        }
+
+        .btn-outline:active {
+            background: #efebe6;
+        }
+
+        .btn-secondary {
+            background: #eae7e1;
+            color: #1e1e1e;
+        }
+
+        .btn-secondary:active {
+            background: #d6d2ca;
+        }
+
+        .btn:disabled {
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .hint {
+            font-size: 13px;
+            color: #6f6f6f;
+            margin-top: 6px;
+        }
+
+        .budget-warning {
+            background: #fff3e0;
+            border-left: 4px solid #e65100;
+            padding: 14px 16px;
+            border-radius: 12px;
+            margin: 12px 0;
+            font-size: 14px;
+        }
+
+        .budget-warning strong {
+            color: #bf360c;
+        }
+
+        .scenario-info {
+            background: #f0ede8;
+            border-radius: 12px;
+            padding: 10px 14px;
+            margin: 4px 0 12px;
+            font-size: 13px;
+            color: #555;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .scenario-info .tag {
+            background: #fff;
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .price-note {
+            font-size: 11px;
+            color: #999;
+            margin-top: 8px;
+            text-align: center;
+        }
+
+        .loading-indicator {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+
+        .loading-indicator .spinner {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border: 3px solid #e2ded7;
+            border-top: 3px solid #1e1e1e;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .app {
+                padding: 16px;
+            }
+
+            .option {
+                font-size: 14px;
+                padding: 10px 14px;
+                min-width: 80px;
+            }
+
+            .budget-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app" id="app">
+        <h1>🥂 Хватит всем <span>v8.2</span></h1>
+        <div class="subhead">Калькулятор еды и напитков с бэкендом</div>
+
+        <!-- Прогресс -->
+        <div class="progress" id="progress">
+            <div class="dot active"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+
+        <!-- ШАГ 1 -->
+        <div class="step active" id="step1">
+            <div class="step-title">🎉 Выберите сценарий</div>
+            <div class="step-desc">Подберите готовый набор блюд для вашего мероприятия</div>
+            <div class="options" id="scenarioOptions">
+                <!-- Загружается из бэкенда -->
+            </div>
+            <div class="scenario-info" id="scenarioInfo" style="display:none;">
+                <span>📋 <span id="scenarioFormat">—</span></span>
+                <span>⏱ <span id="scenarioDuration">—</span> ч</span>
+                <span>👥 <span id="scenarioAudience">—</span></span>
+                <span class="tag" id="scenarioItemsCount">0 блюд</span>
+                <span class="tag" id="scenarioFactor">×<span id="scenarioFactorValue">1.0</span></span>
+            </div>
+            <div class="actions">
+                <button class="btn" id="toStep2" disabled>Далее →</button>
+            </div>
+        </div>
+
+        <!-- ШАГ 2 -->
+        <div class="step" id="step2">
+            <div class="step-title">👥 Сколько гостей?</div>
+            <div class="step-desc">Укажите количество взрослых и детей отдельно</div>
+            <div style="display:flex; gap:20px; flex-wrap:wrap; margin:12px 0;">
+                <div style="flex:1; min-width:120px;">
+                    <label style="font-weight:500;font-size:14px;color:#555;">Взрослые</label>
+                    <div class="counter" style="margin-top:4px;">
+                        <button id="adultsDec">−</button>
+                        <span class="value" id="adultsValue">10</span>
+                        <button id="adultsInc">+</button>
+                    </div>
+                </div>
+                <div style="flex:1; min-width:120px;">
+                    <label style="font-weight:500;font-size:14px;color:#555;">Дети</label>
+                    <div class="counter" style="margin-top:4px;">
+                        <button id="childrenDec">−</button>
+                        <span class="value" id="childrenValue">0</span>
+                        <button id="childrenInc">+</button>
+                    </div>
+                </div>
+            </div>
+            <div class="hint">от 2 до 500 человек всего</div>
+            <div class="actions">
+                <button class="btn btn-outline" id="backToStep1">← Назад</button>
+                <button class="btn" id="toStep3">Далее →</button>
+            </div>
+        </div>
+
+        <!-- ШАГ 3 -->
+        <div class="step" id="step3">
+            <div class="step-title">⏱ Сколько часов?</div>
+            <div class="step-desc">От этого зависит количество еды и напитков</div>
+            <div class="options" id="durationOptions">
+                <div class="option" data-value="2">1–2 ч</div>
+                <div class="option" data-value="4">3–4 ч</div>
+                <div class="option" data-value="6">5–6 ч</div>
+                <div class="option" data-value="8">7–8 ч</div>
+            </div>
+            <div class="actions">
+                <button class="btn btn-outline" id="backToStep2">← Назад</button>
+                <button class="btn" id="toStep4" disabled>Далее →</button>
+            </div>
+        </div>
+
+        <!-- ШАГ 4 -->
+        <div class="step" id="step4">
+            <div class="step-title">💰 Какой бюджет?</div>
+            <div class="step-desc">Выберите сумму или введите свою</div>
+            <div class="budget-grid" id="budgetOptions">
+                <div class="budget-item" data-value="10000">10 000 ₽</div>
+                <div class="budget-item" data-value="20000">20 000 ₽</div>
+                <div class="budget-item" data-value="30000">30 000 ₽</div>
+                <div class="budget-item" data-value="50000">50 000 ₽</div>
+                <div class="budget-item" data-value="100000">100 000 ₽</div>
+            </div>
+            <div class="budget-custom">
+                <input type="number" id="customBudget" placeholder="Свой бюджет..." min="1000" step="1000" />
+                <button class="btn" id="applyCustomBudget" style="flex:0 0 auto;padding:12px 20px;">Применить</button>
+            </div>
+            <div class="actions">
+                <button class="btn btn-outline" id="backToStep3">← Назад</button>
+                <button class="btn" id="toStep5" disabled>Далее →</button>
+            </div>
+        </div>
+
+        <!-- ШАГ 5 -->
+        <div class="step" id="step5">
+            <div class="step-title">🍽 Что предпочитаете?</div>
+            <div class="step-desc">Выберите что-то одно или несколько</div>
+            <div class="pref-grid" id="prefOptions">
+                <div class="pref-item" data-value="meat">🥩 Мясо</div>
+                <div class="pref-item" data-value="fish">🐟 Рыба</div>
+                <div class="pref-item" data-value="veggie">🥗 Овощи</div>
+                <div class="pref-item" data-value="snacks">🧀 Закуски</div>
+                <div class="pref-item" data-value="sweet">🍰 Сладкое</div>
+                <div class="pref-item" data-value="drinks">🥤 Напитки</div>
+                <div class="pref-item" data-value="auto">🤖 Авто-подбор</div>
+            </div>
+            <div class="hint">Выбрано: <span id="prefCount">0</span></div>
+            <div class="actions">
+                <button class="btn btn-outline" id="backToStep4">← Назад</button>
+                <button class="btn" id="toStep6">Рассчитать →</button>
+            </div>
+        </div>
+
+        <!-- ШАГ 6 -->
+        <div class="step" id="step6">
+            <div class="step-title">📋 Ваш расчёт готов!</div>
+            <div class="step-desc" id="resultDesc">💡 Результат получен от бэкенда</div>
+
+            <div class="result-summary" id="resultSummary">
+                <span>🎉 <strong id="resScenario">—</strong></span>
+                <span>👥 <strong id="resAdults">—</strong> взрослых, <strong id="resChildren">—</strong> детей</span>
+                <span>⏱ <strong id="resDuration">—</strong> ч</span>
+                <span>💰 <strong id="resBudget">—</strong> ₽</span>
+            </div>
+
+            <div id="budgetWarning" style="display:none;"></div>
+
+            <div class="loading-indicator" id="loadingIndicator">
+                <div class="spinner"></div>
+                <div style="margin-top:10px;">Рассчитываем меню...</div>
+            </div>
+
+            <div class="result-card" id="resultList"></div>
+
+            <div class="total-row" id="resultTotal">
+                <span>💰 Итого: <strong id="totalCost">0</strong> ₽</span>
+                <span class="budget-status" id="budgetStatus">✅ В пределах бюджета</span>
+            </div>
+
+            <div class="price-note">🧾 Цены: официальная база Пермстата 2025 + динамика Росстата 2026</div>
+
+            <div class="actions" style="margin-top:12px;">
+                <button class="btn btn-secondary" id="resetBtn">🔄 Новый расчёт</button>
+                <button class="btn" id="shareBtn">📤 Поделиться</button>
+            </div>
+            <div class="actions">
+                <button class="btn btn-outline" id="backToStep5">← Назад</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================================
+        // ПОДКЛЮЧЕНИЕ К БЭКЕНДУ
+        // ============================================================
+
+        const API_URL = 'https://hvatitvsem.onrender.com';
+
+        // ============================================================
+        // СОСТОЯНИЕ
+        // ============================================================
+        let state = {
+            step: 1,
+            scenario: null,
+            adults: 10,
+            children: 0,
+            duration: null,
+            budget: null,
+            preferences: [],
+            result: null
+        };
+
+        // ============================================================
+        // ЗАГРУЗКА СЦЕНАРИЕВ С БЭКЕНДА
+        // ============================================================
+        async function loadScenarios() {
+            try {
+                console.log('📡 Загрузка сценариев с бэкенда...');
+                const response = await fetch(`${API_URL}/scenarios`);
+                if (!response.ok) throw new Error('Ошибка загрузки сценариев');
+                const scenarios = await response.json();
+                console.log('✅ Сценарии загружены:', scenarios);
+                renderScenarios(scenarios);
+            } catch (error) {
+                console.error('❌ Ошибка:', error);
+                renderScenarios([
+                    { id: 'SC001', name: 'День рождения - банкет', format: 'Банкет', duration: 4, audience: 'Взрослые', factor: 1.0 }
+                ]);
+                alert('⚠️ Бэкенд не доступен. Убедитесь, что он запущен на http://localhost:8000');
+            }
+        }
+
+        function renderScenarios(scenarios) {
+            const container = document.getElementById('scenarioOptions');
+            container.innerHTML = '';
+            scenarios.forEach(scenario => {
+                const div = document.createElement('div');
+                div.className = 'option';
+                div.dataset.value = scenario.id;
+                div.textContent = scenario.name;
+                div.addEventListener('click', () => {
+                    document.querySelectorAll('#scenarioOptions .option').forEach(el => el.classList.remove('selected'));
+                    div.classList.add('selected');
+                    state.scenario = scenario.id;
+                    document.getElementById('toStep2').disabled = false;
+
+                    document.getElementById('scenarioInfo').style.display = 'flex';
+                    document.getElementById('scenarioFormat').textContent = scenario.format;
+                    document.getElementById('scenarioDuration').textContent = scenario.duration;
+                    document.getElementById('scenarioAudience').textContent = scenario.audience;
+                    document.getElementById('scenarioItemsCount').textContent = '8 блюд';
+                    document.getElementById('scenarioFactorValue').textContent = scenario.factor.toFixed(2);
+                });
+                container.appendChild(div);
+            });
+        }
+
+        // ============================================================
+        // НАВИГАЦИЯ
+        // ============================================================
+        function goToStep(n) {
+            state.step = n;
+            document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
+            document.getElementById(`step${n}`).classList.add('active');
+            document.querySelectorAll('.progress .dot').forEach((dot, i) => {
+                dot.className = 'dot';
+                if (i < n - 1) dot.classList.add('done');
+                if (i === n - 1) dot.classList.add('active');
+            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        document.getElementById('toStep2').addEventListener('click', () => goToStep(2));
+        document.getElementById('toStep3').addEventListener('click', () => goToStep(3));
+        document.getElementById('toStep4').addEventListener('click', () => goToStep(4));
+        document.getElementById('toStep5').addEventListener('click', () => goToStep(5));
+
+        document.getElementById('backToStep1').addEventListener('click', () => goToStep(1));
+        document.getElementById('backToStep2').addEventListener('click', () => goToStep(2));
+        document.getElementById('backToStep3').addEventListener('click', () => goToStep(3));
+        document.getElementById('backToStep4').addEventListener('click', () => goToStep(4));
+
+        // ============================================================
+        // ГОСТИ
+        // ============================================================
+        document.getElementById('adultsDec').addEventListener('click', () => {
+            if (state.adults > 0) { state.adults--; updateGuests(); }
+        });
+        document.getElementById('adultsInc').addEventListener('click', () => {
+            if (state.adults + state.children < 500) { state.adults++; updateGuests(); }
+        });
+        document.getElementById('childrenDec').addEventListener('click', () => {
+            if (state.children > 0) { state.children--; updateGuests(); }
+        });
+        document.getElementById('childrenInc').addEventListener('click', () => {
+            if (state.adults + state.children < 500) { state.children++; updateGuests(); }
+        });
+
+        function updateGuests() {
+            document.getElementById('adultsValue').textContent = state.adults;
+            document.getElementById('childrenValue').textContent = state.children;
+        }
+
+        document.getElementById('toStep3').addEventListener('click', () => {
+            if (state.adults + state.children < 2) { alert('Минимальное количество гостей — 2'); return; }
+            goToStep(3);
+        });
+
+        // ============================================================
+        // ДЛИТЕЛЬНОСТЬ
+        // ============================================================
+        document.querySelectorAll('#durationOptions .option').forEach(el => {
+            el.addEventListener('click', () => {
+                document.querySelectorAll('#durationOptions .option').forEach(o => o.classList.remove('selected'));
+                el.classList.add('selected');
+                state.duration = parseInt(el.dataset.value);
+                document.getElementById('toStep4').disabled = false;
+            });
+        });
+
+        // ============================================================
+        // БЮДЖЕТ
+        // ============================================================
+        document.querySelectorAll('#budgetOptions .budget-item').forEach(el => {
+            el.addEventListener('click', () => {
+                document.querySelectorAll('#budgetOptions .budget-item').forEach(o => o.classList.remove('selected'));
+                el.classList.add('selected');
+                state.budget = parseInt(el.dataset.value);
+                document.getElementById('customBudget').value = '';
+                document.getElementById('toStep5').disabled = false;
+            });
+        });
+
+        document.getElementById('applyCustomBudget').addEventListener('click', () => {
+            const val = parseInt(document.getElementById('customBudget').value);
+            if (val && val >= 1000) {
+                document.querySelectorAll('#budgetOptions .budget-item').forEach(o => o.classList.remove('selected'));
+                state.budget = val;
+                document.getElementById('toStep5').disabled = false;
+            } else {
+                alert('Пожалуйста, введите бюджет от 1000 ₽');
+            }
+        });
+
+        // ============================================================
+        // ПРЕДПОЧТЕНИЯ
+        // ============================================================
+        document.querySelectorAll('#prefOptions .pref-item').forEach(el => {
+            el.addEventListener('click', () => {
+                const value = el.dataset.value;
+                if (value === 'auto') {
+                    document.querySelectorAll('#prefOptions .pref-item').forEach(o => o.classList.remove('selected'));
+                    el.classList.add('selected');
+                    state.preferences = ['auto'];
+                    document.getElementById('prefCount').textContent = '1 (авто)';
+                    return;
+                }
+                document.querySelector('#prefOptions .pref-item[data-value="auto"]')?.classList.remove('selected');
+                state.preferences = state.preferences.filter(p => p !== 'auto');
+
+                if (state.preferences.includes(value)) {
+                    state.preferences = state.preferences.filter(p => p !== value);
+                    el.classList.remove('selected');
+                } else {
+                    state.preferences.push(value);
+                    el.classList.add('selected');
+                }
+                document.getElementById('prefCount').textContent = state.preferences.length;
+            });
+        });
+
+        // ============================================================
+        // РАСЧЁТ (ОТПРАВКА НА БЭКЕНД)
+        // ============================================================
+        document.getElementById('toStep6').addEventListener('click', async function () {
+            console.log('🔥 КНОПКА "Рассчитать" НАЖАТА!');
+
+            if (!state.scenario) {
+                alert('Выберите сценарий');
+                return;
+            }
+            if (!state.duration) {
+                alert('Выберите длительность');
+                return;
+            }
+            if (!state.budget) {
+                alert('Укажите бюджет');
+                return;
+            }
+
+            if (state.preferences.length === 0) {
+                state.preferences = ['auto'];
+                document.querySelector('#prefOptions .pref-item[data-value="auto"]')?.classList.add('selected');
+                document.getElementById('prefCount').textContent = '1 (авто)';
+            }
+
+            console.log('📤 Отправка данных на бэкенд:', {
+                scenario_id: state.scenario,
+                adults: state.adults,
+                children: state.children,
+                hours: state.duration,
+                budget: state.budget,
+                preferences: state.preferences
+            });
+
+            const loading = document.getElementById('loadingIndicator');
+            const resultList = document.getElementById('resultList');
+            loading.style.display = 'block';
+            resultList.innerHTML = '';
+
+            try {
+                const response = await fetch(`${API_URL}/calculate`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        scenario_id: state.scenario,
+                        adults: state.adults,
+                        children: state.children,
+                        hours: state.duration,
+                        budget: state.budget,
+                        preferences: state.preferences
+                    })
+                });
+
+                console.log('📡 Статус ответа:', response.status);
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`Ошибка ${response.status}: ${errorText}`);
+                }
+
+                const result = await response.json();
+                console.log('📥 Ответ от бэкенда:', result);
+
+                state.result = result;
+                displayResult(result);
+
+                loading.style.display = 'none';
+                goToStep(6);
+
+            } catch (error) {
+                console.error('❌ Ошибка:', error);
+                loading.style.display = 'none';
+                resultList.innerHTML = `
+            <div style="text-align:center;padding:30px;color:#e74c3c;">
+                <div style="font-size:48px;">😕</div>
+                <h3>Ошибка подключения к бэкенду</h3>
+                <p style="color:#666;font-size:14px;margin-top:10px;">
+                    ${error.message}
+                </p>
+                <p style="color:#999;font-size:13px;margin-top:8px;">
+                    Убедитесь, что бэкенд запущен: <code>python backend/main.py</code>
+                </p>
+                <p style="color:#999;font-size:13px;">
+                    И работает на <code>http://localhost:8000</code>
+                </p>
+            </div>
+        `;
+            }
+        });
+
+        // ============================================================
+        // ОТОБРАЖЕНИЕ РЕЗУЛЬТАТА
+        // ============================================================
+        function displayResult(data) {
+            console.log('📊 Отображение результата...');
+
+            document.getElementById('resScenario').textContent = data.scenario || '—';
+            document.getElementById('resAdults').textContent = data.adults || 0;
+            document.getElementById('resChildren').textContent = data.children || 0;
+            document.getElementById('resDuration').textContent = data.hours || 0;
+            document.getElementById('resBudget').textContent = (data.budget || 0).toLocaleString('ru-RU');
+
+            const warning = document.getElementById('budgetWarning');
+            if (!data.is_within_budget) {
+                warning.style.display = 'block';
+                warning.innerHTML = `
+            <div class="budget-warning">
+                <strong>⚠️ Бюджета недостаточно</strong><br>
+                Расчётная стоимость: <strong>${data.total_cost.toLocaleString('ru-RU')} ₽</strong><br>
+                Ваш бюджет: <strong>${data.budget.toLocaleString('ru-RU')} ₽</strong><br>
+                Не хватает: <strong>${data.shortfall.toLocaleString('ru-RU')} ₽</strong>
+            </div>
+        `;
+            } else {
+                warning.style.display = 'none';
+            }
+
+            const list = document.getElementById('resultList');
+            list.innerHTML = '';
+
+            if (!data.items || data.items.length === 0) {
+                list.innerHTML = '<div style="text-align:center;padding:20px;color:#999;">Нет блюд в расчёте</div>';
+                return;
+            }
+
+            const categories = {};
+            data.items.forEach(item => {
+                const cat = item.category || 'Другое';
+                if (!categories[cat]) categories[cat] = [];
+                categories[cat].push(item);
+            });
+
+            const order = ['Салаты', 'Холодные закуски', 'Закуски', 'Хлеб', 'Горячее', 'Гарнир', 'Десерт', 'Напитки'];
+            const sorted = Object.keys(categories).sort((a, b) => {
+                const ia = order.indexOf(a);
+                const ib = order.indexOf(b);
+                if (ia === -1 && ib === -1) return a.localeCompare(b);
+                if (ia === -1) return 1;
+                if (ib === -1) return -1;
+                return ia - ib;
+            });
+
+            sorted.forEach(cat => {
+                const items = categories[cat];
+                const total = items.reduce((s, i) => s + i.final_amount, 0);
+                const div = document.createElement('div');
+                div.style.cssText = 'font-weight:600;margin-top:12px;padding:6px 0;border-bottom:2px solid #e2ded7;';
+                div.textContent = `${cat} (${total.toFixed(1)} ${items[0]?.unit || ''})`;
+                list.appendChild(div);
+
+                items.forEach(item => {
+                    const row = document.createElement('div');
+                    row.className = 'result-item';
+                    row.innerHTML = `
+                <span>${item.name}</span>
+                <span>${item.final_amount.toFixed(1)} ${item.unit || ''} — ${item.total_price.toLocaleString('ru-RU')} ₽</span>
+            `;
+                    list.appendChild(row);
+                });
+            });
+
+            document.getElementById('totalCost').textContent = data.total_cost.toLocaleString('ru-RU');
+            const status = document.getElementById('budgetStatus');
+            if (data.is_within_budget) {
+                status.textContent = `✅ В пределах бюджета (${data.remaining.toLocaleString('ru-RU')} ₽ осталось)`;
+                status.className = 'budget-status';
+            } else {
+                status.textContent = `⚠️ Превышение бюджета на ${data.shortfall.toLocaleString('ru-RU')} ₽`;
+                status.className = 'budget-status over';
+            }
+
+            console.log('✅ Результат отображён');
+        }
+
+        // ============================================================
+        // НОВЫЙ РАСЧЁТ
+        // ============================================================
+        document.getElementById('resetBtn').addEventListener('click', () => {
+            state = {
+                step: 1,
+                scenario: null,
+                adults: 10,
+                children: 0,
+                duration: null,
+                budget: null,
+                preferences: [],
+                result: null
+            };
+            document.querySelectorAll('.option, .budget-item, .pref-item').forEach(el => el.classList.remove('selected'));
+            document.getElementById('toStep2').disabled = true;
+            document.getElementById('toStep4').disabled = true;
+            document.getElementById('toStep5').disabled = true;
+            document.getElementById('adultsValue').textContent = '10';
+            document.getElementById('childrenValue').textContent = '0';
+            document.getElementById('prefCount').textContent = '0';
+            document.getElementById('resultList').innerHTML = '';
+            document.getElementById('budgetWarning').style.display = 'none';
+            document.getElementById('customBudget').value = '';
+            document.getElementById('scenarioInfo').style.display = 'none';
+            goToStep(1);
+        });
+
+        // ============================================================
+        // ПОДЕЛИТЬСЯ
+        // ============================================================
+        document.getElementById('shareBtn').addEventListener('click', () => {
+            if (!state.result) {
+                alert('Сначала выполните расчёт');
+                return;
+            }
+
+            const text = `
+🥂 Хватит всем!
+
+Сценарий: ${state.result.scenario || '—'}
+Взрослых: ${state.adults}, Детей: ${state.children}
+Длительность: ${state.duration} ч
+Бюджет: ${state.budget.toLocaleString('ru-RU')} ₽
+
+💰 Итого: ${state.result.total_cost.toLocaleString('ru-RU')} ₽
+${state.result.is_within_budget ? '✅ В пределах бюджета' : '⚠️ Бюджет превышен'}
+
+🧾 Цены: официальная база Пермстата 2025 + динамика Росстата 2026
+    `.trim();
+
+            if (navigator.share) {
+                navigator.share({ title: 'Хватит всем', text: text });
+            } else {
+                navigator.clipboard.writeText(text).then(() => {
+                    alert('✅ Расчёт скопирован в буфер обмена!');
+                });
+            }
+        });
+
+        // ============================================================
+        // ВОЗВРАТ НА ШАГ 5
+        // ============================================================
+        document.getElementById('backToStep5').addEventListener('click', () => goToStep(5));
+
+        // ============================================================
+        // ЗАПУСК
+        // ============================================================
+        console.log('🚀 Хватит всем v8.2 загружен');
+        console.log('📡 API: http://localhost:8000');
+
+        loadScenarios();
+        goToStep(1);
+    </script>
+</body>
+
+</html>
