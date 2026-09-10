@@ -19,9 +19,6 @@
             --primary-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
             --primary-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
             --border: #e5e7eb;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --error: #ef4444;
             --radius: 24px;
             --radius-btn: 20px;
             --radius-sm: 16px;
@@ -89,12 +86,10 @@
             justify-content: center;
             padding: 16px;
             position: relative;
-            /* Базовый градиентный фон */
             background: linear-gradient(135deg, #eef2ff 0%, #faf5ff 40%, #f0f9ff 100%);
             background-attachment: fixed;
         }
 
-        /* Плавающие цветные пятна */
         .bg-blobs {
             position: fixed;
             top: 0;
@@ -120,7 +115,6 @@
             background: radial-gradient(circle, #a5b4fc 0%, transparent 70%);
             top: -80px;
             left: -80px;
-            animation-delay: 0s;
         }
 
         .blob-2 {
@@ -238,11 +232,6 @@
             letter-spacing: -0.02em;
         }
 
-        .card-desc {
-            font-size: 14px;
-            color: var(--text-muted);
-        }
-
         .grid-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -355,7 +344,6 @@
 
         .counter-btn:active {
             transform: scale(0.92);
-            background: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%);
         }
 
         .counter-btn:disabled {
@@ -441,7 +429,6 @@
 
         .btn-primary:active:not(:disabled) {
             transform: scale(0.97);
-            box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
         }
 
         .btn-primary:disabled {
@@ -505,11 +492,6 @@
             color: #065f46;
         }
 
-        .badge-warning {
-            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-            color: #92400e;
-        }
-
         .badge-error {
             background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
             color: #991b1b;
@@ -522,7 +504,6 @@
         .category-title {
             font-size: 16px;
             font-weight: 700;
-            margin-bottom: 0;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -575,6 +556,51 @@
         .item-price {
             font-weight: 700;
             white-space: nowrap;
+        }
+
+        /* Кнопки редактирования */
+        .item-actions {
+            display: flex;
+            gap: 4px;
+            margin-left: 8px;
+        }
+
+        .item-btn {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            border: none;
+            background: rgba(243, 244, 246, 0.9);
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #374151;
+            transition: all 0.2s;
+        }
+
+        .item-btn:active {
+            transform: scale(0.9);
+        }
+
+        .item-minus {
+            color: #ef4444;
+        }
+
+        .item-plus {
+            color: #10b981;
+        }
+
+        .item-remove {
+            background: rgba(254, 226, 226, 0.9);
+            color: #991b1b;
+        }
+
+        .item-swap {
+            background: rgba(219, 234, 254, 0.9);
+            color: #1e40af;
         }
 
         .total-row {
@@ -662,11 +688,131 @@
                 transform: translateX(6px);
             }
         }
+
+        /* 🆕 МОДАЛЬНОЕ ОКНО ЗАМЕНЫ */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(15, 23, 42, 0.5);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            z-index: 999;
+            display: none;
+            align-items: flex-end;
+            justify-content: center;
+            padding: 16px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            width: 100%;
+            max-width: 640px;
+            background: #ffffff;
+            border-radius: 24px 24px 24px 24px;
+            padding: 24px;
+            max-height: 80vh;
+            overflow-y: auto;
+            animation: slideUp 0.3s ease;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(40px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .modal-close {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(243, 244, 246, 0.9);
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-close:active {
+            transform: scale(0.9);
+        }
+
+        .alt-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .alt-item {
+            padding: 16px;
+            border-radius: 16px;
+            background: rgba(250, 251, 255, 0.9);
+            border: 2px solid transparent;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s;
+        }
+
+        .alt-item:active {
+            transform: scale(0.98);
+        }
+
+        .alt-item:hover {
+            border-color: #a5b4fc;
+            background: #eef2ff;
+        }
+
+        .alt-name {
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .alt-price {
+            font-weight: 700;
+            color: #4338ca;
+            font-size: 15px;
+        }
+
+        .alt-empty {
+            text-align: center;
+            padding: 32px;
+            color: var(--text-muted);
+            font-size: 15px;
+        }
     </style>
 </head>
 
 <body>
-    <!-- Красивый фон: плавающие пятна -->
     <div class="bg-blobs">
         <div class="blob blob-1"></div>
         <div class="blob blob-2"></div>
@@ -704,9 +850,7 @@
                 <div class="progress-dot"></div>
                 <div class="progress-dot"></div>
             </div>
-            <div class="top-bar">
-                <button class="back-btn" data-back="screen-event">← Назад</button>
-            </div>
+            <div class="top-bar"><button class="back-btn" data-back="screen-event">← Назад</button></div>
             <div class="card">
                 <div class="card-title">Сколько гостей?</div>
                 <div class="counter-row" style="margin-top:8px;">
@@ -740,9 +884,7 @@
                 <div class="progress-dot"></div>
                 <div class="progress-dot"></div>
             </div>
-            <div class="top-bar">
-                <button class="back-btn" data-back="screen-guests">← Назад</button>
-            </div>
+            <div class="top-bar"><button class="back-btn" data-back="screen-guests">← Назад</button></div>
             <div class="card">
                 <div class="card-title">Сколько продлится мероприятие?</div>
                 <p style="font-size:14px; color:var(--text-muted); margin:8px 0 16px;">Продолжительность влияет на
@@ -761,9 +903,7 @@
                 <div class="progress-dot active"></div>
                 <div class="progress-dot"></div>
             </div>
-            <div class="top-bar">
-                <button class="back-btn" data-back="screen-duration">← Назад</button>
-            </div>
+            <div class="top-bar"><button class="back-btn" data-back="screen-duration">← Назад</button></div>
             <div class="card">
                 <div class="card-title">Какой у вас бюджет?</div>
                 <div class="budget-grid" id="budget-grid" style="margin-top:16px;"></div>
@@ -784,9 +924,7 @@
                 <div class="progress-dot active"></div>
                 <div class="progress-dot active"></div>
             </div>
-            <div class="top-bar">
-                <button class="back-btn" data-back="screen-budget">← Назад</button>
-            </div>
+            <div class="top-bar"><button class="back-btn" data-back="screen-budget">← Назад</button></div>
             <div class="card">
                 <div class="card-title">Что предпочитаете?</div>
                 <p style="font-size:14px; color:var(--text-muted); margin:8px 0 16px;">Можно выбрать несколько.</p>
@@ -831,6 +969,17 @@
         </div>
     </div>
 
+    <!-- 🆕 МОДАЛЬНОЕ ОКНО ЗАМЕНЫ БЛЮДА -->
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-title">🔄 Заменить блюдо</div>
+                <button class="modal-close" id="modal-close">✕</button>
+            </div>
+            <div class="alt-list" id="alt-list"></div>
+        </div>
+    </div>
+
     <script>
         const API_URL = 'https://hvatitvsem.onrender.com';
         const EVENTS = [
@@ -856,13 +1005,25 @@
             { id: 'drinks', icon: '🥤', label: 'Напитки' },
             { id: 'auto', icon: '✨', label: 'Авто-подбор' }
         ];
-        let state = { eventId: null, adults: 10, children: 0, hours: 4, budget: 20000, customBudget: null, prefs: [], lastResult: null };
+
+        let state = {
+            eventId: null,
+            adults: 10,
+            children: 0,
+            hours: 4,
+            budget: 20000,
+            customBudget: null,
+            prefs: [],
+            lastResult: null,
+            swapIdx: null  // индекс блюда, которое заменяем
+        };
 
         function showScreen(id) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.getElementById(id).classList.add('active');
             window.scrollTo(0, 0);
         }
+
         function formatMoney(n) { return Math.round(n).toLocaleString('ru-RU') + ' ₽'; }
         function getTotalGuests() { return state.adults + state.children; }
         function updateTotalGuests() { document.getElementById('total-guests').textContent = getTotalGuests(); }
@@ -896,6 +1057,7 @@
                 });
             });
         }
+
         function renderDurations() {
             const grid = document.getElementById('duration-grid');
             grid.innerHTML = DURATIONS.map(d => `
@@ -911,6 +1073,7 @@
                 });
             });
         }
+
         function renderBudgets() {
             const grid = document.getElementById('budget-grid');
             grid.innerHTML = BUDGETS.map(b => `
@@ -935,6 +1098,7 @@
                 });
             });
         }
+
         function renderPrefs() {
             const grid = document.getElementById('prefs-grid');
             grid.innerHTML = PREFS.map(p => `
@@ -958,15 +1122,28 @@
                 });
             });
         }
+
         function updateSummary() {
             const b = state.customBudget || state.budget;
             document.getElementById('summary-text').textContent = `${state.adults} взрослых, ${state.children} детей, ${state.hours} часа, бюджет ${formatMoney(b)}`;
         }
+
         async function calculate() {
             showScreen('screen-loading');
-            const payload = { scenario_id: state.eventId, adults: state.adults, children: state.children, hours: state.hours, budget: state.customBudget || state.budget, preferences: state.prefs };
+            const payload = {
+                scenario_id: state.eventId,
+                adults: state.adults,
+                children: state.children,
+                hours: state.hours,
+                budget: state.customBudget || state.budget,
+                preferences: state.prefs
+            };
             try {
-                const res = await fetch(`${API_URL}/calculate`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                const res = await fetch(`${API_URL}/calculate`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
                 if (!res.ok) throw new Error('Server error');
                 const data = await res.json();
                 state.lastResult = data;
@@ -982,10 +1159,12 @@
                 setTimeout(() => errBox.remove(), 5000);
             }
         }
+
         function renderResult(data) {
             document.getElementById('result-subtitle').textContent = `${data.adults} взрослых · ${data.children} детей · ${data.hours} часа`;
             document.getElementById('result-total').textContent = formatMoney(data.total_cost);
             document.getElementById('result-total-bottom').textContent = formatMoney(data.total_cost);
+
             const badgeContainer = document.getElementById('result-badge-container');
             const remainingEl = document.getElementById('result-remaining');
             if (data.is_within_budget) {
@@ -995,23 +1174,152 @@
                 badgeContainer.innerHTML = '<span class="badge badge-error">🔴 Превышение бюджета</span>';
                 remainingEl.textContent = `На: ${formatMoney(data.shortfall)}`;
             }
+
             const categories = {};
-            (data.items || []).forEach(item => {
+            (data.items || []).forEach((item, idx) => {
                 if (!categories[item.category]) categories[item.category] = [];
-                categories[item.category].push(item);
+                categories[item.category].push({ ...item, _idx: idx });
             });
+
             let html = '';
             for (const [cat, items] of Object.entries(categories)) {
                 const style = getCategoryStyle(cat);
-                html += `<div class="category-block ${style.cls}"><div class="category-title"><span class="cat-icon">${style.icon}</span><span>${cat}</span></div>`;
+                html += `<div class="category-block ${style.cls}">
+                    <div class="category-title"><span class="cat-icon">${style.icon}</span><span>${cat}</span></div>`;
                 items.forEach(item => {
                     const qty = item.packages > 1 ? `${item.packages} × ${item.package_size} ${item.unit}` : `${item.final_amount} ${item.unit}`;
-                    html += `<div class="item-row"><span class="item-name">${item.name}</span><span class="item-qty">${qty}</span><span class="item-price">${formatMoney(item.total_price)}</span></div>`;
+                    html += `
+                        <div class="item-row" data-idx="${item._idx}">
+                            <span class="item-name">${item.name}</span>
+                            <span class="item-qty">${qty}</span>
+                            <span class="item-price" data-price="${item.total_price}">${formatMoney(item.total_price)}</span>
+                            <div class="item-actions">
+                                <button class="item-btn item-minus" data-idx="${item._idx}" title="Уменьшить">−</button>
+                                <button class="item-btn item-plus" data-idx="${item._idx}" title="Увеличить">+</button>
+                                <button class="item-btn item-swap" data-idx="${item._idx}" title="Заменить">🔄</button>
+                                <button class="item-btn item-remove" data-idx="${item._idx}" title="Удалить">✕</button>
+                            </div>
+                        </div>`;
                 });
                 html += `</div>`;
             }
             document.getElementById('result-items').innerHTML = html;
+
+            document.querySelectorAll('.item-minus').forEach(btn => {
+                btn.addEventListener('click', () => changeQty(parseInt(btn.dataset.idx), -1));
+            });
+            document.querySelectorAll('.item-plus').forEach(btn => {
+                btn.addEventListener('click', () => changeQty(parseInt(btn.dataset.idx), +1));
+            });
+            document.querySelectorAll('.item-remove').forEach(btn => {
+                btn.addEventListener('click', () => removeItem(parseInt(btn.dataset.idx)));
+            });
+            document.querySelectorAll('.item-swap').forEach(btn => {
+                btn.addEventListener('click', () => openSwapModal(parseInt(btn.dataset.idx)));
+            });
         }
+
+        // Изменить количество
+        function changeQty(idx, delta) {
+            const item = state.lastResult.items[idx];
+            if (!item) return;
+            const pkgSize = item.package_size || 1;
+            let newPackages = (item.packages || 1) + delta;
+            if (newPackages < 1) newPackages = 1;
+            item.packages = newPackages;
+            item.final_amount = newPackages * pkgSize;
+            item.total_price = item.final_amount * item.cost_per_unit;
+            recalcAndRender();
+        }
+
+        // Удалить позицию
+        function removeItem(idx) {
+            state.lastResult.items.splice(idx, 1);
+            recalcAndRender();
+        }
+
+        // Пересчитать итоги
+        function recalcAndRender() {
+            const data = state.lastResult;
+            data.total_cost = data.items.reduce((s, i) => s + i.total_price, 0);
+            data.is_within_budget = data.total_cost <= data.budget;
+            data.shortfall = Math.max(0, data.total_cost - data.budget);
+            data.remaining = Math.max(0, data.budget - data.total_cost);
+            renderResult(data);
+        }
+
+        // 🆕 Открыть модалку замены
+        async function openSwapModal(idx) {
+            const item = state.lastResult.items[idx];
+            if (!item) return;
+            state.swapIdx = idx;
+
+            const modal = document.getElementById('modal-overlay');
+            const list = document.getElementById('alt-list');
+            list.innerHTML = '<div class="alt-empty">Загружаем альтернативы…</div>';
+            modal.classList.add('active');
+
+            try {
+                const url = `${API_URL}/alternatives?category=${encodeURIComponent(item.category)}&exclude=${encodeURIComponent(item.name)}`;
+                const res = await fetch(url);
+                if (!res.ok) throw new Error('Ошибка загрузки');
+                const alts = await res.json();
+
+                if (!alts || alts.length === 0) {
+                    list.innerHTML = '<div class="alt-empty">Нет альтернатив в этой категории 😕</div>';
+                    return;
+                }
+
+                list.innerHTML = alts.map(a => `
+                    <div class="alt-item" data-name="${a.name}" data-price="${a.price_per_unit}" data-pkg="${a.package_size}" data-unit="${a.unit}">
+                        <span class="alt-name">${a.name}</span>
+                        <span class="alt-price">${a.price_per_unit} ₽ / ${a.unit}</span>
+                    </div>
+                `).join('');
+
+                list.querySelectorAll('.alt-item').forEach(el => {
+                    el.addEventListener('click', () => swapItem(el.dataset));
+                });
+            } catch (e) {
+                list.innerHTML = '<div class="alt-empty">Не удалось загрузить альтернативы</div>';
+            }
+        }
+
+        // 🆕 Заменить блюдо
+        function swapItem(dataset) {
+            const idx = state.swapIdx;
+            if (idx === null) return;
+            const item = state.lastResult.items[idx];
+            if (!item) return;
+
+            const newName = dataset.name;
+            const newPrice = parseFloat(dataset.price);
+            const newPkg = parseFloat(dataset.pkg) || 1;
+            const newUnit = dataset.unit;
+
+            // Пересчёт: сохраняем количество упаковок, меняем цену
+            item.name = newName;
+            item.cost_per_unit = newPrice;
+            item.package_size = newPkg;
+            item.unit = newUnit;
+            item.final_amount = (item.packages || 1) * newPkg;
+            item.total_price = item.final_amount * newPrice;
+
+            closeSwapModal();
+            recalcAndRender();
+        }
+
+        // 🆕 Закрыть модалку
+        function closeSwapModal() {
+            document.getElementById('modal-overlay').classList.remove('active');
+            state.swapIdx = null;
+        }
+
+        document.getElementById('modal-close').addEventListener('click', closeSwapModal);
+        document.getElementById('modal-overlay').addEventListener('click', (e) => {
+            if (e.target.id === 'modal-overlay') closeSwapModal();
+        });
+
         document.getElementById('btn-next-event').addEventListener('click', () => showScreen('screen-guests'));
         document.getElementById('btn-next-guests').addEventListener('click', () => showScreen('screen-duration'));
         document.getElementById('btn-next-duration').addEventListener('click', () => showScreen('screen-budget'));
@@ -1019,9 +1327,11 @@
         document.getElementById('btn-calculate').addEventListener('click', calculate);
         document.getElementById('btn-back').addEventListener('click', () => showScreen('screen-prefs'));
         document.getElementById('btn-restart').addEventListener('click', () => location.reload());
+
         document.querySelectorAll('.back-btn').forEach(btn => {
             btn.addEventListener('click', () => { showScreen(btn.dataset.back); });
         });
+
         function setupCounter(id, min, max, stateKey) {
             const minus = document.getElementById(`${id}-minus`);
             const plus = document.getElementById(`${id}-plus`);
@@ -1039,6 +1349,7 @@
         }
         setupCounter('adults', 1, 500, 'adults');
         setupCounter('children', 0, 200, 'children');
+
         document.getElementById('custom-budget-input')?.addEventListener('input', (e) => {
             let v = parseInt(e.target.value) || 0;
             if (v < 1000) v = 1000;
@@ -1046,12 +1357,17 @@
             state.budget = v;
             updateSummary();
         });
+
         document.getElementById('btn-share').addEventListener('click', () => {
             if (!state.lastResult) return;
             const text = `Мой расчёт на мероприятие в Хватит всем 🥂\n\nГостей: ${getTotalGuests()}\nБюджет: ${formatMoney(state.customBudget || state.budget)}\nИтого: ${formatMoney(state.lastResult.total_cost)}\n\nhttps://hvatitfrontend.onrender.com`;
-            if (navigator.share) { navigator.share({ title: 'Хватит всем', text }); }
-            else { navigator.clipboard.writeText(text).then(() => alert('✓ Скопировано!')); }
+            if (navigator.share) {
+                navigator.share({ title: 'Хватит всем', text });
+            } else {
+                navigator.clipboard.writeText(text).then(() => alert('✓ Скопировано!'));
+            }
         });
+
         document.getElementById('btn-copy').addEventListener('click', () => {
             if (!state.lastResult) return;
             const text = `Мой расчёт на мероприятие в Хватит всем 🥂\n\nГостей: ${getTotalGuests()}\nБюджет: ${formatMoney(state.customBudget || state.budget)}\nИтого: ${formatMoney(state.lastResult.total_cost)}\n\nhttps://hvatitfrontend.onrender.com`;
@@ -1062,8 +1378,13 @@
                 setTimeout(() => btn.textContent = orig, 2000);
             });
         });
-        renderEvents(); renderDurations(); renderBudgets(); renderPrefs();
-        updateTotalGuests(); updateSummary();
+
+        renderEvents();
+        renderDurations();
+        renderBudgets();
+        renderPrefs();
+        updateTotalGuests();
+        updateSummary();
     </script>
 </body>
 
