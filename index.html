@@ -2,1036 +2,1068 @@
 <html lang="ru">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Хватит всем</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Хватит всем — калькулятор еды и напитков</title>
+    <meta name="description"
+        content="Рассчитайте количество еды, напитков и примерный бюджет для праздника, корпоратива или вечеринки.">
+    <meta property="og:title" content="Хватит всем — калькулятор еды">
+    <meta property="og:description" content="Рассчитайте стол за 1 минуту.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://hvatitfrontend.onrender.com">
     <style>
-        /* ===== БАЗОВЫЙ ДИЗАЙН ===== */
+        :root {
+            --card: rgba(255, 255, 255, 0.85);
+            --text: #1a1a1a;
+            --text-muted: #6b7280;
+            --primary-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            --primary-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+            --border: #e5e7eb;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --radius: 24px;
+            --radius-btn: 20px;
+            --radius-sm: 16px;
+            --shadow-card: 0 8px 32px rgba(31, 38, 135, 0.08);
+        }
+
+        .cat-hot {
+            --cat-color: #ef4444;
+            --cat-bg: #fef2f2;
+        }
+
+        .cat-salads {
+            --cat-color: #10b981;
+            --cat-bg: #ecfdf5;
+        }
+
+        .cat-snacks {
+            --cat-color: #f59e0b;
+            --cat-bg: #fffbeb;
+        }
+
+        .cat-dessert {
+            --cat-color: #ec4899;
+            --cat-bg: #fdf2f8;
+        }
+
+        .cat-drinks {
+            --cat-color: #3b82f6;
+            --cat-bg: #eff6ff;
+        }
+
+        .cat-bread {
+            --cat-color: #a16207;
+            --cat-bg: #fefce8;
+        }
+
+        .cat-garnish {
+            --cat-color: #8b5cf6;
+            --cat-bg: #f5f3ff;
+        }
+
+        .cat-default {
+            --cat-color: #6b7280;
+            --cat-bg: #f9fafb;
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html,
+        body {
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
         body {
-            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-            background: #f7f6f3;
-            color: #1e1e1e;
-            padding: 16px 12px 40px;
-            min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: var(--text);
+            line-height: 1.5;
             display: flex;
             justify-content: center;
-            align-items: flex-start;
+            padding: 16px;
+            position: relative;
+            /* Базовый градиентный фон */
+            background: linear-gradient(135deg, #eef2ff 0%, #faf5ff 40%, #f0f9ff 100%);
+            background-attachment: fixed;
+        }
+
+        /* Плавающие цветные пятна */
+        .bg-blobs {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.5;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .blob-1 {
+            width: 340px;
+            height: 340px;
+            background: radial-gradient(circle, #a5b4fc 0%, transparent 70%);
+            top: -80px;
+            left: -80px;
+            animation-delay: 0s;
+        }
+
+        .blob-2 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, #f0abfc 0%, transparent 70%);
+            top: 30%;
+            right: -120px;
+            animation-delay: -7s;
+        }
+
+        .blob-3 {
+            width: 360px;
+            height: 360px;
+            background: radial-gradient(circle, #a7f3d0 0%, transparent 70%);
+            bottom: -100px;
+            left: 20%;
+            animation-delay: -14s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            33% {
+                transform: translate(30px, -40px) scale(1.1);
+            }
+
+            66% {
+                transform: translate(-20px, 30px) scale(0.95);
+            }
         }
 
         .app {
-            max-width: 720px;
             width: 100%;
-            background: #ffffff;
-            border-radius: 32px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
-            padding: 24px 20px 32px;
-        }
-
-        h1 {
-            font-size: 26px;
-            font-weight: 600;
+            max-width: 640px;
             display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 4px;
-        }
-
-        h1 span {
-            background: #f0ede8;
-            font-size: 14px;
-            font-weight: 400;
-            padding: 2px 12px;
-            border-radius: 40px;
-            color: #4a4a4a;
-        }
-
-        .subhead {
-            color: #6b6b6b;
-            font-size: 14px;
-            margin-bottom: 18px;
-            border-left: 3px solid #d4d0c8;
-            padding-left: 14px;
+            flex-direction: column;
+            gap: 16px;
+            padding-bottom: 40px;
+            position: relative;
+            z-index: 1;
         }
 
         .progress {
             display: flex;
+            justify-content: center;
             gap: 8px;
-            margin: 20px 0 24px;
+            padding: 8px 0;
         }
 
-        .progress .dot {
-            height: 6px;
-            flex: 1;
-            background: #e6e3dc;
-            border-radius: 12px;
-            transition: 0.25s;
+        .progress-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(209, 213, 219, 0.7);
+            transition: all 0.3s ease;
         }
 
-        .progress .dot.active {
-            background: #2b2b2b;
+        .progress-dot.active {
+            background: var(--primary-gradient);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+            transform: scale(1.1);
         }
 
-        .progress .dot.done {
-            background: #b3b0a7;
-        }
-
-        .step {
-            display: none;
-            animation: fade 0.25s ease;
-        }
-
-        .step.active {
-            display: block;
-        }
-
-        @keyframes fade {
-            0% {
-                opacity: 0.4;
-                transform: translateY(6px);
-            }
-
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .step-title {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 6px;
-        }
-
-        .step-desc {
-            color: #5e5e5e;
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
-
-        .options {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin: 16px 0 10px;
-        }
-
-        .option {
-            background: #f4f2ee;
-            padding: 12px 18px;
-            border-radius: 40px;
-            font-size: 15px;
-            font-weight: 500;
-            border: 2px solid transparent;
-            transition: 0.15s;
-            cursor: pointer;
-            user-select: none;
-            flex: 1 0 auto;
-            text-align: center;
-            min-width: 100px;
-        }
-
-        .option.selected {
-            background: #1e1e1e;
-            color: #fff;
-            border-color: #1e1e1e;
-        }
-
-        .option:active {
-            transform: scale(0.96);
-        }
-
-        .counter {
+        .top-bar {
             display: flex;
             align-items: center;
-            gap: 18px;
-            margin: 12px 0 8px;
+            gap: 12px;
+            padding: 4px 0;
         }
 
-        .counter button {
-            width: 48px;
-            height: 48px;
-            border-radius: 40px;
-            border: 2px solid #dbd7d0;
-            background: #fff;
-            font-size: 24px;
-            font-weight: 300;
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 18px;
+            border-radius: var(--radius-btn);
+            border: none;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: var(--text);
+            font-size: 15px;
+            font-weight: 600;
             cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            transition: all 0.2s ease;
+            font-family: inherit;
         }
 
-        .counter button:active {
-            background: #eae7e1;
+        .back-btn:active {
+            transform: scale(0.96);
+            background: rgba(243, 244, 246, 0.9);
         }
 
-        .counter .value {
-            font-size: 32px;
-            font-weight: 500;
-            min-width: 60px;
+        .card {
+            background: var(--card);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: var(--radius);
+            padding: 24px;
+            box-shadow: var(--shadow-card);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 4px;
+            letter-spacing: -0.02em;
+        }
+
+        .card-desc {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .option-card {
+            background: rgba(250, 251, 255, 0.8);
+            border: 2px solid transparent;
+            border-radius: var(--radius-sm);
+            padding: 16px 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            user-select: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary-gradient);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .option-card:active {
+            transform: scale(0.97);
+        }
+
+        .option-card.selected {
+            border-color: #a5b4fc;
+            background: linear-gradient(135deg, #eef2ff 0%, #f5f3ff 100%);
+            box-shadow: 0 4px 16px rgba(99, 102, 241, 0.15);
+        }
+
+        .option-card.selected::before {
+            transform: scaleX(1);
+        }
+
+        .option-icon {
+            font-size: 34px;
+            line-height: 1;
+        }
+
+        .option-label {
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .option-desc {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .counter-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .counter-row:last-child {
+            border-bottom: none;
+        }
+
+        .counter-label {
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .counter-controls {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .counter-btn {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            border: none;
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+            font-size: 24px;
+            font-weight: 400;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            color: var(--text);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .counter-btn:active {
+            transform: scale(0.92);
+            background: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%);
+        }
+
+        .counter-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .counter-value {
+            font-size: 22px;
+            font-weight: 700;
+            min-width: 34px;
             text-align: center;
         }
 
         .budget-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            grid-template-columns: 1fr 1fr;
             gap: 10px;
-            margin: 12px 0 10px;
         }
 
-        .budget-item {
-            background: #f4f2ee;
-            padding: 12px 6px;
-            border-radius: 40px;
-            text-align: center;
-            font-weight: 500;
+        .budget-btn {
+            padding: 16px;
             border: 2px solid transparent;
-            cursor: pointer;
-            transition: 0.1s;
-        }
-
-        .budget-item.selected {
-            background: #1e1e1e;
-            color: #fff;
-            border-color: #1e1e1e;
-        }
-
-        .budget-custom {
-            margin-top: 10px;
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-
-        .budget-custom input {
-            flex: 1;
-            padding: 12px 16px;
-            border: 2px solid #e2ded7;
-            border-radius: 12px;
+            border-radius: var(--radius-btn);
+            background: rgba(250, 251, 255, 0.8);
             font-size: 16px;
-            background: #fafaf8;
-        }
-
-        .budget-custom input:focus {
-            outline: none;
-            border-color: #1e1e1e;
-        }
-
-        .budget-custom .btn {
-            flex: 0 0 auto;
-            padding: 12px 24px;
-            min-width: auto;
-        }
-
-        .pref-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin: 12px 0 10px;
-        }
-
-        .pref-item {
-            background: #f4f2ee;
-            padding: 10px 18px;
-            border-radius: 40px;
-            font-size: 15px;
-            border: 2px solid transparent;
-            cursor: pointer;
-            transition: 0.1s;
-        }
-
-        .pref-item.selected {
-            background: #1e1e1e;
-            color: #fff;
-            border-color: #1e1e1e;
-        }
-
-        .result-card {
-            background: #f9f8f5;
-            border-radius: 24px;
-            padding: 18px 16px;
-            margin: 20px 0 16px;
-        }
-
-        .result-summary {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px 18px;
-            font-size: 14px;
-            color: #3c3c3c;
-            border-bottom: 1px solid #e2ded7;
-            padding-bottom: 14px;
-            margin-bottom: 16px;
-        }
-
-        .result-summary strong {
             font-weight: 600;
-            color: #000;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            color: var(--text);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            font-family: inherit;
         }
 
-        .result-item {
+        .budget-btn:active {
+            transform: scale(0.97);
+        }
+
+        .budget-btn.selected {
+            border-color: #a5b4fc;
+            background: linear-gradient(135deg, #eef2ff 0%, #f5f3ff 100%);
+            box-shadow: 0 4px 16px rgba(99, 102, 241, 0.2);
+            color: #4338ca;
+        }
+
+        .budget-input {
+            width: 100%;
+            padding: 16px;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-btn);
+            font-size: 16px;
+            outline: none;
+            transition: all 0.2s ease;
+            background: rgba(250, 251, 255, 0.9);
+            font-family: inherit;
+        }
+
+        .budget-input:focus {
+            border-color: #a5b4fc;
+            background: #ffffff;
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 18px;
+            border-radius: var(--radius-btn);
+            border: none;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            letter-spacing: -0.01em;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: var(--primary-gradient);
+            color: white;
+            box-shadow: var(--primary-shadow);
+        }
+
+        .btn-primary:active:not(:disabled) {
+            transform: scale(0.97);
+            box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            box-shadow: none;
+            background: #d1d5db;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: var(--text);
+            border: 2px solid var(--border);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .btn-secondary:active {
+            background: #f9fafb;
+            transform: scale(0.97);
+        }
+
+        .btn-row {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-row .btn {
+            flex: 1;
+            padding: 16px 12px;
+            font-size: 15px;
+        }
+
+        .result-header {
+            text-align: center;
+            padding: 16px 0;
+        }
+
+        .result-total {
+            font-size: 42px;
+            font-weight: 800;
+            margin: 12px 0;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.03em;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 24px;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .badge-success {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            color: #065f46;
+        }
+
+        .badge-warning {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            color: #92400e;
+        }
+
+        .badge-error {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            color: #991b1b;
+        }
+
+        .category-block {
+            margin-top: 20px;
+        }
+
+        .category-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            border-radius: var(--radius-sm);
+            background: var(--cat-bg, #f9fafb);
+            color: var(--cat-color, #1a1a1a);
+            border-left: 4px solid var(--cat-color, #6b7280);
+        }
+
+        .category-title .cat-icon {
+            font-size: 20px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #ffffff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+        }
+
+        .item-row {
             display: flex;
             justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid #efebe6;
+            align-items: center;
+            padding: 12px 16px;
+            border-bottom: 1px solid #f9fafb;
             font-size: 15px;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.7);
         }
 
-        .result-item:last-child {
+        .item-row:last-child {
             border-bottom: none;
+            border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+        }
+
+        .item-name {
+            flex: 1;
+            font-weight: 500;
+        }
+
+        .item-qty {
+            color: var(--text-muted);
+            font-size: 13px;
+            white-space: nowrap;
+        }
+
+        .item-price {
+            font-weight: 700;
+            white-space: nowrap;
         }
 
         .total-row {
             display: flex;
             justify-content: space-between;
-            font-size: 18px;
-            font-weight: 600;
-            padding-top: 16px;
-            margin-top: 8px;
-            border-top: 2px solid #d4d0c8;
+            padding: 16px 0;
+            font-size: 20px;
+            font-weight: 800;
+            border-top: 2px solid var(--border);
+            margin-top: 12px;
         }
 
-        .total-row .budget-status {
-            font-size: 14px;
-            font-weight: 400;
-            color: #4f8b4f;
-        }
-
-        .total-row .over {
-            color: #b13e3e;
-        }
-
-        .actions {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin-top: 24px;
-        }
-
-        .btn {
-            background: #1e1e1e;
-            color: #fff;
-            border: none;
-            padding: 14px 28px;
-            border-radius: 60px;
-            font-size: 16px;
-            font-weight: 500;
-            cursor: pointer;
-            flex: 1;
-            min-width: 120px;
-            text-align: center;
-        }
-
-        .btn:active {
-            transform: scale(0.96);
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: #1e1e1e;
-            border: 2px solid #dbd7d0;
-        }
-
-        .btn-outline:active {
-            background: #efebe6;
-        }
-
-        .btn-secondary {
-            background: #eae7e1;
-            color: #1e1e1e;
-        }
-
-        .btn-secondary:active {
-            background: #d6d2ca;
-        }
-
-        .btn:disabled {
-            opacity: 0.4;
-            pointer-events: none;
-        }
-
-        .hint {
-            font-size: 13px;
-            color: #6f6f6f;
-            margin-top: 6px;
-        }
-
-        .budget-warning {
-            background: #fff3e0;
-            border-left: 4px solid #e65100;
-            padding: 14px 16px;
-            border-radius: 12px;
-            margin: 12px 0;
-            font-size: 14px;
-        }
-
-        .budget-warning strong {
-            color: #bf360c;
-        }
-
-        .scenario-info {
-            background: #f0ede8;
-            border-radius: 12px;
-            padding: 10px 14px;
-            margin: 4px 0 12px;
-            font-size: 13px;
-            color: #555;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
-        .scenario-info .tag {
-            background: #fff;
-            padding: 2px 12px;
-            border-radius: 20px;
-            font-weight: 500;
-            color: #333;
-        }
-
-        .price-note {
-            font-size: 11px;
-            color: #999;
-            margin-top: 8px;
-            text-align: center;
-        }
-
-        .loading-indicator {
+        .screen {
             display: none;
-            text-align: center;
-            padding: 20px;
-            color: #666;
         }
 
-        .loading-indicator .spinner {
-            display: inline-block;
-            width: 30px;
-            height: 30px;
-            border: 3px solid #e2ded7;
-            border-top: 3px solid #1e1e1e;
+        .screen.active {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .loader {
+            text-align: center;
+            padding: 60px 20px;
+            font-size: 20px;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .loader::after {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 40px;
+            margin: 20px auto 0;
             border-radius: 50%;
+            border: 3px solid #e5e7eb;
+            border-top-color: #6366f1;
             animation: spin 0.8s linear infinite;
         }
 
         @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
+            to {
                 transform: rotate(360deg);
             }
         }
 
-        @media (max-width: 480px) {
-            .app {
-                padding: 16px;
+        .error-box {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            color: #991b1b;
+            padding: 16px;
+            border-radius: var(--radius-sm);
+            text-align: center;
+            font-size: 15px;
+            font-weight: 500;
+            animation: shake 0.4s ease;
+        }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
             }
 
-            .option {
-                font-size: 14px;
-                padding: 10px 14px;
-                min-width: 80px;
+            25% {
+                transform: translateX(-6px);
             }
 
-            .budget-grid {
-                grid-template-columns: repeat(3, 1fr);
+            75% {
+                transform: translateX(6px);
             }
         }
     </style>
 </head>
 
 <body>
+    <!-- Красивый фон: плавающие пятна -->
+    <div class="bg-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
     <div class="app" id="app">
-        <h1>🥂 Хватит всем <span>v8.2</span></h1>
-        <div class="subhead">Калькулятор еды и напитков с бэкендом</div>
-
-        <!-- Прогресс -->
-        <div class="progress" id="progress">
-            <div class="dot active"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
+        <!-- ЭКРАН 1: Мероприятие -->
+        <div class="screen active" id="screen-event">
+            <div class="progress">
+                <div class="progress-dot active"></div>
+                <div class="progress-dot"></div>
+                <div class="progress-dot"></div>
+                <div class="progress-dot"></div>
+                <div class="progress-dot"></div>
+            </div>
+            <div class="card" style="text-align:center;">
+                <h1 style="font-size:30px; margin-bottom:8px; letter-spacing:-0.03em;">🥂 Хватит всем</h1>
+                <p style="color:var(--text-muted); font-size:15px;">Рассчитаем еду и напитки для вашего мероприятия за 1
+                    минуту.</p>
+            </div>
+            <div class="card">
+                <div class="card-title">Какое мероприятие планируете?</div>
+                <div class="grid-2" id="event-grid" style="margin-top:16px;"></div>
+            </div>
+            <button class="btn btn-primary" id="btn-next-event" disabled>Далее →</button>
         </div>
 
-        <!-- ШАГ 1 -->
-        <div class="step active" id="step1">
-            <div class="step-title">🎉 Выберите сценарий</div>
-            <div class="step-desc">Подберите готовый набор блюд для вашего мероприятия</div>
-            <div class="options" id="scenarioOptions">
-                <!-- Загружается из бэкенда -->
+        <!-- ЭКРАН 2: Гости -->
+        <div class="screen" id="screen-guests">
+            <div class="progress">
+                <div class="progress-dot active"></div>
+                <div class="progress-dot active"></div>
+                <div class="progress-dot"></div>
+                <div class="progress-dot"></div>
+                <div class="progress-dot"></div>
             </div>
-            <div class="scenario-info" id="scenarioInfo" style="display:none;">
-                <span>📋 <span id="scenarioFormat">—</span></span>
-                <span>⏱ <span id="scenarioDuration">—</span> ч</span>
-                <span>👥 <span id="scenarioAudience">—</span></span>
-                <span class="tag" id="scenarioItemsCount">0 блюд</span>
-                <span class="tag" id="scenarioFactor">×<span id="scenarioFactorValue">1.0</span></span>
+            <div class="top-bar">
+                <button class="back-btn" data-back="screen-event">← Назад</button>
             </div>
-            <div class="actions">
-                <button class="btn" id="toStep2" disabled>Далее →</button>
-            </div>
-        </div>
-
-        <!-- ШАГ 2 -->
-        <div class="step" id="step2">
-            <div class="step-title">👥 Сколько гостей?</div>
-            <div class="step-desc">Укажите количество взрослых и детей отдельно</div>
-            <div style="display:flex; gap:20px; flex-wrap:wrap; margin:12px 0;">
-                <div style="flex:1; min-width:120px;">
-                    <label style="font-weight:500;font-size:14px;color:#555;">Взрослые</label>
-                    <div class="counter" style="margin-top:4px;">
-                        <button id="adultsDec">−</button>
-                        <span class="value" id="adultsValue">10</span>
-                        <button id="adultsInc">+</button>
+            <div class="card">
+                <div class="card-title">Сколько гостей?</div>
+                <div class="counter-row" style="margin-top:8px;">
+                    <span class="counter-label">Взрослые</span>
+                    <div class="counter-controls">
+                        <button class="counter-btn" id="adults-minus">−</button>
+                        <span class="counter-value" id="adults-val">10</span>
+                        <button class="counter-btn" id="adults-plus">+</button>
                     </div>
                 </div>
-                <div style="flex:1; min-width:120px;">
-                    <label style="font-weight:500;font-size:14px;color:#555;">Дети</label>
-                    <div class="counter" style="margin-top:4px;">
-                        <button id="childrenDec">−</button>
-                        <span class="value" id="childrenValue">0</span>
-                        <button id="childrenInc">+</button>
+                <div class="counter-row">
+                    <span class="counter-label">Дети</span>
+                    <div class="counter-controls">
+                        <button class="counter-btn" id="children-minus">−</button>
+                        <span class="counter-value" id="children-val">0</span>
+                        <button class="counter-btn" id="children-plus">+</button>
                     </div>
                 </div>
+                <div style="text-align:center; margin-top:16px; font-weight:700; font-size:17px;">Всего гостей: <span
+                        id="total-guests">10</span></div>
             </div>
-            <div class="hint">от 2 до 500 человек всего</div>
-            <div class="actions">
-                <button class="btn btn-outline" id="backToStep1">← Назад</button>
-                <button class="btn" id="toStep3">Далее →</button>
-            </div>
+            <button class="btn btn-primary" id="btn-next-guests">Далее →</button>
         </div>
 
-        <!-- ШАГ 3 -->
-        <div class="step" id="step3">
-            <div class="step-title">⏱ Сколько часов?</div>
-            <div class="step-desc">От этого зависит количество еды и напитков</div>
-            <div class="options" id="durationOptions">
-                <div class="option" data-value="2">1–2 ч</div>
-                <div class="option" data-value="4">3–4 ч</div>
-                <div class="option" data-value="6">5–6 ч</div>
-                <div class="option" data-value="8">7–8 ч</div>
+        <!-- ЭКРАН 3: Продолжительность -->
+        <div class="screen" id="screen-duration">
+            <div class="progress">
+                <div class="progress-dot active"></div>
+                <div class="progress-dot active"></div>
+                <div class="progress-dot active"></div>
+                <div class="progress-dot"></div>
+                <div class="progress-dot"></div>
             </div>
-            <div class="actions">
-                <button class="btn btn-outline" id="backToStep2">← Назад</button>
-                <button class="btn" id="toStep4" disabled>Далее →</button>
+            <div class="top-bar">
+                <button class="back-btn" data-back="screen-guests">← Назад</button>
             </div>
+            <div class="card">
+                <div class="card-title">Сколько продлится мероприятие?</div>
+                <p style="font-size:14px; color:var(--text-muted); margin:8px 0 16px;">Продолжительность влияет на
+                    количество еды и напитков.</p>
+                <div class="grid-2" id="duration-grid"></div>
+            </div>
+            <button class="btn btn-primary" id="btn-next-duration" disabled>Далее →</button>
         </div>
 
-        <!-- ШАГ 4 -->
-        <div class="step" id="step4">
-            <div class="step-title">💰 Какой бюджет?</div>
-            <div class="step-desc">Выберите сумму или введите свою</div>
-            <div class="budget-grid" id="budgetOptions">
-                <div class="budget-item" data-value="10000">10 000 ₽</div>
-                <div class="budget-item" data-value="20000">20 000 ₽</div>
-                <div class="budget-item" data-value="30000">30 000 ₽</div>
-                <div class="budget-item" data-value="50000">50 000 ₽</div>
-                <div class="budget-item" data-value="100000">100 000 ₽</div>
+        <!-- ЭКРАН 4: Бюджет -->
+        <div class="screen" id="screen-budget">
+            <div class="progress">
+                <div class="progress-dot active"></div>
+                <div class="progress-dot active"></div>
+                <div class="progress-dot active"></div>
+                <div class="progress-dot active"></div>
+                <div class="progress-dot"></div>
             </div>
-            <div class="budget-custom">
-                <input type="number" id="customBudget" placeholder="Свой бюджет..." min="1000" step="1000" />
-                <button class="btn" id="applyCustomBudget" style="flex:0 0 auto;padding:12px 20px;">Применить</button>
+            <div class="top-bar">
+                <button class="back-btn" data-back="screen-duration">← Назад</button>
             </div>
-            <div class="actions">
-                <button class="btn btn-outline" id="backToStep3">← Назад</button>
-                <button class="btn" id="toStep5" disabled>Далее →</button>
+            <div class="card">
+                <div class="card-title">Какой у вас бюджет?</div>
+                <div class="budget-grid" id="budget-grid" style="margin-top:16px;"></div>
+                <div id="custom-budget-block" style="display:none; margin-top:12px;">
+                    <input type="number" class="budget-input" id="custom-budget-input" placeholder="Введите сумму в ₽"
+                        min="1000" step="500">
+                </div>
             </div>
+            <button class="btn btn-primary" id="btn-next-budget" disabled>Далее →</button>
         </div>
 
-        <!-- ШАГ 5 -->
-        <div class="step" id="step5">
-            <div class="step-title">🍽 Что предпочитаете?</div>
-            <div class="step-desc">Выберите что-то одно или несколько</div>
-            <div class="pref-grid" id="prefOptions">
-                <div class="pref-item" data-value="meat">🥩 Мясо</div>
-                <div class="pref-item" data-value="fish">🐟 Рыба</div>
-                <div class="pref-item" data-value="veggie">🥗 Овощи</div>
-                <div class="pref-item" data-value="snacks">🧀 Закуски</div>
-                <div class="pref-item" data-value="sweet">🍰 Сладкое</div>
-                <div class="pref-item" data-value="drinks">🥤 Напитки</div>
-                <div class="pref-item" data-value="auto">🤖 Авто-подбор</div>
+        <!-- ЭКРАН 5: Предпочтения -->
+        <div class="screen" id="screen-prefs">
+            <div class="progress">
+                <div class="progress-dot active"></div>
+                <div class="progress-dot active"></div>
+                <div class="progress-dot active"></div>
+                <div class="progress-dot active"></div>
+                <div class="progress-dot active"></div>
             </div>
-            <div class="hint">Выбрано: <span id="prefCount">0</span></div>
-            <div class="actions">
-                <button class="btn btn-outline" id="backToStep4">← Назад</button>
-                <button class="btn" id="toStep6">Рассчитать →</button>
+            <div class="top-bar">
+                <button class="back-btn" data-back="screen-budget">← Назад</button>
             </div>
+            <div class="card">
+                <div class="card-title">Что предпочитаете?</div>
+                <p style="font-size:14px; color:var(--text-muted); margin:8px 0 16px;">Можно выбрать несколько.</p>
+                <div class="grid-3" id="prefs-grid"></div>
+            </div>
+            <div class="card" style="text-align:center;">
+                <div style="font-size:14px; color:var(--text-muted);">Всё готово?</div>
+                <div style="font-weight:600; margin:8px 0; font-size:15px;" id="summary-text">10 взрослых, 0 детей, 4
+                    часа, бюджет 20 000 ₽</div>
+            </div>
+            <button class="btn btn-primary" id="btn-calculate">Рассчитать</button>
         </div>
 
-        <!-- ШАГ 6 -->
-        <div class="step" id="step6">
-            <div class="step-title">📋 Ваш расчёт готов!</div>
-            <div class="step-desc" id="resultDesc">💡 Результат получен от бэкенда</div>
+        <!-- ЭКРАН 6: Загрузка -->
+        <div class="screen" id="screen-loading">
+            <div class="loader">⏳ Считаем ваш стол…</div>
+        </div>
 
-            <div class="result-summary" id="resultSummary">
-                <span>🎉 <strong id="resScenario">—</strong></span>
-                <span>👥 <strong id="resAdults">—</strong> взрослых, <strong id="resChildren">—</strong> детей</span>
-                <span>⏱ <strong id="resDuration">—</strong> ч</span>
-                <span>💰 <strong id="resBudget">—</strong> ₽</span>
+        <!-- ЭКРАН 7: Результат -->
+        <div class="screen" id="screen-result">
+            <div class="card">
+                <div class="result-header">
+                    <h2 style="font-size:24px;">🥂 Ваш стол готов!</h2>
+                    <p style="color:var(--text-muted); font-size:14px;" id="result-subtitle">10 взрослых · 0 детей · 4
+                        часа</p>
+                    <div class="result-total" id="result-total">0 ₽</div>
+                    <div id="result-badge-container"><span class="badge badge-success">🟢 В бюджете</span></div>
+                    <p style="margin-top:12px; font-size:15px; font-weight:600;" id="result-remaining">Осталось: 0 ₽</p>
+                </div>
+                <div id="result-items"></div>
+                <div class="total-row">
+                    <span>Итого:</span>
+                    <span id="result-total-bottom">0 ₽</span>
+                </div>
             </div>
-
-            <div id="budgetWarning" style="display:none;"></div>
-
-            <div class="loading-indicator" id="loadingIndicator">
-                <div class="spinner"></div>
-                <div style="margin-top:10px;">Рассчитываем меню...</div>
+            <div class="btn-row">
+                <button class="btn btn-secondary" id="btn-share">📤 Поделиться</button>
+                <button class="btn btn-secondary" id="btn-copy">📋 Скопировать</button>
             </div>
-
-            <div class="result-card" id="resultList"></div>
-
-            <div class="total-row" id="resultTotal">
-                <span>💰 Итого: <strong id="totalCost">0</strong> ₽</span>
-                <span class="budget-status" id="budgetStatus">✅ В пределах бюджета</span>
-            </div>
-
-            <div class="price-note">🧾 Цены: официальная база Пермстата 2025 + динамика Росстата 2026</div>
-
-            <div class="actions" style="margin-top:12px;">
-                <button class="btn btn-secondary" id="resetBtn">🔄 Новый расчёт</button>
-                <button class="btn" id="shareBtn">📤 Поделиться</button>
-            </div>
-            <div class="actions">
-                <button class="btn btn-outline" id="backToStep5">← Назад</button>
-            </div>
+            <button class="btn btn-primary" id="btn-back">← Изменить параметры</button>
+            <button class="btn btn-secondary" id="btn-restart">🔄 Новый расчёт</button>
         </div>
     </div>
 
     <script>
-        // ============================================================
-        // ПОДКЛЮЧЕНИЕ К БЭКЕНДУ
-        // ============================================================
-
         const API_URL = 'https://hvatitvsem.onrender.com';
+        const EVENTS = [
+            { id: 'SC001', icon: '🎂', label: 'День рождения', desc: 'Универсальный набор' },
+            { id: 'SC003', icon: '🏢', label: 'Корпоратив', desc: 'Закуски и горячее' },
+            { id: 'SC004', icon: '💍', label: 'Свадьба', desc: 'Расширенный стол' },
+            { id: 'SC006', icon: '🎉', label: 'Вечеринка', desc: 'Больше закусок' },
+            { id: 'SC011', icon: '✨', label: 'Другое', desc: 'Настроим под вас' }
+        ];
+        const DURATIONS = [
+            { value: 2, label: '⏱ 1–2 часа' },
+            { value: 4, label: '⏱ 3–4 часа' },
+            { value: 6, label: '⏱ 5–6 часов' },
+            { value: 8, label: '⏱ 7–8 часов' }
+        ];
+        const BUDGETS = [10000, 20000, 30000, 50000, 100000];
+        const PREFS = [
+            { id: 'meat', icon: '🥩', label: 'Мясо' },
+            { id: 'fish', icon: '🐟', label: 'Рыба' },
+            { id: 'veg', icon: '🥬', label: 'Вегетарианское' },
+            { id: 'snacks', icon: '🥪', label: 'Закуски' },
+            { id: 'sweet', icon: '🍰', label: 'Сладкое' },
+            { id: 'drinks', icon: '🥤', label: 'Напитки' },
+            { id: 'auto', icon: '✨', label: 'Авто-подбор' }
+        ];
+        let state = { eventId: null, adults: 10, children: 0, hours: 4, budget: 20000, customBudget: null, prefs: [], lastResult: null };
 
-        // ============================================================
-        // СОСТОЯНИЕ
-        // ============================================================
-        let state = {
-            step: 1,
-            scenario: null,
-            adults: 10,
-            children: 0,
-            duration: null,
-            budget: null,
-            preferences: [],
-            result: null
-        };
+        function showScreen(id) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+        function formatMoney(n) { return Math.round(n).toLocaleString('ru-RU') + ' ₽'; }
+        function getTotalGuests() { return state.adults + state.children; }
+        function updateTotalGuests() { document.getElementById('total-guests').textContent = getTotalGuests(); }
 
-        // ============================================================
-        // ЗАГРУЗКА СЦЕНАРИЕВ С БЭКЕНДА
-        // ======================loadScenarios()
-        async function loadScenarios() {
+        function getCategoryStyle(cat) {
+            const c = (cat || '').toLowerCase();
+            if (c.includes('горяч') || c.includes('мясо')) return { cls: 'cat-hot', icon: '🥩' };
+            if (c.includes('салат')) return { cls: 'cat-salads', icon: '🥗' };
+            if (c.includes('закус') || c.includes('холодн')) return { cls: 'cat-snacks', icon: '🧀' };
+            if (c.includes('десерт') || c.includes('сладк')) return { cls: 'cat-dessert', icon: '🍰' };
+            if (c.includes('напит')) return { cls: 'cat-drinks', icon: '🥤' };
+            if (c.includes('хлеб')) return { cls: 'cat-bread', icon: '🍞' };
+            if (c.includes('гарнир') || c.includes('овощ')) return { cls: 'cat-garnish', icon: '🥔' };
+            return { cls: 'cat-default', icon: '🍽️' };
+        }
+
+        function renderEvents() {
+            const grid = document.getElementById('event-grid');
+            grid.innerHTML = EVENTS.map(e => `
+                <div class="option-card ${state.eventId === e.id ? 'selected' : ''}" data-id="${e.id}">
+                    <div class="option-icon">${e.icon}</div>
+                    <div class="option-label">${e.label}</div>
+                    <div class="option-desc">${e.desc}</div>
+                </div>
+            `).join('');
+            grid.querySelectorAll('.option-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    state.eventId = card.dataset.id;
+                    renderEvents();
+                    document.getElementById('btn-next-event').disabled = false;
+                });
+            });
+        }
+        function renderDurations() {
+            const grid = document.getElementById('duration-grid');
+            grid.innerHTML = DURATIONS.map(d => `
+                <div class="option-card ${state.hours === d.value ? 'selected' : ''}" data-value="${d.value}">
+                    <div class="option-label">${d.label}</div>
+                </div>
+            `).join('');
+            grid.querySelectorAll('.option-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    state.hours = parseInt(card.dataset.value);
+                    renderDurations();
+                    document.getElementById('btn-next-duration').disabled = false;
+                });
+            });
+        }
+        function renderBudgets() {
+            const grid = document.getElementById('budget-grid');
+            grid.innerHTML = BUDGETS.map(b => `
+                <button class="budget-btn ${state.budget === b && !state.customBudget ? 'selected' : ''}" data-value="${b}">${b.toLocaleString('ru-RU')} ₽</button>
+            `).join('') + `<button class="budget-btn ${state.customBudget ? 'selected' : ''}" data-value="custom" style="grid-column: span 2;">💰 Свой бюджет</button>`;
+            grid.querySelectorAll('.budget-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const val = btn.dataset.value;
+                    if (val === 'custom') {
+                        state.customBudget = state.customBudget || 15000;
+                        state.budget = state.customBudget;
+                        document.getElementById('custom-budget-block').style.display = 'block';
+                        document.getElementById('custom-budget-input').value = state.customBudget;
+                    } else {
+                        state.budget = parseInt(val);
+                        state.customBudget = null;
+                        document.getElementById('custom-budget-block').style.display = 'none';
+                    }
+                    renderBudgets();
+                    document.getElementById('btn-next-budget').disabled = false;
+                    updateSummary();
+                });
+            });
+        }
+        function renderPrefs() {
+            const grid = document.getElementById('prefs-grid');
+            grid.innerHTML = PREFS.map(p => `
+                <div class="option-card ${state.prefs.includes(p.id) ? 'selected' : ''}" data-id="${p.id}">
+                    <div class="option-icon">${p.icon}</div>
+                    <div class="option-label" style="font-size:13px;">${p.label}</div>
+                </div>
+            `).join('');
+            grid.querySelectorAll('.option-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const id = card.dataset.id;
+                    if (id === 'auto') {
+                        state.prefs = state.prefs.includes('auto') ? [] : ['auto'];
+                    } else {
+                        state.prefs = state.prefs.filter(p => p !== 'auto');
+                        if (state.prefs.includes(id)) state.prefs = state.prefs.filter(p => p !== id);
+                        else state.prefs.push(id);
+                    }
+                    renderPrefs();
+                    updateSummary();
+                });
+            });
+        }
+        function updateSummary() {
+            const b = state.customBudget || state.budget;
+            document.getElementById('summary-text').textContent = `${state.adults} взрослых, ${state.children} детей, ${state.hours} часа, бюджет ${formatMoney(b)}`;
+        }
+        async function calculate() {
+            showScreen('screen-loading');
+            const payload = { scenario_id: state.eventId, adults: state.adults, children: state.children, hours: state.hours, budget: state.customBudget || state.budget, preferences: state.prefs };
             try {
-                console.log('📡 Загрузка сценариев с бэкенда...');
-                const response = await fetch(`${API_URL}/scenarios`);
-                if (!response.ok) throw new Error('Ошибка загрузки сценариев');
-                const scenarios = await response.json();
-                console.log('✅ Сценарии загружены:', scenarios);
-                renderScenarios(scenarios);
-            } catch (error) {
-                console.error('❌ Ошибка:', error);
-                renderScenarios([
-                    { id: 'SC001', name: 'День рождения - банкет', format: 'Банкет', duration: 4, audience: 'Взрослые', factor: 1.0 }
-                ]);
-                // Убрали жесткую ссылку на localhost
-                console.warn('⚠️ Бэкенд недоступен. Загружена резервная заглушка.');
+                const res = await fetch(`${API_URL}/calculate`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                if (!res.ok) throw new Error('Server error');
+                const data = await res.json();
+                state.lastResult = data;
+                renderResult(data);
+                showScreen('screen-result');
+            } catch (e) {
+                showScreen('screen-prefs');
+                const errBox = document.createElement('div');
+                errBox.className = 'error-box';
+                errBox.textContent = 'Не удалось выполнить расчёт. Проверьте интернет и попробуйте ещё раз.';
+                const btn = document.getElementById('btn-calculate');
+                btn.parentNode.insertBefore(errBox, btn);
+                setTimeout(() => errBox.remove(), 5000);
             }
         }
-
-        function renderScenarios(scenarios) {
-            const container = document.getElementById('scenarioOptions');
-            container.innerHTML = '';
-            scenarios.forEach(scenario => {
-                const div = document.createElement('div');
-                div.className = 'option';
-                div.dataset.value = scenario.id;
-                div.textContent = scenario.name;
-                div.addEventListener('click', () => {
-                    document.querySelectorAll('#scenarioOptions .option').forEach(el => el.classList.remove('selected'));
-                    div.classList.add('selected');
-                    state.scenario = scenario.id;
-                    document.getElementById('toStep2').disabled = false;
-
-                    document.getElementById('scenarioInfo').style.display = 'flex';
-                    document.getElementById('scenarioFormat').textContent = scenario.format;
-                    document.getElementById('scenarioDuration').textContent = scenario.duration;
-                    document.getElementById('scenarioAudience').textContent = scenario.audience;
-                    document.getElementById('scenarioItemsCount').textContent = '8 блюд';
-                    document.getElementById('scenarioFactorValue').textContent = scenario.factor.toFixed(2);
-                });
-                container.appendChild(div);
-            });
-        }
-
-        // ============================================================
-        // НАВИГАЦИЯ
-        // ============================================================
-        function goToStep(n) {
-            state.step = n;
-            document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
-            document.getElementById(`step${n}`).classList.add('active');
-            document.querySelectorAll('.progress .dot').forEach((dot, i) => {
-                dot.className = 'dot';
-                if (i < n - 1) dot.classList.add('done');
-                if (i === n - 1) dot.classList.add('active');
-            });
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        document.getElementById('toStep2').addEventListener('click', () => goToStep(2));
-        document.getElementById('toStep3').addEventListener('click', () => goToStep(3));
-        document.getElementById('toStep4').addEventListener('click', () => goToStep(4));
-        document.getElementById('toStep5').addEventListener('click', () => goToStep(5));
-
-        document.getElementById('backToStep1').addEventListener('click', () => goToStep(1));
-        document.getElementById('backToStep2').addEventListener('click', () => goToStep(2));
-        document.getElementById('backToStep3').addEventListener('click', () => goToStep(3));
-        document.getElementById('backToStep4').addEventListener('click', () => goToStep(4));
-
-        // ============================================================
-        // ГОСТИ
-        // ============================================================
-        document.getElementById('adultsDec').addEventListener('click', () => {
-            if (state.adults > 0) { state.adults--; updateGuests(); }
-        });
-        document.getElementById('adultsInc').addEventListener('click', () => {
-            if (state.adults + state.children < 500) { state.adults++; updateGuests(); }
-        });
-        document.getElementById('childrenDec').addEventListener('click', () => {
-            if (state.children > 0) { state.children--; updateGuests(); }
-        });
-        document.getElementById('childrenInc').addEventListener('click', () => {
-            if (state.adults + state.children < 500) { state.children++; updateGuests(); }
-        });
-
-        function updateGuests() {
-            document.getElementById('adultsValue').textContent = state.adults;
-            document.getElementById('childrenValue').textContent = state.children;
-        }
-
-        document.getElementById('toStep3').addEventListener('click', () => {
-            if (state.adults + state.children < 2) { alert('Минимальное количество гостей — 2'); return; }
-            goToStep(3);
-        });
-
-        // ============================================================
-        // ДЛИТЕЛЬНОСТЬ
-        // ============================================================
-        document.querySelectorAll('#durationOptions .option').forEach(el => {
-            el.addEventListener('click', () => {
-                document.querySelectorAll('#durationOptions .option').forEach(o => o.classList.remove('selected'));
-                el.classList.add('selected');
-                state.duration = parseInt(el.dataset.value);
-                document.getElementById('toStep4').disabled = false;
-            });
-        });
-
-        // ============================================================
-        // БЮДЖЕТ
-        // ============================================================
-        document.querySelectorAll('#budgetOptions .budget-item').forEach(el => {
-            el.addEventListener('click', () => {
-                document.querySelectorAll('#budgetOptions .budget-item').forEach(o => o.classList.remove('selected'));
-                el.classList.add('selected');
-                state.budget = parseInt(el.dataset.value);
-                document.getElementById('customBudget').value = '';
-                document.getElementById('toStep5').disabled = false;
-            });
-        });
-
-        document.getElementById('applyCustomBudget').addEventListener('click', () => {
-            const val = parseInt(document.getElementById('customBudget').value);
-            if (val && val >= 1000) {
-                document.querySelectorAll('#budgetOptions .budget-item').forEach(o => o.classList.remove('selected'));
-                state.budget = val;
-                document.getElementById('toStep5').disabled = false;
-            } else {
-                alert('Пожалуйста, введите бюджет от 1000 ₽');
-            }
-        });
-
-        // ============================================================
-        // ПРЕДПОЧТЕНИЯ
-        // ============================================================
-        document.querySelectorAll('#prefOptions .pref-item').forEach(el => {
-            el.addEventListener('click', () => {
-                const value = el.dataset.value;
-                if (value === 'auto') {
-                    document.querySelectorAll('#prefOptions .pref-item').forEach(o => o.classList.remove('selected'));
-                    el.classList.add('selected');
-                    state.preferences = ['auto'];
-                    document.getElementById('prefCount').textContent = '1 (авто)';
-                    return;
-                }
-                document.querySelector('#prefOptions .pref-item[data-value="auto"]')?.classList.remove('selected');
-                state.preferences = state.preferences.filter(p => p !== 'auto');
-
-                if (state.preferences.includes(value)) {
-                    state.preferences = state.preferences.filter(p => p !== value);
-                    el.classList.remove('selected');
-                } else {
-                    state.preferences.push(value);
-                    el.classList.add('selected');
-                }
-                document.getElementById('prefCount').textContent = state.preferences.length;
-            });
-        });
-
-        // ============================================================
-        // РАСЧЁТ (ОТПРАВКА НА БЭКЕНД)
-        // ============================================================
-        document.getElementById('toStep6').addEventListener('click', async function () {
-            console.log('🔥 КНОПКА "Рассчитать" НАЖАТА!');
-
-            if (!state.scenario) {
-                alert('Выберите сценарий');
-                return;
-            }
-            if (!state.duration) {
-                alert('Выберите длительность');
-                return;
-            }
-            if (!state.budget) {
-                alert('Укажите бюджет');
-                return;
-            }
-
-            if (state.preferences.length === 0) {
-                state.preferences = ['auto'];
-                document.querySelector('#prefOptions .pref-item[data-value="auto"]')?.classList.add('selected');
-                document.getElementById('prefCount').textContent = '1 (авто)';
-            }
-
-            console.log('📤 Отправка данных на бэкенд:', {
-                scenario_id: state.scenario,
-                adults: state.adults,
-                children: state.children,
-                hours: state.duration,
-                budget: state.budget,
-                preferences: state.preferences
-            });
-
-            const loading = document.getElementById('loadingIndicator');
-            const resultList = document.getElementById('resultList');
-            loading.style.display = 'block';
-            resultList.innerHTML = '';
-
-            try {
-                const response = await fetch(`${API_URL}/calculate`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        scenario_id: state.scenario,
-                        adults: state.adults,
-                        children: state.children,
-                        hours: state.duration,
-                        budget: state.budget,
-                        preferences: state.preferences
-                    })
-                });
-
-                console.log('📡 Статус ответа:', response.status);
-
-                if (!response.ok) {
-                    const errorText = await response.text();
-                    throw new Error(`Ошибка ${response.status}: ${errorText}`);
-                }
-
-                const result = await response.json();
-                console.log('📥 Ответ от бэкенда:', result);
-
-                state.result = result;
-                displayResult(result);
-
-                loading.style.display = 'none';
-                goToStep(6);
-
-            } catch (error) {
-                console.error('❌ Ошибка:', error);
-                loading.style.display = 'none';
-                resultList.innerHTML = `
-            <div style="text-align:center;padding:30px;color:#e74c3c;">
-                <div style="font-size:48px;">😕</div>
-                <h3>Ошибка подключения к бэкенду</h3>
-                <p style="color:#666;font-size:14px;margin-top:10px;">
-                    ${error.message}
-                </p>
-                <p style="color:#999;font-size:13px;margin-top:8px;">
-                    Убедитесь, что бэкенд запущен: <code>python backend/main.py</code>
-                </p>
-                <p style="color:#999;font-size:13px;">
-                    И работает на <code>http://localhost:8000</code>
-                </p>
-            </div>
-        `;
-            }
-        });
-
-        // ============================================================
-        // ОТОБРАЖЕНИЕ РЕЗУЛЬТАТА
-        // ============================================================
-        function displayResult(data) {
-            console.log('📊 Отображение результата...');
-
-            document.getElementById('resScenario').textContent = data.scenario || '—';
-            document.getElementById('resAdults').textContent = data.adults || 0;
-            document.getElementById('resChildren').textContent = data.children || 0;
-            document.getElementById('resDuration').textContent = data.hours || 0;
-            document.getElementById('resBudget').textContent = (data.budget || 0).toLocaleString('ru-RU');
-
-            const warning = document.getElementById('budgetWarning');
-            if (!data.is_within_budget) {
-                warning.style.display = 'block';
-                warning.innerHTML = `
-            <div class="budget-warning">
-                <strong>⚠️ Бюджета недостаточно</strong><br>
-                Расчётная стоимость: <strong>${data.total_cost.toLocaleString('ru-RU')} ₽</strong><br>
-                Ваш бюджет: <strong>${data.budget.toLocaleString('ru-RU')} ₽</strong><br>
-                Не хватает: <strong>${data.shortfall.toLocaleString('ru-RU')} ₽</strong>
-            </div>
-        `;
-            } else {
-                warning.style.display = 'none';
-            }
-
-            const list = document.getElementById('resultList');
-            list.innerHTML = '';
-
-            if (!data.items || data.items.length === 0) {
-                list.innerHTML = '<div style="text-align:center;padding:20px;color:#999;">Нет блюд в расчёте</div>';
-                return;
-            }
-
-            const categories = {};
-            data.items.forEach(item => {
-                const cat = item.category || 'Другое';
-                if (!categories[cat]) categories[cat] = [];
-                categories[cat].push(item);
-            });
-
-            const order = ['Салаты', 'Холодные закуски', 'Закуски', 'Хлеб', 'Горячее', 'Гарнир', 'Десерт', 'Напитки'];
-            const sorted = Object.keys(categories).sort((a, b) => {
-                const ia = order.indexOf(a);
-                const ib = order.indexOf(b);
-                if (ia === -1 && ib === -1) return a.localeCompare(b);
-                if (ia === -1) return 1;
-                if (ib === -1) return -1;
-                return ia - ib;
-            });
-
-            sorted.forEach(cat => {
-                const items = categories[cat];
-                const total = items.reduce((s, i) => s + i.final_amount, 0);
-                const div = document.createElement('div');
-                div.style.cssText = 'font-weight:600;margin-top:12px;padding:6px 0;border-bottom:2px solid #e2ded7;';
-                div.textContent = `${cat} (${total.toFixed(1)} ${items[0]?.unit || ''})`;
-                list.appendChild(div);
-
-                items.forEach(item => {
-                    const row = document.createElement('div');
-                    row.className = 'result-item';
-                    row.innerHTML = `
-                <span>${item.name}</span>
-                <span>${item.final_amount.toFixed(1)} ${item.unit || ''} — ${item.total_price.toLocaleString('ru-RU')} ₽</span>
-            `;
-                    list.appendChild(row);
-                });
-            });
-
-            document.getElementById('totalCost').textContent = data.total_cost.toLocaleString('ru-RU');
-            const status = document.getElementById('budgetStatus');
+        function renderResult(data) {
+            document.getElementById('result-subtitle').textContent = `${data.adults} взрослых · ${data.children} детей · ${data.hours} часа`;
+            document.getElementById('result-total').textContent = formatMoney(data.total_cost);
+            document.getElementById('result-total-bottom').textContent = formatMoney(data.total_cost);
+            const badgeContainer = document.getElementById('result-badge-container');
+            const remainingEl = document.getElementById('result-remaining');
             if (data.is_within_budget) {
-                status.textContent = `✅ В пределах бюджета (${data.remaining.toLocaleString('ru-RU')} ₽ осталось)`;
-                status.className = 'budget-status';
+                badgeContainer.innerHTML = '<span class="badge badge-success">🟢 В бюджете</span>';
+                remainingEl.textContent = `Осталось: ${formatMoney(data.remaining)}`;
             } else {
-                status.textContent = `⚠️ Превышение бюджета на ${data.shortfall.toLocaleString('ru-RU')} ₽`;
-                status.className = 'budget-status over';
+                badgeContainer.innerHTML = '<span class="badge badge-error">🔴 Превышение бюджета</span>';
+                remainingEl.textContent = `На: ${formatMoney(data.shortfall)}`;
             }
-
-            console.log('✅ Результат отображён');
-        }
-
-        // ============================================================
-        // НОВЫЙ РАСЧЁТ
-        // ============================================================
-        document.getElementById('resetBtn').addEventListener('click', () => {
-            state = {
-                step: 1,
-                scenario: null,
-                adults: 10,
-                children: 0,
-                duration: null,
-                budget: null,
-                preferences: [],
-                result: null
-            };
-            document.querySelectorAll('.option, .budget-item, .pref-item').forEach(el => el.classList.remove('selected'));
-            document.getElementById('toStep2').disabled = true;
-            document.getElementById('toStep4').disabled = true;
-            document.getElementById('toStep5').disabled = true;
-            document.getElementById('adultsValue').textContent = '10';
-            document.getElementById('childrenValue').textContent = '0';
-            document.getElementById('prefCount').textContent = '0';
-            document.getElementById('resultList').innerHTML = '';
-            document.getElementById('budgetWarning').style.display = 'none';
-            document.getElementById('customBudget').value = '';
-            document.getElementById('scenarioInfo').style.display = 'none';
-            goToStep(1);
-        });
-
-        // ============================================================
-        // ПОДЕЛИТЬСЯ
-        // ============================================================
-        document.getElementById('shareBtn').addEventListener('click', () => {
-            if (!state.result) {
-                alert('Сначала выполните расчёт');
-                return;
-            }
-
-            const text = `
-🥂 Хватит всем!
-
-Сценарий: ${state.result.scenario || '—'}
-Взрослых: ${state.adults}, Детей: ${state.children}
-Длительность: ${state.duration} ч
-Бюджет: ${state.budget.toLocaleString('ru-RU')} ₽
-
-💰 Итого: ${state.result.total_cost.toLocaleString('ru-RU')} ₽
-${state.result.is_within_budget ? '✅ В пределах бюджета' : '⚠️ Бюджет превышен'}
-
-🧾 Цены: официальная база Пермстата 2025 + динамика Росстата 2026
-    `.trim();
-
-            if (navigator.share) {
-                navigator.share({ title: 'Хватит всем', text: text });
-            } else {
-                navigator.clipboard.writeText(text).then(() => {
-                    alert('✅ Расчёт скопирован в буфер обмена!');
+            const categories = {};
+            (data.items || []).forEach(item => {
+                if (!categories[item.category]) categories[item.category] = [];
+                categories[item.category].push(item);
+            });
+            let html = '';
+            for (const [cat, items] of Object.entries(categories)) {
+                const style = getCategoryStyle(cat);
+                html += `<div class="category-block ${style.cls}"><div class="category-title"><span class="cat-icon">${style.icon}</span><span>${cat}</span></div>`;
+                items.forEach(item => {
+                    const qty = item.packages > 1 ? `${item.packages} × ${item.package_size} ${item.unit}` : `${item.final_amount} ${item.unit}`;
+                    html += `<div class="item-row"><span class="item-name">${item.name}</span><span class="item-qty">${qty}</span><span class="item-price">${formatMoney(item.total_price)}</span></div>`;
                 });
+                html += `</div>`;
             }
+            document.getElementById('result-items').innerHTML = html;
+        }
+        document.getElementById('btn-next-event').addEventListener('click', () => showScreen('screen-guests'));
+        document.getElementById('btn-next-guests').addEventListener('click', () => showScreen('screen-duration'));
+        document.getElementById('btn-next-duration').addEventListener('click', () => showScreen('screen-budget'));
+        document.getElementById('btn-next-budget').addEventListener('click', () => showScreen('screen-prefs'));
+        document.getElementById('btn-calculate').addEventListener('click', calculate);
+        document.getElementById('btn-back').addEventListener('click', () => showScreen('screen-prefs'));
+        document.getElementById('btn-restart').addEventListener('click', () => location.reload());
+        document.querySelectorAll('.back-btn').forEach(btn => {
+            btn.addEventListener('click', () => { showScreen(btn.dataset.back); });
         });
-
-        // ============================================================
-        // ВОЗВРАТ НА ШАГ 5
-        // ============================================================
-        document.getElementById('backToStep5').addEventListener('click', () => goToStep(5));
-
-        // ============================================================
-        // ЗАПУСК
-        // ============================================================
-        console.log('🚀 Хватит всем v8.2 загружен');
-        console.log('📡 API: http://localhost:8000');
-
-        loadScenarios();
-        goToStep(1);
+        function setupCounter(id, min, max, stateKey) {
+            const minus = document.getElementById(`${id}-minus`);
+            const plus = document.getElementById(`${id}-plus`);
+            const val = document.getElementById(`${id}-val`);
+            function update() {
+                val.textContent = state[stateKey];
+                minus.disabled = state[stateKey] <= min;
+                plus.disabled = state[stateKey] >= max;
+                updateTotalGuests();
+                updateSummary();
+            }
+            minus.addEventListener('click', () => { if (state[stateKey] > min) state[stateKey]--; update(); });
+            plus.addEventListener('click', () => { if (state[stateKey] < max) state[stateKey]++; update(); });
+            update();
+        }
+        setupCounter('adults', 1, 500, 'adults');
+        setupCounter('children', 0, 200, 'children');
+        document.getElementById('custom-budget-input')?.addEventListener('input', (e) => {
+            let v = parseInt(e.target.value) || 0;
+            if (v < 1000) v = 1000;
+            state.customBudget = v;
+            state.budget = v;
+            updateSummary();
+        });
+        document.getElementById('btn-share').addEventListener('click', () => {
+            if (!state.lastResult) return;
+            const text = `Мой расчёт на мероприятие в Хватит всем 🥂\n\nГостей: ${getTotalGuests()}\nБюджет: ${formatMoney(state.customBudget || state.budget)}\nИтого: ${formatMoney(state.lastResult.total_cost)}\n\nhttps://hvatitfrontend.onrender.com`;
+            if (navigator.share) { navigator.share({ title: 'Хватит всем', text }); }
+            else { navigator.clipboard.writeText(text).then(() => alert('✓ Скопировано!')); }
+        });
+        document.getElementById('btn-copy').addEventListener('click', () => {
+            if (!state.lastResult) return;
+            const text = `Мой расчёт на мероприятие в Хватит всем 🥂\n\nГостей: ${getTotalGuests()}\nБюджет: ${formatMoney(state.customBudget || state.budget)}\nИтого: ${formatMoney(state.lastResult.total_cost)}\n\nhttps://hvatitfrontend.onrender.com`;
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = document.getElementById('btn-copy');
+                const orig = btn.textContent;
+                btn.textContent = '✓ Скопировано';
+                setTimeout(() => btn.textContent = orig, 2000);
+            });
+        });
+        renderEvents(); renderDurations(); renderBudgets(); renderPrefs();
+        updateTotalGuests(); updateSummary();
     </script>
 </body>
 
