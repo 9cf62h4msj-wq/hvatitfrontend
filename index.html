@@ -19,6 +19,9 @@
             --primary-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
             --primary-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
             --border: #e5e7eb;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
             --radius: 24px;
             --radius-btn: 20px;
             --radius-sm: 16px;
@@ -232,6 +235,11 @@
             letter-spacing: -0.02em;
         }
 
+        .card-desc {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
         .grid-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -302,6 +310,7 @@
             color: var(--text-muted);
         }
 
+        /* ============ СЧЁТЧИКИ ============ */
         .counter-row {
             display: flex;
             justify-content: space-between;
@@ -322,16 +331,16 @@
         .counter-controls {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 8px;
         }
 
         .counter-btn {
-            width: 46px;
-            height: 46px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             border: none;
             background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 400;
             cursor: pointer;
             display: flex;
@@ -340,10 +349,12 @@
             transition: all 0.2s ease;
             color: var(--text);
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            flex-shrink: 0;
         }
 
         .counter-btn:active {
             transform: scale(0.92);
+            background: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%);
         }
 
         .counter-btn:disabled {
@@ -352,11 +363,31 @@
             transform: none;
         }
 
-        .counter-value {
-            font-size: 22px;
-            font-weight: 700;
-            min-width: 34px;
+        .counter-input {
+            width: 72px;
+            height: 44px;
             text-align: center;
+            font-size: 20px;
+            font-weight: 700;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 0 6px;
+            outline: none;
+            font-family: inherit;
+            background: rgba(250, 251, 255, 0.9);
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .counter-input::-webkit-outer-spin-button,
+        .counter-input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .counter-input:focus {
+            border-color: #a5b4fc;
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
         }
 
         .budget-grid {
@@ -429,6 +460,7 @@
 
         .btn-primary:active:not(:disabled) {
             transform: scale(0.97);
+            box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
         }
 
         .btn-primary:disabled {
@@ -492,6 +524,11 @@
             color: #065f46;
         }
 
+        .badge-warning {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            color: #92400e;
+        }
+
         .badge-error {
             background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
             color: #991b1b;
@@ -504,6 +541,7 @@
         .category-title {
             font-size: 16px;
             font-weight: 700;
+            margin-bottom: 0;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -542,9 +580,27 @@
             border-radius: 0 0 var(--radius-sm) var(--radius-sm);
         }
 
-        .item-name {
+        .item-info {
             flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            min-width: 0;
+        }
+
+        .item-name {
             font-weight: 500;
+        }
+
+        .item-name .off-filter-mark {
+            font-size: 11px;
+            color: #b45309;
+            background: #fef3c7;
+            padding: 1px 6px;
+            border-radius: 6px;
+            margin-left: 6px;
+            font-weight: 600;
+            vertical-align: middle;
         }
 
         .item-qty {
@@ -556,51 +612,27 @@
         .item-price {
             font-weight: 700;
             white-space: nowrap;
+            font-size: 15px;
         }
 
-        /* Кнопки редактирования */
-        .item-actions {
-            display: flex;
-            gap: 4px;
-            margin-left: 8px;
-        }
-
-        .item-btn {
-            width: 28px;
-            height: 28px;
-            border-radius: 8px;
-            border: none;
+        .item-edit {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
             background: rgba(243, 244, 246, 0.9);
-            font-size: 14px;
-            font-weight: 700;
+            border: none;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #374151;
+            font-size: 16px;
             transition: all 0.2s;
+            flex-shrink: 0;
         }
 
-        .item-btn:active {
+        .item-edit:active {
             transform: scale(0.9);
-        }
-
-        .item-minus {
-            color: #ef4444;
-        }
-
-        .item-plus {
-            color: #10b981;
-        }
-
-        .item-remove {
-            background: rgba(254, 226, 226, 0.9);
-            color: #991b1b;
-        }
-
-        .item-swap {
-            background: rgba(219, 234, 254, 0.9);
-            color: #1e40af;
+            background: #e5e7eb;
         }
 
         .total-row {
@@ -689,21 +721,20 @@
             }
         }
 
-        /* 🆕 МОДАЛЬНОЕ ОКНО ЗАМЕНЫ */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(15, 23, 42, 0.5);
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
-            z-index: 999;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            z-index: 100;
             display: none;
             align-items: flex-end;
             justify-content: center;
-            padding: 16px;
+            animation: fadeIn 0.2s ease;
         }
 
         .modal-overlay.active {
@@ -711,103 +742,142 @@
         }
 
         .modal {
+            background: #ffffff;
             width: 100%;
             max-width: 640px;
-            background: #ffffff;
-            border-radius: 24px 24px 24px 24px;
-            padding: 24px;
-            max-height: 80vh;
-            overflow-y: auto;
-            animation: slideUp 0.3s ease;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border-radius: 24px 24px 0 0;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         @keyframes slideUp {
             from {
-                transform: translateY(40px);
-                opacity: 0;
+                transform: translateY(100%);
             }
 
             to {
                 transform: translateY(0);
-                opacity: 1;
             }
         }
 
         .modal-header {
+            padding: 20px 24px 12px;
+            border-bottom: 1px solid var(--border);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 16px;
-            padding-bottom: 12px;
-            border-bottom: 2px solid var(--border);
         }
 
         .modal-title {
             font-size: 18px;
             font-weight: 700;
+            padding-right: 12px;
         }
 
         .modal-close {
             width: 36px;
             height: 36px;
             border-radius: 50%;
+            background: #f3f4f6;
             border: none;
-            background: rgba(243, 244, 246, 0.9);
             font-size: 18px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-shrink: 0;
         }
 
-        .modal-close:active {
-            transform: scale(0.9);
+        .modal-body {
+            padding: 12px 24px 20px;
+            overflow-y: auto;
+            flex: 1;
         }
 
-        .alt-list {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
+        .modal-hint {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            padding: 0 4px;
         }
 
         .alt-item {
-            padding: 16px;
-            border-radius: 16px;
-            background: rgba(250, 251, 255, 0.9);
-            border: 2px solid transparent;
-            cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: all 0.2s;
+            padding: 14px 16px;
+            border-radius: 14px;
+            background: #f9fafb;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
         }
 
         .alt-item:active {
             transform: scale(0.98);
-        }
-
-        .alt-item:hover {
-            border-color: #a5b4fc;
             background: #eef2ff;
         }
 
         .alt-name {
-            font-weight: 600;
+            font-weight: 500;
             font-size: 15px;
+            flex: 1;
+            padding-right: 12px;
         }
 
         .alt-price {
             font-weight: 700;
-            color: #4338ca;
             font-size: 15px;
+            white-space: nowrap;
+            color: #4338ca;
         }
 
-        .alt-empty {
-            text-align: center;
-            padding: 32px;
+        .alt-tags {
+            font-size: 12px;
             color: var(--text-muted);
-            font-size: 15px;
+            margin-top: 2px;
+        }
+
+        .modal-loading,
+        .modal-empty {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-muted);
+        }
+
+        .modal-loader {
+            width: 32px;
+            height: 32px;
+            margin: 0 auto 12px;
+            border-radius: 50%;
+            border: 3px solid #e5e7eb;
+            border-top-color: #6366f1;
+            animation: spin 0.8s linear infinite;
+        }
+
+        .toast {
+            position: fixed;
+            left: 50%;
+            bottom: 24px;
+            transform: translateX(-50%) translateY(100px);
+            background: #1f2937;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            z-index: 200;
+            opacity: 0;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
         }
     </style>
 </head>
@@ -820,7 +890,7 @@
     </div>
 
     <div class="app" id="app">
-        <!-- ЭКРАН 1: Мероприятие -->
+        <!-- ЭКРАН 1 -->
         <div class="screen active" id="screen-event">
             <div class="progress">
                 <div class="progress-dot active"></div>
@@ -841,7 +911,7 @@
             <button class="btn btn-primary" id="btn-next-event" disabled>Далее →</button>
         </div>
 
-        <!-- ЭКРАН 2: Гости -->
+        <!-- ЭКРАН 2: ГОСТИ (с ручным вводом) -->
         <div class="screen" id="screen-guests">
             <div class="progress">
                 <div class="progress-dot active"></div>
@@ -850,32 +920,40 @@
                 <div class="progress-dot"></div>
                 <div class="progress-dot"></div>
             </div>
-            <div class="top-bar"><button class="back-btn" data-back="screen-event">← Назад</button></div>
+            <div class="top-bar">
+                <button class="back-btn" data-back="screen-event">← Назад</button>
+            </div>
             <div class="card">
                 <div class="card-title">Сколько гостей?</div>
                 <div class="counter-row" style="margin-top:8px;">
                     <span class="counter-label">Взрослые</span>
                     <div class="counter-controls">
-                        <button class="counter-btn" id="adults-minus">−</button>
-                        <span class="counter-value" id="adults-val">10</span>
-                        <button class="counter-btn" id="adults-plus">+</button>
+                        <button class="counter-btn" id="adults-minus" type="button">−</button>
+                        <input type="number" inputmode="numeric" class="counter-input" id="adults-input" value="10"
+                            min="1" max="500">
+                        <button class="counter-btn" id="adults-plus" type="button">+</button>
                     </div>
                 </div>
                 <div class="counter-row">
                     <span class="counter-label">Дети</span>
                     <div class="counter-controls">
-                        <button class="counter-btn" id="children-minus">−</button>
-                        <span class="counter-value" id="children-val">0</span>
-                        <button class="counter-btn" id="children-plus">+</button>
+                        <button class="counter-btn" id="children-minus" type="button">−</button>
+                        <input type="number" inputmode="numeric" class="counter-input" id="children-input" value="0"
+                            min="0" max="200">
+                        <button class="counter-btn" id="children-plus" type="button">+</button>
                     </div>
                 </div>
-                <div style="text-align:center; margin-top:16px; font-weight:700; font-size:17px;">Всего гостей: <span
-                        id="total-guests">10</span></div>
+                <div style="text-align:center; margin-top:16px; font-weight:700; font-size:17px;">
+                    Всего гостей: <span id="total-guests">10</span>
+                </div>
+                <p style="text-align:center; font-size:13px; color:var(--text-muted); margin-top:8px;">
+                    Взрослые: 1–500 · Дети: 0–200. Можно ввести число вручную.
+                </p>
             </div>
             <button class="btn btn-primary" id="btn-next-guests">Далее →</button>
         </div>
 
-        <!-- ЭКРАН 3: Продолжительность -->
+        <!-- ЭКРАН 3 -->
         <div class="screen" id="screen-duration">
             <div class="progress">
                 <div class="progress-dot active"></div>
@@ -884,7 +962,9 @@
                 <div class="progress-dot"></div>
                 <div class="progress-dot"></div>
             </div>
-            <div class="top-bar"><button class="back-btn" data-back="screen-guests">← Назад</button></div>
+            <div class="top-bar">
+                <button class="back-btn" data-back="screen-guests">← Назад</button>
+            </div>
             <div class="card">
                 <div class="card-title">Сколько продлится мероприятие?</div>
                 <p style="font-size:14px; color:var(--text-muted); margin:8px 0 16px;">Продолжительность влияет на
@@ -894,7 +974,7 @@
             <button class="btn btn-primary" id="btn-next-duration" disabled>Далее →</button>
         </div>
 
-        <!-- ЭКРАН 4: Бюджет -->
+        <!-- ЭКРАН 4 -->
         <div class="screen" id="screen-budget">
             <div class="progress">
                 <div class="progress-dot active"></div>
@@ -903,7 +983,9 @@
                 <div class="progress-dot active"></div>
                 <div class="progress-dot"></div>
             </div>
-            <div class="top-bar"><button class="back-btn" data-back="screen-duration">← Назад</button></div>
+            <div class="top-bar">
+                <button class="back-btn" data-back="screen-duration">← Назад</button>
+            </div>
             <div class="card">
                 <div class="card-title">Какой у вас бюджет?</div>
                 <div class="budget-grid" id="budget-grid" style="margin-top:16px;"></div>
@@ -915,7 +997,7 @@
             <button class="btn btn-primary" id="btn-next-budget" disabled>Далее →</button>
         </div>
 
-        <!-- ЭКРАН 5: Предпочтения -->
+        <!-- ЭКРАН 5: ПРЕДПОЧТЕНИЯ (только мясо / рыба / вега / авто) -->
         <div class="screen" id="screen-prefs">
             <div class="progress">
                 <div class="progress-dot active"></div>
@@ -924,11 +1006,14 @@
                 <div class="progress-dot active"></div>
                 <div class="progress-dot active"></div>
             </div>
-            <div class="top-bar"><button class="back-btn" data-back="screen-budget">← Назад</button></div>
+            <div class="top-bar">
+                <button class="back-btn" data-back="screen-budget">← Назад</button>
+            </div>
             <div class="card">
                 <div class="card-title">Что предпочитаете?</div>
-                <p style="font-size:14px; color:var(--text-muted); margin:8px 0 16px;">Можно выбрать несколько.</p>
-                <div class="grid-3" id="prefs-grid"></div>
+                <p style="font-size:14px; color:var(--text-muted); margin:8px 0 16px;">Можно выбрать несколько.
+                    «Авто-подбор» — сбалансированный набор.</p>
+                <div class="grid-2" id="prefs-grid"></div>
             </div>
             <div class="card" style="text-align:center;">
                 <div style="font-size:14px; color:var(--text-muted);">Всё готово?</div>
@@ -938,12 +1023,12 @@
             <button class="btn btn-primary" id="btn-calculate">Рассчитать</button>
         </div>
 
-        <!-- ЭКРАН 6: Загрузка -->
+        <!-- ЭКРАН 6 -->
         <div class="screen" id="screen-loading">
             <div class="loader">⏳ Считаем ваш стол…</div>
         </div>
 
-        <!-- ЭКРАН 7: Результат -->
+        <!-- ЭКРАН 7 -->
         <div class="screen" id="screen-result">
             <div class="card">
                 <div class="result-header">
@@ -960,54 +1045,61 @@
                     <span id="result-total-bottom">0 ₽</span>
                 </div>
             </div>
+            <button class="btn btn-secondary" id="btn-reroll" style="display:none;">🎲 Другое меню</button>
             <div class="btn-row">
                 <button class="btn btn-secondary" id="btn-share">📤 Поделиться</button>
                 <button class="btn btn-secondary" id="btn-copy">📋 Скопировать</button>
             </div>
             <button class="btn btn-primary" id="btn-back">← Изменить параметры</button>
             <button class="btn btn-secondary" id="btn-restart">🔄 Новый расчёт</button>
+            <p style="text-align:center; font-size:12px; color:var(--text-muted); padding:8px;">Расчёт по базе цен
+                сервиса</p>
         </div>
     </div>
 
-    <!-- 🆕 МОДАЛЬНОЕ ОКНО ЗАМЕНЫ БЛЮДА -->
     <div class="modal-overlay" id="modal-overlay">
         <div class="modal">
             <div class="modal-header">
-                <div class="modal-title">🔄 Заменить блюдо</div>
+                <div class="modal-title" id="modal-title">Заменить блюдо</div>
                 <button class="modal-close" id="modal-close">✕</button>
             </div>
-            <div class="alt-list" id="alt-list"></div>
+            <div class="modal-body" id="modal-body"></div>
         </div>
     </div>
 
+    <div class="toast" id="toast"></div>
+
     <script>
         const API_URL = 'https://hvatitvsem.onrender.com';
+
         const EVENTS = [
             { id: 'SC001', icon: '🎂', label: 'День рождения', desc: 'Универсальный набор' },
             { id: 'SC003', icon: '🏢', label: 'Корпоратив', desc: 'Закуски и горячее' },
             { id: 'SC004', icon: '💍', label: 'Свадьба', desc: 'Расширенный стол' },
-            { id: 'SC006', icon: '🎉', label: 'Вечеринка', desc: 'Больше закусок' },
-            { id: 'SC011', icon: '✨', label: 'Другое', desc: 'Настроим под вас' }
+            { id: 'SC100', icon: '🍢', label: 'Фуршет', desc: 'Канапе, закуски, напитки', random: true },
+            { id: 'SC011', icon: '✨', label: 'Другое', desc: 'Настроим под вас' },
         ];
+
         const DURATIONS = [
             { value: 2, label: '⏱ 1–2 часа' },
             { value: 4, label: '⏱ 3–4 часа' },
             { value: 6, label: '⏱ 5–6 часов' },
-            { value: 8, label: '⏱ 7–8 часов' }
+            { value: 8, label: '⏱ 7–8 часов' },
         ];
+
         const BUDGETS = [10000, 20000, 30000, 50000, 100000];
+
+        /* Предпочтения — только 4 варианта */
         const PREFS = [
             { id: 'meat', icon: '🥩', label: 'Мясо' },
             { id: 'fish', icon: '🐟', label: 'Рыба' },
             { id: 'veg', icon: '🥬', label: 'Вегетарианское' },
-            { id: 'snacks', icon: '🥪', label: 'Закуски' },
-            { id: 'sweet', icon: '🍰', label: 'Сладкое' },
-            { id: 'drinks', icon: '🥤', label: 'Напитки' },
-            { id: 'auto', icon: '✨', label: 'Авто-подбор' }
+            { id: 'auto', icon: '✨', label: 'Авто-подбор' },
         ];
 
-        let state = {
+        const state = {
             eventId: null,
+            isRandom: false,
             adults: 10,
             children: 0,
             hours: 4,
@@ -1015,7 +1107,8 @@
             customBudget: null,
             prefs: [],
             lastResult: null,
-            swapIdx: null  // индекс блюда, которое заменяем
+            lastPayload: null,
+            isCalculating: false,
         };
 
         function showScreen(id) {
@@ -1023,10 +1116,19 @@
             document.getElementById(id).classList.add('active');
             window.scrollTo(0, 0);
         }
-
         function formatMoney(n) { return Math.round(n).toLocaleString('ru-RU') + ' ₽'; }
         function getTotalGuests() { return state.adults + state.children; }
-        function updateTotalGuests() { document.getElementById('total-guests').textContent = getTotalGuests(); }
+        function updateTotalGuests() {
+            document.getElementById('total-guests').textContent = getTotalGuests();
+        }
+        function showToast(text) {
+            const t = document.getElementById('toast');
+            t.textContent = text;
+            t.classList.add('show');
+            clearTimeout(showToast._timer);
+            showToast._timer = setTimeout(() => t.classList.remove('show'), 2200);
+        }
+        function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
 
         function getCategoryStyle(cat) {
             const c = (cat || '').toLowerCase();
@@ -1043,15 +1145,16 @@
         function renderEvents() {
             const grid = document.getElementById('event-grid');
             grid.innerHTML = EVENTS.map(e => `
-                <div class="option-card ${state.eventId === e.id ? 'selected' : ''}" data-id="${e.id}">
-                    <div class="option-icon">${e.icon}</div>
-                    <div class="option-label">${e.label}</div>
-                    <div class="option-desc">${e.desc}</div>
-                </div>
-            `).join('');
+    <div class="option-card ${state.eventId === e.id ? 'selected' : ''}" data-id="${e.id}" data-random="${e.random ? '1' : '0'}">
+      <div class="option-icon">${e.icon}</div>
+      <div class="option-label">${e.label}</div>
+      <div class="option-desc">${e.desc}</div>
+    </div>
+  `).join('');
             grid.querySelectorAll('.option-card').forEach(card => {
                 card.addEventListener('click', () => {
                     state.eventId = card.dataset.id;
+                    state.isRandom = card.dataset.random === '1';
                     renderEvents();
                     document.getElementById('btn-next-event').disabled = false;
                 });
@@ -1061,15 +1164,16 @@
         function renderDurations() {
             const grid = document.getElementById('duration-grid');
             grid.innerHTML = DURATIONS.map(d => `
-                <div class="option-card ${state.hours === d.value ? 'selected' : ''}" data-value="${d.value}">
-                    <div class="option-label">${d.label}</div>
-                </div>
-            `).join('');
+    <div class="option-card ${state.hours === d.value ? 'selected' : ''}" data-value="${d.value}">
+      <div class="option-label">${d.label}</div>
+    </div>
+  `).join('');
             grid.querySelectorAll('.option-card').forEach(card => {
                 card.addEventListener('click', () => {
                     state.hours = parseInt(card.dataset.value);
                     renderDurations();
                     document.getElementById('btn-next-duration').disabled = false;
+                    updateSummary();
                 });
             });
         }
@@ -1077,8 +1181,8 @@
         function renderBudgets() {
             const grid = document.getElementById('budget-grid');
             grid.innerHTML = BUDGETS.map(b => `
-                <button class="budget-btn ${state.budget === b && !state.customBudget ? 'selected' : ''}" data-value="${b}">${b.toLocaleString('ru-RU')} ₽</button>
-            `).join('') + `<button class="budget-btn ${state.customBudget ? 'selected' : ''}" data-value="custom" style="grid-column: span 2;">💰 Свой бюджет</button>`;
+    <button class="budget-btn ${state.budget === b && !state.customBudget ? 'selected' : ''}" data-value="${b}">${b.toLocaleString('ru-RU')} ₽</button>
+  `).join('') + `<button class="budget-btn ${state.customBudget ? 'selected' : ''}" data-value="custom" style="grid-column: span 2;">💰 Свой бюджет</button>`;
             grid.querySelectorAll('.budget-btn').forEach(btn => {
                 btn.addEventListener('click', () => {
                     const val = btn.dataset.value;
@@ -1102,20 +1206,25 @@
         function renderPrefs() {
             const grid = document.getElementById('prefs-grid');
             grid.innerHTML = PREFS.map(p => `
-                <div class="option-card ${state.prefs.includes(p.id) ? 'selected' : ''}" data-id="${p.id}">
-                    <div class="option-icon">${p.icon}</div>
-                    <div class="option-label" style="font-size:13px;">${p.label}</div>
-                </div>
-            `).join('');
+    <div class="option-card ${state.prefs.includes(p.id) ? 'selected' : ''}" data-id="${p.id}">
+      <div class="option-icon">${p.icon}</div>
+      <div class="option-label">${p.label}</div>
+    </div>
+  `).join('');
             grid.querySelectorAll('.option-card').forEach(card => {
                 card.addEventListener('click', () => {
                     const id = card.dataset.id;
                     if (id === 'auto') {
+                        // Авто: либо единственный выбран, либо всё сбрасывается
                         state.prefs = state.prefs.includes('auto') ? [] : ['auto'];
                     } else {
+                        // Убираем auto
                         state.prefs = state.prefs.filter(p => p !== 'auto');
-                        if (state.prefs.includes(id)) state.prefs = state.prefs.filter(p => p !== id);
-                        else state.prefs.push(id);
+                        if (state.prefs.includes(id)) {
+                            state.prefs = state.prefs.filter(p => p !== id);
+                        } else {
+                            state.prefs.push(id);
+                        }
                     }
                     renderPrefs();
                     updateSummary();
@@ -1125,200 +1234,283 @@
 
         function updateSummary() {
             const b = state.customBudget || state.budget;
-            document.getElementById('summary-text').textContent = `${state.adults} взрослых, ${state.children} детей, ${state.hours} часа, бюджет ${formatMoney(b)}`;
+            document.getElementById('summary-text').textContent =
+                `${state.adults} взрослых, ${state.children} детей, ${state.hours} часа, бюджет ${formatMoney(b)}`;
         }
 
         async function calculate() {
+            if (state.isCalculating) return;
+            state.isCalculating = true;
             showScreen('screen-loading');
+
             const payload = {
                 scenario_id: state.eventId,
                 adults: state.adults,
                 children: state.children,
                 hours: state.hours,
                 budget: state.customBudget || state.budget,
-                preferences: state.prefs
+                preferences: state.prefs,
             };
+            state.lastPayload = payload;
+
+            const endpoint = state.isRandom ? '/calculate_random' : '/calculate';
+
             try {
-                const res = await fetch(`${API_URL}/calculate`, {
+                const controller = new AbortController();
+                const timeout = setTimeout(() => controller.abort(), 65000);
+                const res = await fetch(`${API_URL}${endpoint}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
+                    body: JSON.stringify(payload),
+                    signal: controller.signal,
                 });
-                if (!res.ok) throw new Error('Server error');
+                clearTimeout(timeout);
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
                 const data = await res.json();
                 state.lastResult = data;
+                state.isCalculating = false;
                 renderResult(data);
                 showScreen('screen-result');
-            } catch (e) {
+            } catch (err) {
+                state.isCalculating = false;
                 showScreen('screen-prefs');
+                let msg = 'Не удалось выполнить расчёт. Проверьте интернет и попробуйте ещё раз.';
+                if (err.name === 'AbortError') msg = 'Сервер не ответил вовремя. Попробуйте ещё раз — иногда первый запуск долгий.';
+                document.querySelectorAll('.error-box').forEach(e => e.remove());
                 const errBox = document.createElement('div');
                 errBox.className = 'error-box';
-                errBox.textContent = 'Не удалось выполнить расчёт. Проверьте интернет и попробуйте ещё раз.';
+                errBox.textContent = msg;
                 const btn = document.getElementById('btn-calculate');
                 btn.parentNode.insertBefore(errBox, btn);
-                setTimeout(() => errBox.remove(), 5000);
+                setTimeout(() => errBox.remove(), 6000);
             }
         }
 
         function renderResult(data) {
-            document.getElementById('result-subtitle').textContent = `${data.adults} взрослых · ${data.children} детей · ${data.hours} часа`;
+            document.getElementById('result-subtitle').textContent =
+                `${data.adults} взрослых · ${data.children} детей · ${data.hours} часа`;
             document.getElementById('result-total').textContent = formatMoney(data.total_cost);
             document.getElementById('result-total-bottom').textContent = formatMoney(data.total_cost);
 
             const badgeContainer = document.getElementById('result-badge-container');
             const remainingEl = document.getElementById('result-remaining');
+            const ratio = data.total_cost / data.budget;
             if (data.is_within_budget) {
-                badgeContainer.innerHTML = '<span class="badge badge-success">🟢 В бюджете</span>';
+                if (ratio > 0.9) {
+                    badgeContainer.innerHTML = '<span class="badge badge-warning">🟡 Почти в бюджете</span>';
+                } else {
+                    badgeContainer.innerHTML = '<span class="badge badge-success">🟢 В бюджете</span>';
+                }
                 remainingEl.textContent = `Осталось: ${formatMoney(data.remaining)}`;
             } else {
                 badgeContainer.innerHTML = '<span class="badge badge-error">🔴 Превышение бюджета</span>';
                 remainingEl.textContent = `На: ${formatMoney(data.shortfall)}`;
             }
 
+            document.getElementById('btn-reroll').style.display = state.isRandom ? 'block' : 'none';
+
             const categories = {};
-            (data.items || []).forEach((item, idx) => {
+            (data.items || []).forEach(item => {
                 if (!categories[item.category]) categories[item.category] = [];
-                categories[item.category].push({ ...item, _idx: idx });
+                categories[item.category].push(item);
             });
 
             let html = '';
             for (const [cat, items] of Object.entries(categories)) {
                 const style = getCategoryStyle(cat);
                 html += `<div class="category-block ${style.cls}">
-                    <div class="category-title"><span class="cat-icon">${style.icon}</span><span>${cat}</span></div>`;
-                items.forEach(item => {
-                    const qty = item.packages > 1 ? `${item.packages} × ${item.package_size} ${item.unit}` : `${item.final_amount} ${item.unit}`;
-                    html += `
-                        <div class="item-row" data-idx="${item._idx}">
-                            <span class="item-name">${item.name}</span>
-                            <span class="item-qty">${qty}</span>
-                            <span class="item-price" data-price="${item.total_price}">${formatMoney(item.total_price)}</span>
-                            <div class="item-actions">
-                                <button class="item-btn item-minus" data-idx="${item._idx}" title="Уменьшить">−</button>
-                                <button class="item-btn item-plus" data-idx="${item._idx}" title="Увеличить">+</button>
-                                <button class="item-btn item-swap" data-idx="${item._idx}" title="Заменить">🔄</button>
-                                <button class="item-btn item-remove" data-idx="${item._idx}" title="Удалить">✕</button>
-                            </div>
-                        </div>`;
+      <div class="category-title">
+        <span class="cat-icon">${style.icon}</span>
+        <span>${cat}</span>
+      </div>`;
+                items.forEach((item, idx) => {
+                    const qty = item.packages > 1
+                        ? `${item.packages} × ${item.package_size} ${item.unit}`
+                        : `${item.final_amount} ${item.unit}`;
+                    const offFilter = item.off_filter
+                        ? '<span class="off-filter-mark">вне фильтра</span>'
+                        : '';
+                    html += `<div class="item-row">
+        <div class="item-info">
+          <div class="item-name">${item.name}${offFilter}</div>
+          <div class="item-qty">${qty}</div>
+        </div>
+        <span class="item-price">${formatMoney(item.total_price)}</span>
+        <button class="item-edit" data-cat="${cat}" data-idx="${idx}" data-name="${item.name.replace(/"/g, '&quot;')}" title="Заменить">✏️</button>
+      </div>`;
                 });
                 html += `</div>`;
             }
             document.getElementById('result-items').innerHTML = html;
 
-            document.querySelectorAll('.item-minus').forEach(btn => {
-                btn.addEventListener('click', () => changeQty(parseInt(btn.dataset.idx), -1));
-            });
-            document.querySelectorAll('.item-plus').forEach(btn => {
-                btn.addEventListener('click', () => changeQty(parseInt(btn.dataset.idx), +1));
-            });
-            document.querySelectorAll('.item-remove').forEach(btn => {
-                btn.addEventListener('click', () => removeItem(parseInt(btn.dataset.idx)));
-            });
-            document.querySelectorAll('.item-swap').forEach(btn => {
-                btn.addEventListener('click', () => openSwapModal(parseInt(btn.dataset.idx)));
+            document.querySelectorAll('.item-edit').forEach(btn => {
+                btn.addEventListener('click', () => openEditor(btn.dataset.cat, btn.dataset.name));
             });
         }
 
-        // Изменить количество
-        function changeQty(idx, delta) {
-            const item = state.lastResult.items[idx];
-            if (!item) return;
-            const pkgSize = item.package_size || 1;
-            let newPackages = (item.packages || 1) + delta;
-            if (newPackages < 1) newPackages = 1;
-            item.packages = newPackages;
-            item.final_amount = newPackages * pkgSize;
-            item.total_price = item.final_amount * item.cost_per_unit;
-            recalcAndRender();
-        }
+        let editingContext = null;
 
-        // Удалить позицию
-        function removeItem(idx) {
-            state.lastResult.items.splice(idx, 1);
-            recalcAndRender();
-        }
+        async function openEditor(category, currentName) {
+            const overlay = document.getElementById('modal-overlay');
+            const title = document.getElementById('modal-title');
+            const body = document.getElementById('modal-body');
 
-        // Пересчитать итоги
-        function recalcAndRender() {
-            const data = state.lastResult;
-            data.total_cost = data.items.reduce((s, i) => s + i.total_price, 0);
-            data.is_within_budget = data.total_cost <= data.budget;
-            data.shortfall = Math.max(0, data.total_cost - data.budget);
-            data.remaining = Math.max(0, data.budget - data.total_cost);
-            renderResult(data);
-        }
+            title.textContent = `${category} — заменить блюдо`;
+            body.innerHTML = `<div class="modal-loading"><div class="modal-loader"></div>Загружаем варианты…</div>`;
+            overlay.classList.add('active');
 
-        // 🆕 Открыть модалку замены
-        async function openSwapModal(idx) {
-            const item = state.lastResult.items[idx];
-            if (!item) return;
-            state.swapIdx = idx;
-
-            const modal = document.getElementById('modal-overlay');
-            const list = document.getElementById('alt-list');
-            list.innerHTML = '<div class="alt-empty">Загружаем альтернативы…</div>';
-            modal.classList.add('active');
+            const prefsStr = state.prefs.filter(p => p !== 'auto').join(',');
+            const scenario = state.eventId || '';
 
             try {
-                const url = `${API_URL}/alternatives?category=${encodeURIComponent(item.category)}&exclude=${encodeURIComponent(item.name)}`;
+                const url = `${API_URL}/alternatives?category=${encodeURIComponent(category)}&exclude=${encodeURIComponent(currentName)}&preferences=${encodeURIComponent(prefsStr)}&scenario_id=${encodeURIComponent(scenario)}`;
                 const res = await fetch(url);
-                if (!res.ok) throw new Error('Ошибка загрузки');
-                const alts = await res.json();
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                const items = await res.json();
 
-                if (!alts || alts.length === 0) {
-                    list.innerHTML = '<div class="alt-empty">Нет альтернатив в этой категории 😕</div>';
+                if (!items || items.length === 0) {
+                    body.innerHTML = `<div class="modal-empty">Нет других блюд в этой категории</div>`;
                     return;
                 }
 
-                list.innerHTML = alts.map(a => `
-                    <div class="alt-item" data-name="${a.name}" data-price="${a.price_per_unit}" data-pkg="${a.package_size}" data-unit="${a.unit}">
-                        <span class="alt-name">${a.name}</span>
-                        <span class="alt-price">${a.price_per_unit} ₽ / ${a.unit}</span>
-                    </div>
-                `).join('');
+                editingContext = { category, currentName };
+                const tagMap = { meat: '🥩 мясо', fish: '🐟 рыба', veg: '🥬 вег.' };
 
-                list.querySelectorAll('.alt-item').forEach(el => {
-                    el.addEventListener('click', () => swapItem(el.dataset));
+                body.innerHTML = `<p class="modal-hint">Выберите блюдо для замены. Сортировка — от дорогих к дешёвым.</p>` +
+                    items.map(it => {
+                        const tags = (it.tags || '').split(',').filter(t => t).map(t => tagMap[t] || t).join(' · ');
+                        return `<div class="alt-item" data-name="${it.name.replace(/"/g, '&quot;')}" data-price="${it.price_per_unit}" data-unit="${it.unit}" data-pkg="${it.package_size}">
+          <div>
+            <div class="alt-name">${it.name}</div>
+            ${tags ? `<div class="alt-tags">${tags}</div>` : ''}
+          </div>
+          <div class="alt-price">${formatMoney(it.price_per_unit)}/${it.unit}</div>
+        </div>`;
+                    }).join('');
+
+                document.querySelectorAll('.alt-item').forEach(el => {
+                    el.addEventListener('click', () => replaceDish({
+                        name: el.dataset.name,
+                        price_per_unit: parseFloat(el.dataset.price),
+                        unit: el.dataset.unit,
+                        package_size: parseFloat(el.dataset.pkg),
+                    }));
                 });
-            } catch (e) {
-                list.innerHTML = '<div class="alt-empty">Не удалось загрузить альтернативы</div>';
+            } catch (err) {
+                body.innerHTML = `<div class="modal-empty">Не удалось загрузить варианты</div>`;
             }
         }
 
-        // 🆕 Заменить блюдо
-        function swapItem(dataset) {
-            const idx = state.swapIdx;
-            if (idx === null) return;
-            const item = state.lastResult.items[idx];
-            if (!item) return;
-
-            const newName = dataset.name;
-            const newPrice = parseFloat(dataset.price);
-            const newPkg = parseFloat(dataset.pkg) || 1;
-            const newUnit = dataset.unit;
-
-            // Пересчёт: сохраняем количество упаковок, меняем цену
-            item.name = newName;
-            item.cost_per_unit = newPrice;
-            item.package_size = newPkg;
-            item.unit = newUnit;
-            item.final_amount = (item.packages || 1) * newPkg;
-            item.total_price = item.final_amount * newPrice;
-
-            closeSwapModal();
-            recalcAndRender();
-        }
-
-        // 🆕 Закрыть модалку
-        function closeSwapModal() {
+        function closeModal() {
             document.getElementById('modal-overlay').classList.remove('active');
-            state.swapIdx = null;
+            editingContext = null;
         }
 
-        document.getElementById('modal-close').addEventListener('click', closeSwapModal);
+        document.getElementById('modal-close').addEventListener('click', closeModal);
         document.getElementById('modal-overlay').addEventListener('click', (e) => {
-            if (e.target.id === 'modal-overlay') closeSwapModal();
+            if (e.target.id === 'modal-overlay') closeModal();
         });
+
+        async function replaceDish(newDish) {
+            if (!editingContext || !state.lastResult) return;
+            const { category, currentName } = editingContext;
+            const items = state.lastResult.items;
+            const target = items.find(i => i.category === category && i.name === currentName);
+            if (!target) { closeModal(); return; }
+
+            const packages = target.packages || 1;
+            const newTotalPrice = packages * newDish.price_per_unit;
+
+            target.name = newDish.name;
+            target.cost_per_unit = newDish.price_per_unit;
+            target.unit = newDish.unit;
+            target.package_size = newDish.package_size;
+            target.total_price = Math.round(newTotalPrice * 100) / 100;
+            target.off_filter = false;
+
+            const total = items.reduce((s, i) => s + i.total_price, 0);
+            state.lastResult.total_cost = Math.round(total * 100) / 100;
+            state.lastResult.is_within_budget = total <= state.lastResult.budget;
+            state.lastResult.remaining = Math.max(0, state.lastResult.budget - total);
+            state.lastResult.shortfall = Math.max(0, total - state.lastResult.budget);
+
+            closeModal();
+            renderResult(state.lastResult);
+            showToast('✓ Блюдо заменено');
+        }
+
+        async function reroll() {
+            if (state.isCalculating || !state.lastPayload) return;
+            state.isCalculating = true;
+            showScreen('screen-loading');
+            try {
+                const res = await fetch(`${API_URL}/reroll`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(state.lastPayload),
+                });
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                const data = await res.json();
+                state.lastResult = data;
+                state.isCalculating = false;
+                renderResult(data);
+                showScreen('screen-result');
+                showToast('🎲 Новое меню готово');
+            } catch (err) {
+                state.isCalculating = false;
+                renderResult(state.lastResult);
+                showScreen('screen-result');
+                showToast('Не удалось получить другое меню');
+            }
+        }
+
+        /* ============ СЧЁТЧИКИ С РУЧНЫМ ВВОДОМ ============ */
+        function setupCounter(name, min, max, stateKey) {
+            const minus = document.getElementById(`${name}-minus`);
+            const plus = document.getElementById(`${name}-plus`);
+            const input = document.getElementById(`${name}-input`);
+
+            function update() {
+                input.value = state[stateKey];
+                minus.disabled = state[stateKey] <= min;
+                plus.disabled = state[stateKey] >= max;
+                updateTotalGuests();
+                updateSummary();
+            }
+
+            minus.addEventListener('click', () => {
+                state[stateKey] = clamp(state[stateKey] - 1, min, max);
+                update();
+            });
+            plus.addEventListener('click', () => {
+                state[stateKey] = clamp(state[stateKey] + 1, min, max);
+                update();
+            });
+
+            // Ручной ввод
+            input.addEventListener('input', () => {
+                // Пока пользователь печатает — просто разрешаем цифры, не сбрасываем
+                let v = parseInt(input.value, 10);
+                if (isNaN(v)) return;
+                state[stateKey] = v;
+                // Мягкое обновление кнопок
+                minus.disabled = v <= min;
+                plus.disabled = v >= max;
+                updateTotalGuests();
+                updateSummary();
+            });
+
+            // При потере фокуса — фиксируем значение в допустимых пределах
+            input.addEventListener('blur', () => {
+                let v = parseInt(input.value, 10);
+                if (isNaN(v)) v = min;
+                v = clamp(v, min, max);
+                state[stateKey] = v;
+                update();
+            });
+
+            update();
+        }
 
         document.getElementById('btn-next-event').addEventListener('click', () => showScreen('screen-guests'));
         document.getElementById('btn-next-guests').addEventListener('click', () => showScreen('screen-duration'));
@@ -1327,62 +1519,78 @@
         document.getElementById('btn-calculate').addEventListener('click', calculate);
         document.getElementById('btn-back').addEventListener('click', () => showScreen('screen-prefs'));
         document.getElementById('btn-restart').addEventListener('click', () => location.reload());
+        document.getElementById('btn-reroll').addEventListener('click', reroll);
 
         document.querySelectorAll('.back-btn').forEach(btn => {
-            btn.addEventListener('click', () => { showScreen(btn.dataset.back); });
+            btn.addEventListener('click', () => showScreen(btn.dataset.back));
         });
 
-        function setupCounter(id, min, max, stateKey) {
-            const minus = document.getElementById(`${id}-minus`);
-            const plus = document.getElementById(`${id}-plus`);
-            const val = document.getElementById(`${id}-val`);
-            function update() {
-                val.textContent = state[stateKey];
-                minus.disabled = state[stateKey] <= min;
-                plus.disabled = state[stateKey] >= max;
-                updateTotalGuests();
-                updateSummary();
-            }
-            minus.addEventListener('click', () => { if (state[stateKey] > min) state[stateKey]--; update(); });
-            plus.addEventListener('click', () => { if (state[stateKey] < max) state[stateKey]++; update(); });
-            update();
-        }
-        setupCounter('adults', 1, 500, 'adults');
-        setupCounter('children', 0, 200, 'children');
-
         document.getElementById('custom-budget-input')?.addEventListener('input', (e) => {
-            let v = parseInt(e.target.value) || 0;
+            let v = parseInt(e.target.value, 10) || 0;
             if (v < 1000) v = 1000;
             state.customBudget = v;
             state.budget = v;
             updateSummary();
         });
 
-        document.getElementById('btn-share').addEventListener('click', () => {
-            if (!state.lastResult) return;
-            const text = `Мой расчёт на мероприятие в Хватит всем 🥂\n\nГостей: ${getTotalGuests()}\nБюджет: ${formatMoney(state.customBudget || state.budget)}\nИтого: ${formatMoney(state.lastResult.total_cost)}\n\nhttps://hvatitfrontend.onrender.com`;
+        function buildShareText() {
+            if (!state.lastResult) return '';
+            const r = state.lastResult;
+            let t = `Мой расчёт на мероприятие в Хватит всем 🥂\n\n`;
+            t += `Гостей: ${getTotalGuests()}\n`;
+            t += `Бюджет: ${formatMoney(state.customBudget || state.budget)}\n`;
+            t += `Итого: ${formatMoney(r.total_cost)}\n\n`;
+            t += `Список:\n`;
+            const cats = {};
+            (r.items || []).forEach(i => { (cats[i.category] = cats[i.category] || []).push(i); });
+            for (const [cat, items] of Object.entries(cats)) {
+                t += `\n${cat}\n`;
+                items.forEach(i => {
+                    const qty = i.packages > 1 ? `${i.packages} × ${i.package_size} ${i.unit}` : `${i.final_amount} ${i.unit}`;
+                    t += `• ${i.name} — ${qty} — ${formatMoney(i.total_price)}\n`;
+                });
+            }
+            t += `\nhttps://hvatitfrontend.onrender.com`;
+            return t;
+        }
+
+        document.getElementById('btn-share').addEventListener('click', async () => {
+            const text = buildShareText();
+            if (!text) return;
             if (navigator.share) {
-                navigator.share({ title: 'Хватит всем', text });
+                try { await navigator.share({ title: 'Хватит всем', text, url: 'https://hvatitfrontend.onrender.com' }); } catch (e) { }
             } else {
-                navigator.clipboard.writeText(text).then(() => alert('✓ Скопировано!'));
+                try { await navigator.clipboard.writeText(text); showToast('✓ Скопировано'); } catch { showToast('Не удалось скопировать'); }
             }
         });
 
-        document.getElementById('btn-copy').addEventListener('click', () => {
-            if (!state.lastResult) return;
-            const text = `Мой расчёт на мероприятие в Хватит всем 🥂\n\nГостей: ${getTotalGuests()}\nБюджет: ${formatMoney(state.customBudget || state.budget)}\nИтого: ${formatMoney(state.lastResult.total_cost)}\n\nhttps://hvatitfrontend.onrender.com`;
-            navigator.clipboard.writeText(text).then(() => {
-                const btn = document.getElementById('btn-copy');
-                const orig = btn.textContent;
-                btn.textContent = '✓ Скопировано';
-                setTimeout(() => btn.textContent = orig, 2000);
-            });
+        document.getElementById('btn-copy').addEventListener('click', async () => {
+            const text = buildShareText();
+            if (!text) return;
+            try {
+                if (navigator.clipboard && window.isSecureContext) {
+                    await navigator.clipboard.writeText(text);
+                } else {
+                    const ta = document.createElement('textarea');
+                    ta.value = text;
+                    ta.style.position = 'fixed';
+                    ta.style.left = '-9999px';
+                    document.body.appendChild(ta);
+                    ta.select();
+                    document.execCommand('copy');
+                    ta.remove();
+                }
+                showToast('✓ Список скопирован');
+            } catch { showToast('Не удалось скопировать'); }
         });
 
+        /* ============ INIT ============ */
         renderEvents();
         renderDurations();
         renderBudgets();
         renderPrefs();
+        setupCounter('adults', 1, 500, 'adults');
+        setupCounter('children', 0, 200, 'children');
         updateTotalGuests();
         updateSummary();
     </script>
