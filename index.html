@@ -1459,37 +1459,85 @@
             }
         }
 
-        /* ============ УВЕЛИЧИТЬ БЮДЖЕТ ============ */
         function openBudgetModal() {
-            const overlay = document.getElementById('modal-overlay');
-            const title = document.getElementById('modal-title');
-            const body = document.getElementById('modal-body');
-            const r = state.lastResult;
+  const overlay = document.getElementById('modal-overlay');
+  const title = document.getElementById('modal-title');
+  const body = document.getElementById('modal-body');
+  const r = state.lastResult;
 
-            title.textContent = 'Увеличить бюджет';
-            const recommended = r.recommended_budget || Math.ceil(r.total_cost / 1000) * 1000;
-            body.innerHTML = `
+  const shortfall = Math.max(0, r.total_cost - r.budget);
+  const minAdd = Math.max(500, Math.ceil(shortfall / 500) * 500);
+
+  title.textContent = '💰 Увеличить бюджет';
+  body.innerHTML = `
     <div class="modal-info">
-      Рекомендуемый бюджет
-      <strong>${formatMoney(recommended)}</strong>
+      Текущий бюджет
+      <strong>${formatMoney(r.budget)}</strong>
     </div>
-    <p class="modal-hint">Текущий бюджет: ${formatMoney(r.budget)} · Меню: ${formatMoney(r.total_cost)}</p>
+    <p class="modal-hint">
+      Меню: ${formatMoney(r.total_cost)}<br>
+      Нужно добавить минимум: <b>${formatMoney(minAdd)}</b>
+    </p>
+
+    <div style="margin-bottom:10px;">
+      <label style="font-size:13px;color:var(--text-muted);display:block;margin-bottom:6px;">
+        Сколько готовы добавить?
+      </label>
+      <input type="number" inputmode="numeric" class="budget-input" id="add-budget-input"
+             value="${minAdd}" min="500" step="500"
+             placeholder="Сумма в ₽">
+    </div>
+
+    <div style="display:flex;gap:8px;margin-bottom:16px;">
+      <button type="button" class="budget-btn" data-add="1000" style="flex:1;padding:12px 8px;font-size:14px;">+1 000</button>
+      <button type="button" class="budget-btn" data-add="5000" style="flex:1;padding:12px 8px;font-size:14px;">+5 000</button>
+      <button type="button" class="budget-btn" data-add="10000" style="flex:1;padding:12px 8px;font-size:14px;">+10 000</button>
+    </div>
+
     <div class="modal-actions">
       <button class="btn btn-secondary" id="modal-cancel">Отмена</button>
       <button class="btn btn-primary" id="modal-apply">Применить</button>
     </div>
   `;
-            overlay.classList.add('active');
+  overlay.classList.add('active');
 
-            document.getElementById('modal-cancel').onclick = closeModal;
-            document.getElementById('modal-apply').onclick = () => {
-                state.budget = recommended;
-                state.customBudget = recommended;
-                closeModal();
-                // Мгновенный пересчёт
-                calculate();
-            };
-        }
+  const input = document.getElementById('add-budget-input');
+
+  // Быстрые кнопки — УСТАНАВЛИВАЮТ значение (не прибавляют)
+  body.querySelectorAll('[data-add]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const val = parseInt(btn.dataset.add, 10);
+      input.value = val;
+      input.focus();
+    });
+  });
+
+  document.getElementById('modal-cancel').onclick = closeModal;
+
+  document.getElementById('modal-apply').onclick = () => {
+    let addAmount = parseInt(input.value, 10);
+    if (isNaN(addAmount) || addAmount < 500) {
+      showToast('Минимум 500 ₽');
+      return;
+    }
+    if (addAmount > 10000000) addAmount = 10000000;
+
+    // Новый бюджет
+    const newBudget = r.budget + addAmount;
+    state.budget = newBudget;
+    state.customBudget = newBudget;
+
+    // ⚠️ НЕ пересобираем меню — только обновляем бюджет и статус
+    r.budget = newBudget;
+    r.is_within_budget = r.total_cost <= newBudget;
+    r.remaining = Math.max(0, newBudget - r.total_cost);
+    r.shortfall = Math.max(0, r.total_cost - newBudget);
+
+    closeModal();
+    renderResult(r);
+    showToast(`✓ Бюджет увеличен на ${formatMoney(addAmount)}`);
+  };
+}
 
         /* ============ REROLL ============ */
         async function reroll() {
