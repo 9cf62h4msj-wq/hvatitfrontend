@@ -235,11 +235,6 @@
             letter-spacing: -0.02em;
         }
 
-        .card-desc {
-            font-size: 14px;
-            color: var(--text-muted);
-        }
-
         .grid-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -310,7 +305,6 @@
             color: var(--text-muted);
         }
 
-        /* ============ СЧЁТЧИКИ ============ */
         .counter-row {
             display: flex;
             justify-content: space-between;
@@ -341,7 +335,6 @@
             border: none;
             background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
             font-size: 22px;
-            font-weight: 400;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -354,7 +347,6 @@
 
         .counter-btn:active {
             transform: scale(0.92);
-            background: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%);
         }
 
         .counter-btn:disabled {
@@ -376,12 +368,6 @@
             font-family: inherit;
             background: rgba(250, 251, 255, 0.9);
             transition: border-color 0.2s, background 0.2s;
-        }
-
-        .counter-input::-webkit-outer-spin-button,
-        .counter-input::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
         }
 
         .counter-input:focus {
@@ -460,7 +446,6 @@
 
         .btn-primary:active:not(:disabled) {
             transform: scale(0.97);
-            box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
         }
 
         .btn-primary:disabled {
@@ -511,6 +496,13 @@
             letter-spacing: -0.03em;
         }
 
+        .result-per-guest {
+            font-size: 14px;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
         .badge {
             display: inline-block;
             padding: 8px 20px;
@@ -541,7 +533,6 @@
         .category-title {
             font-size: 16px;
             font-weight: 700;
-            margin-bottom: 0;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -702,23 +693,6 @@
             text-align: center;
             font-size: 15px;
             font-weight: 500;
-            animation: shake 0.4s ease;
-        }
-
-        @keyframes shake {
-
-            0%,
-            100% {
-                transform: translateX(0);
-            }
-
-            25% {
-                transform: translateX(-6px);
-            }
-
-            75% {
-                transform: translateX(6px);
-            }
         }
 
         .modal-overlay {
@@ -734,7 +708,6 @@
             display: none;
             align-items: flex-end;
             justify-content: center;
-            animation: fadeIn 0.2s ease;
         }
 
         .modal-overlay.active {
@@ -858,6 +831,33 @@
             animation: spin 0.8s linear infinite;
         }
 
+        .modal-info {
+            background: #eef2ff;
+            color: #4338ca;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .modal-info strong {
+            display: block;
+            font-size: 16px;
+            margin-top: 4px;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .modal-actions .btn {
+            flex: 1;
+            padding: 14px 12px;
+            font-size: 15px;
+        }
+
         .toast {
             position: fixed;
             left: 50%;
@@ -890,7 +890,6 @@
     </div>
 
     <div class="app" id="app">
-        <!-- ЭКРАН 1 -->
         <div class="screen active" id="screen-event">
             <div class="progress">
                 <div class="progress-dot active"></div>
@@ -911,7 +910,6 @@
             <button class="btn btn-primary" id="btn-next-event" disabled>Далее →</button>
         </div>
 
-        <!-- ЭКРАН 2: ГОСТИ (с ручным вводом) -->
         <div class="screen" id="screen-guests">
             <div class="progress">
                 <div class="progress-dot active"></div>
@@ -946,14 +944,10 @@
                 <div style="text-align:center; margin-top:16px; font-weight:700; font-size:17px;">
                     Всего гостей: <span id="total-guests">10</span>
                 </div>
-                <p style="text-align:center; font-size:13px; color:var(--text-muted); margin-top:8px;">
-                    Взрослые: 1–500 · Дети: 0–200. Можно ввести число вручную.
-                </p>
             </div>
             <button class="btn btn-primary" id="btn-next-guests">Далее →</button>
         </div>
 
-        <!-- ЭКРАН 3 -->
         <div class="screen" id="screen-duration">
             <div class="progress">
                 <div class="progress-dot active"></div>
@@ -974,7 +968,6 @@
             <button class="btn btn-primary" id="btn-next-duration" disabled>Далее →</button>
         </div>
 
-        <!-- ЭКРАН 4 -->
         <div class="screen" id="screen-budget">
             <div class="progress">
                 <div class="progress-dot active"></div>
@@ -997,7 +990,6 @@
             <button class="btn btn-primary" id="btn-next-budget" disabled>Далее →</button>
         </div>
 
-        <!-- ЭКРАН 5: ПРЕДПОЧТЕНИЯ (только мясо / рыба / вега / авто) -->
         <div class="screen" id="screen-prefs">
             <div class="progress">
                 <div class="progress-dot active"></div>
@@ -1017,27 +1009,24 @@
             </div>
             <div class="card" style="text-align:center;">
                 <div style="font-size:14px; color:var(--text-muted);">Всё готово?</div>
-                <div style="font-weight:600; margin:8px 0; font-size:15px;" id="summary-text">10 взрослых, 0 детей, 4
-                    часа, бюджет 20 000 ₽</div>
+                <div style="font-weight:600; margin:8px 0; font-size:15px;" id="summary-text"></div>
             </div>
             <button class="btn btn-primary" id="btn-calculate">Рассчитать</button>
         </div>
 
-        <!-- ЭКРАН 6 -->
         <div class="screen" id="screen-loading">
             <div class="loader">⏳ Считаем ваш стол…</div>
         </div>
 
-        <!-- ЭКРАН 7 -->
         <div class="screen" id="screen-result">
             <div class="card">
                 <div class="result-header">
                     <h2 style="font-size:24px;">🥂 Ваш стол готов!</h2>
-                    <p style="color:var(--text-muted); font-size:14px;" id="result-subtitle">10 взрослых · 0 детей · 4
-                        часа</p>
+                    <p style="color:var(--text-muted); font-size:14px;" id="result-subtitle"></p>
                     <div class="result-total" id="result-total">0 ₽</div>
-                    <div id="result-badge-container"><span class="badge badge-success">🟢 В бюджете</span></div>
-                    <p style="margin-top:12px; font-size:15px; font-weight:600;" id="result-remaining">Осталось: 0 ₽</p>
+                    <div class="result-per-guest" id="result-per-guest"></div>
+                    <div id="result-badge-container" style="margin-top:12px;"></div>
+                    <p style="margin-top:12px; font-size:15px; font-weight:600;" id="result-remaining"></p>
                 </div>
                 <div id="result-items"></div>
                 <div class="total-row">
@@ -1045,7 +1034,11 @@
                     <span id="result-total-bottom">0 ₽</span>
                 </div>
             </div>
+
+            <button class="btn btn-primary" id="btn-expand" style="display:none;">✨ Расширить меню</button>
+            <button class="btn btn-primary" id="btn-increase" style="display:none;">💰 Увеличить бюджет</button>
             <button class="btn btn-secondary" id="btn-reroll" style="display:none;">🎲 Другое меню</button>
+
             <div class="btn-row">
                 <button class="btn btn-secondary" id="btn-share">📤 Поделиться</button>
                 <button class="btn btn-secondary" id="btn-copy">📋 Скопировать</button>
@@ -1089,7 +1082,6 @@
 
         const BUDGETS = [10000, 20000, 30000, 50000, 100000];
 
-        /* Предпочтения — только 4 варианта */
         const PREFS = [
             { id: 'meat', icon: '🥩', label: 'Мясо' },
             { id: 'fish', icon: '🐟', label: 'Рыба' },
@@ -1118,9 +1110,7 @@
         }
         function formatMoney(n) { return Math.round(n).toLocaleString('ru-RU') + ' ₽'; }
         function getTotalGuests() { return state.adults + state.children; }
-        function updateTotalGuests() {
-            document.getElementById('total-guests').textContent = getTotalGuests();
-        }
+        function updateTotalGuests() { document.getElementById('total-guests').textContent = getTotalGuests(); }
         function showToast(text) {
             const t = document.getElementById('toast');
             t.textContent = text;
@@ -1215,16 +1205,11 @@
                 card.addEventListener('click', () => {
                     const id = card.dataset.id;
                     if (id === 'auto') {
-                        // Авто: либо единственный выбран, либо всё сбрасывается
                         state.prefs = state.prefs.includes('auto') ? [] : ['auto'];
                     } else {
-                        // Убираем auto
                         state.prefs = state.prefs.filter(p => p !== 'auto');
-                        if (state.prefs.includes(id)) {
-                            state.prefs = state.prefs.filter(p => p !== id);
-                        } else {
-                            state.prefs.push(id);
-                        }
+                        if (state.prefs.includes(id)) state.prefs = state.prefs.filter(p => p !== id);
+                        else state.prefs.push(id);
                     }
                     renderPrefs();
                     updateSummary();
@@ -1245,8 +1230,7 @@
 
             const payload = {
                 scenario_id: state.eventId,
-                adults: state.adults,
-                children: state.children,
+                adults: state.adults, children: state.children,
                 hours: state.hours,
                 budget: state.customBudget || state.budget,
                 preferences: state.prefs,
@@ -1259,10 +1243,8 @@
                 const controller = new AbortController();
                 const timeout = setTimeout(() => controller.abort(), 65000);
                 const res = await fetch(`${API_URL}${endpoint}`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload),
-                    signal: controller.signal,
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload), signal: controller.signal,
                 });
                 clearTimeout(timeout);
                 if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -1275,7 +1257,7 @@
                 state.isCalculating = false;
                 showScreen('screen-prefs');
                 let msg = 'Не удалось выполнить расчёт. Проверьте интернет и попробуйте ещё раз.';
-                if (err.name === 'AbortError') msg = 'Сервер не ответил вовремя. Попробуйте ещё раз — иногда первый запуск долгий.';
+                if (err.name === 'AbortError') msg = 'Сервер не ответил вовремя. Попробуйте ещё раз.';
                 document.querySelectorAll('.error-box').forEach(e => e.remove());
                 const errBox = document.createElement('div');
                 errBox.className = 'error-box';
@@ -1292,22 +1274,36 @@
             document.getElementById('result-total').textContent = formatMoney(data.total_cost);
             document.getElementById('result-total-bottom').textContent = formatMoney(data.total_cost);
 
+            const perGuest = data.price_per_guest || Math.round(data.total_cost / Math.max(1, data.total_guests));
+            document.getElementById('result-per-guest').textContent = `👤 ${formatMoney(perGuest)} на человека`;
+
             const badgeContainer = document.getElementById('result-badge-container');
             const remainingEl = document.getElementById('result-remaining');
+            const btnExpand = document.getElementById('btn-expand');
+            const btnIncrease = document.getElementById('btn-increase');
+            const btnReroll = document.getElementById('btn-reroll');
+
+            btnExpand.style.display = 'none';
+            btnIncrease.style.display = 'none';
+            btnReroll.style.display = state.isRandom ? 'block' : 'none';
+
             const ratio = data.total_cost / data.budget;
             if (data.is_within_budget) {
                 if (ratio > 0.9) {
                     badgeContainer.innerHTML = '<span class="badge badge-warning">🟡 Почти в бюджете</span>';
                 } else {
                     badgeContainer.innerHTML = '<span class="badge badge-success">🟢 В бюджете</span>';
+                    // Показываем кнопку «Расширить» если остаток > 3% бюджета
+                    if (data.remaining > data.budget * 0.03 && state.isRandom) {
+                        btnExpand.style.display = 'block';
+                    }
                 }
                 remainingEl.textContent = `Осталось: ${formatMoney(data.remaining)}`;
             } else {
-                badgeContainer.innerHTML = '<span class="badge badge-error">🔴 Превышение бюджета</span>';
+                badgeContainer.innerHTML = '<span class="badge badge-error">🔴 Бюджет превышен</span>';
                 remainingEl.textContent = `На: ${formatMoney(data.shortfall)}`;
+                btnIncrease.style.display = 'block';
             }
-
-            document.getElementById('btn-reroll').style.display = state.isRandom ? 'block' : 'none';
 
             const categories = {};
             (data.items || []).forEach(item => {
@@ -1327,16 +1323,14 @@
                     const qty = item.packages > 1
                         ? `${item.packages} × ${item.package_size} ${item.unit}`
                         : `${item.final_amount} ${item.unit}`;
-                    const offFilter = item.off_filter
-                        ? '<span class="off-filter-mark">вне фильтра</span>'
-                        : '';
+                    const offFilter = item.off_filter ? '<span class="off-filter-mark">вне фильтра</span>' : '';
                     html += `<div class="item-row">
         <div class="item-info">
           <div class="item-name">${item.name}${offFilter}</div>
           <div class="item-qty">${qty}</div>
         </div>
         <span class="item-price">${formatMoney(item.total_price)}</span>
-        <button class="item-edit" data-cat="${cat}" data-idx="${idx}" data-name="${item.name.replace(/"/g, '&quot;')}" title="Заменить">✏️</button>
+        <button class="item-edit" data-cat="${cat}" data-name="${item.name.replace(/"/g, '&quot;')}" title="Заменить">✏️</button>
       </div>`;
                 });
                 html += `</div>`;
@@ -1348,6 +1342,7 @@
             });
         }
 
+        /* ============ МОДАЛКА РЕДАКТИРОВАНИЯ ============ */
         let editingContext = null;
 
         async function openEditor(category, currentName) {
@@ -1367,27 +1362,20 @@
                 const res = await fetch(url);
                 if (!res.ok) throw new Error(`HTTP ${res.status}`);
                 const items = await res.json();
-
                 if (!items || items.length === 0) {
                     body.innerHTML = `<div class="modal-empty">Нет других блюд в этой категории</div>`;
                     return;
                 }
-
                 editingContext = { category, currentName };
                 const tagMap = { meat: '🥩 мясо', fish: '🐟 рыба', veg: '🥬 вег.' };
-
-                body.innerHTML = `<p class="modal-hint">Выберите блюдо для замены. Сортировка — от дорогих к дешёвым.</p>` +
+                body.innerHTML = `<p class="modal-hint">Сортировка — от дорогих к дешёвым.</p>` +
                     items.map(it => {
                         const tags = (it.tags || '').split(',').filter(t => t).map(t => tagMap[t] || t).join(' · ');
                         return `<div class="alt-item" data-name="${it.name.replace(/"/g, '&quot;')}" data-price="${it.price_per_unit}" data-unit="${it.unit}" data-pkg="${it.package_size}">
-          <div>
-            <div class="alt-name">${it.name}</div>
-            ${tags ? `<div class="alt-tags">${tags}</div>` : ''}
-          </div>
+          <div><div class="alt-name">${it.name}</div>${tags ? `<div class="alt-tags">${tags}</div>` : ''}</div>
           <div class="alt-price">${formatMoney(it.price_per_unit)}/${it.unit}</div>
         </div>`;
                     }).join('');
-
                 document.querySelectorAll('.alt-item').forEach(el => {
                     el.addEventListener('click', () => replaceDish({
                         name: el.dataset.name,
@@ -1405,7 +1393,6 @@
             document.getElementById('modal-overlay').classList.remove('active');
             editingContext = null;
         }
-
         document.getElementById('modal-close').addEventListener('click', closeModal);
         document.getElementById('modal-overlay').addEventListener('click', (e) => {
             if (e.target.id === 'modal-overlay') closeModal();
@@ -1419,13 +1406,11 @@
             if (!target) { closeModal(); return; }
 
             const packages = target.packages || 1;
-            const newTotalPrice = packages * newDish.price_per_unit;
-
             target.name = newDish.name;
             target.cost_per_unit = newDish.price_per_unit;
             target.unit = newDish.unit;
             target.package_size = newDish.package_size;
-            target.total_price = Math.round(newTotalPrice * 100) / 100;
+            target.total_price = Math.round(packages * newDish.price_per_unit * 100) / 100;
             target.off_filter = false;
 
             const total = items.reduce((s, i) => s + i.total_price, 0);
@@ -1433,20 +1418,87 @@
             state.lastResult.is_within_budget = total <= state.lastResult.budget;
             state.lastResult.remaining = Math.max(0, state.lastResult.budget - total);
             state.lastResult.shortfall = Math.max(0, total - state.lastResult.budget);
+            state.lastResult.price_per_guest = Math.round(total / Math.max(1, state.lastResult.total_guests));
 
             closeModal();
             renderResult(state.lastResult);
             showToast('✓ Блюдо заменено');
         }
 
+        /* ============ РАСШИРИТЬ ============ */
+        async function expandMenu() {
+            if (state.isCalculating || !state.lastResult || !state.lastPayload) return;
+            state.isCalculating = true;
+            showScreen('screen-loading');
+            try {
+                const res = await fetch(`${API_URL}/expand`, {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        scenario_id: state.eventId,
+                        adults: state.adults, children: state.children,
+                        hours: state.hours, budget: state.customBudget || state.budget,
+                        preferences: state.prefs,
+                        current_items: state.lastResult.items,
+                    }),
+                });
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                const data = await res.json();
+                const before = state.lastResult.items.length;
+                const after = data.items.length;
+                state.lastResult = data;
+                state.isCalculating = false;
+                renderResult(data);
+                showScreen('screen-result');
+                if (after > before) showToast('✨ Меню расширено');
+                else showToast('Нечего добавить в остаток бюджета');
+            } catch (err) {
+                state.isCalculating = false;
+                renderResult(state.lastResult);
+                showScreen('screen-result');
+                showToast('Не удалось расширить меню');
+            }
+        }
+
+        /* ============ УВЕЛИЧИТЬ БЮДЖЕТ ============ */
+        function openBudgetModal() {
+            const overlay = document.getElementById('modal-overlay');
+            const title = document.getElementById('modal-title');
+            const body = document.getElementById('modal-body');
+            const r = state.lastResult;
+
+            title.textContent = 'Увеличить бюджет';
+            const recommended = r.recommended_budget || Math.ceil(r.total_cost / 1000) * 1000;
+            body.innerHTML = `
+    <div class="modal-info">
+      Рекомендуемый бюджет
+      <strong>${formatMoney(recommended)}</strong>
+    </div>
+    <p class="modal-hint">Текущий бюджет: ${formatMoney(r.budget)} · Меню: ${formatMoney(r.total_cost)}</p>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" id="modal-cancel">Отмена</button>
+      <button class="btn btn-primary" id="modal-apply">Применить</button>
+    </div>
+  `;
+            overlay.classList.add('active');
+
+            document.getElementById('modal-cancel').onclick = closeModal;
+            document.getElementById('modal-apply').onclick = () => {
+                state.budget = recommended;
+                state.customBudget = recommended;
+                closeModal();
+                // Мгновенный пересчёт
+                calculate();
+            };
+        }
+
+        /* ============ REROLL ============ */
         async function reroll() {
             if (state.isCalculating || !state.lastPayload) return;
             state.isCalculating = true;
             showScreen('screen-loading');
             try {
                 const res = await fetch(`${API_URL}/reroll`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(state.lastPayload),
                 });
                 if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -1464,43 +1516,26 @@
             }
         }
 
-        /* ============ СЧЁТЧИКИ С РУЧНЫМ ВВОДОМ ============ */
+        /* ============ СЧЁТЧИКИ ============ */
         function setupCounter(name, min, max, stateKey) {
             const minus = document.getElementById(`${name}-minus`);
             const plus = document.getElementById(`${name}-plus`);
             const input = document.getElementById(`${name}-input`);
-
             function update() {
                 input.value = state[stateKey];
                 minus.disabled = state[stateKey] <= min;
                 plus.disabled = state[stateKey] >= max;
-                updateTotalGuests();
-                updateSummary();
+                updateTotalGuests(); updateSummary();
             }
-
-            minus.addEventListener('click', () => {
-                state[stateKey] = clamp(state[stateKey] - 1, min, max);
-                update();
-            });
-            plus.addEventListener('click', () => {
-                state[stateKey] = clamp(state[stateKey] + 1, min, max);
-                update();
-            });
-
-            // Ручной ввод
+            minus.addEventListener('click', () => { state[stateKey] = clamp(state[stateKey] - 1, min, max); update(); });
+            plus.addEventListener('click', () => { state[stateKey] = clamp(state[stateKey] + 1, min, max); update(); });
             input.addEventListener('input', () => {
-                // Пока пользователь печатает — просто разрешаем цифры, не сбрасываем
                 let v = parseInt(input.value, 10);
                 if (isNaN(v)) return;
                 state[stateKey] = v;
-                // Мягкое обновление кнопок
-                minus.disabled = v <= min;
-                plus.disabled = v >= max;
-                updateTotalGuests();
-                updateSummary();
+                minus.disabled = v <= min; plus.disabled = v >= max;
+                updateTotalGuests(); updateSummary();
             });
-
-            // При потере фокуса — фиксируем значение в допустимых пределах
             input.addEventListener('blur', () => {
                 let v = parseInt(input.value, 10);
                 if (isNaN(v)) v = min;
@@ -1508,7 +1543,6 @@
                 state[stateKey] = v;
                 update();
             });
-
             update();
         }
 
@@ -1520,6 +1554,8 @@
         document.getElementById('btn-back').addEventListener('click', () => showScreen('screen-prefs'));
         document.getElementById('btn-restart').addEventListener('click', () => location.reload());
         document.getElementById('btn-reroll').addEventListener('click', reroll);
+        document.getElementById('btn-expand').addEventListener('click', expandMenu);
+        document.getElementById('btn-increase').addEventListener('click', openBudgetModal);
 
         document.querySelectorAll('.back-btn').forEach(btn => {
             btn.addEventListener('click', () => showScreen(btn.dataset.back));
@@ -1528,8 +1564,7 @@
         document.getElementById('custom-budget-input')?.addEventListener('input', (e) => {
             let v = parseInt(e.target.value, 10) || 0;
             if (v < 1000) v = 1000;
-            state.customBudget = v;
-            state.budget = v;
+            state.customBudget = v; state.budget = v;
             updateSummary();
         });
 
@@ -1539,8 +1574,8 @@
             let t = `Мой расчёт на мероприятие в Хватит всем 🥂\n\n`;
             t += `Гостей: ${getTotalGuests()}\n`;
             t += `Бюджет: ${formatMoney(state.customBudget || state.budget)}\n`;
-            t += `Итого: ${formatMoney(r.total_cost)}\n\n`;
-            t += `Список:\n`;
+            t += `Итого: ${formatMoney(r.total_cost)}\n`;
+            t += `На человека: ${formatMoney(r.price_per_guest)}\n\nСписок:\n`;
             const cats = {};
             (r.items || []).forEach(i => { (cats[i.category] = cats[i.category] || []).push(i); });
             for (const [cat, items] of Object.entries(cats)) {
@@ -1568,23 +1603,16 @@
             const text = buildShareText();
             if (!text) return;
             try {
-                if (navigator.clipboard && window.isSecureContext) {
-                    await navigator.clipboard.writeText(text);
-                } else {
+                if (navigator.clipboard && window.isSecureContext) await navigator.clipboard.writeText(text);
+                else {
                     const ta = document.createElement('textarea');
-                    ta.value = text;
-                    ta.style.position = 'fixed';
-                    ta.style.left = '-9999px';
-                    document.body.appendChild(ta);
-                    ta.select();
-                    document.execCommand('copy');
-                    ta.remove();
+                    ta.value = text; ta.style.position = 'fixed'; ta.style.left = '-9999px';
+                    document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
                 }
                 showToast('✓ Список скопирован');
             } catch { showToast('Не удалось скопировать'); }
         });
 
-        /* ============ INIT ============ */
         renderEvents();
         renderDurations();
         renderBudgets();
