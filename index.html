@@ -1066,7 +1066,7 @@
         const API_URL = 'https://hvatitvsem.onrender.com';
 
         const EVENTS = [
-            { id: 'SC001', icon: '🎂', label: 'День рождения', desc: 'Универсальный набор' },
+            { id: 'SC101', icon: '🎂', label: 'День рождения', desc: 'Расширенный стол', random: true }, ,
             { id: 'SC003', icon: '🏢', label: 'Корпоратив', desc: 'Закуски и горячее' },
             { id: 'SC004', icon: '💍', label: 'Свадьба', desc: 'Расширенный стол' },
             { id: 'SC100', icon: '🍢', label: 'Фуршет', desc: 'Канапе, закуски, напитки', random: true },
@@ -1460,16 +1460,16 @@
         }
 
         function openBudgetModal() {
-  const overlay = document.getElementById('modal-overlay');
-  const title = document.getElementById('modal-title');
-  const body = document.getElementById('modal-body');
-  const r = state.lastResult;
+            const overlay = document.getElementById('modal-overlay');
+            const title = document.getElementById('modal-title');
+            const body = document.getElementById('modal-body');
+            const r = state.lastResult;
 
-  const shortfall = Math.max(0, r.total_cost - r.budget);
-  const minAdd = Math.max(500, Math.ceil(shortfall / 500) * 500);
+            const shortfall = Math.max(0, r.total_cost - r.budget);
+            const minAdd = Math.max(500, Math.ceil(shortfall / 500) * 500);
 
-  title.textContent = '💰 Увеличить бюджет';
-  body.innerHTML = `
+            title.textContent = '💰 Увеличить бюджет';
+            body.innerHTML = `
     <div class="modal-info">
       Текущий бюджет
       <strong>${formatMoney(r.budget)}</strong>
@@ -1499,45 +1499,45 @@
       <button class="btn btn-primary" id="modal-apply">Применить</button>
     </div>
   `;
-  overlay.classList.add('active');
+            overlay.classList.add('active');
 
-  const input = document.getElementById('add-budget-input');
+            const input = document.getElementById('add-budget-input');
 
-  // Быстрые кнопки — УСТАНАВЛИВАЮТ значение (не прибавляют)
-  body.querySelectorAll('[data-add]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const val = parseInt(btn.dataset.add, 10);
-      input.value = val;
-      input.focus();
-    });
-  });
+            // Быстрые кнопки — УСТАНАВЛИВАЮТ значение (не прибавляют)
+            body.querySelectorAll('[data-add]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const val = parseInt(btn.dataset.add, 10);
+                    input.value = val;
+                    input.focus();
+                });
+            });
 
-  document.getElementById('modal-cancel').onclick = closeModal;
+            document.getElementById('modal-cancel').onclick = closeModal;
 
-  document.getElementById('modal-apply').onclick = () => {
-    let addAmount = parseInt(input.value, 10);
-    if (isNaN(addAmount) || addAmount < 500) {
-      showToast('Минимум 500 ₽');
-      return;
-    }
-    if (addAmount > 10000000) addAmount = 10000000;
+            document.getElementById('modal-apply').onclick = () => {
+                let addAmount = parseInt(input.value, 10);
+                if (isNaN(addAmount) || addAmount < 500) {
+                    showToast('Минимум 500 ₽');
+                    return;
+                }
+                if (addAmount > 10000000) addAmount = 10000000;
 
-    // Новый бюджет
-    const newBudget = r.budget + addAmount;
-    state.budget = newBudget;
-    state.customBudget = newBudget;
+                // Новый бюджет
+                const newBudget = r.budget + addAmount;
+                state.budget = newBudget;
+                state.customBudget = newBudget;
 
-    // ⚠️ НЕ пересобираем меню — только обновляем бюджет и статус
-    r.budget = newBudget;
-    r.is_within_budget = r.total_cost <= newBudget;
-    r.remaining = Math.max(0, newBudget - r.total_cost);
-    r.shortfall = Math.max(0, r.total_cost - newBudget);
+                // ⚠️ НЕ пересобираем меню — только обновляем бюджет и статус
+                r.budget = newBudget;
+                r.is_within_budget = r.total_cost <= newBudget;
+                r.remaining = Math.max(0, newBudget - r.total_cost);
+                r.shortfall = Math.max(0, r.total_cost - newBudget);
 
-    closeModal();
-    renderResult(r);
-    showToast(`✓ Бюджет увеличен на ${formatMoney(addAmount)}`);
-  };
-}
+                closeModal();
+                renderResult(r);
+                showToast(`✓ Бюджет увеличен на ${formatMoney(addAmount)}`);
+            };
+        }
 
         /* ============ REROLL ============ */
         async function reroll() {
