@@ -241,12 +241,6 @@
             gap: 12px;
         }
 
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-        }
-
         .option-card {
             background: rgba(250, 251, 255, 0.8);
             border: 2px solid transparent;
@@ -890,6 +884,7 @@
     </div>
 
     <div class="app" id="app">
+        <!-- ЭКРАН 1: Мероприятие -->
         <div class="screen active" id="screen-event">
             <div class="progress">
                 <div class="progress-dot active"></div>
@@ -910,6 +905,7 @@
             <button class="btn btn-primary" id="btn-next-event" disabled>Далее →</button>
         </div>
 
+        <!-- ЭКРАН 2: Гости -->
         <div class="screen" id="screen-guests">
             <div class="progress">
                 <div class="progress-dot active"></div>
@@ -948,6 +944,7 @@
             <button class="btn btn-primary" id="btn-next-guests">Далее →</button>
         </div>
 
+        <!-- ЭКРАН 3: Длительность -->
         <div class="screen" id="screen-duration">
             <div class="progress">
                 <div class="progress-dot active"></div>
@@ -968,6 +965,7 @@
             <button class="btn btn-primary" id="btn-next-duration" disabled>Далее →</button>
         </div>
 
+        <!-- ЭКРАН 4: Бюджет -->
         <div class="screen" id="screen-budget">
             <div class="progress">
                 <div class="progress-dot active"></div>
@@ -990,6 +988,7 @@
             <button class="btn btn-primary" id="btn-next-budget" disabled>Далее →</button>
         </div>
 
+        <!-- ЭКРАН 5: Предпочтения -->
         <div class="screen" id="screen-prefs">
             <div class="progress">
                 <div class="progress-dot active"></div>
@@ -1014,10 +1013,12 @@
             <button class="btn btn-primary" id="btn-calculate">Рассчитать</button>
         </div>
 
+        <!-- ЭКРАН 6: Загрузка -->
         <div class="screen" id="screen-loading">
             <div class="loader">⏳ Считаем ваш стол…</div>
         </div>
 
+        <!-- ЭКРАН 7: Результат -->
         <div class="screen" id="screen-result">
             <div class="card">
                 <div class="result-header">
@@ -1038,6 +1039,8 @@
             <button class="btn btn-primary" id="btn-expand" style="display:none;">✨ Расширить меню</button>
             <button class="btn btn-primary" id="btn-increase" style="display:none;">💰 Увеличить бюджет</button>
             <button class="btn btn-secondary" id="btn-reroll" style="display:none;">🎲 Другое меню</button>
+            <button class="btn btn-primary" id="btn-send-request"
+                style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">📩 Отправить заявку</button>
 
             <div class="btn-row">
                 <button class="btn btn-secondary" id="btn-share">📤 Поделиться</button>
@@ -1047,6 +1050,50 @@
             <button class="btn btn-secondary" id="btn-restart">🔄 Новый расчёт</button>
             <p style="text-align:center; font-size:12px; color:var(--text-muted); padding:8px;">Расчёт по базе цен
                 сервиса</p>
+        </div>
+
+        <!-- ЭКРАН 8: Форма заявки -->
+        <div class="screen" id="screen-send-request">
+            <div class="top-bar">
+                <button class="back-btn" id="back-from-request">← Назад</button>
+            </div>
+            <div class="card">
+                <div class="card-title">📩 Отправить заявку</div>
+                <p style="font-size:14px; color:var(--text-muted); margin:8px 0 16px;">
+                    Оставьте контакты — мы свяжемся с вами в течение 15 минут.
+                </p>
+                <div style="margin-bottom:12px;">
+                    <label style="font-size:13px;color:var(--text-muted);display:block;margin-bottom:6px;">Имя *</label>
+                    <input type="text" class="budget-input" id="req-name" placeholder="Ваше имя">
+                </div>
+                <div style="margin-bottom:12px;">
+                    <label style="font-size:13px;color:var(--text-muted);display:block;margin-bottom:6px;">Телефон
+                        *</label>
+                    <input type="tel" class="budget-input" id="req-phone" placeholder="+7 999 123-45-67">
+                </div>
+                <div style="margin-bottom:12px;">
+                    <label style="font-size:13px;color:var(--text-muted);display:block;margin-bottom:6px;">Email</label>
+                    <input type="email" class="budget-input" id="req-email" placeholder="your@email.com">
+                </div>
+                <div style="margin-bottom:16px;">
+                    <label
+                        style="font-size:13px;color:var(--text-muted);display:block;margin-bottom:6px;">Комментарий</label>
+                    <textarea class="budget-input" id="req-comment" rows="3"
+                        placeholder="Дата, пожелания..."></textarea>
+                </div>
+                <button class="btn btn-primary" id="btn-submit-request">Отправить заявку</button>
+            </div>
+        </div>
+
+        <!-- ЭКРАН 9: Успех -->
+        <div class="screen" id="screen-send-success">
+            <div class="card" style="text-align:center; padding:40px 24px;">
+                <div style="font-size:64px; margin-bottom:16px;">✅</div>
+                <h2 style="margin-bottom:12px;">Спасибо!</h2>
+                <p style="color:var(--text-muted); margin-bottom:8px;" id="success-text">Ваша заявка принята.</p>
+                <p style="color:var(--text-muted); font-size:13px;">Мы свяжемся с вами в течение 15 минут.</p>
+            </div>
+            <button class="btn btn-secondary" id="btn-close-success">← Вернуться к расчёту</button>
         </div>
     </div>
 
@@ -1108,9 +1155,11 @@
             document.getElementById(id).classList.add('active');
             window.scrollTo(0, 0);
         }
+
         function formatMoney(n) { return Math.round(n).toLocaleString('ru-RU') + ' ₽'; }
         function getTotalGuests() { return state.adults + state.children; }
         function updateTotalGuests() { document.getElementById('total-guests').textContent = getTotalGuests(); }
+
         function showToast(text) {
             const t = document.getElementById('toast');
             t.textContent = text;
@@ -1118,6 +1167,7 @@
             clearTimeout(showToast._timer);
             showToast._timer = setTimeout(() => t.classList.remove('show'), 2200);
         }
+
         function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
 
         function getCategoryStyle(cat) {
@@ -1135,12 +1185,12 @@
         function renderEvents() {
             const grid = document.getElementById('event-grid');
             grid.innerHTML = EVENTS.map(e => `
-    <div class="option-card ${state.eventId === e.id ? 'selected' : ''}" data-id="${e.id}" data-random="${e.random ? '1' : '0'}">
-      <div class="option-icon">${e.icon}</div>
-      <div class="option-label">${e.label}</div>
-      <div class="option-desc">${e.desc}</div>
-    </div>
-  `).join('');
+                <div class="option-card ${state.eventId === e.id ? 'selected' : ''}" data-id="${e.id}" data-random="${e.random ? '1' : '0'}">
+                    <div class="option-icon">${e.icon}</div>
+                    <div class="option-label">${e.label}</div>
+                    <div class="option-desc">${e.desc}</div>
+                </div>
+            `).join('');
             grid.querySelectorAll('.option-card').forEach(card => {
                 card.addEventListener('click', () => {
                     state.eventId = card.dataset.id;
@@ -1154,10 +1204,10 @@
         function renderDurations() {
             const grid = document.getElementById('duration-grid');
             grid.innerHTML = DURATIONS.map(d => `
-    <div class="option-card ${state.hours === d.value ? 'selected' : ''}" data-value="${d.value}">
-      <div class="option-label">${d.label}</div>
-    </div>
-  `).join('');
+                <div class="option-card ${state.hours === d.value ? 'selected' : ''}" data-value="${d.value}">
+                    <div class="option-label">${d.label}</div>
+                </div>
+            `).join('');
             grid.querySelectorAll('.option-card').forEach(card => {
                 card.addEventListener('click', () => {
                     state.hours = parseInt(card.dataset.value);
@@ -1171,8 +1221,8 @@
         function renderBudgets() {
             const grid = document.getElementById('budget-grid');
             grid.innerHTML = BUDGETS.map(b => `
-    <button class="budget-btn ${state.budget === b && !state.customBudget ? 'selected' : ''}" data-value="${b}">${b.toLocaleString('ru-RU')} ₽</button>
-  `).join('') + `<button class="budget-btn ${state.customBudget ? 'selected' : ''}" data-value="custom" style="grid-column: span 2;">💰 Свой бюджет</button>`;
+                <button class="budget-btn ${state.budget === b && !state.customBudget ? 'selected' : ''}" data-value="${b}">${b.toLocaleString('ru-RU')} ₽</button>
+            `).join('') + `<button class="budget-btn ${state.customBudget ? 'selected' : ''}" data-value="custom" style="grid-column: span 2;">💰 Свой бюджет</button>`;
             grid.querySelectorAll('.budget-btn').forEach(btn => {
                 btn.addEventListener('click', () => {
                     const val = btn.dataset.value;
@@ -1196,11 +1246,11 @@
         function renderPrefs() {
             const grid = document.getElementById('prefs-grid');
             grid.innerHTML = PREFS.map(p => `
-    <div class="option-card ${state.prefs.includes(p.id) ? 'selected' : ''}" data-id="${p.id}">
-      <div class="option-icon">${p.icon}</div>
-      <div class="option-label">${p.label}</div>
-    </div>
-  `).join('');
+                <div class="option-card ${state.prefs.includes(p.id) ? 'selected' : ''}" data-id="${p.id}">
+                    <div class="option-icon">${p.icon}</div>
+                    <div class="option-label">${p.label}</div>
+                </div>
+            `).join('');
             grid.querySelectorAll('.option-card').forEach(card => {
                 card.addEventListener('click', () => {
                     const id = card.dataset.id;
@@ -1243,8 +1293,10 @@
                 const controller = new AbortController();
                 const timeout = setTimeout(() => controller.abort(), 65000);
                 const res = await fetch(`${API_URL}${endpoint}`, {
-                    method: 'POST', headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload), signal: controller.signal,
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload),
+                    signal: controller.signal,
                 });
                 clearTimeout(timeout);
                 if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -1293,7 +1345,6 @@
                     badgeContainer.innerHTML = '<span class="badge badge-warning">🟡 Почти в бюджете</span>';
                 } else {
                     badgeContainer.innerHTML = '<span class="badge badge-success">🟢 В бюджете</span>';
-                    // Показываем кнопку «Расширить» если остаток > 3% бюджета
                     if (data.remaining > data.budget * 0.03 && state.isRandom) {
                         btnExpand.style.display = 'block';
                     }
@@ -1315,23 +1366,23 @@
             for (const [cat, items] of Object.entries(categories)) {
                 const style = getCategoryStyle(cat);
                 html += `<div class="category-block ${style.cls}">
-      <div class="category-title">
-        <span class="cat-icon">${style.icon}</span>
-        <span>${cat}</span>
-      </div>`;
-                items.forEach((item, idx) => {
+                    <div class="category-title">
+                        <span class="cat-icon">${style.icon}</span>
+                        <span>${cat}</span>
+                    </div>`;
+                items.forEach((item) => {
                     const qty = item.packages > 1
                         ? `${item.packages} × ${item.package_size} ${item.unit}`
                         : `${item.final_amount} ${item.unit}`;
                     const offFilter = item.off_filter ? '<span class="off-filter-mark">вне фильтра</span>' : '';
                     html += `<div class="item-row">
-        <div class="item-info">
-          <div class="item-name">${item.name}${offFilter}</div>
-          <div class="item-qty">${qty}</div>
-        </div>
-        <span class="item-price">${formatMoney(item.total_price)}</span>
-        <button class="item-edit" data-cat="${cat}" data-name="${item.name.replace(/"/g, '&quot;')}" title="Заменить">✏️</button>
-      </div>`;
+                        <div class="item-info">
+                            <div class="item-name">${item.name}${offFilter}</div>
+                            <div class="item-qty">${qty}</div>
+                        </div>
+                        <span class="item-price">${formatMoney(item.total_price)}</span>
+                        <button class="item-edit" data-cat="${cat}" data-name="${item.name.replace(/"/g, '&quot;')}" title="Заменить">✏️</button>
+                    </div>`;
                 });
                 html += `</div>`;
             }
@@ -1372,9 +1423,12 @@
                     items.map(it => {
                         const tags = (it.tags || '').split(',').filter(t => t).map(t => tagMap[t] || t).join(' · ');
                         return `<div class="alt-item" data-name="${it.name.replace(/"/g, '&quot;')}" data-price="${it.price_per_unit}" data-unit="${it.unit}" data-pkg="${it.package_size}">
-          <div><div class="alt-name">${it.name}</div>${tags ? `<div class="alt-tags">${tags}</div>` : ''}</div>
-          <div class="alt-price">${formatMoney(it.price_per_unit)}/${it.unit}</div>
-        </div>`;
+                            <div>
+                                <div class="alt-name">${it.name}</div>
+                                ${tags ? `<div class="alt-tags">${tags}</div>` : ''}
+                            </div>
+                            <div class="alt-price">${formatMoney(it.price_per_unit)}/${it.unit}</div>
+                        </div>`;
                     }).join('');
                 document.querySelectorAll('.alt-item').forEach(el => {
                     el.addEventListener('click', () => replaceDish({
@@ -1393,6 +1447,7 @@
             document.getElementById('modal-overlay').classList.remove('active');
             editingContext = null;
         }
+
         document.getElementById('modal-close').addEventListener('click', closeModal);
         document.getElementById('modal-overlay').addEventListener('click', (e) => {
             if (e.target.id === 'modal-overlay') closeModal();
@@ -1432,7 +1487,8 @@
             showScreen('screen-loading');
             try {
                 const res = await fetch(`${API_URL}/expand`, {
-                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         scenario_id: state.eventId,
                         adults: state.adults, children: state.children,
@@ -1470,40 +1526,35 @@
 
             title.textContent = '💰 Увеличить бюджет';
             body.innerHTML = `
-    <div class="modal-info">
-      Текущий бюджет
-      <strong>${formatMoney(r.budget)}</strong>
-    </div>
-    <p class="modal-hint">
-      Меню: ${formatMoney(r.total_cost)}<br>
-      Нужно добавить минимум: <b>${formatMoney(minAdd)}</b>
-    </p>
-
-    <div style="margin-bottom:10px;">
-      <label style="font-size:13px;color:var(--text-muted);display:block;margin-bottom:6px;">
-        Сколько готовы добавить?
-      </label>
-      <input type="number" inputmode="numeric" class="budget-input" id="add-budget-input"
-             value="${minAdd}" min="500" step="500"
-             placeholder="Сумма в ₽">
-    </div>
-
-    <div style="display:flex;gap:8px;margin-bottom:16px;">
-      <button type="button" class="budget-btn" data-add="1000" style="flex:1;padding:12px 8px;font-size:14px;">+1 000</button>
-      <button type="button" class="budget-btn" data-add="5000" style="flex:1;padding:12px 8px;font-size:14px;">+5 000</button>
-      <button type="button" class="budget-btn" data-add="10000" style="flex:1;padding:12px 8px;font-size:14px;">+10 000</button>
-    </div>
-
-    <div class="modal-actions">
-      <button class="btn btn-secondary" id="modal-cancel">Отмена</button>
-      <button class="btn btn-primary" id="modal-apply">Применить</button>
-    </div>
-  `;
+                <div class="modal-info">
+                    Текущий бюджет
+                    <strong>${formatMoney(r.budget)}</strong>
+                </div>
+                <p class="modal-hint">
+                    Меню: ${formatMoney(r.total_cost)}<br>
+                    Нужно добавить минимум: <b>${formatMoney(minAdd)}</b>
+                </p>
+                <div style="margin-bottom:10px;">
+                    <label style="font-size:13px;color:var(--text-muted);display:block;margin-bottom:6px;">
+                        Сколько готовы добавить?
+                    </label>
+                    <input type="number" inputmode="numeric" class="budget-input" id="add-budget-input"
+                        value="${minAdd}" min="500" step="500" placeholder="Сумма в ₽">
+                </div>
+                <div style="display:flex;gap:8px;margin-bottom:16px;">
+                    <button type="button" class="budget-btn" data-add="1000" style="flex:1;padding:12px 8px;font-size:14px;">+1 000</button>
+                    <button type="button" class="budget-btn" data-add="5000" style="flex:1;padding:12px 8px;font-size:14px;">+5 000</button>
+                    <button type="button" class="budget-btn" data-add="10000" style="flex:1;padding:12px 8px;font-size:14px;">+10 000</button>
+                </div>
+                <div class="modal-actions">
+                    <button class="btn btn-secondary" id="modal-cancel">Отмена</button>
+                    <button class="btn btn-primary" id="modal-apply">Применить</button>
+                </div>
+            `;
             overlay.classList.add('active');
 
             const input = document.getElementById('add-budget-input');
 
-            // Быстрые кнопки — УСТАНАВЛИВАЮТ значение (не прибавляют)
             body.querySelectorAll('[data-add]').forEach(btn => {
                 btn.addEventListener('click', () => {
                     const val = parseInt(btn.dataset.add, 10);
@@ -1522,12 +1573,10 @@
                 }
                 if (addAmount > 10000000) addAmount = 10000000;
 
-                // Новый бюджет
                 const newBudget = r.budget + addAmount;
                 state.budget = newBudget;
                 state.customBudget = newBudget;
 
-                // ⚠️ НЕ пересобираем меню — только обновляем бюджет и статус
                 r.budget = newBudget;
                 r.is_within_budget = r.total_cost <= newBudget;
                 r.remaining = Math.max(0, newBudget - r.total_cost);
@@ -1546,7 +1595,8 @@
             showScreen('screen-loading');
             try {
                 const res = await fetch(`${API_URL}/reroll`, {
-                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(state.lastPayload),
                 });
                 if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -1564,6 +1614,71 @@
             }
         }
 
+        /* ============ ОТПРАВКА ЗАЯВКИ ============ */
+        document.getElementById('btn-send-request').addEventListener('click', () => {
+            showScreen('screen-send-request');
+        });
+
+        document.getElementById('back-from-request').addEventListener('click', () => {
+            showScreen('screen-result');
+        });
+
+        document.getElementById('btn-close-success').addEventListener('click', () => {
+            showScreen('screen-result');
+        });
+
+        document.getElementById('btn-submit-request').addEventListener('click', async () => {
+            const name = document.getElementById('req-name').value.trim();
+            const phone = document.getElementById('req-phone').value.trim();
+            const email = document.getElementById('req-email').value.trim();
+            const comment = document.getElementById('req-comment').value.trim();
+
+            if (!name) { showToast('Укажите имя'); return; }
+            if (!phone) { showToast('Укажите телефон'); return; }
+            if (!state.lastResult) { showToast('Сначала рассчитайте меню'); return; }
+
+            const btn = document.getElementById('btn-submit-request');
+            btn.disabled = true;
+            btn.textContent = 'Отправляем…';
+
+            const scenarioObj = EVENTS.find(e => e.id === state.eventId) || {};
+
+            const payload = {
+                client_name: name,
+                client_phone: phone,
+                client_email: email,
+                client_comment: comment,
+                scenario_id: state.eventId,
+                scenario_name: scenarioObj.label || '',
+                adults: state.adults,
+                children: state.children,
+                hours: state.hours,
+                budget: state.customBudget || state.budget,
+                total_cost: state.lastResult.total_cost,
+                price_per_guest: state.lastResult.price_per_guest || 0,
+                items: state.lastResult.items,
+            };
+
+            try {
+                const res = await fetch(`${API_URL}/send_request`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload),
+                });
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                const data = await res.json();
+
+                document.getElementById('success-text').textContent =
+                    `Заявка №${data.request_id} принята.`;
+                showScreen('screen-send-success');
+            } catch (err) {
+                console.error(err);
+                btn.disabled = false;
+                btn.textContent = 'Отправить заявку';
+                showToast('Не удалось отправить. Проверьте интернет.');
+            }
+        });
+
         /* ============ СЧЁТЧИКИ ============ */
         function setupCounter(name, min, max, stateKey) {
             const minus = document.getElementById(`${name}-minus`);
@@ -1573,7 +1688,8 @@
                 input.value = state[stateKey];
                 minus.disabled = state[stateKey] <= min;
                 plus.disabled = state[stateKey] >= max;
-                updateTotalGuests(); updateSummary();
+                updateTotalGuests();
+                updateSummary();
             }
             minus.addEventListener('click', () => { state[stateKey] = clamp(state[stateKey] - 1, min, max); update(); });
             plus.addEventListener('click', () => { state[stateKey] = clamp(state[stateKey] + 1, min, max); update(); });
@@ -1581,8 +1697,10 @@
                 let v = parseInt(input.value, 10);
                 if (isNaN(v)) return;
                 state[stateKey] = v;
-                minus.disabled = v <= min; plus.disabled = v >= max;
-                updateTotalGuests(); updateSummary();
+                minus.disabled = v <= min;
+                plus.disabled = v >= max;
+                updateTotalGuests();
+                updateSummary();
             });
             input.addEventListener('blur', () => {
                 let v = parseInt(input.value, 10);
@@ -1606,13 +1724,17 @@
         document.getElementById('btn-increase').addEventListener('click', openBudgetModal);
 
         document.querySelectorAll('.back-btn').forEach(btn => {
-            btn.addEventListener('click', () => showScreen(btn.dataset.back));
+            const target = btn.dataset.back;
+            if (target) {
+                btn.addEventListener('click', () => showScreen(target));
+            }
         });
 
         document.getElementById('custom-budget-input')?.addEventListener('input', (e) => {
             let v = parseInt(e.target.value, 10) || 0;
             if (v < 1000) v = 1000;
-            state.customBudget = v; state.budget = v;
+            state.customBudget = v;
+            state.budget = v;
             updateSummary();
         });
 
@@ -1641,9 +1763,16 @@
             const text = buildShareText();
             if (!text) return;
             if (navigator.share) {
-                try { await navigator.share({ title: 'Хватит всем', text, url: 'https://hvatitfrontend.onrender.com' }); } catch (e) { }
+                try {
+                    await navigator.share({ title: 'Хватит всем', text, url: 'https://hvatitfrontend.onrender.com' });
+                } catch (e) { }
             } else {
-                try { await navigator.clipboard.writeText(text); showToast('✓ Скопировано'); } catch { showToast('Не удалось скопировать'); }
+                try {
+                    await navigator.clipboard.writeText(text);
+                    showToast('✓ Скопировано');
+                } catch {
+                    showToast('Не удалось скопировать');
+                }
             }
         });
 
@@ -1651,14 +1780,22 @@
             const text = buildShareText();
             if (!text) return;
             try {
-                if (navigator.clipboard && window.isSecureContext) await navigator.clipboard.writeText(text);
-                else {
+                if (navigator.clipboard && window.isSecureContext) {
+                    await navigator.clipboard.writeText(text);
+                } else {
                     const ta = document.createElement('textarea');
-                    ta.value = text; ta.style.position = 'fixed'; ta.style.left = '-9999px';
-                    document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
+                    ta.value = text;
+                    ta.style.position = 'fixed';
+                    ta.style.left = '-9999px';
+                    document.body.appendChild(ta);
+                    ta.select();
+                    document.execCommand('copy');
+                    ta.remove();
                 }
                 showToast('✓ Список скопирован');
-            } catch { showToast('Не удалось скопировать'); }
+            } catch {
+                showToast('Не удалось скопировать');
+            }
         });
 
         renderEvents();
