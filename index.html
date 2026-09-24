@@ -928,15 +928,7 @@
                         <button class="counter-btn" id="adults-plus" type="button">+</button>
                     </div>
                 </div>
-                <div class="counter-row">
-                    <span class="counter-label">Дети</span>
-                    <div class="counter-controls">
-                        <button class="counter-btn" id="children-minus" type="button">−</button>
-                        <input type="number" inputmode="numeric" class="counter-input" id="children-input" value="0"
-                            min="0" max="200">
-                        <button class="counter-btn" id="children-plus" type="button">+</button>
-                    </div>
-                </div>
+
                 <div style="text-align:center; margin-top:16px; font-weight:700; font-size:17px;">
                     Всего гостей: <span id="total-guests">10</span>
                 </div>
@@ -1140,7 +1132,6 @@
             eventId: null,
             isRandom: false,
             adults: 10,
-            children: 0,
             hours: 4,
             budget: 20000,
             customBudget: null,
@@ -1150,6 +1141,7 @@
             isCalculating: false,
         };
 
+
         function showScreen(id) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.getElementById(id).classList.add('active');
@@ -1157,7 +1149,7 @@
         }
 
         function formatMoney(n) { return Math.round(n).toLocaleString('ru-RU') + ' ₽'; }
-        function getTotalGuests() { return state.adults + state.children; }
+        function getTotalGuests() { return state.adults; }
         function updateTotalGuests() { document.getElementById('total-guests').textContent = getTotalGuests(); }
 
         function showToast(text) {
@@ -1270,7 +1262,7 @@
         function updateSummary() {
             const b = state.customBudget || state.budget;
             document.getElementById('summary-text').textContent =
-                `${state.adults} взрослых, ${state.children} детей, ${state.hours} часа, бюджет ${formatMoney(b)}`;
+                `${state.adults} взрослых, ${state.hours} часа, бюджет ${formatMoney(b)}`;
         }
 
         async function calculate() {
@@ -1280,7 +1272,7 @@
 
             const payload = {
                 scenario_id: state.eventId,
-                adults: state.adults, children: state.children,
+                adults: state.adults,
                 hours: state.hours,
                 budget: state.customBudget || state.budget,
                 preferences: state.prefs,
@@ -1322,7 +1314,7 @@
 
         function renderResult(data) {
             document.getElementById('result-subtitle').textContent =
-                `${data.adults} взрослых · ${data.children} детей · ${data.hours} часа`;
+                `${data.adults} взрослых · ${data.hours} часа`;
             document.getElementById('result-total').textContent = formatMoney(data.total_cost);
             document.getElementById('result-total-bottom').textContent = formatMoney(data.total_cost);
 
@@ -1491,7 +1483,7 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         scenario_id: state.eventId,
-                        adults: state.adults, children: state.children,
+                        adults: state.adults,
                         hours: state.hours, budget: state.customBudget || state.budget,
                         preferences: state.prefs,
                         current_items: state.lastResult.items,
@@ -1651,7 +1643,6 @@
                 scenario_id: state.eventId,
                 scenario_name: scenarioObj.label || '',
                 adults: state.adults,
-                children: state.children,
                 hours: state.hours,
                 budget: state.customBudget || state.budget,
                 total_cost: state.lastResult.total_cost,
@@ -1803,7 +1794,6 @@
         renderBudgets();
         renderPrefs();
         setupCounter('adults', 1, 500, 'adults');
-        setupCounter('children', 0, 200, 'children');
         updateTotalGuests();
         updateSummary();
     </script>
