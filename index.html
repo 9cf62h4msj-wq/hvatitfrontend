@@ -11,6 +11,8 @@
     <meta property="og:description" content="Рассчитайте стол за 1 минуту.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://hvatitfrontend.onrender.com">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥂</text></svg>">
     <style>
         :root {
             --card: rgba(255, 255, 255, 0.85);
@@ -202,7 +204,6 @@
             border: none;
             background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
             color: var(--text);
             font-size: 15px;
             font-weight: 600;
@@ -220,7 +221,6 @@
         .card {
             background: var(--card);
             backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
             border-radius: var(--radius);
             padding: 24px;
             box-shadow: var(--shadow-card);
@@ -452,7 +452,6 @@
         .btn-secondary {
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
             color: var(--text);
             border: 2px solid var(--border);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
@@ -558,6 +557,7 @@
             font-size: 15px;
             gap: 8px;
             background: rgba(255, 255, 255, 0.7);
+            position: relative;
         }
 
         .item-row:last-child {
@@ -697,7 +697,6 @@
             bottom: 0;
             background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
             z-index: 100;
             display: none;
             align-items: flex-end;
@@ -895,8 +894,9 @@
             </div>
             <div class="card" style="text-align:center;">
                 <h1 style="font-size:30px; margin-bottom:8px; letter-spacing:-0.03em;">🥂 Хватит всем</h1>
-                <p style="color:var(--text-muted); font-size:15px;">Рассчитаем еду и напитки для вашего мероприятия за 1
-                    минуту.</p>
+                <p style="color:var(--text-muted); font-size:15px;">Рассчитаем еду и напитки для вашего мероприятия в
+                    Перми за 1 минуту.</p>
+                <p style="font-size:12px; color:#888; margin-top:6px;">Расчёт по базе цен кейтеринга «Вкусно!»</p>
             </div>
             <div class="card">
                 <div class="card-title">Какое мероприятие планируете?</div>
@@ -928,7 +928,6 @@
                         <button class="counter-btn" id="adults-plus" type="button">+</button>
                     </div>
                 </div>
-
                 <div style="text-align:center; margin-top:16px; font-weight:700; font-size:17px;">
                     Всего гостей: <span id="total-guests">10</span>
                 </div>
@@ -1021,6 +1020,15 @@
                     <div id="result-badge-container" style="margin-top:12px;"></div>
                     <p style="margin-top:12px; font-size:15px; font-weight:600;" id="result-remaining"></p>
                 </div>
+
+                <!-- Подсказка про редактирование -->
+                <div
+                    style="background: #eef2ff; border-radius: 12px; padding: 12px; margin-bottom: 16px; font-size: 13px; color: #4338ca; text-align: center; border: 1px solid #e0e7ff;">
+                    💡 <b>Хотите изменить блюдо?</b><br>
+                    Нажмите на иконку <b>✏️</b> рядом с любым блюдом. Откроется список, из которого можно выбрать замену
+                    (например, заменить рыбу на мясо).
+                </div>
+
                 <div id="result-items"></div>
                 <div class="total-row">
                     <span>Итого:</span>
@@ -1139,8 +1147,8 @@
             lastResult: null,
             lastPayload: null,
             isCalculating: false,
+            tooltipShown: false // Флаг, чтобы облачко не вылезало каждый раз
         };
-
 
         function showScreen(id) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
@@ -1383,6 +1391,47 @@
             document.querySelectorAll('.item-edit').forEach(btn => {
                 btn.addEventListener('click', () => openEditor(btn.dataset.cat, btn.dataset.name));
             });
+
+            // --- Облачко-подсказка для первой кнопки ✏️ ---
+            if (!state.tooltipShown) {
+                state.tooltipShown = true; // Показываем только один раз за сессию
+                setTimeout(() => {
+                    const firstEditBtn = document.querySelector('.item-edit');
+                    if (firstEditBtn) {
+                        const tooltip = document.createElement('div');
+                        tooltip.style.cssText = `
+                            position: absolute; 
+                            background: #1f2937; 
+                            color: white; 
+                            padding: 8px 12px; 
+                            border-radius: 8px; 
+                            font-size: 12px; 
+                            z-index: 1000;
+                            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                            white-space: nowrap;
+                            pointer-events: none;
+                        `;
+                        tooltip.innerHTML = '👆 Нажмите, чтобы заменить блюдо';
+
+                        // Позиционируем облачко прямо над кнопкой
+                        const rect = firstEditBtn.getBoundingClientRect();
+                        tooltip.style.top = (rect.top + window.scrollY - 40) + 'px';
+                        tooltip.style.left = (rect.left + window.scrollX - 100) + 'px';
+
+                        document.body.appendChild(tooltip);
+
+                        // Исчезает через 5 секунд
+                        setTimeout(() => {
+                            if (tooltip.parentNode) tooltip.remove();
+                        }, 5000);
+
+                        // Исчезает при клике на кнопку
+                        firstEditBtn.addEventListener('click', () => {
+                            if (tooltip.parentNode) tooltip.remove();
+                        }, { once: true });
+                    }
+                }, 500);
+            }
         }
 
         /* ============ МОДАЛКА РЕДАКТИРОВАНИЯ ============ */
