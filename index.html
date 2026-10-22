@@ -1147,7 +1147,7 @@
             lastResult: null,
             lastPayload: null,
             isCalculating: false,
-            tooltipShown: false // Флаг, чтобы облачко не вылезало каждый раз
+            tooltipShown: false
         };
 
         function showScreen(id) {
@@ -1410,22 +1410,24 @@
                             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
                             white-space: nowrap;
                             pointer-events: none;
+                            transform: translateX(-50%);
+                            transition: opacity 0.3s ease;
                         `;
                         tooltip.innerHTML = '👆 Нажмите, чтобы заменить блюдо';
 
-                        // Позиционируем облачко прямо над кнопкой
                         const rect = firstEditBtn.getBoundingClientRect();
-                        tooltip.style.top = (rect.top + window.scrollY - 40) + 'px';
-                        tooltip.style.left = (rect.left + window.scrollX - 100) + 'px';
+                        tooltip.style.top = (rect.top + window.scrollY - 35) + 'px';
+                        tooltip.style.left = (rect.left + window.scrollX + rect.width / 2) + 'px';
 
                         document.body.appendChild(tooltip);
 
-                        // Исчезает через 5 секунд
                         setTimeout(() => {
-                            if (tooltip.parentNode) tooltip.remove();
-                        }, 5000);
+                            if (tooltip.parentNode) {
+                                tooltip.style.opacity = '0';
+                                setTimeout(() => tooltip.remove(), 300);
+                            }
+                        }, 4000);
 
-                        // Исчезает при клике на кнопку
                         firstEditBtn.addEventListener('click', () => {
                             if (tooltip.parentNode) tooltip.remove();
                         }, { once: true });
