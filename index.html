@@ -15,69 +15,69 @@
         href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥂</text></svg>">
     <style>
         :root {
-            --card: rgba(255, 255, 255, 0.85);
+            --card: rgba(255, 255, 255, .85);
             --text: #1a1a1a;
             --text-muted: #6b7280;
             --primary-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-            --primary-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+            --primary-shadow: 0 4px 14px rgba(99, 102, 241, .4);
             --border: #e5e7eb;
             --radius: 24px;
             --radius-btn: 20px;
             --radius-sm: 16px;
-            --shadow-card: 0 8px 32px rgba(31, 38, 135, 0.08);
+            --shadow-card: 0 8px 32px rgba(31, 38, 135, .08);
         }
 
         .cat-hot {
             --cat-color: #ef4444;
-            --cat-bg: #fef2f2;
+            --cat-bg: #fef2f2
         }
 
         .cat-salads {
             --cat-color: #10b981;
-            --cat-bg: #ecfdf5;
+            --cat-bg: #ecfdf5
         }
 
         .cat-snacks {
             --cat-color: #f59e0b;
-            --cat-bg: #fffbeb;
+            --cat-bg: #fffbeb
         }
 
         .cat-dessert {
             --cat-color: #ec4899;
-            --cat-bg: #fdf2f8;
+            --cat-bg: #fdf2f8
         }
 
         .cat-drinks {
             --cat-color: #3b82f6;
-            --cat-bg: #eff6ff;
+            --cat-bg: #eff6ff
         }
 
         .cat-bread {
             --cat-color: #a16207;
-            --cat-bg: #fefce8;
+            --cat-bg: #fefce8
         }
 
         .cat-garnish {
             --cat-color: #8b5cf6;
-            --cat-bg: #f5f3ff;
+            --cat-bg: #f5f3ff
         }
 
         .cat-default {
             --cat-color: #6b7280;
-            --cat-bg: #f9fafb;
+            --cat-bg: #f9fafb
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            -webkit-tap-highlight-color: transparent;
+            -webkit-tap-highlight-color: transparent
         }
 
         html,
         body {
             min-height: 100vh;
-            overflow-x: hidden;
+            overflow-x: hidden
         }
 
         body {
@@ -100,15 +100,15 @@
             height: 100%;
             z-index: 0;
             pointer-events: none;
-            overflow: hidden;
+            overflow: hidden
         }
 
         .blob {
             position: absolute;
             border-radius: 50%;
             filter: blur(80px);
-            opacity: 0.5;
-            animation: float 20s ease-in-out infinite;
+            opacity: .5;
+            animation: float 20s ease-in-out infinite
         }
 
         .blob-1 {
@@ -116,7 +116,7 @@
             height: 340px;
             background: radial-gradient(circle, #a5b4fc 0%, transparent 70%);
             top: -80px;
-            left: -80px;
+            left: -80px
         }
 
         .blob-2 {
@@ -125,7 +125,7 @@
             background: radial-gradient(circle, #f0abfc 0%, transparent 70%);
             top: 30%;
             right: -120px;
-            animation-delay: -7s;
+            animation-delay: -7s
         }
 
         .blob-3 {
@@ -134,22 +134,22 @@
             background: radial-gradient(circle, #a7f3d0 0%, transparent 70%);
             bottom: -100px;
             left: 20%;
-            animation-delay: -14s;
+            animation-delay: -14s
         }
 
         @keyframes float {
 
             0%,
             100% {
-                transform: translate(0, 0) scale(1);
+                transform: translate(0, 0) scale(1)
             }
 
             33% {
-                transform: translate(30px, -40px) scale(1.1);
+                transform: translate(30px, -40px) scale(1.1)
             }
 
             66% {
-                transform: translate(-20px, 30px) scale(0.95);
+                transform: translate(-20px, 30px) scale(.95)
             }
         }
 
@@ -161,35 +161,35 @@
             gap: 16px;
             padding-bottom: 40px;
             position: relative;
-            z-index: 1;
+            z-index: 1
         }
 
         .progress {
             display: flex;
             justify-content: center;
             gap: 8px;
-            padding: 8px 0;
+            padding: 8px 0
         }
 
         .progress-dot {
             width: 10px;
             height: 10px;
             border-radius: 50%;
-            background: rgba(209, 213, 219, 0.7);
-            transition: all 0.3s ease;
+            background: rgba(209, 213, 219, .7);
+            transition: all .3s
         }
 
         .progress-dot.active {
             background: var(--primary-gradient);
-            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
-            transform: scale(1.1);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, .15);
+            transform: scale(1.1)
         }
 
         .top-bar {
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 4px 0;
+            padding: 4px 0
         }
 
         .back-btn {
@@ -199,20 +199,20 @@
             padding: 10px 18px;
             border-radius: var(--radius-btn);
             border: none;
-            background: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, .7);
             backdrop-filter: blur(10px);
             color: var(--text);
             font-size: 15px;
             font-weight: 600;
             cursor: pointer;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-            transition: all 0.2s ease;
-            font-family: inherit;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .06);
+            transition: all .2s;
+            font-family: inherit
         }
 
         .back-btn:active {
-            transform: scale(0.96);
-            background: rgba(243, 244, 246, 0.9);
+            transform: scale(.96);
+            background: rgba(243, 244, 246, .9)
         }
 
         .card {
@@ -221,63 +221,63 @@
             border-radius: var(--radius);
             padding: 24px;
             box-shadow: var(--shadow-card);
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.6);
+            transition: all .3s;
+            border: 1px solid rgba(255, 255, 255, .6)
         }
 
         .card-title {
             font-size: 20px;
             font-weight: 700;
             margin-bottom: 4px;
-            letter-spacing: -0.02em;
+            letter-spacing: -.02em
         }
 
         .grid-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            gap: 12px
         }
 
         .option-card {
-            background: rgba(250, 251, 255, 0.8);
+            background: rgba(250, 251, 255, .8);
             border: 2px solid transparent;
             border-radius: var(--radius-sm);
             padding: 16px 12px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all .25s cubic-bezier(.4, 0, .2, 1);
             user-select: none;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 6px;
             position: relative;
-            overflow: hidden;
+            overflow: hidden
         }
 
         .option-card:active {
-            transform: scale(0.97);
+            transform: scale(.97)
         }
 
         .option-card.selected {
             border-color: #a5b4fc;
             background: linear-gradient(135deg, #eef2ff 0%, #f5f3ff 100%);
-            box-shadow: 0 4px 16px rgba(99, 102, 241, 0.15);
+            box-shadow: 0 4px 16px rgba(99, 102, 241, .15)
         }
 
         .option-icon {
             font-size: 34px;
-            line-height: 1;
+            line-height: 1
         }
 
         .option-label {
             font-weight: 600;
-            font-size: 15px;
+            font-size: 15px
         }
 
         .option-desc {
             font-size: 12px;
-            color: var(--text-muted);
+            color: var(--text-muted)
         }
 
         .counter-row {
@@ -285,22 +285,22 @@
             justify-content: space-between;
             align-items: center;
             padding: 14px 0;
-            border-bottom: 1px solid var(--border);
+            border-bottom: 1px solid var(--border)
         }
 
         .counter-row:last-child {
-            border-bottom: none;
+            border-bottom: none
         }
 
         .counter-label {
             font-weight: 600;
-            font-size: 16px;
+            font-size: 16px
         }
 
         .counter-controls {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 8px
         }
 
         .counter-btn {
@@ -314,20 +314,20 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.2s ease;
+            transition: all .2s;
             color: var(--text);
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-            flex-shrink: 0;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, .05);
+            flex-shrink: 0
         }
 
         .counter-btn:active {
-            transform: scale(0.92);
+            transform: scale(.92)
         }
 
         .counter-btn:disabled {
-            opacity: 0.3;
+            opacity: .3;
             cursor: not-allowed;
-            transform: none;
+            transform: none
         }
 
         .counter-input {
@@ -341,45 +341,45 @@
             padding: 0 6px;
             outline: none;
             font-family: inherit;
-            background: rgba(250, 251, 255, 0.9);
-            transition: border-color 0.2s, background 0.2s;
+            background: rgba(250, 251, 255, .9);
+            transition: border-color .2s, background .2s
         }
 
         .counter-input:focus {
             border-color: #a5b4fc;
             background: #fff;
-            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, .1)
         }
 
         .budget-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
+            gap: 10px
         }
 
         .budget-btn {
             padding: 16px;
             border: 2px solid transparent;
             border-radius: var(--radius-btn);
-            background: rgba(250, 251, 255, 0.8);
+            background: rgba(250, 251, 255, .8);
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.25s ease;
+            transition: all .25s;
             color: var(--text);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-            font-family: inherit;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .04);
+            font-family: inherit
         }
 
         .budget-btn:active {
-            transform: scale(0.97);
+            transform: scale(.97)
         }
 
         .budget-btn.selected {
             border-color: #a5b4fc;
             background: linear-gradient(135deg, #eef2ff 0%, #f5f3ff 100%);
-            box-shadow: 0 4px 16px rgba(99, 102, 241, 0.2);
-            color: #4338ca;
+            box-shadow: 0 4px 16px rgba(99, 102, 241, .2);
+            color: #4338ca
         }
 
         .budget-input {
@@ -389,15 +389,15 @@
             border-radius: var(--radius-btn);
             font-size: 16px;
             outline: none;
-            transition: all 0.2s ease;
-            background: rgba(250, 251, 255, 0.9);
-            font-family: inherit;
+            transition: all .2s;
+            background: rgba(250, 251, 255, .9);
+            font-family: inherit
         }
 
         .budget-input:focus {
             border-color: #a5b4fc;
-            background: #ffffff;
-            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, .1)
         }
 
         .btn {
@@ -408,55 +408,55 @@
             font-size: 17px;
             font-weight: 700;
             cursor: pointer;
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-            letter-spacing: -0.01em;
-            font-family: inherit;
+            transition: all .25s cubic-bezier(.4, 0, .2, 1);
+            letter-spacing: -.01em;
+            font-family: inherit
         }
 
         .btn-primary {
             background: var(--primary-gradient);
-            color: white;
-            box-shadow: var(--primary-shadow);
+            color: #fff;
+            box-shadow: var(--primary-shadow)
         }
 
         .btn-primary:active:not(:disabled) {
-            transform: scale(0.97);
+            transform: scale(.97)
         }
 
         .btn-primary:disabled {
-            opacity: 0.5;
+            opacity: .5;
             cursor: not-allowed;
             box-shadow: none;
-            background: #d1d5db;
+            background: #d1d5db
         }
 
         .btn-secondary {
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, .85);
             backdrop-filter: blur(10px);
             color: var(--text);
             border: 2px solid var(--border);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .04)
         }
 
         .btn-secondary:active {
             background: #f9fafb;
-            transform: scale(0.97);
+            transform: scale(.97)
         }
 
         .btn-row {
             display: flex;
-            gap: 12px;
+            gap: 12px
         }
 
         .btn-row .btn {
             flex: 1;
             padding: 16px 12px;
-            font-size: 15px;
+            font-size: 15px
         }
 
         .result-header {
             text-align: center;
-            padding: 16px 0;
+            padding: 16px 0
         }
 
         .result-total {
@@ -467,14 +467,14 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            letter-spacing: -0.03em;
+            letter-spacing: -.03em
         }
 
         .result-per-guest {
             font-size: 14px;
             color: var(--text-muted);
             font-weight: 600;
-            margin-top: 4px;
+            margin-top: 4px
         }
 
         .badge {
@@ -482,26 +482,26 @@
             padding: 8px 20px;
             border-radius: 24px;
             font-size: 14px;
-            font-weight: 700;
+            font-weight: 700
         }
 
         .badge-success {
             background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
-            color: #065f46;
+            color: #065f46
         }
 
         .badge-warning {
             background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-            color: #92400e;
+            color: #92400e
         }
 
         .badge-error {
             background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
-            color: #991b1b;
+            color: #991b1b
         }
 
         .category-block {
-            margin-top: 20px;
+            margin-top: 20px
         }
 
         .category-title {
@@ -514,7 +514,7 @@
             border-radius: var(--radius-sm);
             background: var(--cat-bg, #f9fafb);
             color: var(--cat-color, #1a1a1a);
-            border-left: 4px solid var(--cat-color, #6b7280);
+            border-left: 4px solid var(--cat-color, #6b7280)
         }
 
         .category-title .cat-icon {
@@ -525,8 +525,8 @@
             width: 32px;
             height: 32px;
             border-radius: 50%;
-            background: #ffffff;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+            background: #fff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, .06)
         }
 
         .item-row {
@@ -537,13 +537,13 @@
             border-bottom: 1px solid #f9fafb;
             font-size: 15px;
             gap: 8px;
-            background: rgba(255, 255, 255, 0.7);
-            position: relative;
+            background: rgba(255, 255, 255, .7);
+            position: relative
         }
 
         .item-row:last-child {
             border-bottom: none;
-            border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+            border-radius: 0 0 var(--radius-sm) var(--radius-sm)
         }
 
         .item-info {
@@ -551,43 +551,43 @@
             display: flex;
             flex-direction: column;
             gap: 2px;
-            min-width: 0;
+            min-width: 0
         }
 
         .item-name {
-            font-weight: 500;
+            font-weight: 500
         }
 
         .item-qty {
             color: var(--text-muted);
             font-size: 13px;
-            white-space: nowrap;
+            white-space: nowrap
         }
 
         .item-price {
             font-weight: 700;
             white-space: nowrap;
-            font-size: 15px;
+            font-size: 15px
         }
 
         .item-edit {
             width: 36px;
             height: 36px;
             border-radius: 10px;
-            background: rgba(243, 244, 246, 0.9);
+            background: rgba(243, 244, 246, .9);
             border: none;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 16px;
-            transition: all 0.2s;
-            flex-shrink: 0;
+            transition: all .2s;
+            flex-shrink: 0
         }
 
         .item-edit:active {
-            transform: scale(0.9);
-            background: #e5e7eb;
+            transform: scale(.9);
+            background: #e5e7eb
         }
 
         .total-row {
@@ -597,29 +597,29 @@
             font-size: 20px;
             font-weight: 800;
             border-top: 2px solid var(--border);
-            margin-top: 12px;
+            margin-top: 12px
         }
 
         .screen {
-            display: none;
+            display: none
         }
 
         .screen.active {
             display: flex;
             flex-direction: column;
             gap: 16px;
-            animation: fadeIn 0.3s ease;
+            animation: fadeIn .3s ease
         }
 
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(8px);
+                transform: translateY(8px)
             }
 
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translateY(0)
             }
         }
 
@@ -628,7 +628,7 @@
             padding: 60px 20px;
             font-size: 20px;
             color: var(--text-muted);
-            font-weight: 600;
+            font-weight: 600
         }
 
         .loader::after {
@@ -640,12 +640,12 @@
             border-radius: 50%;
             border: 3px solid #e5e7eb;
             border-top-color: #6366f1;
-            animation: spin 0.8s linear infinite;
+            animation: spin .8s linear infinite
         }
 
         @keyframes spin {
             to {
-                transform: rotate(360deg);
+                transform: rotate(360deg)
             }
         }
 
@@ -656,7 +656,7 @@
             border-radius: var(--radius-sm);
             text-align: center;
             font-size: 15px;
-            font-weight: 500;
+            font-weight: 500
         }
 
         .modal-overlay {
@@ -665,36 +665,36 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, .5);
             backdrop-filter: blur(4px);
             z-index: 100;
             display: none;
             align-items: flex-end;
-            justify-content: center;
+            justify-content: center
         }
 
         .modal-overlay.active {
-            display: flex;
+            display: flex
         }
 
         .modal {
-            background: #ffffff;
+            background: #fff;
             width: 100%;
             max-width: 640px;
             border-radius: 24px 24px 0 0;
             max-height: 85vh;
             display: flex;
             flex-direction: column;
-            animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: slideUp .3s cubic-bezier(.4, 0, .2, 1)
         }
 
         @keyframes slideUp {
             from {
-                transform: translateY(100%);
+                transform: translateY(100%)
             }
 
             to {
-                transform: translateY(0);
+                transform: translateY(0)
             }
         }
 
@@ -703,13 +703,13 @@
             border-bottom: 1px solid var(--border);
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: center
         }
 
         .modal-title {
             font-size: 18px;
             font-weight: 700;
-            padding-right: 12px;
+            padding-right: 12px
         }
 
         .modal-close {
@@ -723,20 +723,30 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-shrink: 0;
+            flex-shrink: 0
         }
 
         .modal-body {
             padding: 12px 24px 20px;
             overflow-y: auto;
-            flex: 1;
+            flex: 1
         }
 
         .modal-hint {
             font-size: 13px;
             color: var(--text-muted);
             margin-bottom: 12px;
+            padding: 0 4px
+        }
+
+        .modal-sub {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin: 14px 0 6px;
             padding: 0 4px;
+            text-transform: uppercase;
+            letter-spacing: .03em
         }
 
         .alt-item {
@@ -748,40 +758,40 @@
             background: #f9fafb;
             margin-bottom: 8px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all .2s;
             border: 2px solid transparent;
+            gap: 10px
         }
 
         .alt-item:active {
-            transform: scale(0.98);
-            background: #eef2ff;
+            transform: scale(.98);
+            background: #eef2ff
         }
 
         .alt-name {
             font-weight: 500;
             font-size: 15px;
-            flex: 1;
-            padding-right: 12px;
+            flex: 1
         }
 
         .alt-price {
             font-weight: 700;
             font-size: 15px;
             white-space: nowrap;
-            color: #4338ca;
+            color: #4338ca
         }
 
-        .alt-tags {
-            font-size: 12px;
+        .alt-price small {
+            font-size: 11px;
             color: var(--text-muted);
-            margin-top: 2px;
+            font-weight: 400
         }
 
         .modal-loading,
         .modal-empty {
             text-align: center;
             padding: 40px 20px;
-            color: var(--text-muted);
+            color: var(--text-muted)
         }
 
         .modal-loader {
@@ -791,7 +801,7 @@
             border-radius: 50%;
             border: 3px solid #e5e7eb;
             border-top-color: #6366f1;
-            animation: spin 0.8s linear infinite;
+            animation: spin .8s linear infinite
         }
 
         .modal-info {
@@ -800,25 +810,25 @@
             padding: 12px 16px;
             border-radius: 12px;
             font-size: 14px;
-            margin-bottom: 12px;
+            margin-bottom: 12px
         }
 
         .modal-info strong {
             display: block;
             font-size: 16px;
-            margin-top: 4px;
+            margin-top: 4px
         }
 
         .modal-actions {
             display: flex;
             gap: 10px;
-            margin-top: 16px;
+            margin-top: 16px
         }
 
         .modal-actions .btn {
             flex: 1;
             padding: 14px 12px;
-            font-size: 15px;
+            font-size: 15px
         }
 
         .toast {
@@ -827,27 +837,28 @@
             bottom: 24px;
             transform: translateX(-50%) translateY(100px);
             background: #1f2937;
-            color: white;
+            color: #fff;
             padding: 12px 20px;
             border-radius: 12px;
             font-size: 14px;
             font-weight: 600;
             z-index: 200;
             opacity: 0;
-            transition: all 0.3s ease;
+            transition: all .3s;
             pointer-events: none;
+            max-width: 90vw;
+            text-align: center
         }
 
         .toast.show {
             opacity: 1;
-            transform: translateX(-50%) translateY(0);
+            transform: translateX(-50%) translateY(0)
         }
 
-        /* ===== ФИКС: поле даты — ровное, без «выпирания» на мобильных ===== */
         .date-picker-wrapper {
             position: relative;
             margin-top: 16px;
-            width: 100%;
+            width: 100%
         }
 
         .date-picker-input {
@@ -863,41 +874,41 @@
             font-size: 16px;
             font-family: inherit;
             outline: none;
-            background: rgba(250, 251, 255, 0.9);
+            background: rgba(250, 251, 255, .9);
             color: var(--text);
             cursor: pointer;
             line-height: 1.4;
             -webkit-appearance: none;
             appearance: none;
             -webkit-text-fill-color: var(--text);
-            text-align: left;
+            text-align: left
         }
 
         .date-picker-input:focus {
             border-color: #a5b4fc;
             background: #fff;
-            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, .1)
         }
 
         .date-picker-input::-webkit-calendar-picker-indicator {
             cursor: pointer;
-            opacity: 0.7;
+            opacity: .7;
             padding: 2px;
-            margin-right: -4px;
+            margin-right: -4px
         }
 
         .date-picker-input::-webkit-datetime-edit {
             padding: 0;
-            line-height: 1.4;
+            line-height: 1.4
         }
 
         .date-picker-input::-webkit-datetime-edit-fields-wrapper {
-            padding: 0;
+            padding: 0
         }
 
         .date-picker-input::-webkit-date-and-time-value {
             text-align: left;
-            margin: 0;
+            margin: 0
         }
 
         .pulse-hint {
@@ -908,25 +919,7 @@
             font-size: 13px;
             margin-bottom: 16px;
             text-align: center;
-            border: 1px solid #fcd34d;
-            animation: pulse-anim 2s infinite;
-        }
-
-        @keyframes pulse-anim {
-            0% {
-                box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4);
-                transform: scale(1);
-            }
-
-            50% {
-                box-shadow: 0 0 0 8px rgba(245, 158, 11, 0);
-                transform: scale(1.02);
-            }
-
-            100% {
-                box-shadow: 0 0 0 0 rgba(245, 158, 11, 0);
-                transform: scale(1);
-            }
+            border: 1px solid #fcd34d
         }
 
         .checkbox-row {
@@ -935,7 +928,7 @@
             gap: 10px;
             margin: 16px 0;
             font-size: 13px;
-            color: var(--text-muted);
+            color: var(--text-muted)
         }
 
         .checkbox-row input[type="checkbox"] {
@@ -943,12 +936,12 @@
             height: 20px;
             flex-shrink: 0;
             margin-top: 2px;
-            accent-color: #6366f1;
+            accent-color: #6366f1
         }
 
         .checkbox-row a {
             color: #6366f1;
-            text-decoration: underline;
+            text-decoration: underline
         }
     </style>
 </head>
@@ -961,6 +954,7 @@
     </div>
 
     <div class="app" id="app">
+
         <!-- ЭКРАН 1: Мероприятие -->
         <div class="screen active" id="screen-event">
             <div class="progress">
@@ -971,8 +965,8 @@
                 <div class="progress-dot"></div>
             </div>
             <div class="card" style="text-align:center;">
-                <h1 style="font-size:30px; margin-bottom:8px; letter-spacing:-0.03em;">🥂 Хватит всем</h1>
-                <p style="color:var(--text-muted); font-size:15px;">Рассчитаем еду и напитки для вашего мероприятия в
+                <h1 style="font-size:30px;margin-bottom:8px;letter-spacing:-.03em;">🥂 Хватит всем</h1>
+                <p style="color:var(--text-muted);font-size:15px;">Рассчитаем еду и напитки для вашего мероприятия в
                     Перми за 1 минуту.</p>
             </div>
             <div class="card">
@@ -1011,7 +1005,7 @@
                         <button class="counter-btn" id="adults-plus" type="button">+</button>
                     </div>
                 </div>
-                <div style="text-align:center; margin-top:16px; font-weight:700; font-size:17px;">
+                <div style="text-align:center;margin-top:16px;font-weight:700;font-size:17px;">
                     Всего гостей: <span id="total-guests">12</span>
                 </div>
             </div>
@@ -1032,7 +1026,7 @@
             </div>
             <div class="card">
                 <div class="card-title">Сколько продлится мероприятие?</div>
-                <p style="font-size:14px; color:var(--text-muted); margin:8px 0 16px;">Продолжительность влияет на
+                <p style="font-size:14px;color:var(--text-muted);margin:8px 0 16px;">Продолжительность влияет на
                     количество еды и напитков.</p>
                 <div class="grid-2" id="duration-grid"></div>
             </div>
@@ -1054,7 +1048,7 @@
             <div class="card">
                 <div class="card-title">Какой у вас бюджет?</div>
                 <div class="budget-grid" id="budget-grid" style="margin-top:16px;"></div>
-                <div id="custom-budget-block" style="display:none; margin-top:12px;">
+                <div id="custom-budget-block" style="display:none;margin-top:12px;">
                     <input type="number" class="budget-input" id="custom-budget-input" placeholder="Введите сумму в ₽"
                         min="1000" step="500">
                 </div>
@@ -1076,16 +1070,14 @@
             </div>
             <div class="card">
                 <div class="card-title">Что предпочитаете?</div>
-                <p style="font-size:14px; color:var(--text-muted); margin:8px 0 16px;">Можно выбрать несколько.
+                <p style="font-size:14px;color:var(--text-muted);margin:8px 0 16px;">Можно выбрать несколько.
                     «Авто-подбор» — сбалансированный набор.</p>
                 <div class="grid-2" id="prefs-grid"></div>
             </div>
             <div class="card" style="text-align:center;">
-                <div style="font-size:14px; color:var(--text-muted);">Всё готово?</div>
-                <div style="font-weight:600; margin:8px 0; font-size:15px;" id="summary-text"></div>
-                <div style="font-size:12px; color:var(--text-muted);">
-                    Цена без учёта обслуживания · база «Вкусно»
-                </div>
+                <div style="font-size:14px;color:var(--text-muted);">Всё готово?</div>
+                <div style="font-weight:600;margin:8px 0;font-size:15px;" id="summary-text"></div>
+                <div style="font-size:12px;color:var(--text-muted);">Цена без учёта обслуживания · база «Вкусно»</div>
             </div>
             <button class="btn btn-primary" id="btn-calculate">Рассчитать</button>
         </div>
@@ -1100,19 +1092,15 @@
             <div class="card">
                 <div class="result-header">
                     <h2 style="font-size:24px;">🥂 Ваш стол готов!</h2>
-                    <p style="color:var(--text-muted); font-size:14px;" id="result-subtitle"></p>
+                    <p style="color:var(--text-muted);font-size:14px;" id="result-subtitle"></p>
                     <div class="result-total" id="result-total">0 ₽</div>
                     <div class="result-per-guest" id="result-per-guest"></div>
                     <div id="result-badge-container" style="margin-top:12px;"></div>
-                    <p style="margin-top:12px; font-size:15px; font-weight:600;" id="result-remaining"></p>
-                    <p style="margin-top:8px; font-size:12px; color:var(--text-muted);">
-                        Цена без учёта обслуживания. Расчёт выполнен по базе «Вкусно».
-                    </p>
+                    <p style="margin-top:12px;font-size:15px;font-weight:600;" id="result-remaining"></p>
+                    <p style="margin-top:8px;font-size:12px;color:var(--text-muted);">Цена без учёта обслуживания.
+                        Расчёт по базе «Вкусно».</p>
                 </div>
-                <div class="pulse-hint" id="pulse-hint">
-                    💡 Нажмите <b>✏️</b> рядом с блюдом, чтобы заменить его на другое
-                </div>
-
+                <div class="pulse-hint">💡 Нажмите <b>✏️</b> рядом с блюдом, чтобы заменить его на другое</div>
                 <div id="result-items"></div>
                 <div class="total-row">
                     <span>Итого:</span>
@@ -1120,11 +1108,10 @@
                 </div>
             </div>
 
-            <button class="btn btn-primary" id="btn-expand" style="display:none;">✨ Расширить меню</button>
             <button class="btn btn-primary" id="btn-increase" style="display:none;">💰 Увеличить бюджет</button>
             <button class="btn btn-secondary" id="btn-reroll" style="display:none;">🎲 Другое меню</button>
             <button class="btn btn-primary" id="btn-send-request"
-                style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">📩 Отправить заявку</button>
+                style="background:linear-gradient(135deg,#10b981 0%,#059669 100%);">📩 Отправить заявку</button>
 
             <div class="btn-row">
                 <button class="btn btn-secondary" id="btn-share">📤 Поделиться</button>
@@ -1132,9 +1119,8 @@
             </div>
             <button class="btn btn-primary" id="btn-back">← Изменить параметры</button>
             <button class="btn btn-secondary" id="btn-restart">🔄 Новый расчёт</button>
-            <p style="text-align:center; font-size:12px; color:var(--text-muted); padding:8px;">
-                Все позиции — на базе «Вкусно». Цена без учёта обслуживания.
-            </p>
+            <p style="text-align:center;font-size:12px;color:var(--text-muted);padding:8px;">Все позиции — на базе
+                «Вкусно». Цена без учёта обслуживания.</p>
         </div>
 
         <!-- ЭКРАН 8: Форма заявки -->
@@ -1144,9 +1130,8 @@
             </div>
             <div class="card">
                 <div class="card-title">📩 Отправить заявку</div>
-                <p style="font-size:14px; color:var(--text-muted); margin:8px 0 16px;">
-                    Оставьте контакты — мы свяжемся с вами в течение 15 минут.
-                </p>
+                <p style="font-size:14px;color:var(--text-muted);margin:8px 0 16px;">Оставьте контакты — мы свяжемся с
+                    вами в течение 15 минут.</p>
                 <div style="margin-bottom:12px;">
                     <label style="font-size:13px;color:var(--text-muted);display:block;margin-bottom:6px;">Имя *</label>
                     <input type="text" class="budget-input" id="req-name" placeholder="Ваше имя">
@@ -1161,7 +1146,6 @@
                         style="font-size:13px;color:var(--text-muted);display:block;margin-bottom:6px;">Комментарий</label>
                     <textarea class="budget-input" id="req-comment" rows="3" placeholder="Пожелания..."></textarea>
                 </div>
-
                 <div class="checkbox-row">
                     <input type="checkbox" id="req-agree">
                     <label for="req-agree">
@@ -1169,21 +1153,21 @@
                             onclick="event.stopPropagation()">обработку и передачу персональных данных</a>
                     </label>
                 </div>
-
                 <button class="btn btn-primary" id="btn-submit-request">Отправить заявку</button>
             </div>
         </div>
 
         <!-- ЭКРАН 9: Успех -->
         <div class="screen" id="screen-send-success">
-            <div class="card" style="text-align:center; padding:40px 24px;">
-                <div style="font-size:64px; margin-bottom:16px;">✅</div>
+            <div class="card" style="text-align:center;padding:40px 24px;">
+                <div style="font-size:64px;margin-bottom:16px;">✅</div>
                 <h2 style="margin-bottom:12px;">Спасибо!</h2>
-                <p style="color:var(--text-muted); margin-bottom:8px;" id="success-text">Ваша заявка принята.</p>
-                <p style="color:var(--text-muted); font-size:13px;">Мы свяжемся с вами в течение 15 минут.</p>
+                <p style="color:var(--text-muted);margin-bottom:8px;">Ваша заявка принята.</p>
+                <p style="color:var(--text-muted);font-size:13px;">Мы свяжемся с вами в течение 15 минут.</p>
             </div>
             <button class="btn btn-secondary" id="btn-close-success">← Вернуться к расчёту</button>
         </div>
+
     </div>
 
     <!-- Модалка -->
@@ -1200,16 +1184,19 @@
     <div class="toast" id="toast"></div>
 
     <script>
+        /* ============================================================
+           CONFIG
+        ============================================================ */
         const API_URL = 'https://hvatitvsem.onrender.com';
         const STORAGE_KEY = 'hvatit_state_v1';
 
         const EVENTS = [
-            { id: 'SC101', icon: '🎂', label: 'День рождения', desc: 'Банкет с закусками и горячим', random: true },
-            { id: 'SC102', icon: '🏢', label: 'Корпоратив', desc: 'Банкет с закусками и горячим', random: true },
-            { id: 'SC103', icon: '💍', label: 'Свадьба', desc: 'Расширенный банкетный стол', random: true },
-            { id: 'SC104', icon: '🎉', label: 'Юбилей', desc: 'Праздничный банкет', random: true },
-            { id: 'SC100', icon: '🍢', label: 'Фуршет', desc: 'Канапе, закуски, напитки', random: true },
-            { id: 'SC105', icon: '✨', label: 'Другое', desc: 'Настроим под вас', random: true },
+            { id: 'SC101', icon: '🎂', label: 'День рождения', desc: 'Банкет с закусками и горячим' },
+            { id: 'SC102', icon: '🏢', label: 'Корпоратив', desc: 'Банкет с закусками и горячим' },
+            { id: 'SC103', icon: '💍', label: 'Свадьба', desc: 'Расширенный банкетный стол' },
+            { id: 'SC104', icon: '🎉', label: 'Юбилей', desc: 'Праздничный банкет' },
+            { id: 'SC100', icon: '🍢', label: 'Фуршет', desc: 'Канапе, закуски, напитки' },
+            { id: 'SC105', icon: '✨', label: 'Другое', desc: 'Настроим под вас' },
         ];
         const DURATIONS = [
             { value: 2, label: '⏱ 1–2 часа' },
@@ -1224,10 +1211,14 @@
             { id: 'veg', icon: '🥬', label: 'Вегетарианское' },
             { id: 'auto', icon: '✨', label: 'Авто-подбор' },
         ];
+        const MIN_ADULTS = 12;   // ограничение бэкенда
+        const MAX_ADULTS = 500;
 
+        /* ============================================================
+           STATE
+        ============================================================ */
         const state = {
             eventId: null,
-            isRandom: false,
             adults: 12,
             hours: 4,
             eventDate: '',
@@ -1235,10 +1226,12 @@
             customBudget: null,
             prefs: [],
             lastResult: null,
-            lastPayload: null,
             isCalculating: false,
         };
 
+        /* ============================================================
+           STORAGE (sessionStorage)
+        ============================================================ */
         function saveState() {
             try {
                 const form = {
@@ -1251,7 +1244,6 @@
                 sessionStorage.setItem(STORAGE_KEY, JSON.stringify({
                     screen: currentScreen,
                     eventId: state.eventId,
-                    isRandom: state.isRandom,
                     adults: state.adults,
                     hours: state.hours,
                     eventDate: state.eventDate,
@@ -1259,19 +1251,17 @@
                     customBudget: state.customBudget,
                     prefs: state.prefs,
                     lastResult: state.lastResult,
-                    lastPayload: state.lastPayload,
                     form,
                 }));
             } catch (e) { }
         }
 
-        function restoreStateData() {
+        function restoreState() {
             try {
-                const saved = sessionStorage.getItem(STORAGE_KEY);
-                if (!saved) return null;
-                const s = JSON.parse(saved);
+                const raw = sessionStorage.getItem(STORAGE_KEY);
+                if (!raw) return null;
+                const s = JSON.parse(raw);
                 if (s.eventId) state.eventId = s.eventId;
-                if (typeof s.isRandom === 'boolean') state.isRandom = s.isRandom;
                 if (typeof s.adults === 'number') state.adults = s.adults;
                 if (typeof s.hours === 'number') state.hours = s.hours;
                 if (s.eventDate) state.eventDate = s.eventDate;
@@ -1279,7 +1269,6 @@
                 if (s.customBudget !== undefined && s.customBudget !== null) state.customBudget = s.customBudget;
                 if (Array.isArray(s.prefs)) state.prefs = s.prefs;
                 if (s.lastResult) state.lastResult = s.lastResult;
-                if (s.lastPayload) state.lastPayload = s.lastPayload;
                 if (s.form) {
                     const ni = document.getElementById('req-name');
                     const pi = document.getElementById('req-phone');
@@ -1294,6 +1283,9 @@
             } catch (e) { return null; }
         }
 
+        /* ============================================================
+           HELPERS
+        ============================================================ */
         function showScreen(id) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             const target = document.getElementById(id);
@@ -1301,12 +1293,10 @@
             window.scrollTo(0, 0);
             saveState();
         }
-
-        function formatMoney(n) { return Math.round(n).toLocaleString('ru-RU') + ' ₽'; }
-        function getTotalGuests() { return state.adults; }
-        function updateTotalGuests() {
-            const el = document.getElementById('total-guests');
-            if (el) el.textContent = getTotalGuests();
+        function formatMoney(n) {
+            const v = Number(n);
+            if (!isFinite(v)) return '0 ₽';
+            return Math.round(v).toLocaleString('ru-RU') + ' ₽';
         }
         function showToast(text) {
             const t = document.getElementById('toast');
@@ -1314,9 +1304,10 @@
             t.textContent = text;
             t.classList.add('show');
             clearTimeout(showToast._timer);
-            showToast._timer = setTimeout(() => t.classList.remove('show'), 2200);
+            showToast._timer = setTimeout(() => t.classList.remove('show'), 2400);
         }
         function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
+
         function getCategoryStyle(cat) {
             const c = (cat || '').toLowerCase();
             if (c.includes('горяч') || c.includes('мясо')) return { cls: 'cat-hot', icon: '🥩' };
@@ -1324,25 +1315,27 @@
             if (c.includes('закус') || c.includes('холодн')) return { cls: 'cat-snacks', icon: '🧀' };
             if (c.includes('десерт') || c.includes('сладк')) return { cls: 'cat-dessert', icon: '🍰' };
             if (c.includes('напит')) return { cls: 'cat-drinks', icon: '🥤' };
-            if (c.includes('хлеб')) return { cls: 'cat-bread', icon: '🍞' };
+            if (c.includes('хлеб') || c.includes('выпеч')) return { cls: 'cat-bread', icon: '🍞' };
             if (c.includes('гарнир') || c.includes('овощ')) return { cls: 'cat-garnish', icon: '🥔' };
             return { cls: 'cat-default', icon: '🍽️' };
         }
 
+        /* ============================================================
+           RENDER: ЭКРАНЫ НАСТРОЕК
+        ============================================================ */
         function renderEvents() {
             const grid = document.getElementById('event-grid');
             if (!grid) return;
             grid.innerHTML = EVENTS.map(e => `
-                <div class="option-card ${state.eventId === e.id ? 'selected' : ''}" data-id="${e.id}" data-random="${e.random ? '1' : '0'}">
-                    <div class="option-icon">${e.icon}</div>
-                    <div class="option-label">${e.label}</div>
-                    <div class="option-desc">${e.desc}</div>
-                </div>
-            `).join('');
+    <div class="option-card ${state.eventId === e.id ? 'selected' : ''}" data-id="${e.id}">
+      <div class="option-icon">${e.icon}</div>
+      <div class="option-label">${e.label}</div>
+      <div class="option-desc">${e.desc}</div>
+    </div>
+  `).join('');
             grid.querySelectorAll('.option-card').forEach(card => {
                 card.addEventListener('click', () => {
                     state.eventId = card.dataset.id;
-                    state.isRandom = card.dataset.random === '1';
                     renderEvents();
                     const btn = document.getElementById('btn-next-event');
                     if (btn) btn.disabled = false;
@@ -1355,13 +1348,13 @@
             const grid = document.getElementById('duration-grid');
             if (!grid) return;
             grid.innerHTML = DURATIONS.map(d => `
-                <div class="option-card ${state.hours === d.value ? 'selected' : ''}" data-value="${d.value}">
-                    <div class="option-label">${d.label}</div>
-                </div>
-            `).join('');
+    <div class="option-card ${state.hours === d.value ? 'selected' : ''}" data-value="${d.value}">
+      <div class="option-label">${d.label}</div>
+    </div>
+  `).join('');
             grid.querySelectorAll('.option-card').forEach(card => {
                 card.addEventListener('click', () => {
-                    state.hours = parseInt(card.dataset.value);
+                    state.hours = parseInt(card.dataset.value, 10);
                     renderDurations();
                     const btn = document.getElementById('btn-next-duration');
                     if (btn) btn.disabled = false;
@@ -1375,8 +1368,9 @@
             const grid = document.getElementById('budget-grid');
             if (!grid) return;
             grid.innerHTML = BUDGETS.map(b => `
-                <button class="budget-btn ${state.budget === b && !state.customBudget ? 'selected' : ''}" data-value="${b}">${b.toLocaleString('ru-RU')} ₽</button>
-            `).join('') + `<button class="budget-btn ${state.customBudget ? 'selected' : ''}" data-value="custom" style="grid-column: span 2;">💰 Свой бюджет</button>`;
+    <button class="budget-btn ${state.budget === b && !state.customBudget ? 'selected' : ''}" data-value="${b}">${b.toLocaleString('ru-RU')} ₽</button>
+  `).join('') + `<button class="budget-btn ${state.customBudget ? 'selected' : ''}" data-value="custom" style="grid-column:span 2;">💰 Свой бюджет</button>`;
+
             grid.querySelectorAll('.budget-btn').forEach(btn => {
                 btn.addEventListener('click', () => {
                     const val = btn.dataset.value;
@@ -1384,7 +1378,7 @@
                         state.customBudget = state.customBudget || 15000;
                         state.budget = state.customBudget;
                     } else {
-                        state.budget = parseInt(val);
+                        state.budget = parseInt(val, 10);
                         state.customBudget = null;
                     }
                     renderBudgets();
@@ -1394,14 +1388,13 @@
                     saveState();
                 });
             });
+
             const customBlock = document.getElementById('custom-budget-block');
             const customInput = document.getElementById('custom-budget-input');
             if (customBlock && customInput) {
                 if (state.customBudget) {
                     customBlock.style.display = 'block';
-                    if (customInput.value !== String(state.customBudget)) {
-                        customInput.value = state.customBudget;
-                    }
+                    if (customInput.value !== String(state.customBudget)) customInput.value = state.customBudget;
                 } else {
                     customBlock.style.display = 'none';
                 }
@@ -1412,11 +1405,11 @@
             const grid = document.getElementById('prefs-grid');
             if (!grid) return;
             grid.innerHTML = PREFS.map(p => `
-                <div class="option-card ${state.prefs.includes(p.id) ? 'selected' : ''}" data-id="${p.id}">
-                    <div class="option-icon">${p.icon}</div>
-                    <div class="option-label">${p.label}</div>
-                </div>
-            `).join('');
+    <div class="option-card ${state.prefs.includes(p.id) ? 'selected' : ''}" data-id="${p.id}">
+      <div class="option-icon">${p.icon}</div>
+      <div class="option-label">${p.label}</div>
+    </div>
+  `).join('');
             grid.querySelectorAll('.option-card').forEach(card => {
                 card.addEventListener('click', () => {
                     const id = card.dataset.id;
@@ -1438,30 +1431,44 @@
             const b = state.customBudget || state.budget;
             const dateStr = state.eventDate ? new Date(state.eventDate).toLocaleDateString('ru-RU') : 'без даты';
             const el = document.getElementById('summary-text');
-            if (el) el.textContent = `${state.adults} взрослых, ${state.hours} часа, ${dateStr}, бюджет ${formatMoney(b)}`;
+            if (el) el.textContent = `${state.adults} гостей, ${state.hours} часа, ${dateStr}, бюджет ${formatMoney(b)}`;
         }
 
+        function updateTotalGuests() {
+            const el = document.getElementById('total-guests');
+            if (el) el.textContent = state.adults;
+        }
+
+        /* ============================================================
+           РАСЧЁТ
+        ============================================================ */
         async function calculate() {
             if (state.isCalculating) return;
+            if (!state.eventId) { showToast('Выберите мероприятие'); return; }
+            if (state.adults < MIN_ADULTS) { showToast(`Минимум ${MIN_ADULTS} гостей`); return; }
+
             state.isCalculating = true;
             showScreen('screen-loading');
 
             const payload = {
                 scenario_id: state.eventId,
                 adults: state.adults,
+                children: 0,
                 hours: state.hours,
                 budget: state.customBudget || state.budget,
-                preferences: state.prefs,
+                preferences: state.prefs.length ? state.prefs : ['auto'],
+                alcohol: false,
+                reroll: 0,
             };
-            state.lastPayload = payload;
-            const endpoint = state.isRandom ? '/calculate_random' : '/calculate';
 
             try {
                 const controller = new AbortController();
                 const timeout = setTimeout(() => controller.abort(), 65000);
-                const res = await fetch(`${API_URL}${endpoint}`, {
-                    method: 'POST', headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload), signal: controller.signal,
+                const res = await fetch(`${API_URL}/calculate_random`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload),
+                    signal: controller.signal,
                 });
                 clearTimeout(timeout);
                 if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -1471,10 +1478,12 @@
                 renderResult(data);
                 showScreen('screen-result');
             } catch (err) {
+                console.error('calculate:', err);
                 state.isCalculating = false;
                 showScreen('screen-prefs');
-                let msg = 'Не удалось выполнить расчёт. Проверьте интернет и попробуйте ещё раз.';
-                if (err.name === 'AbortError') msg = 'Сервер не ответил вовремя. Попробуйте ещё раз.';
+                const msg = err.name === 'AbortError'
+                    ? 'Сервер не ответил вовремя. Попробуйте ещё раз.'
+                    : 'Не удалось выполнить расчёт. Проверьте интернет и попробуйте ещё раз.';
                 document.querySelectorAll('.error-box').forEach(e => e.remove());
                 const errBox = document.createElement('div');
                 errBox.className = 'error-box';
@@ -1485,29 +1494,31 @@
             }
         }
 
+        /* ============================================================
+           РЕНДЕР РЕЗУЛЬТАТА
+        ============================================================ */
         function renderResult(data) {
-            document.getElementById('result-subtitle').textContent = `${data.adults} взрослых · ${data.hours} часа`;
+            document.getElementById('result-subtitle').textContent =
+                `${data.adults} гостей · ${data.hours} часа`;
             document.getElementById('result-total').textContent = formatMoney(data.total_cost);
             document.getElementById('result-total-bottom').textContent = formatMoney(data.total_cost);
-            const perGuest = data.price_per_guest || Math.round(data.total_cost / Math.max(1, data.total_guests));
-            document.getElementById('result-per-guest').textContent = `👤 ${formatMoney(perGuest)} на человека`;
+            document.getElementById('result-per-guest').textContent =
+                `👤 ${formatMoney(data.price_per_guest)} на человека`;
 
             const badgeContainer = document.getElementById('result-badge-container');
             const remainingEl = document.getElementById('result-remaining');
-            const btnExpand = document.getElementById('btn-expand');
             const btnIncrease = document.getElementById('btn-increase');
             const btnReroll = document.getElementById('btn-reroll');
 
-            btnExpand.style.display = 'none';
             btnIncrease.style.display = 'none';
-            btnReroll.style.display = state.isRandom ? 'block' : 'none';
+            btnReroll.style.display = 'block';
 
-            const ratio = data.total_cost / data.budget;
+            const ratio = data.budget > 0 ? data.total_cost / data.budget : 0;
             if (data.is_within_budget) {
-                if (ratio > 0.9) badgeContainer.innerHTML = '<span class="badge badge-warning">🟡 Почти в бюджете</span>';
-                else {
+                if (ratio > 0.9) {
+                    badgeContainer.innerHTML = '<span class="badge badge-warning">🟡 Почти в бюджете</span>';
+                } else {
                     badgeContainer.innerHTML = '<span class="badge badge-success">🟢 В бюджете</span>';
-                    if (data.remaining > data.budget * 0.03 && state.isRandom) btnExpand.style.display = 'block';
                 }
                 remainingEl.textContent = `Осталось: ${formatMoney(data.remaining)}`;
             } else {
@@ -1516,79 +1527,103 @@
                 btnIncrease.style.display = 'block';
             }
 
-            const categories = {};
-            (data.items || []).forEach(item => {
-                if (!categories[item.category]) categories[item.category] = [];
-                categories[item.category].push(item);
+            // Группировка по категориям с сохранением оригинального индекса
+            const byCategory = {};
+            (data.items || []).forEach((item, idx) => {
+                const cat = item.category || 'Прочее';
+                if (!byCategory[cat]) byCategory[cat] = [];
+                byCategory[cat].push({ ...item, __idx: idx });
             });
 
             let html = '';
-            for (const [cat, items] of Object.entries(categories)) {
+            for (const [cat, items] of Object.entries(byCategory)) {
                 const style = getCategoryStyle(cat);
                 html += `<div class="category-block ${style.cls}">
-                    <div class="category-title"><span class="cat-icon">${style.icon}</span><span>${cat}</span></div>`;
+      <div class="category-title">
+        <span class="cat-icon">${style.icon}</span>
+        <span>${cat}</span>
+      </div>`;
                 items.forEach((item) => {
-                    const qty = item.packages > 1 ? `${item.packages} × ${item.package_size} ${item.unit}` : `${item.final_amount} ${item.unit}`;
+                    const qty = item.packages > 1
+                        ? `${item.packages} × ${item.package_size} ${item.unit}`
+                        : `${item.final_amount} ${item.unit}`;
                     html += `<div class="item-row">
-                        <div class="item-info">
-                            <div class="item-name">${item.name}</div>
-                            <div class="item-qty">${qty}</div>
-                        </div>
-                        <span class="item-price">${formatMoney(item.total_price)}</span>
-                        <button class="item-edit" data-cat="${cat}" data-name="${item.name.replace(/"/g, '&quot;')}" title="Заменить">✏️</button>
-                    </div>`;
+        <div class="item-info">
+          <div class="item-name">${item.name}</div>
+          <div class="item-qty">${qty}</div>
+        </div>
+        <span class="item-price">${formatMoney(item.total_price)}</span>
+        <button class="item-edit" data-idx="${item.__idx}" title="Заменить">✏️</button>
+      </div>`;
                 });
                 html += `</div>`;
             }
             document.getElementById('result-items').innerHTML = html;
             document.querySelectorAll('.item-edit').forEach(btn => {
-                btn.addEventListener('click', () => openEditor(btn.dataset.cat, btn.dataset.name));
+                btn.addEventListener('click', () => openEditor(parseInt(btn.dataset.idx, 10)));
             });
+
             saveState();
         }
 
-        /* ============ МОДАЛКА РЕДАКТИРОВАНИЯ ============ */
+        /* ============================================================
+           РЕДАКТИРОВАНИЕ БЛЮДА (через /dishes и /replace)
+        ============================================================ */
         let editingContext = null;
-        async function openEditor(category, currentName) {
+
+        async function openEditor(idx) {
+            if (!state.lastResult || !state.lastResult.items) return;
+            const item = state.lastResult.items[idx];
+            if (!item) { showToast('Блюдо не найдено'); return; }
+
             const overlay = document.getElementById('modal-overlay');
             const title = document.getElementById('modal-title');
             const body = document.getElementById('modal-body');
-            title.textContent = `${category} — заменить блюдо`;
+            title.textContent = `${item.category} — заменить блюдо`;
             body.innerHTML = `<div class="modal-loading"><div class="modal-loader"></div>Загружаем варианты…</div>`;
             overlay.classList.add('active');
 
-            const prefsStr = state.prefs.filter(p => p !== 'auto').join(',');
-            const scenario = state.eventId || '';
+            // Бэкенд использует SC101 для всех, кроме фуршета (SC100)
+            const scenarioForApi = (state.eventId === 'SC100') ? 'SC100' : 'SC101';
 
             try {
-                const url = `${API_URL}/alternatives?category=${encodeURIComponent(category)}&exclude=${encodeURIComponent(currentName)}&preferences=${encodeURIComponent(prefsStr)}&scenario_id=${encodeURIComponent(scenario)}`;
+                const url = `${API_URL}/dishes?scenario_id=${encodeURIComponent(scenarioForApi)}&category=${encodeURIComponent(item.category)}`;
                 const res = await fetch(url);
                 if (!res.ok) throw new Error(`HTTP ${res.status}`);
-                const items = await res.json();
-                if (!items || items.length === 0) {
-                    body.innerHTML = `<div class="modal-empty">Нет других блюд в этой категории</div>`;
+                const dishes = await res.json();
+
+                if (!Array.isArray(dishes) || dishes.length === 0) {
+                    body.innerHTML = `<div class="modal-empty">В этой категории нет вариантов для замены</div>`;
                     return;
                 }
-                editingContext = { category, currentName };
-                const tagMap = { meat: '🥩 мясо', fish: '🐟 рыба', veg: '🥬 вег.' };
-                body.innerHTML = `<p class="modal-hint">Сортировка — от дорогих к дешёвым.</p>` +
-                    items.map(it => {
-                        const tags = (it.tags || '').split(',').filter(t => t).map(t => tagMap[t] || t).join(' · ');
-                        return `<div class="alt-item" data-name="${it.name.replace(/"/g, '&quot;')}" data-price="${it.price_per_unit}" data-unit="${it.unit}" data-pkg="${it.package_size}">
-                            <div><div class="alt-name">${it.name}</div>${tags ? `<div class="alt-tags">${tags}</div>` : ''}</div>
-                            <div class="alt-price">${formatMoney(it.price_per_unit)}/${it.unit}</div>
-                        </div>`;
+
+                editingContext = { idx };
+
+                const groups = {};
+                dishes.forEach(d => {
+                    const key = d.subcategory || 'Прочее';
+                    (groups[key] = groups[key] || []).push(d);
+                });
+
+                let html = '<p class="modal-hint">База «Вкусно». Количество порций и цена пересчитаются автоматически.</p>';
+                for (const [sub, list] of Object.entries(groups)) {
+                    html += `<div class="modal-sub">${sub}</div>`;
+                    html += list.map(d => {
+                        const safeName = d.name.replace(/"/g, '&quot;');
+                        return `<div class="alt-item" data-name="${safeName}">
+          <div class="alt-name">${d.name}</div>
+          <div class="alt-price">${formatMoney(d.price)}<small>/${d.unit}</small></div>
+        </div>`;
                     }).join('');
+                }
+                body.innerHTML = html;
+
                 document.querySelectorAll('.alt-item').forEach(el => {
-                    el.addEventListener('click', () => replaceDish({
-                        name: el.dataset.name,
-                        price_per_unit: parseFloat(el.dataset.price),
-                        unit: el.dataset.unit,
-                        package_size: parseFloat(el.dataset.pkg),
-                    }));
+                    el.addEventListener('click', () => replaceDish(el.dataset.name));
                 });
             } catch (err) {
-                body.innerHTML = `<div class="modal-empty">Не удалось загрузить варианты</div>`;
+                console.error('openEditor:', err);
+                body.innerHTML = `<div class="modal-empty">Не удалось загрузить варианты (${err.message || 'network'})</div>`;
             }
         }
 
@@ -1596,100 +1631,86 @@
             document.getElementById('modal-overlay').classList.remove('active');
             editingContext = null;
         }
-        document.getElementById('modal-close').addEventListener('click', closeModal);
-        document.getElementById('modal-overlay').addEventListener('click', (e) => {
-            if (e.target.id === 'modal-overlay') closeModal();
-        });
 
-        async function replaceDish(newDish) {
+        async function replaceDish(newName) {
             if (!editingContext || !state.lastResult) return;
-            const { category, currentName } = editingContext;
-            const items = state.lastResult.items;
-            const target = items.find(i => i.category === category && i.name === currentName);
-            if (!target) { closeModal(); return; }
-            const packages = target.packages || 1;
-            target.name = newDish.name;
-            target.cost_per_unit = newDish.price_per_unit;
-            target.unit = newDish.unit;
-            target.package_size = newDish.package_size;
-            target.total_price = Math.round(packages * newDish.price_per_unit * 100) / 100;
-            const total = items.reduce((s, i) => s + i.total_price, 0);
-            state.lastResult.total_cost = Math.round(total * 100) / 100;
-            state.lastResult.is_within_budget = total <= state.lastResult.budget;
-            state.lastResult.remaining = Math.max(0, state.lastResult.budget - total);
-            state.lastResult.shortfall = Math.max(0, total - state.lastResult.budget);
-            state.lastResult.price_per_guest = Math.round(total / Math.max(1, state.lastResult.total_guests));
-            closeModal();
-            renderResult(state.lastResult);
-            showToast('✓ Блюдо заменено');
-        }
+            const { idx } = editingContext;
+            const scenarioForApi = (state.eventId === 'SC100') ? 'SC100' : 'SC101';
 
-        /* ============ РАСШИРИТЬ ============ */
-        async function expandMenu() {
-            if (state.isCalculating || !state.lastResult || !state.lastPayload) return;
-            state.isCalculating = true;
-            showScreen('screen-loading');
             try {
-                const res = await fetch(`${API_URL}/expand`, {
-                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                const res = await fetch(`${API_URL}/replace`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        scenario_id: state.eventId,
-                        adults: state.adults,
-                        hours: state.hours, budget: state.customBudget || state.budget,
-                        preferences: state.prefs,
-                        current_items: state.lastResult.items,
+                        scenario_id: scenarioForApi,
+                        items: state.lastResult.items,
+                        index: idx,
+                        new_name: newName,
                     }),
                 });
                 if (!res.ok) throw new Error(`HTTP ${res.status}`);
                 const data = await res.json();
-                const before = state.lastResult.items.length;
-                const after = data.items.length;
-                state.lastResult = data;
-                state.isCalculating = false;
-                renderResult(data);
-                showScreen('screen-result');
-                if (after > before) showToast('✨ Меню расширено');
-                else showToast('Нечего добавить в остаток бюджета');
-            } catch (err) {
-                state.isCalculating = false;
+
+                state.lastResult.items = data.items;
+                state.lastResult.total_cost = data.total_cost;
+                state.lastResult.is_within_budget = data.total_cost <= state.lastResult.budget;
+                state.lastResult.remaining = Math.max(0, state.lastResult.budget - data.total_cost);
+                state.lastResult.shortfall = Math.max(0, data.total_cost - state.lastResult.budget);
+                state.lastResult.price_per_guest = Math.round(
+                    data.total_cost / Math.max(1, state.lastResult.total_guests)
+                );
+
+                closeModal();
                 renderResult(state.lastResult);
-                showScreen('screen-result');
-                showToast('Не удалось расширить меню');
+                showToast('✓ Блюдо заменено');
+            } catch (err) {
+                console.error('replaceDish:', err);
+                closeModal();
+                showToast('Не удалось заменить блюдо');
             }
         }
 
+        /* ============================================================
+           БЮДЖЕТ (увеличение локально)
+        ============================================================ */
         function openBudgetModal() {
+            if (!state.lastResult) return;
             const overlay = document.getElementById('modal-overlay');
             const title = document.getElementById('modal-title');
             const body = document.getElementById('modal-body');
             const r = state.lastResult;
             const shortfall = Math.max(0, r.total_cost - r.budget);
             const minAdd = Math.max(500, Math.ceil(shortfall / 500) * 500);
+
             title.textContent = '💰 Увеличить бюджет';
             body.innerHTML = `
-                <div class="modal-info">Текущий бюджет<strong>${formatMoney(r.budget)}</strong></div>
-                <p class="modal-hint">Меню: ${formatMoney(r.total_cost)}<br>Нужно добавить минимум: <b>${formatMoney(minAdd)}</b></p>
-                <div style="margin-bottom:10px;">
-                    <label style="font-size:13px;color:var(--text-muted);display:block;margin-bottom:6px;">Сколько готовы добавить?</label>
-                    <input type="number" inputmode="numeric" class="budget-input" id="add-budget-input" value="${minAdd}" min="500" step="500">
-                </div>
-                <div style="display:flex;gap:8px;margin-bottom:16px;">
-                    <button type="button" class="budget-btn" data-add="1000" style="flex:1;padding:12px 8px;font-size:14px;">+1 000</button>
-                    <button type="button" class="budget-btn" data-add="5000" style="flex:1;padding:12px 8px;font-size:14px;">+5 000</button>
-                    <button type="button" class="budget-btn" data-add="10000" style="flex:1;padding:12px 8px;font-size:14px;">+10 000</button>
-                </div>
-                <div class="modal-actions">
-                    <button class="btn btn-secondary" id="modal-cancel">Отмена</button>
-                    <button class="btn btn-primary" id="modal-apply">Применить</button>
-                </div>`;
+    <div class="modal-info">Текущий бюджет<strong>${formatMoney(r.budget)}</strong></div>
+    <p class="modal-hint">Меню: ${formatMoney(r.total_cost)}<br>Нужно добавить минимум: <b>${formatMoney(minAdd)}</b></p>
+    <div style="margin-bottom:10px;">
+      <label style="font-size:13px;color:var(--text-muted);display:block;margin-bottom:6px;">Сколько готовы добавить?</label>
+      <input type="number" inputmode="numeric" class="budget-input" id="add-budget-input" value="${minAdd}" min="500" step="500">
+    </div>
+    <div style="display:flex;gap:8px;margin-bottom:16px;">
+      <button type="button" class="budget-btn" data-add="1000" style="flex:1;padding:12px 8px;font-size:14px;">+1 000</button>
+      <button type="button" class="budget-btn" data-add="5000" style="flex:1;padding:12px 8px;font-size:14px;">+5 000</button>
+      <button type="button" class="budget-btn" data-add="10000" style="flex:1;padding:12px 8px;font-size:14px;">+10 000</button>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" id="modal-cancel">Отмена</button>
+      <button class="btn btn-primary" id="modal-apply">Применить</button>
+    </div>`;
             overlay.classList.add('active');
+
             const input = document.getElementById('add-budget-input');
             body.querySelectorAll('[data-add]').forEach(btn => {
-                btn.addEventListener('click', () => { input.value = parseInt(btn.dataset.add, 10); input.focus(); });
+                btn.addEventListener('click', () => {
+                    input.value = parseInt(btn.dataset.add, 10);
+                    input.focus();
+                });
             });
             document.getElementById('modal-cancel').onclick = closeModal;
             document.getElementById('modal-apply').onclick = () => {
-                let addAmount = parseInt(input.value, 10);
+                const addAmount = parseInt(input.value, 10);
                 if (isNaN(addAmount) || addAmount < 500) { showToast('Минимум 500 ₽'); return; }
                 const newBudget = r.budget + addAmount;
                 state.budget = newBudget;
@@ -1704,14 +1725,31 @@
             };
         }
 
+        /* ============================================================
+           REROLL
+        ============================================================ */
         async function reroll() {
-            if (state.isCalculating || !state.lastPayload) return;
+            if (state.isCalculating) return;
+            if (!state.eventId) return;
+
             state.isCalculating = true;
             showScreen('screen-loading');
+
+            const payload = {
+                scenario_id: state.eventId,
+                adults: state.adults,
+                children: 0,
+                hours: state.hours,
+                budget: state.customBudget || state.budget,
+                preferences: state.prefs.length ? state.prefs : ['auto'],
+                alcohol: false,
+            };
+
             try {
                 const res = await fetch(`${API_URL}/reroll`, {
-                    method: 'POST', headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(state.lastPayload),
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload),
                 });
                 if (!res.ok) throw new Error(`HTTP ${res.status}`);
                 const data = await res.json();
@@ -1721,6 +1759,7 @@
                 showScreen('screen-result');
                 showToast('🎲 Новое меню готово');
             } catch (err) {
+                console.error('reroll:', err);
                 state.isCalculating = false;
                 renderResult(state.lastResult);
                 showScreen('screen-result');
@@ -1728,14 +1767,10 @@
             }
         }
 
-        /* ============ ОТПРАВКА ЗАЯВКИ ============ */
-        document.getElementById('btn-send-request').addEventListener('click', () => {
-            showScreen('screen-send-request');
-        });
-        document.getElementById('back-from-request').addEventListener('click', () => showScreen('screen-result'));
-        document.getElementById('btn-close-success').addEventListener('click', () => showScreen('screen-result'));
-
-        document.getElementById('btn-submit-request').addEventListener('click', async () => {
+        /* ============================================================
+           ОТПРАВКА ЗАЯВКИ
+        ============================================================ */
+        async function submitRequest() {
             const name = document.getElementById('req-name').value.trim();
             const phone = document.getElementById('req-phone').value.trim();
             const comment = document.getElementById('req-comment').value.trim();
@@ -1751,112 +1786,193 @@
             btn.textContent = 'Отправляем…';
 
             const scenarioObj = EVENTS.find(e => e.id === state.eventId) || {};
+            const r = state.lastResult;
+
             const payload = {
                 client_name: name,
                 client_phone: phone,
-                client_email: "",
-                client_comment: `Дата: ${state.eventDate || 'не указана'}. ${comment}`,
+                client_email: '',
+                client_comment: comment || 'без комментария',
+                event_date: state.eventDate || '',
+                consent: !!agree,
                 scenario_id: state.eventId,
                 scenario_name: scenarioObj.label || '',
-                adults: state.adults,
-                hours: state.hours,
-                budget: state.customBudget || state.budget,
-                total_cost: state.lastResult.total_cost,
-                price_per_guest: state.lastResult.price_per_guest || 0,
-                items: state.lastResult.items,
+                adults: r.adults || state.adults,
+                children: r.children || 0,
+                hours: r.hours || state.hours,
+                budget: r.budget,
+                total_cost: r.total_cost,
+                price_per_guest: r.price_per_guest || 0,
+                items: r.items,
             };
 
             try {
                 const res = await fetch(`${API_URL}/send_request`, {
-                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload),
                 });
                 if (!res.ok) throw new Error(`HTTP ${res.status}`);
-                const data = await res.json();
-                document.getElementById('success-text').textContent = `Заявка №${data.request_id} принята.`;
+                await res.json();
                 showScreen('screen-send-success');
             } catch (err) {
-                console.error(err);
+                console.error('submitRequest:', err);
                 btn.disabled = false;
                 btn.textContent = 'Отправить заявку';
                 showToast('Не удалось отправить. Проверьте интернет.');
             }
-        });
+        }
 
-        /* ============ СЧЁТЧИКИ ============ */
-        function setupCounter(name, min, max, stateKey) {
-            const minus = document.getElementById(`${name}-minus`);
-            const plus = document.getElementById(`${name}-plus`);
-            const input = document.getElementById(`${name}-input`);
+        /* ============================================================
+           СЧЁТЧИК ГОСТЕЙ
+        ============================================================ */
+        function setupCounter() {
+            const minus = document.getElementById('adults-minus');
+            const plus = document.getElementById('adults-plus');
+            const input = document.getElementById('adults-input');
             if (!minus || !plus || !input) return;
 
-            if (!minus.dataset.listenerAdded) {
-                minus.addEventListener('click', () => {
-                    state[stateKey] = clamp(state[stateKey] - 1, min, max);
-                    updateCounterUI(name, min, max, stateKey);
-                });
-                plus.addEventListener('click', () => {
-                    state[stateKey] = clamp(state[stateKey] + 1, min, max);
-                    updateCounterUI(name, min, max, stateKey);
-                });
-                input.addEventListener('input', () => {
-                    let v = parseInt(input.value, 10);
-                    if (isNaN(v)) return;
-                    state[stateKey] = v;
-                    updateCounterUI(name, min, max, stateKey, true);
-                });
-                input.addEventListener('blur', () => {
-                    let v = parseInt(input.value, 10);
-                    if (isNaN(v)) v = min;
-                    v = clamp(v, min, max);
-                    state[stateKey] = v;
-                    updateCounterUI(name, min, max, stateKey);
-                });
-                minus.dataset.listenerAdded = '1';
-                plus.dataset.listenerAdded = '1';
-                input.dataset.listenerAdded = '1';
+            function sync() {
+                input.value = state.adults;
+                minus.disabled = state.adults <= MIN_ADULTS;
+                plus.disabled = state.adults >= MAX_ADULTS;
+                updateTotalGuests();
+                updateSummary();
+                saveState();
             }
-            updateCounterUI(name, min, max, stateKey);
+
+            minus.addEventListener('click', () => {
+                state.adults = clamp(state.adults - 1, MIN_ADULTS, MAX_ADULTS);
+                sync();
+            });
+            plus.addEventListener('click', () => {
+                state.adults = clamp(state.adults + 1, MIN_ADULTS, MAX_ADULTS);
+                sync();
+            });
+            input.addEventListener('input', () => {
+                const v = parseInt(input.value, 10);
+                if (isNaN(v)) return;
+                state.adults = v;   // не clamp-им на лету, чтобы не мешать набору
+                updateTotalGuests();
+                updateSummary();
+                saveState();
+            });
+            input.addEventListener('blur', () => {
+                const v = parseInt(input.value, 10);
+                state.adults = clamp(isNaN(v) ? MIN_ADULTS : v, MIN_ADULTS, MAX_ADULTS);
+                sync();
+            });
+
+            sync();
         }
 
-        function updateCounterUI(name, min, max, stateKey, skipInput) {
-            const minus = document.getElementById(`${name}-minus`);
-            const plus = document.getElementById(`${name}-plus`);
-            const input = document.getElementById(`${name}-input`);
-            if (input && !skipInput) input.value = state[stateKey];
-            if (minus) minus.disabled = state[stateKey] <= min;
-            if (plus) plus.disabled = state[stateKey] >= max;
-            updateTotalGuests();
-            updateSummary();
-            saveState();
+        /* ============================================================
+           SHARE / COPY
+        ============================================================ */
+        function buildShareText() {
+            if (!state.lastResult) return '';
+            const r = state.lastResult;
+            let t = `Мой расчёт на мероприятие в Хватит всем 🥂\n\n`;
+            t += `Гостей: ${r.adults}\n`;
+            t += `Бюджет: ${formatMoney(r.budget)}\n`;
+            t += `Итого: ${formatMoney(r.total_cost)}\n`;
+            t += `На человека: ${formatMoney(r.price_per_guest)}\n`;
+            t += `Цена без учёта обслуживания · база «Вкусно»\n\nСписок:\n`;
+
+            const cats = {};
+            (r.items || []).forEach(i => {
+                const c = i.category || 'Прочее';
+                (cats[c] = cats[c] || []).push(i);
+            });
+            for (const [cat, items] of Object.entries(cats)) {
+                t += `\n${cat}\n`;
+                items.forEach(i => {
+                    const qty = i.packages > 1
+                        ? `${i.packages} × ${i.package_size} ${i.unit}`
+                        : `${i.final_amount} ${i.unit}`;
+                    t += `• ${i.name} — ${qty} — ${formatMoney(i.total_price)}\n`;
+                });
+            }
+            t += `\nhttps://hvatitfrontend.onrender.com`;
+            return t;
         }
 
-        // ====== ИНИЦИАЛИЗАЦИЯ ======
-        document.getElementById('event-date').addEventListener('change', (e) => {
-            state.eventDate = e.target.value;
-            updateSummary();
-            saveState();
-        });
+        async function shareResult() {
+            const text = buildShareText();
+            if (!text) return;
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: 'Хватит всем',
+                        text,
+                        url: 'https://hvatitfrontend.onrender.com',
+                    });
+                } catch (e) { }
+            } else {
+                copyResult();
+            }
+        }
 
+        async function copyResult() {
+            const text = buildShareText();
+            if (!text) return;
+            try {
+                if (navigator.clipboard && window.isSecureContext) {
+                    await navigator.clipboard.writeText(text);
+                } else {
+                    const ta = document.createElement('textarea');
+                    ta.value = text;
+                    ta.style.position = 'fixed';
+                    ta.style.left = '-9999px';
+                    document.body.appendChild(ta);
+                    ta.select();
+                    document.execCommand('copy');
+                    ta.remove();
+                }
+                showToast('✓ Список скопирован');
+            } catch (e) {
+                showToast('Не удалось скопировать');
+            }
+        }
+
+        /* ============================================================
+           НАВЕШИВАНИЕ ОБРАБОТЧИКОВ
+        ============================================================ */
         document.getElementById('btn-next-event').addEventListener('click', () => showScreen('screen-guests'));
-        document.getElementById('btn-next-guests').addEventListener('click', () => showScreen('screen-duration'));
+        document.getElementById('btn-next-guests').addEventListener('click', () => {
+            if (state.adults < MIN_ADULTS) { showToast(`Минимум ${MIN_ADULTS} гостей`); return; }
+            showScreen('screen-duration');
+        });
         document.getElementById('btn-next-duration').addEventListener('click', () => showScreen('screen-budget'));
         document.getElementById('btn-next-budget').addEventListener('click', () => showScreen('screen-prefs'));
         document.getElementById('btn-calculate').addEventListener('click', calculate);
         document.getElementById('btn-back').addEventListener('click', () => showScreen('screen-prefs'));
-
+        document.getElementById('btn-reroll').addEventListener('click', reroll);
+        document.getElementById('btn-increase').addEventListener('click', openBudgetModal);
+        document.getElementById('btn-share').addEventListener('click', shareResult);
+        document.getElementById('btn-copy').addEventListener('click', copyResult);
+        document.getElementById('btn-send-request').addEventListener('click', () => showScreen('screen-send-request'));
+        document.getElementById('back-from-request').addEventListener('click', () => showScreen('screen-result'));
+        document.getElementById('btn-close-success').addEventListener('click', () => showScreen('screen-result'));
+        document.getElementById('btn-submit-request').addEventListener('click', submitRequest);
         document.getElementById('btn-restart').addEventListener('click', () => {
             try { sessionStorage.removeItem(STORAGE_KEY); } catch (e) { }
             location.reload();
         });
-
-        document.getElementById('btn-reroll').addEventListener('click', reroll);
-        document.getElementById('btn-expand').addEventListener('click', expandMenu);
-        document.getElementById('btn-increase').addEventListener('click', openBudgetModal);
+        document.getElementById('modal-close').addEventListener('click', closeModal);
+        document.getElementById('modal-overlay').addEventListener('click', (e) => {
+            if (e.target.id === 'modal-overlay') closeModal();
+        });
 
         document.querySelectorAll('.back-btn').forEach(btn => {
             const target = btn.dataset.back;
             if (target) btn.addEventListener('click', () => showScreen(target));
+        });
+
+        document.getElementById('event-date').addEventListener('change', (e) => {
+            state.eventDate = e.target.value;
+            updateSummary();
+            saveState();
         });
 
         document.getElementById('custom-budget-input').addEventListener('input', (e) => {
@@ -1868,71 +1984,27 @@
             saveState();
         });
 
-        function buildShareText() {
-            if (!state.lastResult) return '';
-            const r = state.lastResult;
-            let t = `Мой расчёт на мероприятие в Хватит всем 🥂\n\n`;
-            t += `Гостей: ${getTotalGuests()}\n`;
-            t += `Бюджет: ${formatMoney(state.customBudget || state.budget)}\n`;
-            t += `Итого: ${formatMoney(r.total_cost)}\n`;
-            t += `На человека: ${formatMoney(r.price_per_guest)}\n`;
-            t += `Цена без учёта обслуживания · база «Вкусно»\n\nСписок:\n`;
-            const cats = {};
-            (r.items || []).forEach(i => { (cats[i.category] = cats[i.category] || []).push(i); });
-            for (const [cat, items] of Object.entries(cats)) {
-                t += `\n${cat}\n`;
-                items.forEach(i => {
-                    const qty = i.packages > 1 ? `${i.packages} × ${i.package_size} ${i.unit}` : `${i.final_amount} ${i.unit}`;
-                    t += `• ${i.name} — ${qty} — ${formatMoney(i.total_price)}\n`;
-                });
-            }
-            t += `\nhttps://hvatitfrontend.onrender.com`;
-            return t;
-        }
-
-        document.getElementById('btn-share').addEventListener('click', async () => {
-            const text = buildShareText();
-            if (!text) return;
-            if (navigator.share) {
-                try { await navigator.share({ title: 'Хватит всем', text, url: 'https://hvatitfrontend.onrender.com' }); } catch (e) { }
-            } else {
-                try { await navigator.clipboard.writeText(text); showToast('✓ Скопировано'); } catch { showToast('Не удалось скопировать'); }
-            }
-        });
-
-        document.getElementById('btn-copy').addEventListener('click', async () => {
-            const text = buildShareText();
-            if (!text) return;
-            try {
-                if (navigator.clipboard && window.isSecureContext) await navigator.clipboard.writeText(text);
-                else {
-                    const ta = document.createElement('textarea');
-                    ta.value = text; ta.style.position = 'fixed'; ta.style.left = '-9999px';
-                    document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
-                }
-                showToast('✓ Список скопирован');
-            } catch { showToast('Не удалось скопировать'); }
-        });
-
-        document.addEventListener('visibilitychange', () => {
-            if (document.visibilityState === 'hidden') saveState();
-        });
-        window.addEventListener('beforeunload', saveState);
-
         ['req-name', 'req-phone', 'req-comment'].forEach(id => {
             const el = document.getElementById(id);
             if (el) el.addEventListener('input', saveState);
         });
         document.getElementById('req-agree').addEventListener('change', saveState);
 
-        // ====== ЗАПУСК ======
-        const savedScreen = restoreStateData();
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'hidden') saveState();
+        });
+        window.addEventListener('beforeunload', saveState);
+
+        /* ============================================================
+           ЗАПУСК
+        ============================================================ */
+        const savedScreen = restoreState();
 
         renderEvents();
         renderDurations();
         renderBudgets();
         renderPrefs();
-        setupCounter('adults', 12, 500, 'adults');
+        setupCounter();
         updateTotalGuests();
         updateSummary();
 
@@ -1953,7 +2025,7 @@
             renderResult(state.lastResult);
         }
 
-        if (savedScreen && savedScreen !== 'screen-event') {
+        if (savedScreen && savedScreen !== 'screen-event' && document.getElementById(savedScreen)) {
             showScreen(savedScreen);
         } else {
             saveState();
