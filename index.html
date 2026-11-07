@@ -879,7 +879,6 @@
             box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
         }
 
-        /* Нормализация внутренних псевдо-элементов даты в WebKit */
         .date-picker-input::-webkit-calendar-picker-indicator {
             cursor: pointer;
             opacity: 0.7;
@@ -1088,434 +1087,449 @@
                     Цена без учёта обслуживания · база «Вкусно»
                 </div>
             </div>
+            <button class="btn btn-primary" id="btn-calculate">Рассчитать</button>
+        </div>
 
-            <!-- ЭКРАН 6: Загрузка -->
-            <div class="screen" id="screen-loading">
-                <div class="loader">⏳ Считаем ваш стол…</div>
+        <!-- ЭКРАН 6: Загрузка -->
+        <div class="screen" id="screen-loading">
+            <div class="loader">⏳ Считаем ваш стол…</div>
+        </div>
+
+        <!-- ЭКРАН 7: Результат -->
+        <div class="screen" id="screen-result">
+            <div class="card">
+                <div class="result-header">
+                    <h2 style="font-size:24px;">🥂 Ваш стол готов!</h2>
+                    <p style="color:var(--text-muted); font-size:14px;" id="result-subtitle"></p>
+                    <div class="result-total" id="result-total">0 ₽</div>
+                    <div class="result-per-guest" id="result-per-guest"></div>
+                    <div id="result-badge-container" style="margin-top:12px;"></div>
+                    <p style="margin-top:12px; font-size:15px; font-weight:600;" id="result-remaining"></p>
+                    <p style="margin-top:8px; font-size:12px; color:var(--text-muted);">
+                        Цена без учёта обслуживания. Расчёт выполнен по базе «Вкусно».
+                    </p>
+                </div>
+                <div class="pulse-hint" id="pulse-hint">
+                    💡 Нажмите <b>✏️</b> рядом с блюдом, чтобы заменить его на другое
+                </div>
+
+                <div id="result-items"></div>
+                <div class="total-row">
+                    <span>Итого:</span>
+                    <span id="result-total-bottom">0 ₽</span>
+                </div>
             </div>
 
-            <!-- ЭКРАН 7: Результат -->
-            <div class="screen" id="screen-result">
-                <div class="card">
-                    <div class="result-header">
-                        <h2 style="font-size:24px;">🥂 Ваш стол готов!</h2>
-                        <p style="color:var(--text-muted); font-size:14px;" id="result-subtitle"></p>
-                        <div class="result-total" id="result-total">0 ₽</div>
-                        <div class="result-per-guest" id="result-per-guest"></div>
-                        <div id="result-badge-container" style="margin-top:12px;"></div>
-                        <p style="margin-top:12px; font-size:15px; font-weight:600;" id="result-remaining"></p>
-                        <p style="margin-top:8px; font-size:12px; color:var(--text-muted);">
-                            Цена без учёта обслуживания. Расчёт выполнен по базе «Вкусно».
-                        </p>
-                    </div>
-                    <div class="pulse-hint" id="pulse-hint">
-                        💡 Нажмите <b>✏️</b> рядом с блюдом, чтобы заменить его на другое
-                    </div>
+            <button class="btn btn-primary" id="btn-expand" style="display:none;">✨ Расширить меню</button>
+            <button class="btn btn-primary" id="btn-increase" style="display:none;">💰 Увеличить бюджет</button>
+            <button class="btn btn-secondary" id="btn-reroll" style="display:none;">🎲 Другое меню</button>
+            <button class="btn btn-primary" id="btn-send-request"
+                style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">📩 Отправить заявку</button>
 
-                    <div id="result-items"></div>
-                    <div class="total-row">
-                        <span>Итого:</span>
-                        <span id="result-total-bottom">0 ₽</span>
-                    </div>
-                </div>
+            <div class="btn-row">
+                <button class="btn btn-secondary" id="btn-share">📤 Поделиться</button>
+                <button class="btn btn-secondary" id="btn-copy">📋 Скопировать</button>
+            </div>
+            <button class="btn btn-primary" id="btn-back">← Изменить параметры</button>
+            <button class="btn btn-secondary" id="btn-restart">🔄 Новый расчёт</button>
+            <p style="text-align:center; font-size:12px; color:var(--text-muted); padding:8px;">
+                Все позиции — на базе «Вкусно». Цена без учёта обслуживания.
+            </p>
+        </div>
 
-                <button class="btn btn-primary" id="btn-expand" style="display:none;">✨ Расширить меню</button>
-                <button class="btn btn-primary" id="btn-increase" style="display:none;">💰 Увеличить бюджет</button>
-                <button class="btn btn-secondary" id="btn-reroll" style="display:none;">🎲 Другое меню</button>
-                <button class="btn btn-primary" id="btn-send-request"
-                    style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">📩 Отправить заявку</button>
-
-                <div class="btn-row">
-                    <button class="btn btn-secondary" id="btn-share">📤 Поделиться</button>
-                    <button class="btn btn-secondary" id="btn-copy">📋 Скопировать</button>
-                </div>
-                <button class="btn btn-primary" id="btn-back">← Изменить параметры</button>
-                <button class="btn btn-secondary" id="btn-restart">🔄 Новый расчёт</button>
-                <p style="text-align:center; font-size:12px; color:var(--text-muted); padding:8px;">
-                    Все позиции — на базе «Вкусно». Цена без учёта обслуживания.
+        <!-- ЭКРАН 8: Форма заявки -->
+        <div class="screen" id="screen-send-request">
+            <div class="top-bar">
+                <button class="back-btn" id="back-from-request">← Назад</button>
+            </div>
+            <div class="card">
+                <div class="card-title">📩 Отправить заявку</div>
+                <p style="font-size:14px; color:var(--text-muted); margin:8px 0 16px;">
+                    Оставьте контакты — мы свяжемся с вами в течение 15 минут.
                 </p>
-
-                <!-- ЭКРАН 8: Форма заявки -->
-                <div class="screen" id="screen-send-request">
-                    <div class="top-bar">
-                        <button class="back-btn" id="back-from-request">← Назад</button>
-                    </div>
-                    <div class="card">
-                        <div class="card-title">📩 Отправить заявку</div>
-                        <p style="font-size:14px; color:var(--text-muted); margin:8px 0 16px;">
-                            Оставьте контакты — мы свяжемся с вами в течение 15 минут.
-                        </p>
-                        <div style="margin-bottom:12px;">
-                            <label style="font-size:13px;color:var(--text-muted);display:block;margin-bottom:6px;">Имя
-                                *</label>
-                            <input type="text" class="budget-input" id="req-name" placeholder="Ваше имя">
-                        </div>
-                        <div style="margin-bottom:12px;">
-                            <label
-                                style="font-size:13px;color:var(--text-muted);display:block;margin-bottom:6px;">Телефон
-                                *</label>
-                            <input type="tel" class="budget-input" id="req-phone" placeholder="+7 999 123-45-67"
-                                required>
-                        </div>
-                        <div style="margin-bottom:16px;">
-                            <label
-                                style="font-size:13px;color:var(--text-muted);display:block;margin-bottom:6px;">Комментарий</label>
-                            <textarea class="budget-input" id="req-comment" rows="3"
-                                placeholder="Пожелания..."></textarea>
-                        </div>
-
-                        <div class="checkbox-row">
-                            <input type="checkbox" id="req-agree">
-                            <label for="req-agree">
-                                Я согласен на <a href="/privacy.html" target="_blank" rel="noopener noreferrer"
-                                    onclick="event.stopPropagation()">обработку и передачу персональных данных</a>
-                            </label>
-                        </div>
-
-                        <button class="btn btn-primary" id="btn-submit-request">Отправить заявку</button>
-                    </div>
+                <div style="margin-bottom:12px;">
+                    <label style="font-size:13px;color:var(--text-muted);display:block;margin-bottom:6px;">Имя *</label>
+                    <input type="text" class="budget-input" id="req-name" placeholder="Ваше имя">
+                </div>
+                <div style="margin-bottom:12px;">
+                    <label style="font-size:13px;color:var(--text-muted);display:block;margin-bottom:6px;">Телефон
+                        *</label>
+                    <input type="tel" class="budget-input" id="req-phone" placeholder="+7 999 123-45-67" required>
+                </div>
+                <div style="margin-bottom:16px;">
+                    <label
+                        style="font-size:13px;color:var(--text-muted);display:block;margin-bottom:6px;">Комментарий</label>
+                    <textarea class="budget-input" id="req-comment" rows="3" placeholder="Пожелания..."></textarea>
                 </div>
 
-                <!-- ЭКРАН 9: Успех -->
-                <div class="screen" id="screen-send-success">
-                    <div class="card" style="text-align:center; padding:40px 24px;">
-                        <div style="font-size:64px; margin-bottom:16px;">✅</div>
-                        <h2 style="margin-bottom:12px;">Спасибо!</h2>
-                        <p style="color:var(--text-muted); margin-bottom:8px;" id="success-text">Ваша заявка принята.
-                        </p>
-                        <p style="color:var(--text-muted); font-size:13px;">Мы свяжемся с вами в течение 15 минут.</p>
-                    </div>
-                    <button class="btn btn-secondary" id="btn-close-success">← Вернуться к расчёту</button>
+                <div class="checkbox-row">
+                    <input type="checkbox" id="req-agree">
+                    <label for="req-agree">
+                        Я согласен на <a href="/privacy.html" target="_blank" rel="noopener noreferrer"
+                            onclick="event.stopPropagation()">обработку и передачу персональных данных</a>
+                    </label>
                 </div>
+
+                <button class="btn btn-primary" id="btn-submit-request">Отправить заявку</button>
             </div>
+        </div>
 
-            <!-- Модалка -->
-            <div class="modal-overlay" id="modal-overlay">
-                <div class="modal">
-                    <div class="modal-header">
-                        <div class="modal-title" id="modal-title">Заменить блюдо</div>
-                        <button class="modal-close" id="modal-close">✕</button>
-                    </div>
-                    <div class="modal-body" id="modal-body"></div>
-                </div>
+        <!-- ЭКРАН 9: Успех -->
+        <div class="screen" id="screen-send-success">
+            <div class="card" style="text-align:center; padding:40px 24px;">
+                <div style="font-size:64px; margin-bottom:16px;">✅</div>
+                <h2 style="margin-bottom:12px;">Спасибо!</h2>
+                <p style="color:var(--text-muted); margin-bottom:8px;" id="success-text">Ваша заявка принята.</p>
+                <p style="color:var(--text-muted); font-size:13px;">Мы свяжемся с вами в течение 15 минут.</p>
             </div>
+            <button class="btn btn-secondary" id="btn-close-success">← Вернуться к расчёту</button>
+        </div>
+    </div>
 
-            <div class="toast" id="toast"></div>
+    <!-- Модалка -->
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-title" id="modal-title">Заменить блюдо</div>
+                <button class="modal-close" id="modal-close">✕</button>
+            </div>
+            <div class="modal-body" id="modal-body"></div>
+        </div>
+    </div>
 
-            <script>
-                const API_URL = 'https://hvatitvsem.onrender.com';
-                const STORAGE_KEY = 'hvatit_state_v1';   // ← ключ для sessionStorage
+    <div class="toast" id="toast"></div>
 
-                const EVENTS = [
-                    { id: 'SC101', icon: '🎂', label: 'День рождения', desc: 'Банкет с закусками и горячим', random: true },
-                    { id: 'SC102', icon: '🏢', label: 'Корпоратив', desc: 'Банкет с закусками и горячим', random: true },
-                    { id: 'SC103', icon: '💍', label: 'Свадьба', desc: 'Расширенный банкетный стол', random: true },
-                    { id: 'SC104', icon: '🎉', label: 'Юбилей', desc: 'Праздничный банкет', random: true },
-                    { id: 'SC100', icon: '🍢', label: 'Фуршет', desc: 'Канапе, закуски, напитки', random: true },
-                    { id: 'SC105', icon: '✨', label: 'Другое', desc: 'Настроим под вас', random: true },
-                ];
-                const DURATIONS = [
-                    { value: 2, label: '⏱ 1–2 часа' },
-                    { value: 4, label: '⏱ 3–4 часа' },
-                    { value: 6, label: '⏱ 5–6 часов' },
-                    { value: 8, label: '⏱ 7–8 часов' },
-                ];
-                const BUDGETS = [10000, 20000, 30000, 50000, 100000];
-                const PREFS = [
-                    { id: 'meat', icon: '🥩', label: 'Мясо' },
-                    { id: 'fish', icon: '🐟', label: 'Рыба' },
-                    { id: 'veg', icon: '🥬', label: 'Вегетарианское' },
-                    { id: 'auto', icon: '✨', label: 'Авто-подбор' },
-                ];
+    <script>
+        const API_URL = 'https://hvatitvsem.onrender.com';
+        const STORAGE_KEY = 'hvatit_state_v1';
 
-                const state = {
-                    eventId: null,
-                    isRandom: false,
-                    adults: 12,
-                    hours: 4,
-                    eventDate: '',
-                    budget: 20000,
-                    customBudget: null,
-                    prefs: [],
-                    lastResult: null,
-                    lastPayload: null,
-                    isCalculating: false,
+        const EVENTS = [
+            { id: 'SC101', icon: '🎂', label: 'День рождения', desc: 'Банкет с закусками и горячим', random: true },
+            { id: 'SC102', icon: '🏢', label: 'Корпоратив', desc: 'Банкет с закусками и горячим', random: true },
+            { id: 'SC103', icon: '💍', label: 'Свадьба', desc: 'Расширенный банкетный стол', random: true },
+            { id: 'SC104', icon: '🎉', label: 'Юбилей', desc: 'Праздничный банкет', random: true },
+            { id: 'SC100', icon: '🍢', label: 'Фуршет', desc: 'Канапе, закуски, напитки', random: true },
+            { id: 'SC105', icon: '✨', label: 'Другое', desc: 'Настроим под вас', random: true },
+        ];
+        const DURATIONS = [
+            { value: 2, label: '⏱ 1–2 часа' },
+            { value: 4, label: '⏱ 3–4 часа' },
+            { value: 6, label: '⏱ 5–6 часов' },
+            { value: 8, label: '⏱ 7–8 часов' },
+        ];
+        const BUDGETS = [10000, 20000, 30000, 50000, 100000];
+        const PREFS = [
+            { id: 'meat', icon: '🥩', label: 'Мясо' },
+            { id: 'fish', icon: '🐟', label: 'Рыба' },
+            { id: 'veg', icon: '🥬', label: 'Вегетарианское' },
+            { id: 'auto', icon: '✨', label: 'Авто-подбор' },
+        ];
+
+        const state = {
+            eventId: null,
+            isRandom: false,
+            adults: 12,
+            hours: 4,
+            eventDate: '',
+            budget: 20000,
+            customBudget: null,
+            prefs: [],
+            lastResult: null,
+            lastPayload: null,
+            isCalculating: false,
+        };
+
+        function saveState() {
+            try {
+                const form = {
+                    name: document.getElementById('req-name')?.value || '',
+                    phone: document.getElementById('req-phone')?.value || '',
+                    comment: document.getElementById('req-comment')?.value || '',
+                    agree: document.getElementById('req-agree')?.checked || false,
                 };
+                const currentScreen = document.querySelector('.screen.active')?.id || 'screen-event';
+                sessionStorage.setItem(STORAGE_KEY, JSON.stringify({
+                    screen: currentScreen,
+                    eventId: state.eventId,
+                    isRandom: state.isRandom,
+                    adults: state.adults,
+                    hours: state.hours,
+                    eventDate: state.eventDate,
+                    budget: state.budget,
+                    customBudget: state.customBudget,
+                    prefs: state.prefs,
+                    lastResult: state.lastResult,
+                    lastPayload: state.lastPayload,
+                    form,
+                }));
+            } catch (e) { }
+        }
 
-                // ===== ФИКС БАГ 1: сохранение состояния между перезагрузками =====
-                function saveState() {
-                    try {
-                        const form = {
-                            name: document.getElementById('req-name')?.value || '',
-                            phone: document.getElementById('req-phone')?.value || '',
-                            comment: document.getElementById('req-comment')?.value || '',
-                            agree: document.getElementById('req-agree')?.checked || false,
-                        };
-                        const currentScreen = document.querySelector('.screen.active')?.id || 'screen-event';
-                        sessionStorage.setItem(STORAGE_KEY, JSON.stringify({
-                            screen: currentScreen,
-                            eventId: state.eventId,
-                            isRandom: state.isRandom,
-                            adults: state.adults,
-                            hours: state.hours,
-                            eventDate: state.eventDate,
-                            budget: state.budget,
-                            customBudget: state.customBudget,
-                            prefs: state.prefs,
-                            lastResult: state.lastResult,
-                            lastPayload: state.lastPayload,
-                            form,
-                        }));
-                    } catch (e) { }
+        function restoreStateData() {
+            try {
+                const saved = sessionStorage.getItem(STORAGE_KEY);
+                if (!saved) return null;
+                const s = JSON.parse(saved);
+                if (s.eventId) state.eventId = s.eventId;
+                if (typeof s.isRandom === 'boolean') state.isRandom = s.isRandom;
+                if (typeof s.adults === 'number') state.adults = s.adults;
+                if (typeof s.hours === 'number') state.hours = s.hours;
+                if (s.eventDate) state.eventDate = s.eventDate;
+                if (typeof s.budget === 'number') state.budget = s.budget;
+                if (s.customBudget !== undefined && s.customBudget !== null) state.customBudget = s.customBudget;
+                if (Array.isArray(s.prefs)) state.prefs = s.prefs;
+                if (s.lastResult) state.lastResult = s.lastResult;
+                if (s.lastPayload) state.lastPayload = s.lastPayload;
+                if (s.form) {
+                    const ni = document.getElementById('req-name');
+                    const pi = document.getElementById('req-phone');
+                    const ci = document.getElementById('req-comment');
+                    const ai = document.getElementById('req-agree');
+                    if (ni) ni.value = s.form.name || '';
+                    if (pi) pi.value = s.form.phone || '';
+                    if (ci) ci.value = s.form.comment || '';
+                    if (ai) ai.checked = !!s.form.agree;
                 }
+                return s.screen || null;
+            } catch (e) { return null; }
+        }
 
-                function restoreStateData() {
-                    try {
-                        const saved = sessionStorage.getItem(STORAGE_KEY);
-                        if (!saved) return null;
-                        const s = JSON.parse(saved);
-                        if (s.eventId) state.eventId = s.eventId;
-                        if (typeof s.isRandom === 'boolean') state.isRandom = s.isRandom;
-                        if (typeof s.adults === 'number') state.adults = s.adults;
-                        if (typeof s.hours === 'number') state.hours = s.hours;
-                        if (s.eventDate) state.eventDate = s.eventDate;
-                        if (typeof s.budget === 'number') state.budget = s.budget;
-                        if (s.customBudget !== undefined && s.customBudget !== null) state.customBudget = s.customBudget;
-                        if (Array.isArray(s.prefs)) state.prefs = s.prefs;
-                        if (s.lastResult) state.lastResult = s.lastResult;
-                        if (s.lastPayload) state.lastPayload = s.lastPayload;
-                        if (s.form) {
-                            const ni = document.getElementById('req-name');
-                            const pi = document.getElementById('req-phone');
-                            const ci = document.getElementById('req-comment');
-                            const ai = document.getElementById('req-agree');
-                            if (ni) ni.value = s.form.name || '';
-                            if (pi) pi.value = s.form.phone || '';
-                            if (ci) ci.value = s.form.comment || '';
-                            if (ai) ai.checked = !!s.form.agree;
-                        }
-                        return s.screen || null;
-                    } catch (e) { return null; }
-                }
+        function showScreen(id) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            const target = document.getElementById(id);
+            if (target) target.classList.add('active');
+            window.scrollTo(0, 0);
+            saveState();
+        }
 
-                function showScreen(id) {
-                    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-                    document.getElementById(id).classList.add('active');
-                    window.scrollTo(0, 0);
-                    saveState();
-                }
+        function formatMoney(n) { return Math.round(n).toLocaleString('ru-RU') + ' ₽'; }
+        function getTotalGuests() { return state.adults; }
+        function updateTotalGuests() {
+            const el = document.getElementById('total-guests');
+            if (el) el.textContent = getTotalGuests();
+        }
+        function showToast(text) {
+            const t = document.getElementById('toast');
+            if (!t) return;
+            t.textContent = text;
+            t.classList.add('show');
+            clearTimeout(showToast._timer);
+            showToast._timer = setTimeout(() => t.classList.remove('show'), 2200);
+        }
+        function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
+        function getCategoryStyle(cat) {
+            const c = (cat || '').toLowerCase();
+            if (c.includes('горяч') || c.includes('мясо')) return { cls: 'cat-hot', icon: '🥩' };
+            if (c.includes('салат')) return { cls: 'cat-salads', icon: '🥗' };
+            if (c.includes('закус') || c.includes('холодн')) return { cls: 'cat-snacks', icon: '🧀' };
+            if (c.includes('десерт') || c.includes('сладк')) return { cls: 'cat-dessert', icon: '🍰' };
+            if (c.includes('напит')) return { cls: 'cat-drinks', icon: '🥤' };
+            if (c.includes('хлеб')) return { cls: 'cat-bread', icon: '🍞' };
+            if (c.includes('гарнир') || c.includes('овощ')) return { cls: 'cat-garnish', icon: '🥔' };
+            return { cls: 'cat-default', icon: '🍽️' };
+        }
 
-                function formatMoney(n) { return Math.round(n).toLocaleString('ru-RU') + ' ₽'; }
-                function getTotalGuests() { return state.adults; }
-                function updateTotalGuests() { document.getElementById('total-guests').textContent = getTotalGuests(); }
-                function showToast(text) {
-                    const t = document.getElementById('toast');
-                    t.textContent = text;
-                    t.classList.add('show');
-                    clearTimeout(showToast._timer);
-                    showToast._timer = setTimeout(() => t.classList.remove('show'), 2200);
-                }
-                function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
-                function getCategoryStyle(cat) {
-                    const c = (cat || '').toLowerCase();
-                    if (c.includes('горяч') || c.includes('мясо')) return { cls: 'cat-hot', icon: '🥩' };
-                    if (c.includes('салат')) return { cls: 'cat-salads', icon: '🥗' };
-                    if (c.includes('закус') || c.includes('холодн')) return { cls: 'cat-snacks', icon: '🧀' };
-                    if (c.includes('десерт') || c.includes('сладк')) return { cls: 'cat-dessert', icon: '🍰' };
-                    if (c.includes('напит')) return { cls: 'cat-drinks', icon: '🥤' };
-                    if (c.includes('хлеб')) return { cls: 'cat-bread', icon: '🍞' };
-                    if (c.includes('гарнир') || c.includes('овощ')) return { cls: 'cat-garnish', icon: '🥔' };
-                    return { cls: 'cat-default', icon: '🍽️' };
-                }
-
-                function renderEvents() {
-                    const grid = document.getElementById('event-grid');
-                    grid.innerHTML = EVENTS.map(e => `
+        function renderEvents() {
+            const grid = document.getElementById('event-grid');
+            if (!grid) return;
+            grid.innerHTML = EVENTS.map(e => `
                 <div class="option-card ${state.eventId === e.id ? 'selected' : ''}" data-id="${e.id}" data-random="${e.random ? '1' : '0'}">
                     <div class="option-icon">${e.icon}</div>
                     <div class="option-label">${e.label}</div>
                     <div class="option-desc">${e.desc}</div>
                 </div>
             `).join('');
-                    grid.querySelectorAll('.option-card').forEach(card => {
-                        card.addEventListener('click', () => {
-                            state.eventId = card.dataset.id;
-                            state.isRandom = card.dataset.random === '1';
-                            renderEvents();
-                            document.getElementById('btn-next-event').disabled = false;
-                            saveState();
-                        });
-                    });
-                }
-                function renderDurations() {
-                    const grid = document.getElementById('duration-grid');
-                    grid.innerHTML = DURATIONS.map(d => `
+            grid.querySelectorAll('.option-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    state.eventId = card.dataset.id;
+                    state.isRandom = card.dataset.random === '1';
+                    renderEvents();
+                    const btn = document.getElementById('btn-next-event');
+                    if (btn) btn.disabled = false;
+                    saveState();
+                });
+            });
+        }
+
+        function renderDurations() {
+            const grid = document.getElementById('duration-grid');
+            if (!grid) return;
+            grid.innerHTML = DURATIONS.map(d => `
                 <div class="option-card ${state.hours === d.value ? 'selected' : ''}" data-value="${d.value}">
                     <div class="option-label">${d.label}</div>
                 </div>
             `).join('');
-                    grid.querySelectorAll('.option-card').forEach(card => {
-                        card.addEventListener('click', () => {
-                            state.hours = parseInt(card.dataset.value);
-                            renderDurations();
-                            document.getElementById('btn-next-duration').disabled = false;
-                            updateSummary();
-                            saveState();
-                        });
-                    });
-                }
-                function renderBudgets() {
-                    const grid = document.getElementById('budget-grid');
-                    grid.innerHTML = BUDGETS.map(b => `
+            grid.querySelectorAll('.option-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    state.hours = parseInt(card.dataset.value);
+                    renderDurations();
+                    const btn = document.getElementById('btn-next-duration');
+                    if (btn) btn.disabled = false;
+                    updateSummary();
+                    saveState();
+                });
+            });
+        }
+
+        function renderBudgets() {
+            const grid = document.getElementById('budget-grid');
+            if (!grid) return;
+            grid.innerHTML = BUDGETS.map(b => `
                 <button class="budget-btn ${state.budget === b && !state.customBudget ? 'selected' : ''}" data-value="${b}">${b.toLocaleString('ru-RU')} ₽</button>
             `).join('') + `<button class="budget-btn ${state.customBudget ? 'selected' : ''}" data-value="custom" style="grid-column: span 2;">💰 Свой бюджет</button>`;
-                    grid.querySelectorAll('.budget-btn').forEach(btn => {
-                        btn.addEventListener('click', () => {
-                            const val = btn.dataset.value;
-                            if (val === 'custom') {
-                                state.customBudget = state.customBudget || 15000;
-                                state.budget = state.customBudget;
-                            } else {
-                                state.budget = parseInt(val);
-                                state.customBudget = null;
-                            }
-                            renderBudgets();
-                            document.getElementById('btn-next-budget').disabled = false;
-                            updateSummary();
-                            saveState();
-                        });
-                    });
-                    // ← ФИКС: синхронизируем видимость поля своего бюджета при восстановлении
-                    const customBlock = document.getElementById('custom-budget-block');
-                    const customInput = document.getElementById('custom-budget-input');
-                    if (state.customBudget) {
-                        customBlock.style.display = 'block';
-                        if (customInput.value !== String(state.customBudget)) {
-                            customInput.value = state.customBudget;
-                        }
+            grid.querySelectorAll('.budget-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const val = btn.dataset.value;
+                    if (val === 'custom') {
+                        state.customBudget = state.customBudget || 15000;
+                        state.budget = state.customBudget;
                     } else {
-                        customBlock.style.display = 'none';
+                        state.budget = parseInt(val);
+                        state.customBudget = null;
                     }
+                    renderBudgets();
+                    const nextBtn = document.getElementById('btn-next-budget');
+                    if (nextBtn) nextBtn.disabled = false;
+                    updateSummary();
+                    saveState();
+                });
+            });
+            const customBlock = document.getElementById('custom-budget-block');
+            const customInput = document.getElementById('custom-budget-input');
+            if (customBlock && customInput) {
+                if (state.customBudget) {
+                    customBlock.style.display = 'block';
+                    if (customInput.value !== String(state.customBudget)) {
+                        customInput.value = state.customBudget;
+                    }
+                } else {
+                    customBlock.style.display = 'none';
                 }
-                function renderPrefs() {
-                    const grid = document.getElementById('prefs-grid');
-                    grid.innerHTML = PREFS.map(p => `
+            }
+        }
+
+        function renderPrefs() {
+            const grid = document.getElementById('prefs-grid');
+            if (!grid) return;
+            grid.innerHTML = PREFS.map(p => `
                 <div class="option-card ${state.prefs.includes(p.id) ? 'selected' : ''}" data-id="${p.id}">
                     <div class="option-icon">${p.icon}</div>
                     <div class="option-label">${p.label}</div>
                 </div>
             `).join('');
-                    grid.querySelectorAll('.option-card').forEach(card => {
-                        card.addEventListener('click', () => {
-                            const id = card.dataset.id;
-                            if (id === 'auto') {
-                                state.prefs = state.prefs.includes('auto') ? [] : ['auto'];
-                            } else {
-                                state.prefs = state.prefs.filter(p => p !== 'auto');
-                                if (state.prefs.includes(id)) state.prefs = state.prefs.filter(p => p !== id);
-                                else state.prefs.push(id);
-                            }
-                            renderPrefs();
-                            updateSummary();
-                            saveState();
-                        });
-                    });
-                }
-                function updateSummary() {
-                    const b = state.customBudget || state.budget;
-                    const dateStr = state.eventDate ? new Date(state.eventDate).toLocaleDateString('ru-RU') : 'без даты';
-                    document.getElementById('summary-text').textContent = `${state.adults} взрослых, ${state.hours} часа, ${dateStr}, бюджет ${formatMoney(b)}`;
-                }
-
-                async function calculate() {
-                    if (state.isCalculating) return;
-                    state.isCalculating = true;
-                    showScreen('screen-loading');
-
-                    const payload = {
-                        scenario_id: state.eventId,
-                        adults: state.adults,
-                        hours: state.hours,
-                        budget: state.customBudget || state.budget,
-                        preferences: state.prefs,
-                    };
-                    state.lastPayload = payload;
-                    const endpoint = state.isRandom ? '/calculate_random' : '/calculate';
-
-                    try {
-                        const controller = new AbortController();
-                        const timeout = setTimeout(() => controller.abort(), 65000);
-                        const res = await fetch(`${API_URL}${endpoint}`, {
-                            method: 'POST', headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify(payload), signal: controller.signal,
-                        });
-                        clearTimeout(timeout);
-                        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-                        const data = await res.json();
-                        state.lastResult = data;
-                        state.isCalculating = false;
-                        renderResult(data);
-                        showScreen('screen-result');
-                    } catch (err) {
-                        state.isCalculating = false;
-                        showScreen('screen-prefs');
-                        let msg = 'Не удалось выполнить расчёт. Проверьте интернет и попробуйте ещё раз.';
-                        if (err.name === 'AbortError') msg = 'Сервер не ответил вовремя. Попробуйте ещё раз.';
-                        document.querySelectorAll('.error-box').forEach(e => e.remove());
-                        const errBox = document.createElement('div');
-                        errBox.className = 'error-box';
-                        errBox.textContent = msg;
-                        const btn = document.getElementById('btn-calculate');
-                        btn.parentNode.insertBefore(errBox, btn);
-                        setTimeout(() => errBox.remove(), 6000);
-                    }
-                }
-
-                function renderResult(data) {
-                    document.getElementById('result-subtitle').textContent = `${data.adults} взрослых · ${data.hours} часа`;
-                    document.getElementById('result-total').textContent = formatMoney(data.total_cost);
-                    document.getElementById('result-total-bottom').textContent = formatMoney(data.total_cost);
-                    const perGuest = data.price_per_guest || Math.round(data.total_cost / Math.max(1, data.total_guests));
-                    document.getElementById('result-per-guest').textContent = `👤 ${formatMoney(perGuest)} на человека`;
-
-                    const badgeContainer = document.getElementById('result-badge-container');
-                    const remainingEl = document.getElementById('result-remaining');
-                    const btnExpand = document.getElementById('btn-expand');
-                    const btnIncrease = document.getElementById('btn-increase');
-                    const btnReroll = document.getElementById('btn-reroll');
-
-                    btnExpand.style.display = 'none';
-                    btnIncrease.style.display = 'none';
-                    btnReroll.style.display = state.isRandom ? 'block' : 'none';
-
-                    const ratio = data.total_cost / data.budget;
-                    if (data.is_within_budget) {
-                        if (ratio > 0.9) badgeContainer.innerHTML = '<span class="badge badge-warning">🟡 Почти в бюджете</span>';
-                        else {
-                            badgeContainer.innerHTML = '<span class="badge badge-success">🟢 В бюджете</span>';
-                            if (data.remaining > data.budget * 0.03 && state.isRandom) btnExpand.style.display = 'block';
-                        }
-                        remainingEl.textContent = `Осталось: ${formatMoney(data.remaining)}`;
+            grid.querySelectorAll('.option-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const id = card.dataset.id;
+                    if (id === 'auto') {
+                        state.prefs = state.prefs.includes('auto') ? [] : ['auto'];
                     } else {
-                        badgeContainer.innerHTML = '<span class="badge badge-error">🔴 Бюджет превышен</span>';
-                        remainingEl.textContent = `На: ${formatMoney(data.shortfall)}`;
-                        btnIncrease.style.display = 'block';
+                        state.prefs = state.prefs.filter(p => p !== 'auto');
+                        if (state.prefs.includes(id)) state.prefs = state.prefs.filter(p => p !== id);
+                        else state.prefs.push(id);
                     }
+                    renderPrefs();
+                    updateSummary();
+                    saveState();
+                });
+            });
+        }
 
-                    const categories = {};
-                    (data.items || []).forEach(item => {
-                        if (!categories[item.category]) categories[item.category] = [];
-                        categories[item.category].push(item);
-                    });
+        function updateSummary() {
+            const b = state.customBudget || state.budget;
+            const dateStr = state.eventDate ? new Date(state.eventDate).toLocaleDateString('ru-RU') : 'без даты';
+            const el = document.getElementById('summary-text');
+            if (el) el.textContent = `${state.adults} взрослых, ${state.hours} часа, ${dateStr}, бюджет ${formatMoney(b)}`;
+        }
 
-                    let html = '';
-                    for (const [cat, items] of Object.entries(categories)) {
-                        const style = getCategoryStyle(cat);
-                        html += `<div class="category-block ${style.cls}">
+        async function calculate() {
+            if (state.isCalculating) return;
+            state.isCalculating = true;
+            showScreen('screen-loading');
+
+            const payload = {
+                scenario_id: state.eventId,
+                adults: state.adults,
+                hours: state.hours,
+                budget: state.customBudget || state.budget,
+                preferences: state.prefs,
+            };
+            state.lastPayload = payload;
+            const endpoint = state.isRandom ? '/calculate_random' : '/calculate';
+
+            try {
+                const controller = new AbortController();
+                const timeout = setTimeout(() => controller.abort(), 65000);
+                const res = await fetch(`${API_URL}${endpoint}`, {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload), signal: controller.signal,
+                });
+                clearTimeout(timeout);
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                const data = await res.json();
+                state.lastResult = data;
+                state.isCalculating = false;
+                renderResult(data);
+                showScreen('screen-result');
+            } catch (err) {
+                state.isCalculating = false;
+                showScreen('screen-prefs');
+                let msg = 'Не удалось выполнить расчёт. Проверьте интернет и попробуйте ещё раз.';
+                if (err.name === 'AbortError') msg = 'Сервер не ответил вовремя. Попробуйте ещё раз.';
+                document.querySelectorAll('.error-box').forEach(e => e.remove());
+                const errBox = document.createElement('div');
+                errBox.className = 'error-box';
+                errBox.textContent = msg;
+                const btn = document.getElementById('btn-calculate');
+                if (btn && btn.parentNode) btn.parentNode.insertBefore(errBox, btn);
+                setTimeout(() => errBox.remove(), 6000);
+            }
+        }
+
+        function renderResult(data) {
+            document.getElementById('result-subtitle').textContent = `${data.adults} взрослых · ${data.hours} часа`;
+            document.getElementById('result-total').textContent = formatMoney(data.total_cost);
+            document.getElementById('result-total-bottom').textContent = formatMoney(data.total_cost);
+            const perGuest = data.price_per_guest || Math.round(data.total_cost / Math.max(1, data.total_guests));
+            document.getElementById('result-per-guest').textContent = `👤 ${formatMoney(perGuest)} на человека`;
+
+            const badgeContainer = document.getElementById('result-badge-container');
+            const remainingEl = document.getElementById('result-remaining');
+            const btnExpand = document.getElementById('btn-expand');
+            const btnIncrease = document.getElementById('btn-increase');
+            const btnReroll = document.getElementById('btn-reroll');
+
+            btnExpand.style.display = 'none';
+            btnIncrease.style.display = 'none';
+            btnReroll.style.display = state.isRandom ? 'block' : 'none';
+
+            const ratio = data.total_cost / data.budget;
+            if (data.is_within_budget) {
+                if (ratio > 0.9) badgeContainer.innerHTML = '<span class="badge badge-warning">🟡 Почти в бюджете</span>';
+                else {
+                    badgeContainer.innerHTML = '<span class="badge badge-success">🟢 В бюджете</span>';
+                    if (data.remaining > data.budget * 0.03 && state.isRandom) btnExpand.style.display = 'block';
+                }
+                remainingEl.textContent = `Осталось: ${formatMoney(data.remaining)}`;
+            } else {
+                badgeContainer.innerHTML = '<span class="badge badge-error">🔴 Бюджет превышен</span>';
+                remainingEl.textContent = `На: ${formatMoney(data.shortfall)}`;
+                btnIncrease.style.display = 'block';
+            }
+
+            const categories = {};
+            (data.items || []).forEach(item => {
+                if (!categories[item.category]) categories[item.category] = [];
+                categories[item.category].push(item);
+            });
+
+            let html = '';
+            for (const [cat, items] of Object.entries(categories)) {
+                const style = getCategoryStyle(cat);
+                html += `<div class="category-block ${style.cls}">
                     <div class="category-title"><span class="cat-icon">${style.icon}</span><span>${cat}</span></div>`;
-                        items.forEach((item) => {
-                            const qty = item.packages > 1 ? `${item.packages} × ${item.package_size} ${item.unit}` : `${item.final_amount} ${item.unit}`;
-                            html += `<div class="item-row">
+                items.forEach((item) => {
+                    const qty = item.packages > 1 ? `${item.packages} × ${item.package_size} ${item.unit}` : `${item.final_amount} ${item.unit}`;
+                    html += `<div class="item-row">
                         <div class="item-info">
                             <div class="item-name">${item.name}</div>
                             <div class="item-qty">${qty}</div>
@@ -1523,135 +1537,136 @@
                         <span class="item-price">${formatMoney(item.total_price)}</span>
                         <button class="item-edit" data-cat="${cat}" data-name="${item.name.replace(/"/g, '&quot;')}" title="Заменить">✏️</button>
                     </div>`;
-                        });
-                        html += `</div>`;
-                    }
-                    document.getElementById('result-items').innerHTML = html;
-                    document.querySelectorAll('.item-edit').forEach(btn => {
-                        btn.addEventListener('click', () => openEditor(btn.dataset.cat, btn.dataset.name));
-                    });
-                    saveState();
+                });
+                html += `</div>`;
+            }
+            document.getElementById('result-items').innerHTML = html;
+            document.querySelectorAll('.item-edit').forEach(btn => {
+                btn.addEventListener('click', () => openEditor(btn.dataset.cat, btn.dataset.name));
+            });
+            saveState();
+        }
+
+        /* ============ МОДАЛКА РЕДАКТИРОВАНИЯ ============ */
+        let editingContext = null;
+        async function openEditor(category, currentName) {
+            const overlay = document.getElementById('modal-overlay');
+            const title = document.getElementById('modal-title');
+            const body = document.getElementById('modal-body');
+            title.textContent = `${category} — заменить блюдо`;
+            body.innerHTML = `<div class="modal-loading"><div class="modal-loader"></div>Загружаем варианты…</div>`;
+            overlay.classList.add('active');
+
+            const prefsStr = state.prefs.filter(p => p !== 'auto').join(',');
+            const scenario = state.eventId || '';
+
+            try {
+                const url = `${API_URL}/alternatives?category=${encodeURIComponent(category)}&exclude=${encodeURIComponent(currentName)}&preferences=${encodeURIComponent(prefsStr)}&scenario_id=${encodeURIComponent(scenario)}`;
+                const res = await fetch(url);
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                const items = await res.json();
+                if (!items || items.length === 0) {
+                    body.innerHTML = `<div class="modal-empty">Нет других блюд в этой категории</div>`;
+                    return;
                 }
-
-                /* ============ МОДАЛКА РЕДАКТИРОВАНИЯ ============ */
-                let editingContext = null;
-                async function openEditor(category, currentName) {
-                    const overlay = document.getElementById('modal-overlay');
-                    const title = document.getElementById('modal-title');
-                    const body = document.getElementById('modal-body');
-                    title.textContent = `${category} — заменить блюдо`;
-                    body.innerHTML = `<div class="modal-loading"><div class="modal-loader"></div>Загружаем варианты…</div>`;
-                    overlay.classList.add('active');
-
-                    const prefsStr = state.prefs.filter(p => p !== 'auto').join(',');
-                    const scenario = state.eventId || '';
-
-                    try {
-                        const url = `${API_URL}/alternatives?category=${encodeURIComponent(category)}&exclude=${encodeURIComponent(currentName)}&preferences=${encodeURIComponent(prefsStr)}&scenario_id=${encodeURIComponent(scenario)}`;
-                        const res = await fetch(url);
-                        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-                        const items = await res.json();
-                        if (!items || items.length === 0) {
-                            body.innerHTML = `<div class="modal-empty">Нет других блюд в этой категории</div>`;
-                            return;
-                        }
-                        editingContext = { category, currentName };
-                        const tagMap = { meat: '🥩 мясо', fish: '🐟 рыба', veg: '🥬 вег.' };
-                        body.innerHTML = `<p class="modal-hint">Сортировка — от дорогих к дешёвым.</p>` +
-                            items.map(it => {
-                                const tags = (it.tags || '').split(',').filter(t => t).map(t => tagMap[t] || t).join(' · ');
-                                return `<div class="alt-item" data-name="${it.name.replace(/"/g, '&quot;')}" data-price="${it.price_per_unit}" data-unit="${it.unit}" data-pkg="${it.package_size}">
+                editingContext = { category, currentName };
+                const tagMap = { meat: '🥩 мясо', fish: '🐟 рыба', veg: '🥬 вег.' };
+                body.innerHTML = `<p class="modal-hint">Сортировка — от дорогих к дешёвым.</p>` +
+                    items.map(it => {
+                        const tags = (it.tags || '').split(',').filter(t => t).map(t => tagMap[t] || t).join(' · ');
+                        return `<div class="alt-item" data-name="${it.name.replace(/"/g, '&quot;')}" data-price="${it.price_per_unit}" data-unit="${it.unit}" data-pkg="${it.package_size}">
                             <div><div class="alt-name">${it.name}</div>${tags ? `<div class="alt-tags">${tags}</div>` : ''}</div>
                             <div class="alt-price">${formatMoney(it.price_per_unit)}/${it.unit}</div>
                         </div>`;
-                            }).join('');
-                        document.querySelectorAll('.alt-item').forEach(el => {
-                            el.addEventListener('click', () => replaceDish({
-                                name: el.dataset.name,
-                                price_per_unit: parseFloat(el.dataset.price),
-                                unit: el.dataset.unit,
-                                package_size: parseFloat(el.dataset.pkg),
-                            }));
-                        });
-                    } catch (err) {
-                        body.innerHTML = `<div class="modal-empty">Не удалось загрузить варианты</div>`;
-                    }
-                }
-                function closeModal() {
-                    document.getElementById('modal-overlay').classList.remove('active');
-                    editingContext = null;
-                }
-                document.getElementById('modal-close').addEventListener('click', closeModal);
-                document.getElementById('modal-overlay').addEventListener('click', (e) => {
-                    if (e.target.id === 'modal-overlay') closeModal();
+                    }).join('');
+                document.querySelectorAll('.alt-item').forEach(el => {
+                    el.addEventListener('click', () => replaceDish({
+                        name: el.dataset.name,
+                        price_per_unit: parseFloat(el.dataset.price),
+                        unit: el.dataset.unit,
+                        package_size: parseFloat(el.dataset.pkg),
+                    }));
                 });
+            } catch (err) {
+                body.innerHTML = `<div class="modal-empty">Не удалось загрузить варианты</div>`;
+            }
+        }
 
-                async function replaceDish(newDish) {
-                    if (!editingContext || !state.lastResult) return;
-                    const { category, currentName } = editingContext;
-                    const items = state.lastResult.items;
-                    const target = items.find(i => i.category === category && i.name === currentName);
-                    if (!target) { closeModal(); return; }
-                    const packages = target.packages || 1;
-                    target.name = newDish.name;
-                    target.cost_per_unit = newDish.price_per_unit;
-                    target.unit = newDish.unit;
-                    target.package_size = newDish.package_size;
-                    target.total_price = Math.round(packages * newDish.price_per_unit * 100) / 100;
-                    const total = items.reduce((s, i) => s + i.total_price, 0);
-                    state.lastResult.total_cost = Math.round(total * 100) / 100;
-                    state.lastResult.is_within_budget = total <= state.lastResult.budget;
-                    state.lastResult.remaining = Math.max(0, state.lastResult.budget - total);
-                    state.lastResult.shortfall = Math.max(0, total - state.lastResult.budget);
-                    state.lastResult.price_per_guest = Math.round(total / Math.max(1, state.lastResult.total_guests));
-                    closeModal();
-                    renderResult(state.lastResult);
-                    showToast('✓ Блюдо заменено');
-                }
+        function closeModal() {
+            document.getElementById('modal-overlay').classList.remove('active');
+            editingContext = null;
+        }
+        document.getElementById('modal-close').addEventListener('click', closeModal);
+        document.getElementById('modal-overlay').addEventListener('click', (e) => {
+            if (e.target.id === 'modal-overlay') closeModal();
+        });
 
-                /* ============ РАСШИРИТЬ ============ */
-                async function expandMenu() {
-                    if (state.isCalculating || !state.lastResult || !state.lastPayload) return;
-                    state.isCalculating = true;
-                    showScreen('screen-loading');
-                    try {
-                        const res = await fetch(`${API_URL}/expand`, {
-                            method: 'POST', headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({
-                                scenario_id: state.eventId,
-                                adults: state.adults,
-                                hours: state.hours, budget: state.customBudget || state.budget,
-                                preferences: state.prefs,
-                                current_items: state.lastResult.items,
-                            }),
-                        });
-                        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-                        const data = await res.json();
-                        const before = state.lastResult.items.length;
-                        const after = data.items.length;
-                        state.lastResult = data;
-                        state.isCalculating = false;
-                        renderResult(data);
-                        showScreen('screen-result');
-                        if (after > before) showToast('✨ Меню расширено');
-                        else showToast('Нечего добавить в остаток бюджета');
-                    } catch (err) {
-                        state.isCalculating = false;
-                        renderResult(state.lastResult);
-                        showScreen('screen-result');
-                        showToast('Не удалось расширить меню');
-                    }
-                }
+        async function replaceDish(newDish) {
+            if (!editingContext || !state.lastResult) return;
+            const { category, currentName } = editingContext;
+            const items = state.lastResult.items;
+            const target = items.find(i => i.category === category && i.name === currentName);
+            if (!target) { closeModal(); return; }
+            const packages = target.packages || 1;
+            target.name = newDish.name;
+            target.cost_per_unit = newDish.price_per_unit;
+            target.unit = newDish.unit;
+            target.package_size = newDish.package_size;
+            target.total_price = Math.round(packages * newDish.price_per_unit * 100) / 100;
+            const total = items.reduce((s, i) => s + i.total_price, 0);
+            state.lastResult.total_cost = Math.round(total * 100) / 100;
+            state.lastResult.is_within_budget = total <= state.lastResult.budget;
+            state.lastResult.remaining = Math.max(0, state.lastResult.budget - total);
+            state.lastResult.shortfall = Math.max(0, total - state.lastResult.budget);
+            state.lastResult.price_per_guest = Math.round(total / Math.max(1, state.lastResult.total_guests));
+            closeModal();
+            renderResult(state.lastResult);
+            showToast('✓ Блюдо заменено');
+        }
 
-                function openBudgetModal() {
-                    const overlay = document.getElementById('modal-overlay');
-                    const title = document.getElementById('modal-title');
-                    const body = document.getElementById('modal-body');
-                    const r = state.lastResult;
-                    const shortfall = Math.max(0, r.total_cost - r.budget);
-                    const minAdd = Math.max(500, Math.ceil(shortfall / 500) * 500);
-                    title.textContent = '💰 Увеличить бюджет';
-                    body.innerHTML = `
+        /* ============ РАСШИРИТЬ ============ */
+        async function expandMenu() {
+            if (state.isCalculating || !state.lastResult || !state.lastPayload) return;
+            state.isCalculating = true;
+            showScreen('screen-loading');
+            try {
+                const res = await fetch(`${API_URL}/expand`, {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        scenario_id: state.eventId,
+                        adults: state.adults,
+                        hours: state.hours, budget: state.customBudget || state.budget,
+                        preferences: state.prefs,
+                        current_items: state.lastResult.items,
+                    }),
+                });
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                const data = await res.json();
+                const before = state.lastResult.items.length;
+                const after = data.items.length;
+                state.lastResult = data;
+                state.isCalculating = false;
+                renderResult(data);
+                showScreen('screen-result');
+                if (after > before) showToast('✨ Меню расширено');
+                else showToast('Нечего добавить в остаток бюджета');
+            } catch (err) {
+                state.isCalculating = false;
+                renderResult(state.lastResult);
+                showScreen('screen-result');
+                showToast('Не удалось расширить меню');
+            }
+        }
+
+        function openBudgetModal() {
+            const overlay = document.getElementById('modal-overlay');
+            const title = document.getElementById('modal-title');
+            const body = document.getElementById('modal-body');
+            const r = state.lastResult;
+            const shortfall = Math.max(0, r.total_cost - r.budget);
+            const minAdd = Math.max(500, Math.ceil(shortfall / 500) * 500);
+            title.textContent = '💰 Увеличить бюджет';
+            body.innerHTML = `
                 <div class="modal-info">Текущий бюджет<strong>${formatMoney(r.budget)}</strong></div>
                 <p class="modal-hint">Меню: ${formatMoney(r.total_cost)}<br>Нужно добавить минимум: <b>${formatMoney(minAdd)}</b></p>
                 <div style="margin-bottom:10px;">
@@ -1667,295 +1682,283 @@
                     <button class="btn btn-secondary" id="modal-cancel">Отмена</button>
                     <button class="btn btn-primary" id="modal-apply">Применить</button>
                 </div>`;
-                    overlay.classList.add('active');
-                    const input = document.getElementById('add-budget-input');
-                    body.querySelectorAll('[data-add]').forEach(btn => {
-                        btn.addEventListener('click', () => { input.value = parseInt(btn.dataset.add, 10); input.focus(); });
-                    });
-                    document.getElementById('modal-cancel').onclick = closeModal;
-                    document.getElementById('modal-apply').onclick = () => {
-                        let addAmount = parseInt(input.value, 10);
-                        if (isNaN(addAmount) || addAmount < 500) { showToast('Минимум 500 ₽'); return; }
-                        const newBudget = r.budget + addAmount;
-                        state.budget = newBudget;
-                        state.customBudget = newBudget;
-                        r.budget = newBudget;
-                        r.is_within_budget = r.total_cost <= newBudget;
-                        r.remaining = Math.max(0, newBudget - r.total_cost);
-                        r.shortfall = Math.max(0, r.total_cost - newBudget);
-                        closeModal();
-                        renderResult(r);
-                        showToast(`✓ Бюджет увеличен на ${formatMoney(addAmount)}`);
-                    };
-                }
+            overlay.classList.add('active');
+            const input = document.getElementById('add-budget-input');
+            body.querySelectorAll('[data-add]').forEach(btn => {
+                btn.addEventListener('click', () => { input.value = parseInt(btn.dataset.add, 10); input.focus(); });
+            });
+            document.getElementById('modal-cancel').onclick = closeModal;
+            document.getElementById('modal-apply').onclick = () => {
+                let addAmount = parseInt(input.value, 10);
+                if (isNaN(addAmount) || addAmount < 500) { showToast('Минимум 500 ₽'); return; }
+                const newBudget = r.budget + addAmount;
+                state.budget = newBudget;
+                state.customBudget = newBudget;
+                r.budget = newBudget;
+                r.is_within_budget = r.total_cost <= newBudget;
+                r.remaining = Math.max(0, newBudget - r.total_cost);
+                r.shortfall = Math.max(0, r.total_cost - newBudget);
+                closeModal();
+                renderResult(r);
+                showToast(`✓ Бюджет увеличен на ${formatMoney(addAmount)}`);
+            };
+        }
 
-                async function reroll() {
-                    if (state.isCalculating || !state.lastPayload) return;
-                    state.isCalculating = true;
-                    showScreen('screen-loading');
-                    try {
-                        const res = await fetch(`${API_URL}/reroll`, {
-                            method: 'POST', headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify(state.lastPayload),
-                        });
-                        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-                        const data = await res.json();
-                        state.lastResult = data;
-                        state.isCalculating = false;
-                        renderResult(data);
-                        showScreen('screen-result');
-                        showToast('🎲 Новое меню готово');
-                    } catch (err) {
-                        state.isCalculating = false;
-                        renderResult(state.lastResult);
-                        showScreen('screen-result');
-                        showToast('Не удалось получить другое меню');
-                    }
-                }
-
-                /* ============ ОТПРАВКА ЗАЯВКИ ============ */
-                document.getElementById('btn-send-request').addEventListener('click', () => {
-                    showScreen('screen-send-request');
+        async function reroll() {
+            if (state.isCalculating || !state.lastPayload) return;
+            state.isCalculating = true;
+            showScreen('screen-loading');
+            try {
+                const res = await fetch(`${API_URL}/reroll`, {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(state.lastPayload),
                 });
-                document.getElementById('back-from-request').addEventListener('click', () => showScreen('screen-result'));
-                document.getElementById('btn-close-success').addEventListener('click', () => showScreen('screen-result'));
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                const data = await res.json();
+                state.lastResult = data;
+                state.isCalculating = false;
+                renderResult(data);
+                showScreen('screen-result');
+                showToast('🎲 Новое меню готово');
+            } catch (err) {
+                state.isCalculating = false;
+                renderResult(state.lastResult);
+                showScreen('screen-result');
+                showToast('Не удалось получить другое меню');
+            }
+        }
 
-                document.getElementById('btn-submit-request').addEventListener('click', async () => {
-                    const name = document.getElementById('req-name').value.trim();
-                    const phone = document.getElementById('req-phone').value.trim();
-                    const comment = document.getElementById('req-comment').value.trim();
-                    const agree = document.getElementById('req-agree').checked;
+        /* ============ ОТПРАВКА ЗАЯВКИ ============ */
+        document.getElementById('btn-send-request').addEventListener('click', () => {
+            showScreen('screen-send-request');
+        });
+        document.getElementById('back-from-request').addEventListener('click', () => showScreen('screen-result'));
+        document.getElementById('btn-close-success').addEventListener('click', () => showScreen('screen-result'));
 
-                    if (!name) { showToast('Укажите имя'); return; }
-                    if (!phone) { showToast('Укажите телефон'); return; }
-                    if (!agree) { showToast('Необходимо согласие на обработку данных'); return; }
-                    if (!state.lastResult) { showToast('Сначала рассчитайте меню'); return; }
+        document.getElementById('btn-submit-request').addEventListener('click', async () => {
+            const name = document.getElementById('req-name').value.trim();
+            const phone = document.getElementById('req-phone').value.trim();
+            const comment = document.getElementById('req-comment').value.trim();
+            const agree = document.getElementById('req-agree').checked;
 
-                    const btn = document.getElementById('btn-submit-request');
-                    btn.disabled = true;
-                    btn.textContent = 'Отправляем…';
+            if (!name) { showToast('Укажите имя'); return; }
+            if (!phone) { showToast('Укажите телефон'); return; }
+            if (!agree) { showToast('Необходимо согласие на обработку данных'); return; }
+            if (!state.lastResult) { showToast('Сначала рассчитайте меню'); return; }
 
-                    const scenarioObj = EVENTS.find(e => e.id === state.eventId) || {};
-                    const payload = {
-                        client_name: name,
-                        client_phone: phone,
-                        client_email: "",
-                        client_comment: `Дата: ${state.eventDate || 'не указана'}. ${comment}`,
-                        scenario_id: state.eventId,
-                        scenario_name: scenarioObj.label || '',
-                        adults: state.adults,
-                        hours: state.hours,
-                        budget: state.customBudget || state.budget,
-                        total_cost: state.lastResult.total_cost,
-                        price_per_guest: state.lastResult.price_per_guest || 0,
-                        items: state.lastResult.items,
-                    };
+            const btn = document.getElementById('btn-submit-request');
+            btn.disabled = true;
+            btn.textContent = 'Отправляем…';
 
-                    try {
-                        const res = await fetch(`${API_URL}/send_request`, {
-                            method: 'POST', headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify(payload),
-                        });
-                        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-                        const data = await res.json();
-                        document.getElementById('success-text').textContent = `Заявка №${data.request_id} принята.`;
-                        showScreen('screen-send-success');
-                    } catch (err) {
-                        console.error(err);
-                        btn.disabled = false;
-                        btn.textContent = 'Отправить заявку';
-                        showToast('Не удалось отправить. Проверьте интернет.');
-                    }
+            const scenarioObj = EVENTS.find(e => e.id === state.eventId) || {};
+            const payload = {
+                client_name: name,
+                client_phone: phone,
+                client_email: "",
+                client_comment: `Дата: ${state.eventDate || 'не указана'}. ${comment}`,
+                scenario_id: state.eventId,
+                scenario_name: scenarioObj.label || '',
+                adults: state.adults,
+                hours: state.hours,
+                budget: state.customBudget || state.budget,
+                total_cost: state.lastResult.total_cost,
+                price_per_guest: state.lastResult.price_per_guest || 0,
+                items: state.lastResult.items,
+            };
+
+            try {
+                const res = await fetch(`${API_URL}/send_request`, {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload),
                 });
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                const data = await res.json();
+                document.getElementById('success-text').textContent = `Заявка №${data.request_id} принята.`;
+                showScreen('screen-send-success');
+            } catch (err) {
+                console.error(err);
+                btn.disabled = false;
+                btn.textContent = 'Отправить заявку';
+                showToast('Не удалось отправить. Проверьте интернет.');
+            }
+        });
 
-                /* ============ СЧЁТЧИКИ (идемпотентная инициализация) ============ */
-                function setupCounter(name, min, max, stateKey) {
-                    const minus = document.getElementById(`${name}-minus`);
-                    const plus = document.getElementById(`${name}-plus`);
-                    const input = document.getElementById(`${name}-input`);
-                    if (!minus || !plus || !input) return;
+        /* ============ СЧЁТЧИКИ ============ */
+        function setupCounter(name, min, max, stateKey) {
+            const minus = document.getElementById(`${name}-minus`);
+            const plus = document.getElementById(`${name}-plus`);
+            const input = document.getElementById(`${name}-input`);
+            if (!minus || !plus || !input) return;
 
-                    // Слушатели вешаем только один раз
-                    if (!minus.dataset.listenerAdded) {
-                        minus.addEventListener('click', () => {
-                            state[stateKey] = clamp(state[stateKey] - 1, min, max);
-                            updateCounterUI(name, min, max, stateKey);
-                        });
-                        plus.addEventListener('click', () => {
-                            state[stateKey] = clamp(state[stateKey] + 1, min, max);
-                            updateCounterUI(name, min, max, stateKey);
-                        });
-                        input.addEventListener('input', () => {
-                            let v = parseInt(input.value, 10);
-                            if (isNaN(v)) return;
-                            state[stateKey] = v;
-                            updateCounterUI(name, min, max, stateKey, /*skipInput*/ true);
-                        });
-                        input.addEventListener('blur', () => {
-                            let v = parseInt(input.value, 10);
-                            if (isNaN(v)) v = min;
-                            v = clamp(v, min, max);
-                            state[stateKey] = v;
-                            updateCounterUI(name, min, max, stateKey);
-                        });
-                        minus.dataset.listenerAdded = '1';
-                        plus.dataset.listenerAdded = '1';
-                        input.dataset.listenerAdded = '1';
-                    }
+            if (!minus.dataset.listenerAdded) {
+                minus.addEventListener('click', () => {
+                    state[stateKey] = clamp(state[stateKey] - 1, min, max);
                     updateCounterUI(name, min, max, stateKey);
-                }
-
-                function updateCounterUI(name, min, max, stateKey, skipInput) {
-                    const minus = document.getElementById(`${name}-minus`);
-                    const plus = document.getElementById(`${name}-plus`);
-                    const input = document.getElementById(`${name}-input`);
-                    if (input && !skipInput) input.value = state[stateKey];
-                    if (minus) minus.disabled = state[stateKey] <= min;
-                    if (plus) plus.disabled = state[stateKey] >= max;
-                    updateTotalGuests();
-                    updateSummary();
-                    saveState();
-                }
-
-                // ====== ИНИЦИАЛИЗАЦИЯ ======
-                document.getElementById('event-date').addEventListener('change', (e) => {
-                    state.eventDate = e.target.value;
-                    updateSummary();
-                    saveState();
                 });
-
-                document.getElementById('btn-next-event').addEventListener('click', () => showScreen('screen-guests'));
-                document.getElementById('btn-next-guests').addEventListener('click', () => showScreen('screen-duration'));
-                document.getElementById('btn-next-duration').addEventListener('click', () => showScreen('screen-budget'));
-                document.getElementById('btn-next-budget').addEventListener('click', () => showScreen('screen-prefs'));
-                document.getElementById('btn-calculate').addEventListener('click', calculate);
-                document.getElementById('btn-back').addEventListener('click', () => showScreen('screen-prefs'));
-
-                // ← ФИКС: «Новый расчёт» должен стирать сохранённое состояние, иначе
-                //    после reload restoreState вернёт пользователя назад.
-                document.getElementById('btn-restart').addEventListener('click', () => {
-                    try { sessionStorage.removeItem(STORAGE_KEY); } catch (e) { }
-                    location.reload();
+                plus.addEventListener('click', () => {
+                    state[stateKey] = clamp(state[stateKey] + 1, min, max);
+                    updateCounterUI(name, min, max, stateKey);
                 });
-
-                document.getElementById('btn-reroll').addEventListener('click', reroll);
-                document.getElementById('btn-expand').addEventListener('click', expandMenu);
-                document.getElementById('btn-increase').addEventListener('click', openBudgetModal);
-
-                document.querySelectorAll('.back-btn').forEach(btn => {
-                    const target = btn.dataset.back;
-                    if (target) btn.addEventListener('click', () => showScreen(target));
+                input.addEventListener('input', () => {
+                    let v = parseInt(input.value, 10);
+                    if (isNaN(v)) return;
+                    state[stateKey] = v;
+                    updateCounterUI(name, min, max, stateKey, true);
                 });
-
-                document.getElementById('custom-budget-input').addEventListener('input', (e) => {
-                    let v = parseInt(e.target.value, 10) || 0;
-                    if (v < 1000) v = 1000;
-                    state.customBudget = v;
-                    state.budget = v;
-                    updateSummary();
-                    saveState();
+                input.addEventListener('blur', () => {
+                    let v = parseInt(input.value, 10);
+                    if (isNaN(v)) v = min;
+                    v = clamp(v, min, max);
+                    state[stateKey] = v;
+                    updateCounterUI(name, min, max, stateKey);
                 });
+                minus.dataset.listenerAdded = '1';
+                plus.dataset.listenerAdded = '1';
+                input.dataset.listenerAdded = '1';
+            }
+            updateCounterUI(name, min, max, stateKey);
+        }
 
-                function buildShareText() {
-                    if (!state.lastResult) return '';
-                    const r = state.lastResult;
-                    let t = `Мой расчёт на мероприятие в Хватит всем 🥂\n\n`;
-                    t += `Гостей: ${getTotalGuests()}\n`;
-                    t += `Бюджет: ${formatMoney(state.customBudget || state.budget)}\n`;
-                    t += `Итого: ${formatMoney(r.total_cost)}\n`;
-                    t += `На человека: ${formatMoney(r.price_per_guest)}\n`;
-                    t += `Цена без учёта обслуживания · база «Вкусно»\n\nСписок:\n`;
-                    const cats = {};
-                    (r.items || []).forEach(i => { (cats[i.category] = cats[i.category] || []).push(i); });
-                    for (const [cat, items] of Object.entries(cats)) {
-                        t += `\n${cat}\n`;
-                        items.forEach(i => {
-                            const qty = i.packages > 1 ? `${i.packages} × ${i.package_size} ${i.unit}` : `${i.final_amount} ${i.unit}`;
-                            t += `• ${i.name} — ${qty} — ${formatMoney(i.total_price)}\n`;
-                        });
-                    }
-                    t += `\nhttps://hvatitfrontend.onrender.com`;
-                    return t;
-                }
+        function updateCounterUI(name, min, max, stateKey, skipInput) {
+            const minus = document.getElementById(`${name}-minus`);
+            const plus = document.getElementById(`${name}-plus`);
+            const input = document.getElementById(`${name}-input`);
+            if (input && !skipInput) input.value = state[stateKey];
+            if (minus) minus.disabled = state[stateKey] <= min;
+            if (plus) plus.disabled = state[stateKey] >= max;
+            updateTotalGuests();
+            updateSummary();
+            saveState();
+        }
 
-                document.getElementById('btn-share').addEventListener('click', async () => {
-                    const text = buildShareText();
-                    if (!text) return;
-                    if (navigator.share) {
-                        try { await navigator.share({ title: 'Хватит всем', text, url: 'https://hvatitfrontend.onrender.com' }); } catch (e) { }
-                    } else {
-                        try { await navigator.clipboard.writeText(text); showToast('✓ Скопировано'); } catch { showToast('Не удалось скопировать'); }
-                    }
+        // ====== ИНИЦИАЛИЗАЦИЯ ======
+        document.getElementById('event-date').addEventListener('change', (e) => {
+            state.eventDate = e.target.value;
+            updateSummary();
+            saveState();
+        });
+
+        document.getElementById('btn-next-event').addEventListener('click', () => showScreen('screen-guests'));
+        document.getElementById('btn-next-guests').addEventListener('click', () => showScreen('screen-duration'));
+        document.getElementById('btn-next-duration').addEventListener('click', () => showScreen('screen-budget'));
+        document.getElementById('btn-next-budget').addEventListener('click', () => showScreen('screen-prefs'));
+        document.getElementById('btn-calculate').addEventListener('click', calculate);
+        document.getElementById('btn-back').addEventListener('click', () => showScreen('screen-prefs'));
+
+        document.getElementById('btn-restart').addEventListener('click', () => {
+            try { sessionStorage.removeItem(STORAGE_KEY); } catch (e) { }
+            location.reload();
+        });
+
+        document.getElementById('btn-reroll').addEventListener('click', reroll);
+        document.getElementById('btn-expand').addEventListener('click', expandMenu);
+        document.getElementById('btn-increase').addEventListener('click', openBudgetModal);
+
+        document.querySelectorAll('.back-btn').forEach(btn => {
+            const target = btn.dataset.back;
+            if (target) btn.addEventListener('click', () => showScreen(target));
+        });
+
+        document.getElementById('custom-budget-input').addEventListener('input', (e) => {
+            let v = parseInt(e.target.value, 10) || 0;
+            if (v < 1000) v = 1000;
+            state.customBudget = v;
+            state.budget = v;
+            updateSummary();
+            saveState();
+        });
+
+        function buildShareText() {
+            if (!state.lastResult) return '';
+            const r = state.lastResult;
+            let t = `Мой расчёт на мероприятие в Хватит всем 🥂\n\n`;
+            t += `Гостей: ${getTotalGuests()}\n`;
+            t += `Бюджет: ${formatMoney(state.customBudget || state.budget)}\n`;
+            t += `Итого: ${formatMoney(r.total_cost)}\n`;
+            t += `На человека: ${formatMoney(r.price_per_guest)}\n`;
+            t += `Цена без учёта обслуживания · база «Вкусно»\n\nСписок:\n`;
+            const cats = {};
+            (r.items || []).forEach(i => { (cats[i.category] = cats[i.category] || []).push(i); });
+            for (const [cat, items] of Object.entries(cats)) {
+                t += `\n${cat}\n`;
+                items.forEach(i => {
+                    const qty = i.packages > 1 ? `${i.packages} × ${i.package_size} ${i.unit}` : `${i.final_amount} ${i.unit}`;
+                    t += `• ${i.name} — ${qty} — ${formatMoney(i.total_price)}\n`;
                 });
+            }
+            t += `\nhttps://hvatitfrontend.onrender.com`;
+            return t;
+        }
 
-                document.getElementById('btn-copy').addEventListener('click', async () => {
-                    const text = buildShareText();
-                    if (!text) return;
-                    try {
-                        if (navigator.clipboard && window.isSecureContext) await navigator.clipboard.writeText(text);
-                        else {
-                            const ta = document.createElement('textarea');
-                            ta.value = text; ta.style.position = 'fixed'; ta.style.left = '-9999px';
-                            document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
-                        }
-                        showToast('✓ Список скопирован');
-                    } catch { showToast('Не удалось скопировать'); }
-                });
+        document.getElementById('btn-share').addEventListener('click', async () => {
+            const text = buildShareText();
+            if (!text) return;
+            if (navigator.share) {
+                try { await navigator.share({ title: 'Хватит всем', text, url: 'https://hvatitfrontend.onrender.com' }); } catch (e) { }
+            } else {
+                try { await navigator.clipboard.writeText(text); showToast('✓ Скопировано'); } catch { showToast('Не удалось скопировать'); }
+            }
+        });
 
-                // Сохраняем при уходе со вкладки — критично для клика по ссылке privacy
-                document.addEventListener('visibilitychange', () => {
-                    if (document.visibilityState === 'hidden') saveState();
-                });
-                // Дополнительно — на случай закрытия/перезагрузки
-                window.addEventListener('beforeunload', saveState);
-
-                // Сохраняем значения формы заявки «на лету»
-                ['req-name', 'req-phone', 'req-comment'].forEach(id => {
-                    const el = document.getElementById(id);
-                    if (el) el.addEventListener('input', saveState);
-                });
-                document.getElementById('req-agree').addEventListener('change', saveState);
-
-                // ====== ЗАПУСК ======
-                // 1. Восстанавливаем данные из sessionStorage (если были)
-                const savedScreen = restoreStateData();
-
-                // 2. Первичный рендер (уже с восстановленными данными, если есть)
-                renderEvents();
-                renderDurations();
-                renderBudgets();
-                renderPrefs();
-                setupCounter('adults', 12, 500, 'adults');
-                updateTotalGuests();
-                updateSummary();
-
-                // 3. Восстанавливаем UI-детали, зависящие от состояния
-                if (state.eventDate) {
-                    document.getElementById('event-date').value = state.eventDate;
+        document.getElementById('btn-copy').addEventListener('click', async () => {
+            const text = buildShareText();
+            if (!text) return;
+            try {
+                if (navigator.clipboard && window.isSecureContext) await navigator.clipboard.writeText(text);
+                else {
+                    const ta = document.createElement('textarea');
+                    ta.value = text; ta.style.position = 'fixed'; ta.style.left = '-9999px';
+                    document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
                 }
-                if (state.eventId) {
-                    document.getElementById('btn-next-event').disabled = false;
-                }
-                if (state.hours) {
-                    document.getElementById('btn-next-duration').disabled = false;
-                }
-                if (state.budget || state.customBudget) {
-                    document.getElementById('btn-next-budget').disabled = false;
-                }
+                showToast('✓ Список скопирован');
+            } catch { showToast('Не удалось скопировать'); }
+        });
 
-                // 4. Если был открыт экран результата — перерисуем его
-                if (savedScreen === 'screen-result' && state.lastResult) {
-                    renderResult(state.lastResult);
-                }
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'hidden') saveState();
+        });
+        window.addEventListener('beforeunload', saveState);
 
-                // 5. Возвращаем пользователя на тот экран, где он был
-                if (savedScreen && savedScreen !== 'screen-event') {
-                    showScreen(savedScreen);
-                } else {
-                    // На всякий случай — сохраняем стартовый экран
-                    saveState();
-                }
-            </script>
+        ['req-name', 'req-phone', 'req-comment'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.addEventListener('input', saveState);
+        });
+        document.getElementById('req-agree').addEventListener('change', saveState);
+
+        // ====== ЗАПУСК ======
+        const savedScreen = restoreStateData();
+
+        renderEvents();
+        renderDurations();
+        renderBudgets();
+        renderPrefs();
+        setupCounter('adults', 12, 500, 'adults');
+        updateTotalGuests();
+        updateSummary();
+
+        if (state.eventDate) {
+            document.getElementById('event-date').value = state.eventDate;
+        }
+        if (state.eventId) {
+            document.getElementById('btn-next-event').disabled = false;
+        }
+        if (state.hours) {
+            document.getElementById('btn-next-duration').disabled = false;
+        }
+        if (state.budget || state.customBudget) {
+            document.getElementById('btn-next-budget').disabled = false;
+        }
+
+        if (savedScreen === 'screen-result' && state.lastResult) {
+            renderResult(state.lastResult);
+        }
+
+        if (savedScreen && savedScreen !== 'screen-event') {
+            showScreen(savedScreen);
+        } else {
+            saveState();
+        }
+    </script>
 </body>
 
 </html>
