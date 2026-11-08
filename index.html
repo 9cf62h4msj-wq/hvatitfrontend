@@ -639,7 +639,49 @@
         }
 
         .item-name {
-            font-weight: 500
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap
+        }
+
+        .item-tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 1px 6px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            line-height: 1.4;
+            background: #f3f4f6;
+            color: #4b5563;
+            white-space: nowrap
+        }
+
+        .item-tag.meat {
+            background: #fee2e2;
+            color: #991b1b
+        }
+
+        .item-tag.fish {
+            background: #dbeafe;
+            color: #1e40af
+        }
+
+        .item-tag.veg {
+            background: #d1fae5;
+            color: #065f46
+        }
+
+        .item-tag.sweet {
+            background: #fce7f3;
+            color: #9d174d
+        }
+
+        .item-tag.drink {
+            background: #e0e7ff;
+            color: #3730a3
         }
 
         .item-qty {
@@ -654,24 +696,49 @@
             font-size: 15px
         }
 
+        /* ===== Кнопка "Заменить" — яркая, круглая, с иконкой ===== */
         .item-edit {
-            width: 36px;
-            height: 36px;
-            border-radius: 10px;
-            background: rgba(243, 244, 246, .9);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: #fff;
             border: none;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 16px;
-            transition: all .2s;
-            flex-shrink: 0
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, .35);
+            transition: transform .15s, box-shadow .15s;
+            padding: 0;
+        }
+
+        .item-edit svg {
+            width: 20px;
+            height: 20px;
+            display: block
         }
 
         .item-edit:active {
             transform: scale(.9);
-            background: #e5e7eb
+            box-shadow: 0 2px 6px rgba(99, 102, 241, .5)
+        }
+
+        @keyframes editPulse {
+
+            0%,
+            100% {
+                box-shadow: 0 4px 12px rgba(99, 102, 241, .35), 0 0 0 0 rgba(99, 102, 241, .35)
+            }
+
+            50% {
+                box-shadow: 0 4px 12px rgba(99, 102, 241, .35), 0 0 0 8px rgba(99, 102, 241, 0)
+            }
+        }
+
+        .item-edit.pulse {
+            animation: editPulse 1.6s ease-in-out infinite
         }
 
         .total-row {
@@ -819,8 +886,41 @@
         .modal-hint {
             font-size: 13px;
             color: var(--text-muted);
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             padding: 0 4px
+        }
+
+        /* ===== Фильтр тегов в модалке ===== */
+        .modal-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 14px;
+            padding: 0 4px
+        }
+
+        .modal-tag {
+            padding: 7px 12px;
+            border-radius: 20px;
+            border: 1.5px solid var(--border);
+            background: #fff;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all .15s;
+            color: var(--text);
+            font-family: inherit
+        }
+
+        .modal-tag.active {
+            background: var(--primary-gradient);
+            color: #fff;
+            border-color: transparent;
+            box-shadow: 0 3px 10px rgba(99, 102, 241, .3)
+        }
+
+        .modal-tag:active {
+            transform: scale(.96)
         }
 
         .alt-item {
@@ -833,7 +933,8 @@
             margin-bottom: 8px;
             cursor: pointer;
             transition: all .2s ease;
-            border: 2px solid transparent
+            border: 2px solid transparent;
+            gap: 10px
         }
 
         .alt-item:active {
@@ -841,11 +942,63 @@
             background: #eef2ff
         }
 
+        .alt-item.hidden {
+            display: none
+        }
+
+        .alt-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            min-width: 0
+        }
+
         .alt-name {
             font-weight: 500;
-            font-size: 15px;
-            flex: 1;
-            padding-right: 12px
+            font-size: 15px
+        }
+
+        .alt-meta {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap
+        }
+
+        .alt-tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 1px 7px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            line-height: 1.5
+        }
+
+        .alt-tag.meat {
+            background: #fee2e2;
+            color: #991b1b
+        }
+
+        .alt-tag.fish {
+            background: #dbeafe;
+            color: #1e40af
+        }
+
+        .alt-tag.veg {
+            background: #d1fae5;
+            color: #065f46
+        }
+
+        .alt-tag.sweet {
+            background: #fce7f3;
+            color: #9d174d
+        }
+
+        .alt-tag.drink {
+            background: #e0e7ff;
+            color: #3730a3
         }
 
         .alt-price {
@@ -1063,9 +1216,13 @@
                         Расчёт по базе «Вкусно».</p>
                 </div>
                 <div
-                    style="background:#eef2ff;border-radius:12px;padding:12px;margin-bottom:16px;font-size:13px;color:#4338ca;text-align:center;border:1px solid #e0e7ff;">
-                    💡 <b>Хотите изменить блюдо?</b><br>Нажмите <b>✏️</b> — откроется список блюд этой категории из
-                    прайса «Вкусно».
+                    style="background:linear-gradient(135deg,#eef2ff 0%,#f5f3ff 100%);border-radius:14px;padding:14px 16px;margin-bottom:16px;font-size:13px;color:#4338ca;text-align:left;border:1px solid #e0e7ff;display:flex;gap:12px;align-items:center;">
+                    <div style="font-size:26px;flex-shrink:0;">✏️</div>
+                    <div>
+                        <b>Заменить любое блюдо?</b><br>
+                        Нажмите круглую фиолетовую кнопку справа от блюда — откроется список с фильтрами (мясо / рыба /
+                        вегетарианское).
+                    </div>
                 </div>
                 <div id="result-items"></div>
                 <div class="total-row"><span>Итого:</span><span id="result-total-bottom">0 ₽</span></div>
@@ -1132,11 +1289,45 @@
 
     <script>
         const API_URL = 'https://hvatitvsem.onrender.com';
-        const STORAGE_KEY = 'hvatit_state_v2';
+        const STORAGE_KEY = 'hvatit_state_v3';
+
+        /* ============================================================
+           ОПРЕДЕЛЕНИЕ ТЕГА ПО НАЗВАНИЮ БЛЮДА
+        ============================================================ */
+        const TAG_EMOJI = { meat: '🥩', fish: '🐟', veg: '🥬', sweet: '🍰', drink: '🥤' };
+        const TAG_LABEL = { meat: 'Мясо', fish: 'Рыба', veg: 'Вегетарианское', sweet: 'Сладкое', drink: 'Напиток' };
+
+        function detectTag(name) {
+            const n = (name || '').toLowerCase();
+
+            // Явные исключения (проверяются первыми)
+            if (/фруктов.*шашлыч|фруктов.*канапе|канапе фрукт|фруктовая тарелк/.test(n)) return 'veg';
+
+            // Сладкое
+            if (/торт[аы]|пирожн|десерт|желе|панна|котт|зефир|морожен|медовик|конфет|шоколад|кукис|тирамису|маскарпоне|печень\s|печенье|творожн.*мусс|ягодн.*мусс|профитрол.*сгущ|профитрол.*творог|сочник|слойка.*творог|слойка.*яблок|слойка.*сгущ|пирож.*яблок|шаньг|корзиночк|пирожное/.test(n)) return 'sweet';
+
+            // Рыба / морепродукты
+            if (/сёмг|семг|форел|лосос|сельд|икр|кревет|миди|кальмар|дорад|рыб[аыу]|тунец|скумбри|осетр|горбуш|нерк|треск|палтус|камбал|морск|крабов|лангустин|гребешк|устриц|креветок/.test(n)) return 'fish';
+
+            // Мясо / птица
+            if (/говяд|свинин|кур[аыое]|куриц|курин|телятин|язык|ветчин|бекон|колбас|сосис|буженин|прошутт|карбонат|окорок|купат|шашлык|шашлыч|крылыш|крыл[оа]|бедрышк|бедр[оа]|ножк|заливн|паштет|пастром|балык|грудин|стейк|медальон|каррер|цыплен|цыпл|утк|индейк|бастурм|хамон|салями|сервелат|колбаск|котлет|бифштекс|ростбиф|мяс[оа]|мясом|мясн|тушен|тушён|кесадиль.*кур|жульен/.test(n)) return 'meat';
+
+            // Напитки
+            if (/лимонад|морс|сок[аи]|вода|кофе|чай|капучино|латте|эспрессо|американо|глинтвейн|мохито|квас|компот|напит/.test(n)) return 'drink';
+
+            return 'veg';
+        }
+
+        function getTagBadge(name, extraClass) {
+            const tag = detectTag(name);
+            const label = TAG_LABEL[tag];
+            const emoji = TAG_EMOJI[tag];
+            const cls = extraClass || 'item-tag';
+            return `<span class="${cls} ${tag}">${emoji} ${label}</span>`;
+        }
 
         /* ============================================================
            ЛОКАЛЬНАЯ БАЗА БЛЮД «ВКУСНО» (из прайса)
-           Формат: [name, unit, price, package_size]
         ============================================================ */
         const LOCAL_DISHES = {
             'Холодные закуски': [
@@ -1692,6 +1883,8 @@
             }
         }
 
+        const PENCIL_SVG = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>`;
+
         function renderResult(data) {
             document.getElementById('result-subtitle').textContent = `${data.adults} взрослых · ${data.hours} часа`;
             document.getElementById('result-total').textContent = formatMoney(data.total_cost);
@@ -1730,11 +1923,11 @@
                         : `${item.final_amount} ${item.unit}`;
                     html += `<div class="item-row">
         <div class="item-info">
-          <div class="item-name">${item.name}</div>
+          <div class="item-name">${item.name} ${getTagBadge(item.name)}</div>
           <div class="item-qty">${qty}</div>
         </div>
         <span class="item-price">${formatMoney(item.total_price)}</span>
-        <button class="item-edit" data-cat="${cat}" data-name="${item.name.replace(/"/g, '&quot;')}" title="Заменить">✏️</button>
+        <button class="item-edit pulse" data-cat="${cat}" data-name="${item.name.replace(/"/g, '&quot;')}" title="Заменить блюдо" aria-label="Заменить блюдо">${PENCIL_SVG}</button>
       </div>`;
                 });
                 html += `</div>`;
@@ -1743,11 +1936,15 @@
             document.querySelectorAll('.item-edit').forEach(btn => {
                 btn.addEventListener('click', () => openEditor(btn.dataset.cat, btn.dataset.name));
             });
+            // Через 3 секунды убираем пульсацию — чтобы не отвлекала
+            setTimeout(() => {
+                document.querySelectorAll('.item-edit.pulse').forEach(b => b.classList.remove('pulse'));
+            }, 3200);
             saveState();
         }
 
         /* ============================================================
-           РЕДАКТОР: ЛОКАЛЬНЫЕ БЛЮДА ИЗ ПРАЙСА
+           РЕДАКТОР: ЛОКАЛЬНЫЕ БЛЮДА + ФИЛЬТР ПО ТЕГАМ
         ============================================================ */
         let editingContext = null;
 
@@ -1758,10 +1955,9 @@
             title.textContent = `${category} — заменить блюдо`;
             overlay.classList.add('active');
 
-            // Пытаемся найти блюда по точному названию категории, затем по частичному совпадению
+            // Ищем блюда по точному имени категории, затем по частичному
             let dishes = getLocalDishes(category);
             if (!dishes.length) {
-                // Например, "Холодные закуски" приходят с бэка — попробуем найти нечётко
                 const keys = Object.keys(LOCAL_DISHES);
                 const lower = category.toLowerCase();
                 let matchKey = keys.find(k => k.toLowerCase() === lower);
@@ -1774,7 +1970,6 @@
                 return;
             }
 
-            // Убираем текущее блюдо из списка
             const filtered = dishes.filter(d => d.name !== currentName);
             editingContext = { category, currentName };
 
@@ -1783,16 +1978,52 @@
                 return;
             }
 
-            body.innerHTML = `<p class="modal-hint">База «Вкусно». Нажмите на блюдо для замены. Цена пересчитается автоматически.</p>` +
-                filtered.map(d => {
-                    const safeName = d.name.replace(/"/g, '&quot;');
-                    return `<div class="alt-item" data-name="${safeName}" data-price="${d.price}" data-unit="${d.unit}" data-pkg="${d.package_size}">
-        <div class="alt-name">${d.name}</div>
-        <div class="alt-price">${formatMoney(d.price)}/${d.unit}</div>
-      </div>`;
-                }).join('');
+            // Проверяем, какие теги есть в списке
+            const presentTags = new Set(filtered.map(d => detectTag(d.name)));
 
-            document.querySelectorAll('.alt-item').forEach(el => {
+            // Фильтры — только для тегов, которые есть в этой категории
+            const filterChips = [['all', 'Все']];
+            if (presentTags.has('meat')) filterChips.push(['meat', '🥩 Мясо']);
+            if (presentTags.has('fish')) filterChips.push(['fish', '🐟 Рыба']);
+            if (presentTags.has('veg')) filterChips.push(['veg', '🥬 Вегетарианское']);
+            if (presentTags.has('sweet')) filterChips.push(['sweet', '🍰 Сладкое']);
+            if (presentTags.has('drink')) filterChips.push(['drink', '🥤 Напитки']);
+
+            body.innerHTML = `
+    <p class="modal-hint">База «Вкусно». Количество порций и цена пересчитаются автоматически.</p>
+    <div class="modal-tags" id="modal-tags">
+      ${filterChips.map(([val, label], i) => `<button class="modal-tag ${i === 0 ? 'active' : ''}" data-filter="${val}">${label}</button>`).join('')}
+    </div>
+    <div id="modal-list">
+      ${filtered.map(d => {
+                const tag = detectTag(d.name);
+                const safeName = d.name.replace(/"/g, '&quot;');
+                return `<div class="alt-item" data-name="${safeName}" data-price="${d.price}" data-unit="${d.unit}" data-pkg="${d.package_size}" data-tag="${tag}">
+          <div class="alt-info">
+            <div class="alt-name">${d.name}</div>
+            <div class="alt-meta"><span class="alt-tag ${tag}">${TAG_EMOJI[tag]} ${TAG_LABEL[tag]}</span></div>
+          </div>
+          <div class="alt-price">${formatMoney(d.price)}/${d.unit}</div>
+        </div>`;
+            }).join('')}
+    </div>
+  `;
+
+            // Фильтр по тегам
+            body.querySelectorAll('.modal-tag').forEach(tagBtn => {
+                tagBtn.addEventListener('click', () => {
+                    body.querySelectorAll('.modal-tag').forEach(b => b.classList.remove('active'));
+                    tagBtn.classList.add('active');
+                    const filter = tagBtn.dataset.filter;
+                    body.querySelectorAll('.alt-item').forEach(item => {
+                        if (filter === 'all' || item.dataset.tag === filter) item.classList.remove('hidden');
+                        else item.classList.add('hidden');
+                    });
+                });
+            });
+
+            // Клик по блюду — замена
+            body.querySelectorAll('.alt-item').forEach(el => {
                 el.addEventListener('click', () => replaceDish({
                     name: el.dataset.name,
                     price_per_unit: parseFloat(el.dataset.price),
