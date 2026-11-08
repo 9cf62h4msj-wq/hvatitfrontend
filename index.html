@@ -15,72 +15,69 @@
         href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥂</text></svg>">
     <style>
         :root {
-            --card: rgba(255, 255, 255, 0.85);
+            --card: rgba(255, 255, 255, .85);
             --text: #1a1a1a;
             --text-muted: #6b7280;
             --primary-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-            --primary-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+            --primary-shadow: 0 4px 14px rgba(99, 102, 241, .4);
             --border: #e5e7eb;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --error: #ef4444;
             --radius: 24px;
             --radius-btn: 20px;
             --radius-sm: 16px;
-            --shadow-card: 0 8px 32px rgba(31, 38, 135, 0.08);
+            --shadow-card: 0 8px 32px rgba(31, 38, 135, .08)
         }
 
         .cat-hot {
             --cat-color: #ef4444;
-            --cat-bg: #fef2f2;
+            --cat-bg: #fef2f2
         }
 
         .cat-salads {
             --cat-color: #10b981;
-            --cat-bg: #ecfdf5;
+            --cat-bg: #ecfdf5
         }
 
         .cat-snacks {
             --cat-color: #f59e0b;
-            --cat-bg: #fffbeb;
+            --cat-bg: #fffbeb
         }
 
         .cat-dessert {
             --cat-color: #ec4899;
-            --cat-bg: #fdf2f8;
+            --cat-bg: #fdf2f8
         }
 
         .cat-drinks {
             --cat-color: #3b82f6;
-            --cat-bg: #eff6ff;
+            --cat-bg: #eff6ff
         }
 
         .cat-bread {
             --cat-color: #a16207;
-            --cat-bg: #fefce8;
+            --cat-bg: #fefce8
         }
 
         .cat-garnish {
             --cat-color: #8b5cf6;
-            --cat-bg: #f5f3ff;
+            --cat-bg: #f5f3ff
         }
 
         .cat-default {
             --cat-color: #6b7280;
-            --cat-bg: #f9fafb;
+            --cat-bg: #f9fafb
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            -webkit-tap-highlight-color: transparent;
+            -webkit-tap-highlight-color: transparent
         }
 
         html,
         body {
             min-height: 100vh;
-            overflow-x: hidden;
+            overflow-x: hidden
         }
 
         body {
@@ -92,7 +89,7 @@
             padding: 16px;
             position: relative;
             background: linear-gradient(135deg, #eef2ff 0%, #faf5ff 40%, #f0f9ff 100%);
-            background-attachment: fixed;
+            background-attachment: fixed
         }
 
         .bg-blobs {
@@ -103,15 +100,15 @@
             height: 100%;
             z-index: 0;
             pointer-events: none;
-            overflow: hidden;
+            overflow: hidden
         }
 
         .blob {
             position: absolute;
             border-radius: 50%;
             filter: blur(80px);
-            opacity: 0.5;
-            animation: float 20s ease-in-out infinite;
+            opacity: .5;
+            animation: float 20s ease-in-out infinite
         }
 
         .blob-1 {
@@ -119,7 +116,7 @@
             height: 340px;
             background: radial-gradient(circle, #a5b4fc 0%, transparent 70%);
             top: -80px;
-            left: -80px;
+            left: -80px
         }
 
         .blob-2 {
@@ -128,7 +125,7 @@
             background: radial-gradient(circle, #f0abfc 0%, transparent 70%);
             top: 30%;
             right: -120px;
-            animation-delay: -7s;
+            animation-delay: -7s
         }
 
         .blob-3 {
@@ -137,22 +134,22 @@
             background: radial-gradient(circle, #a7f3d0 0%, transparent 70%);
             bottom: -100px;
             left: 20%;
-            animation-delay: -14s;
+            animation-delay: -14s
         }
 
         @keyframes float {
 
             0%,
             100% {
-                transform: translate(0, 0) scale(1);
+                transform: translate(0, 0) scale(1)
             }
 
             33% {
-                transform: translate(30px, -40px) scale(1.1);
+                transform: translate(30px, -40px) scale(1.1)
             }
 
             66% {
-                transform: translate(-20px, 30px) scale(0.95);
+                transform: translate(-20px, 30px) scale(.95)
             }
         }
 
@@ -164,35 +161,35 @@
             gap: 16px;
             padding-bottom: 40px;
             position: relative;
-            z-index: 1;
+            z-index: 1
         }
 
         .progress {
             display: flex;
             justify-content: center;
             gap: 8px;
-            padding: 8px 0;
+            padding: 8px 0
         }
 
         .progress-dot {
             width: 10px;
             height: 10px;
             border-radius: 50%;
-            background: rgba(209, 213, 219, 0.7);
-            transition: all 0.3s ease;
+            background: rgba(209, 213, 219, .7);
+            transition: all .3s ease
         }
 
         .progress-dot.active {
             background: var(--primary-gradient);
-            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
-            transform: scale(1.1);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, .15);
+            transform: scale(1.1)
         }
 
         .top-bar {
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 4px 0;
+            padding: 4px 0
         }
 
         .back-btn {
@@ -202,20 +199,20 @@
             padding: 10px 18px;
             border-radius: var(--radius-btn);
             border: none;
-            background: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, .7);
             backdrop-filter: blur(10px);
             color: var(--text);
             font-size: 15px;
             font-weight: 600;
             cursor: pointer;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-            transition: all 0.2s ease;
-            font-family: inherit;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .06);
+            transition: all .2s ease;
+            font-family: inherit
         }
 
         .back-btn:active {
-            transform: scale(0.96);
-            background: rgba(243, 244, 246, 0.9);
+            transform: scale(.96);
+            background: rgba(243, 244, 246, .9)
         }
 
         .card {
@@ -224,38 +221,38 @@
             border-radius: var(--radius);
             padding: 24px;
             box-shadow: var(--shadow-card);
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.6);
+            transition: all .3s ease;
+            border: 1px solid rgba(255, 255, 255, .6)
         }
 
         .card-title {
             font-size: 20px;
             font-weight: 700;
             margin-bottom: 4px;
-            letter-spacing: -0.02em;
+            letter-spacing: -.02em
         }
 
         .grid-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            gap: 12px
         }
 
         .option-card {
-            background: rgba(250, 251, 255, 0.8);
+            background: rgba(250, 251, 255, .8);
             border: 2px solid transparent;
             border-radius: var(--radius-sm);
             padding: 16px 12px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all .25s cubic-bezier(.4, 0, .2, 1);
             user-select: none;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 6px;
             position: relative;
-            overflow: hidden;
+            overflow: hidden
         }
 
         .option-card::before {
@@ -267,36 +264,36 @@
             height: 3px;
             background: var(--primary-gradient);
             transform: scaleX(0);
-            transition: transform 0.3s ease;
+            transition: transform .3s ease
         }
 
         .option-card:active {
-            transform: scale(0.97);
+            transform: scale(.97)
         }
 
         .option-card.selected {
             border-color: #a5b4fc;
             background: linear-gradient(135deg, #eef2ff 0%, #f5f3ff 100%);
-            box-shadow: 0 4px 16px rgba(99, 102, 241, 0.15);
+            box-shadow: 0 4px 16px rgba(99, 102, 241, .15)
         }
 
         .option-card.selected::before {
-            transform: scaleX(1);
+            transform: scaleX(1)
         }
 
         .option-icon {
             font-size: 34px;
-            line-height: 1;
+            line-height: 1
         }
 
         .option-label {
             font-weight: 600;
-            font-size: 15px;
+            font-size: 15px
         }
 
         .option-desc {
             font-size: 12px;
-            color: var(--text-muted);
+            color: var(--text-muted)
         }
 
         .counter-row {
@@ -304,22 +301,22 @@
             justify-content: space-between;
             align-items: center;
             padding: 14px 0;
-            border-bottom: 1px solid var(--border);
+            border-bottom: 1px solid var(--border)
         }
 
         .counter-row:last-child {
-            border-bottom: none;
+            border-bottom: none
         }
 
         .counter-label {
             font-weight: 600;
-            font-size: 16px;
+            font-size: 16px
         }
 
         .counter-controls {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 8px
         }
 
         .counter-btn {
@@ -333,20 +330,20 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.2s ease;
+            transition: all .2s ease;
             color: var(--text);
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-            flex-shrink: 0;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, .05);
+            flex-shrink: 0
         }
 
         .counter-btn:active {
-            transform: scale(0.92);
+            transform: scale(.92)
         }
 
         .counter-btn:disabled {
-            opacity: 0.3;
+            opacity: .3;
             cursor: not-allowed;
-            transform: none;
+            transform: none
         }
 
         .counter-input {
@@ -360,20 +357,19 @@
             padding: 0 6px;
             outline: none;
             font-family: inherit;
-            background: rgba(250, 251, 255, 0.9);
-            transition: border-color 0.2s, background 0.2s;
+            background: rgba(250, 251, 255, .9);
+            transition: border-color .2s, background .2s
         }
 
         .counter-input:focus {
             border-color: #a5b4fc;
             background: #fff;
-            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, .1)
         }
 
-        /* ===== Поле даты — обязательное, ровное на мобильных ===== */
         .date-wrapper {
             position: relative;
-            width: 100%;
+            width: 100%
         }
 
         .date-input {
@@ -389,7 +385,7 @@
             font-size: 16px;
             font-family: inherit;
             outline: none;
-            background: rgba(250, 251, 255, 0.9);
+            background: rgba(250, 251, 255, .9);
             color: var(--text);
             cursor: pointer;
             line-height: 1.4;
@@ -397,81 +393,77 @@
             appearance: none;
             -webkit-text-fill-color: var(--text);
             text-align: left;
-            transition: border-color 0.2s, background 0.2s;
+            transition: border-color .2s, background .2s
         }
 
         .date-input:focus {
             border-color: #a5b4fc;
             background: #fff;
-            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
-        }
-
-        .date-input:invalid {
-            border-color: #fca5a5;
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, .1)
         }
 
         .date-input::-webkit-calendar-picker-indicator {
             cursor: pointer;
-            opacity: 0.7;
+            opacity: .7;
             padding: 2px;
-            margin-right: -4px;
+            margin-right: -4px
         }
 
         .date-input::-webkit-datetime-edit {
             padding: 0;
-            line-height: 1.4;
+            line-height: 1.4
         }
 
         .date-input::-webkit-datetime-edit-fields-wrapper {
-            padding: 0;
+            padding: 0
         }
 
         .date-input::-webkit-date-and-time-value {
             text-align: left;
-            margin: 0;
+            margin: 0
         }
 
         .date-hint {
             font-size: 12px;
             color: var(--text-muted);
             margin-top: 6px;
-            padding-left: 4px;
+            padding-left: 4px
         }
 
         .date-hint.error {
             color: #b91c1c;
-            font-weight: 600;
+            font-weight: 600
         }
 
         .budget-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
+            gap: 10px
         }
 
         .budget-btn {
             padding: 16px;
             border: 2px solid transparent;
             border-radius: var(--radius-btn);
-            background: rgba(250, 251, 255, 0.8);
+            background: rgba(250, 251, 255, .8);
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.25s ease;
+            transition: all .25s ease;
             color: var(--text);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-            font-family: inherit;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .04);
+            font-family: inherit
         }
 
         .budget-btn:active {
-            transform: scale(0.97);
+            transform: scale(.97)
         }
 
         .budget-btn.selected {
             border-color: #a5b4fc;
             background: linear-gradient(135deg, #eef2ff 0%, #f5f3ff 100%);
-            box-shadow: 0 4px 16px rgba(99, 102, 241, 0.2);
-            color: #4338ca;
+            box-shadow: 0 4px 16px rgba(99, 102, 241, .2);
+            color: #4338ca
         }
 
         .budget-input {
@@ -481,15 +473,15 @@
             border-radius: var(--radius-btn);
             font-size: 16px;
             outline: none;
-            transition: all 0.2s ease;
-            background: rgba(250, 251, 255, 0.9);
-            font-family: inherit;
+            transition: all .2s ease;
+            background: rgba(250, 251, 255, .9);
+            font-family: inherit
         }
 
         .budget-input:focus {
             border-color: #a5b4fc;
-            background: #ffffff;
-            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, .1)
         }
 
         .btn {
@@ -500,55 +492,55 @@
             font-size: 17px;
             font-weight: 700;
             cursor: pointer;
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-            letter-spacing: -0.01em;
-            font-family: inherit;
+            transition: all .25s cubic-bezier(.4, 0, .2, 1);
+            letter-spacing: -.01em;
+            font-family: inherit
         }
 
         .btn-primary {
             background: var(--primary-gradient);
-            color: white;
-            box-shadow: var(--primary-shadow);
+            color: #fff;
+            box-shadow: var(--primary-shadow)
         }
 
         .btn-primary:active:not(:disabled) {
-            transform: scale(0.97);
+            transform: scale(.97)
         }
 
         .btn-primary:disabled {
-            opacity: 0.5;
+            opacity: .5;
             cursor: not-allowed;
             box-shadow: none;
-            background: #d1d5db;
+            background: #d1d5db
         }
 
         .btn-secondary {
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, .85);
             backdrop-filter: blur(10px);
             color: var(--text);
             border: 2px solid var(--border);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .04)
         }
 
         .btn-secondary:active {
             background: #f9fafb;
-            transform: scale(0.97);
+            transform: scale(.97)
         }
 
         .btn-row {
             display: flex;
-            gap: 12px;
+            gap: 12px
         }
 
         .btn-row .btn {
             flex: 1;
             padding: 16px 12px;
-            font-size: 15px;
+            font-size: 15px
         }
 
         .result-header {
             text-align: center;
-            padding: 16px 0;
+            padding: 16px 0
         }
 
         .result-total {
@@ -559,14 +551,14 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            letter-spacing: -0.03em;
+            letter-spacing: -.03em
         }
 
         .result-per-guest {
             font-size: 14px;
             color: var(--text-muted);
             font-weight: 600;
-            margin-top: 4px;
+            margin-top: 4px
         }
 
         .badge {
@@ -574,26 +566,26 @@
             padding: 8px 20px;
             border-radius: 24px;
             font-size: 14px;
-            font-weight: 700;
+            font-weight: 700
         }
 
         .badge-success {
             background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
-            color: #065f46;
+            color: #065f46
         }
 
         .badge-warning {
             background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-            color: #92400e;
+            color: #92400e
         }
 
         .badge-error {
             background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
-            color: #991b1b;
+            color: #991b1b
         }
 
         .category-block {
-            margin-top: 20px;
+            margin-top: 20px
         }
 
         .category-title {
@@ -606,7 +598,7 @@
             border-radius: var(--radius-sm);
             background: var(--cat-bg, #f9fafb);
             color: var(--cat-color, #1a1a1a);
-            border-left: 4px solid var(--cat-color, #6b7280);
+            border-left: 4px solid var(--cat-color, #6b7280)
         }
 
         .category-title .cat-icon {
@@ -617,8 +609,8 @@
             width: 32px;
             height: 32px;
             border-radius: 50%;
-            background: #ffffff;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+            background: #fff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, .06)
         }
 
         .item-row {
@@ -629,13 +621,13 @@
             border-bottom: 1px solid #f9fafb;
             font-size: 15px;
             gap: 8px;
-            background: rgba(255, 255, 255, 0.7);
-            position: relative;
+            background: rgba(255, 255, 255, .7);
+            position: relative
         }
 
         .item-row:last-child {
             border-bottom: none;
-            border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+            border-radius: 0 0 var(--radius-sm) var(--radius-sm)
         }
 
         .item-info {
@@ -643,54 +635,43 @@
             display: flex;
             flex-direction: column;
             gap: 2px;
-            min-width: 0;
+            min-width: 0
         }
 
         .item-name {
-            font-weight: 500;
-        }
-
-        .item-name .off-filter-mark {
-            font-size: 11px;
-            color: #b45309;
-            background: #fef3c7;
-            padding: 1px 6px;
-            border-radius: 6px;
-            margin-left: 6px;
-            font-weight: 600;
-            vertical-align: middle;
+            font-weight: 500
         }
 
         .item-qty {
             color: var(--text-muted);
             font-size: 13px;
-            white-space: nowrap;
+            white-space: nowrap
         }
 
         .item-price {
             font-weight: 700;
             white-space: nowrap;
-            font-size: 15px;
+            font-size: 15px
         }
 
         .item-edit {
             width: 36px;
             height: 36px;
             border-radius: 10px;
-            background: rgba(243, 244, 246, 0.9);
+            background: rgba(243, 244, 246, .9);
             border: none;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 16px;
-            transition: all 0.2s;
-            flex-shrink: 0;
+            transition: all .2s;
+            flex-shrink: 0
         }
 
         .item-edit:active {
-            transform: scale(0.9);
-            background: #e5e7eb;
+            transform: scale(.9);
+            background: #e5e7eb
         }
 
         .total-row {
@@ -700,29 +681,29 @@
             font-size: 20px;
             font-weight: 800;
             border-top: 2px solid var(--border);
-            margin-top: 12px;
+            margin-top: 12px
         }
 
         .screen {
-            display: none;
+            display: none
         }
 
         .screen.active {
             display: flex;
             flex-direction: column;
             gap: 16px;
-            animation: fadeIn 0.3s ease;
+            animation: fadeIn .3s ease
         }
 
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(8px);
+                transform: translateY(8px)
             }
 
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translateY(0)
             }
         }
 
@@ -731,7 +712,7 @@
             padding: 60px 20px;
             font-size: 20px;
             color: var(--text-muted);
-            font-weight: 600;
+            font-weight: 600
         }
 
         .loader::after {
@@ -743,12 +724,12 @@
             border-radius: 50%;
             border: 3px solid #e5e7eb;
             border-top-color: #6366f1;
-            animation: spin 0.8s linear infinite;
+            animation: spin .8s linear infinite
         }
 
         @keyframes spin {
             to {
-                transform: rotate(360deg);
+                transform: rotate(360deg)
             }
         }
 
@@ -759,7 +740,7 @@
             border-radius: var(--radius-sm);
             text-align: center;
             font-size: 15px;
-            font-weight: 500;
+            font-weight: 500
         }
 
         .modal-overlay {
@@ -768,36 +749,36 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, .5);
             backdrop-filter: blur(4px);
             z-index: 100;
             display: none;
             align-items: flex-end;
-            justify-content: center;
+            justify-content: center
         }
 
         .modal-overlay.active {
-            display: flex;
+            display: flex
         }
 
         .modal {
-            background: #ffffff;
+            background: #fff;
             width: 100%;
             max-width: 640px;
             border-radius: 24px 24px 0 0;
             max-height: 85vh;
             display: flex;
             flex-direction: column;
-            animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: slideUp .3s cubic-bezier(.4, 0, .2, 1)
         }
 
         @keyframes slideUp {
             from {
-                transform: translateY(100%);
+                transform: translateY(100%)
             }
 
             to {
-                transform: translateY(0);
+                transform: translateY(0)
             }
         }
 
@@ -806,13 +787,13 @@
             border-bottom: 1px solid var(--border);
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: center
         }
 
         .modal-title {
             font-size: 18px;
             font-weight: 700;
-            padding-right: 12px;
+            padding-right: 12px
         }
 
         .modal-close {
@@ -826,20 +807,20 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-shrink: 0;
+            flex-shrink: 0
         }
 
         .modal-body {
             padding: 12px 24px 20px;
             overflow-y: auto;
-            flex: 1;
+            flex: 1
         }
 
         .modal-hint {
             font-size: 13px;
             color: var(--text-muted);
             margin-bottom: 12px;
-            padding: 0 4px;
+            padding: 0 4px
         }
 
         .alt-item {
@@ -851,40 +832,34 @@
             background: #f9fafb;
             margin-bottom: 8px;
             cursor: pointer;
-            transition: all 0.2s ease;
-            border: 2px solid transparent;
+            transition: all .2s ease;
+            border: 2px solid transparent
         }
 
         .alt-item:active {
-            transform: scale(0.98);
-            background: #eef2ff;
+            transform: scale(.98);
+            background: #eef2ff
         }
 
         .alt-name {
             font-weight: 500;
             font-size: 15px;
             flex: 1;
-            padding-right: 12px;
+            padding-right: 12px
         }
 
         .alt-price {
             font-weight: 700;
             font-size: 15px;
             white-space: nowrap;
-            color: #4338ca;
-        }
-
-        .alt-tags {
-            font-size: 12px;
-            color: var(--text-muted);
-            margin-top: 2px;
+            color: #4338ca
         }
 
         .modal-loading,
         .modal-empty {
             text-align: center;
             padding: 40px 20px;
-            color: var(--text-muted);
+            color: var(--text-muted)
         }
 
         .modal-loader {
@@ -894,7 +869,7 @@
             border-radius: 50%;
             border: 3px solid #e5e7eb;
             border-top-color: #6366f1;
-            animation: spin 0.8s linear infinite;
+            animation: spin .8s linear infinite
         }
 
         .modal-info {
@@ -903,25 +878,25 @@
             padding: 12px 16px;
             border-radius: 12px;
             font-size: 14px;
-            margin-bottom: 12px;
+            margin-bottom: 12px
         }
 
         .modal-info strong {
             display: block;
             font-size: 16px;
-            margin-top: 4px;
+            margin-top: 4px
         }
 
         .modal-actions {
             display: flex;
             gap: 10px;
-            margin-top: 16px;
+            margin-top: 16px
         }
 
         .modal-actions .btn {
             flex: 1;
             padding: 14px 12px;
-            font-size: 15px;
+            font-size: 15px
         }
 
         .toast {
@@ -930,20 +905,20 @@
             bottom: 24px;
             transform: translateX(-50%) translateY(100px);
             background: #1f2937;
-            color: white;
+            color: #fff;
             padding: 12px 20px;
             border-radius: 12px;
             font-size: 14px;
             font-weight: 600;
             z-index: 200;
             opacity: 0;
-            transition: all 0.3s ease;
-            pointer-events: none;
+            transition: all .3s ease;
+            pointer-events: none
         }
 
         .toast.show {
             opacity: 1;
-            transform: translateX(-50%) translateY(0);
+            transform: translateX(-50%) translateY(0)
         }
     </style>
 </head>
@@ -956,7 +931,6 @@
     </div>
 
     <div class="app" id="app">
-        <!-- ЭКРАН 1: Мероприятие -->
         <div class="screen active" id="screen-event">
             <div class="progress">
                 <div class="progress-dot active"></div>
@@ -966,10 +940,10 @@
                 <div class="progress-dot"></div>
             </div>
             <div class="card" style="text-align:center;">
-                <h1 style="font-size:30px; margin-bottom:8px; letter-spacing:-0.03em;">🥂 Хватит всем</h1>
-                <p style="color:var(--text-muted); font-size:15px;">Рассчитаем еду и напитки для вашего мероприятия в
+                <h1 style="font-size:30px;margin-bottom:8px;letter-spacing:-.03em;">🥂 Хватит всем</h1>
+                <p style="color:var(--text-muted);font-size:15px;">Рассчитаем еду и напитки для вашего мероприятия в
                     Перми за 1 минуту.</p>
-                <p style="font-size:12px; color:#888; margin-top:6px;">Расчёт по базе цен кейтеринга «Вкусно!»</p>
+                <p style="font-size:12px;color:#888;margin-top:6px;">Расчёт по базе цен кейтеринга «Вкусно!»</p>
             </div>
             <div class="card">
                 <div class="card-title">Какое мероприятие планируете?</div>
@@ -978,7 +952,6 @@
             <button class="btn btn-primary" id="btn-next-event" disabled>Далее →</button>
         </div>
 
-        <!-- ЭКРАН 2: Гости + Дата -->
         <div class="screen" id="screen-guests">
             <div class="progress">
                 <div class="progress-dot active"></div>
@@ -987,10 +960,7 @@
                 <div class="progress-dot"></div>
                 <div class="progress-dot"></div>
             </div>
-            <div class="top-bar">
-                <button class="back-btn" data-back="screen-event">← Назад</button>
-            </div>
-
+            <div class="top-bar"><button class="back-btn" data-back="screen-event">← Назад</button></div>
             <div class="card">
                 <div class="card-title">Дата мероприятия <span style="color:#ef4444;">*</span></div>
                 <div class="date-wrapper" style="margin-top:12px;">
@@ -998,26 +968,23 @@
                 </div>
                 <div class="date-hint" id="date-hint">Укажите дату — это обязательно</div>
             </div>
-
             <div class="card">
                 <div class="card-title">Сколько гостей?</div>
                 <div class="counter-row" style="margin-top:8px;">
                     <span class="counter-label">Взрослые</span>
                     <div class="counter-controls">
                         <button class="counter-btn" id="adults-minus" type="button">−</button>
-                        <input type="number" inputmode="numeric" class="counter-input" id="adults-input" value="10"
-                            min="1" max="500">
+                        <input type="number" inputmode="numeric" class="counter-input" id="adults-input" value="12"
+                            min="12" max="500">
                         <button class="counter-btn" id="adults-plus" type="button">+</button>
                     </div>
                 </div>
-                <div style="text-align:center; margin-top:16px; font-weight:700; font-size:17px;">
-                    Всего гостей: <span id="total-guests">10</span>
-                </div>
+                <div style="text-align:center;margin-top:16px;font-weight:700;font-size:17px;">Всего гостей: <span
+                        id="total-guests">12</span></div>
             </div>
             <button class="btn btn-primary" id="btn-next-guests">Далее →</button>
         </div>
 
-        <!-- ЭКРАН 3: Длительность -->
         <div class="screen" id="screen-duration">
             <div class="progress">
                 <div class="progress-dot active"></div>
@@ -1026,19 +993,16 @@
                 <div class="progress-dot"></div>
                 <div class="progress-dot"></div>
             </div>
-            <div class="top-bar">
-                <button class="back-btn" data-back="screen-guests">← Назад</button>
-            </div>
+            <div class="top-bar"><button class="back-btn" data-back="screen-guests">← Назад</button></div>
             <div class="card">
                 <div class="card-title">Сколько продлится мероприятие?</div>
-                <p style="font-size:14px; color:var(--text-muted); margin:8px 0 16px;">Продолжительность влияет на
+                <p style="font-size:14px;color:var(--text-muted);margin:8px 0 16px;">Продолжительность влияет на
                     количество еды и напитков.</p>
                 <div class="grid-2" id="duration-grid"></div>
             </div>
             <button class="btn btn-primary" id="btn-next-duration" disabled>Далее →</button>
         </div>
 
-        <!-- ЭКРАН 4: Бюджет -->
         <div class="screen" id="screen-budget">
             <div class="progress">
                 <div class="progress-dot active"></div>
@@ -1047,13 +1011,11 @@
                 <div class="progress-dot active"></div>
                 <div class="progress-dot"></div>
             </div>
-            <div class="top-bar">
-                <button class="back-btn" data-back="screen-duration">← Назад</button>
-            </div>
+            <div class="top-bar"><button class="back-btn" data-back="screen-duration">← Назад</button></div>
             <div class="card">
                 <div class="card-title">Какой у вас бюджет?</div>
                 <div class="budget-grid" id="budget-grid" style="margin-top:16px;"></div>
-                <div id="custom-budget-block" style="display:none; margin-top:12px;">
+                <div id="custom-budget-block" style="display:none;margin-top:12px;">
                     <input type="number" class="budget-input" id="custom-budget-input" placeholder="Введите сумму в ₽"
                         min="1000" step="500">
                 </div>
@@ -1061,7 +1023,6 @@
             <button class="btn btn-primary" id="btn-next-budget" disabled>Далее →</button>
         </div>
 
-        <!-- ЭКРАН 5: Предпочтения -->
         <div class="screen" id="screen-prefs">
             <div class="progress">
                 <div class="progress-dot active"></div>
@@ -1070,116 +1031,88 @@
                 <div class="progress-dot active"></div>
                 <div class="progress-dot active"></div>
             </div>
-            <div class="top-bar">
-                <button class="back-btn" data-back="screen-budget">← Назад</button>
-            </div>
+            <div class="top-bar"><button class="back-btn" data-back="screen-budget">← Назад</button></div>
             <div class="card">
                 <div class="card-title">Что предпочитаете?</div>
-                <p style="font-size:14px; color:var(--text-muted); margin:8px 0 16px;">Можно выбрать несколько.
+                <p style="font-size:14px;color:var(--text-muted);margin:8px 0 16px;">Можно выбрать несколько.
                     «Авто-подбор» — сбалансированный набор.</p>
                 <div class="grid-2" id="prefs-grid"></div>
             </div>
             <div class="card" style="text-align:center;">
-                <div style="font-size:14px; color:var(--text-muted);">Всё готово?</div>
-                <div style="font-weight:600; margin:8px 0; font-size:15px;" id="summary-text"></div>
-                <div style="font-size:12px; color:var(--text-muted);">
-                    Цена без учёта обслуживания · база «Вкусно»
-                </div>
+                <div style="font-size:14px;color:var(--text-muted);">Всё готово?</div>
+                <div style="font-weight:600;margin:8px 0;font-size:15px;" id="summary-text"></div>
+                <div style="font-size:12px;color:var(--text-muted);">Цена без учёта обслуживания · база «Вкусно»</div>
             </div>
             <button class="btn btn-primary" id="btn-calculate">Рассчитать</button>
         </div>
 
-        <!-- ЭКРАН 6: Загрузка -->
         <div class="screen" id="screen-loading">
             <div class="loader">⏳ Считаем ваш стол…</div>
         </div>
 
-        <!-- ЭКРАН 7: Результат -->
         <div class="screen" id="screen-result">
             <div class="card">
                 <div class="result-header">
                     <h2 style="font-size:24px;">🥂 Ваш стол готов!</h2>
-                    <p style="color:var(--text-muted); font-size:14px;" id="result-subtitle"></p>
+                    <p style="color:var(--text-muted);font-size:14px;" id="result-subtitle"></p>
                     <div class="result-total" id="result-total">0 ₽</div>
                     <div class="result-per-guest" id="result-per-guest"></div>
                     <div id="result-badge-container" style="margin-top:12px;"></div>
-                    <p style="margin-top:12px; font-size:15px; font-weight:600;" id="result-remaining"></p>
-                    <p style="margin-top:8px; font-size:12px; color:var(--text-muted);">
-                        Цена без учёта обслуживания. Расчёт по базе «Вкусно».
-                    </p>
+                    <p style="margin-top:12px;font-size:15px;font-weight:600;" id="result-remaining"></p>
+                    <p style="margin-top:8px;font-size:12px;color:var(--text-muted);">Цена без учёта обслуживания.
+                        Расчёт по базе «Вкусно».</p>
                 </div>
-
                 <div
-                    style="background: #eef2ff; border-radius: 12px; padding: 12px; margin-bottom: 16px; font-size: 13px; color: #4338ca; text-align: center; border: 1px solid #e0e7ff;">
-                    💡 <b>Хотите изменить блюдо?</b><br>
-                    Нажмите на иконку <b>✏️</b> рядом с любым блюдом. Откроется список, из которого можно выбрать замену
-                    (например, заменить рыбу на мясо).
+                    style="background:#eef2ff;border-radius:12px;padding:12px;margin-bottom:16px;font-size:13px;color:#4338ca;text-align:center;border:1px solid #e0e7ff;">
+                    💡 <b>Хотите изменить блюдо?</b><br>Нажмите <b>✏️</b> — откроется список блюд этой категории из
+                    прайса «Вкусно».
                 </div>
-
                 <div id="result-items"></div>
-                <div class="total-row">
-                    <span>Итого:</span>
-                    <span id="result-total-bottom">0 ₽</span>
-                </div>
+                <div class="total-row"><span>Итого:</span><span id="result-total-bottom">0 ₽</span></div>
             </div>
-
-            <button class="btn btn-primary" id="btn-expand" style="display:none;">✨ Расширить меню</button>
             <button class="btn btn-primary" id="btn-increase" style="display:none;">💰 Увеличить бюджет</button>
             <button class="btn btn-secondary" id="btn-reroll" style="display:none;">🎲 Другое меню</button>
             <button class="btn btn-primary" id="btn-send-request"
-                style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">📩 Отправить заявку</button>
-
+                style="background:linear-gradient(135deg,#10b981 0%,#059669 100%);">📩 Отправить заявку</button>
             <div class="btn-row">
                 <button class="btn btn-secondary" id="btn-share">📤 Поделиться</button>
                 <button class="btn btn-secondary" id="btn-copy">📋 Скопировать</button>
             </div>
             <button class="btn btn-primary" id="btn-back">← Изменить параметры</button>
             <button class="btn btn-secondary" id="btn-restart">🔄 Новый расчёт</button>
-            <p style="text-align:center; font-size:12px; color:var(--text-muted); padding:8px;">
-                Все позиции — на базе «Вкусно». Цена без учёта обслуживания.
-            </p>
+            <p style="text-align:center;font-size:12px;color:var(--text-muted);padding:8px;">Все позиции — на базе
+                «Вкусно». Цена без учёта обслуживания.</p>
         </div>
 
-        <!-- ЭКРАН 8: Форма заявки -->
         <div class="screen" id="screen-send-request">
-            <div class="top-bar">
-                <button class="back-btn" id="back-from-request">← Назад</button>
-            </div>
+            <div class="top-bar"><button class="back-btn" id="back-from-request">← Назад</button></div>
             <div class="card">
                 <div class="card-title">📩 Отправить заявку</div>
-                <p style="font-size:14px; color:var(--text-muted); margin:8px 0 16px;">
-                    Оставьте контакты — мы свяжемся с вами в течение 15 минут.
-                </p>
-                <div style="margin-bottom:12px;">
-                    <label style="font-size:13px;color:var(--text-muted);display:block;margin-bottom:6px;">Имя *</label>
-                    <input type="text" class="budget-input" id="req-name" placeholder="Ваше имя">
+                <p style="font-size:14px;color:var(--text-muted);margin:8px 0 16px;">Оставьте контакты — мы свяжемся с
+                    вами в течение 15 минут.</p>
+                <div style="margin-bottom:12px;"><label
+                        style="font-size:13px;color:var(--text-muted);display:block;margin-bottom:6px;">Имя
+                        *</label><input type="text" class="budget-input" id="req-name" placeholder="Ваше имя"></div>
+                <div style="margin-bottom:12px;"><label
+                        style="font-size:13px;color:var(--text-muted);display:block;margin-bottom:6px;">Телефон
+                        *</label><input type="tel" class="budget-input" id="req-phone" placeholder="+7 999 123-45-67">
                 </div>
-                <div style="margin-bottom:12px;">
-                    <label style="font-size:13px;color:var(--text-muted);display:block;margin-bottom:6px;">Телефон
-                        *</label>
-                    <input type="tel" class="budget-input" id="req-phone" placeholder="+7 999 123-45-67">
-                </div>
-                <div style="margin-bottom:12px;">
-                    <label style="font-size:13px;color:var(--text-muted);display:block;margin-bottom:6px;">Email</label>
-                    <input type="email" class="budget-input" id="req-email" placeholder="your@email.com">
-                </div>
-                <div style="margin-bottom:16px;">
-                    <label
-                        style="font-size:13px;color:var(--text-muted);display:block;margin-bottom:6px;">Комментарий</label>
-                    <textarea class="budget-input" id="req-comment" rows="3"
-                        placeholder="Дата, пожелания..."></textarea>
-                </div>
+                <div style="margin-bottom:12px;"><label
+                        style="font-size:13px;color:var(--text-muted);display:block;margin-bottom:6px;">Email</label><input
+                        type="email" class="budget-input" id="req-email" placeholder="your@email.com"></div>
+                <div style="margin-bottom:16px;"><label
+                        style="font-size:13px;color:var(--text-muted);display:block;margin-bottom:6px;">Комментарий</label><textarea
+                        class="budget-input" id="req-comment" rows="3" placeholder="Пожелания..."></textarea></div>
                 <button class="btn btn-primary" id="btn-submit-request">Отправить заявку</button>
             </div>
         </div>
 
-        <!-- ЭКРАН 9: Успех -->
         <div class="screen" id="screen-send-success">
-            <div class="card" style="text-align:center; padding:40px 24px;">
-                <div style="font-size:64px; margin-bottom:16px;">✅</div>
+            <div class="card" style="text-align:center;padding:40px 24px;">
+                <div style="font-size:64px;margin-bottom:16px;">✅</div>
                 <h2 style="margin-bottom:12px;">Спасибо!</h2>
-                <p style="color:var(--text-muted); margin-bottom:8px;" id="success-text">Ваша заявка принята.</p>
-                <p style="color:var(--text-muted); font-size:13px;">Мы свяжемся с вами в течение 15 минут.</p>
+                <p style="color:var(--text-muted);margin-bottom:8px;" id="success-text">Ваша заявка принята.</p>
+                <p style="color:var(--text-muted);font-size:13px;">Мы свяжемся с вами в течение 15 минут.</p>
             </div>
             <button class="btn btn-secondary" id="btn-close-success">← Вернуться к расчёту</button>
         </div>
@@ -1199,71 +1132,338 @@
 
     <script>
         const API_URL = 'https://hvatitvsem.onrender.com';
-        const STORAGE_KEY = 'hvatit_state_v1';
+        const STORAGE_KEY = 'hvatit_state_v2';
 
+        /* ============================================================
+           ЛОКАЛЬНАЯ БАЗА БЛЮД «ВКУСНО» (из прайса)
+           Формат: [name, unit, price, package_size]
+        ============================================================ */
+        const LOCAL_DISHES = {
+            'Холодные закуски': [
+                ['Канапе с ветчиной и маслинами', 'шт', 60, 1],
+                ['Канапе с сыром и ветчиной', 'шт', 60, 1],
+                ['Канапе с сыром Маасдам, Фета и виноградом', 'шт', 60, 1],
+                ['Канапе овощные с черри и перцем', 'шт', 83, 1],
+                ['Канапе фруктовые', 'шт', 60, 1],
+                ['Фруктовые шашлычки', 'шт', 100, 1],
+                ['Канапе-десерт Медовик сметанный', 'шт', 85, 1],
+                ['Канапе с зефиром, бананами и виноградом', 'шт', 60, 1],
+                ['Розочка слабосолёной семги на тосте', 'шт', 130, 1],
+                ['Тарталетка-mini с сёмгой и творожным сыром', 'шт', 150, 1],
+                ['Волованы с креветкой, красной икрой и сыром', 'шт', 230, 1],
+                ['Королевская креветка на тосте', 'шт', 180, 1],
+                ['Канапе с креветкой на творожном сыре', 'шт', 190, 1],
+                ['Канапе с мидией, цитрусом и яблоком', 'шт', 115, 1],
+                ['Волованы с красной икрой и икорным муссом', 'шт', 190, 1],
+                ['Волованы с чёрной осетровой икрой и Маскарпоне', 'шт', 1700, 1],
+                ['Волованы с красной икрой', 'шт', 190, 1],
+                ['Ломтики подкопчёного кальмара на тосте', 'шт', 135, 1],
+                ['Волованы с муссом из семги и сыра', 'шт', 100, 1],
+                ['Волованы с красной икрой и муссом из сёмги', 'шт', 195, 1],
+                ['Профитроли с муссом из семги', 'шт', 130, 1],
+                ['Профитроли с красной икрой и сёмгой', 'шт', 180, 1],
+                ['Канапе с исландской сельдью', 'шт', 80, 1],
+                ['Канапе с говядиной и черри', 'шт', 135, 1],
+                ['Канапе с ветчиной и черри', 'шт', 95, 1],
+                ['Канапе Цезарь с куриной грудкой', 'шт', 100, 1],
+                ['Канапе с бужениной и корнишонами', 'шт', 215, 1],
+                ['Канапе с окороком и виноградом', 'шт', 95, 1],
+                ['Канапе с телячьим языком', 'шт', 140, 1],
+                ['Канапе с карбонатом и горчицей', 'шт', 95, 1],
+                ['Канапе с карбонатом, сулугуни и маслинами', 'шт', 97, 1],
+                ['Канапе с прошутто, грушей и Дор Блю', 'шт', 150, 1],
+                ['Профитроли с муссом из телятины', 'шт', 100, 1],
+                ['Профитроли с муссом из курицы и грибов', 'шт', 90, 1],
+                ['Заливное с телятиной, языком, курочкой', 'шт', 350, 1],
+                ['Кубики сыра Фета в зелени', 'шт', 60, 1],
+                ['Итальянская закуска с оливками', 'шт', 70, 1],
+                ['Канапе с Дор Блю, орехом и виноградом', 'шт', 280, 1],
+                ['Канапе с Камамбером и виноградом', 'шт', 220, 1],
+                ['Закуска с Моцареллой, базиликом и черри', 'шт', 130, 1],
+                ['Закуска с Моцареллой, черри и маслинами', 'шт', 105, 1],
+                ['Закуска Итальяно', 'шт', 110, 1],
+                ['Закуска Капрезе в шоте', 'шт', 150, 1],
+                ['Тарталетки с муссом из Эдам', 'шт', 125, 1],
+                ['Волованы с грибным муссом и ветчиной', 'шт', 130, 1],
+                ['Мини-бутерброд с говядиной и огурцом', 'шт', 116, 1],
+                ['Мини-бутерброд с тремя сырами', 'шт', 145, 1],
+                ['Мини-бутерброд с сёмгой', 'шт', 170, 1],
+                ['Мини-бутерброд с красной икрой', 'шт', 215, 1],
+                ['Мини-бутерброд с сервелатом', 'шт', 115, 1],
+                ['Мини-бутерброд с сельдью', 'шт', 95, 1],
+                ['Мини-сэндвич с салями', 'шт', 150, 1],
+                ['Мини-сэндвич с ветчиной и сыром', 'шт', 115, 1],
+                ['Бутерброд с ветчиной', 'шт', 120, 1],
+                ['Бутерброд с сыром', 'шт', 120, 1],
+                ['Бутерброд с говяжим окороком', 'шт', 275, 1],
+                ['Бутерброд с семгой', 'шт', 260, 1],
+                ['Бутерброд с копчёной колбасой', 'шт', 170, 1],
+                ['Сэндвич с ветчиной, овощами и сыром', 'шт', 250, 1],
+                ['Клаб-сэндвич с мясом и овощами', 'шт', 350, 1],
+                ['Клаб-сэндвич с ветчиной и овощами', 'шт', 200, 1],
+                ['Багет с говядиной, огурцом и томатом', 'шт', 350, 1],
+                ['Брускетта с красной рыбой', 'шт', 250, 1],
+                ['Брускетта с паштетом из курицы', 'шт', 150, 1],
+                ['Брускетта с шампиньонами и трюфелем', 'шт', 180, 1],
+                ['Брускетта с персиками и мятой', 'шт', 155, 1],
+                ['Куриные рулетики с перцем и сыром', 'шт', 130, 1],
+                ['Куриные рулетики с ветчиной и беконом', 'шт', 155, 1],
+                ['Рулетики из баклажанов с орехами', 'шт', 100, 1],
+                ['Мини-блинчики с красной икрой', 'шт', 250, 1],
+                ['Рулетики с семужкой и брынзой', 'шт', 130, 1],
+                ['Рулетики с курицей и грибами', 'шт', 80, 1],
+                ['Рулетики из ветчины с сыром', 'шт', 70, 1],
+                ['Пикантный рулетик из говядины', 'шт', 100, 1]
+            ],
+            'Нарезки': [
+                ['Шесть видов сыров с крекерами', 'тарелка', 1800, 1],
+                ['Сыры и фрукты Остров', 'тарелка', 1800, 1],
+                ['Пять видов элитных сыров', 'тарелка', 5100, 1],
+                ['Ассорти Орехи-сухофрукты', 'тарелка', 900, 1],
+                ['Домашние маринады', 'тарелка', 1300, 1],
+                ['Ароматная буженина с розмарином', 'тарелка', 1750, 1],
+                ['Ассорти Охотничье', 'тарелка', 1850, 1],
+                ['Мясная нарезка', 'тарелка', 1800, 1],
+                ['Рыбная нарезка', 'тарелка', 2900, 1],
+                ['Овощная нарезка с соусом', 'тарелка', 800, 1],
+                ['Овощная нарезка с черри', 'тарелка', 1600, 1],
+                ['Овощная нарезка (шот)', 'тарелка', 110, 1],
+                ['Овощная нарезка', 'тарелка', 700, 1],
+                ['Фруктовая тарелка', 'тарелка', 1450, 1]
+            ],
+            'Антипасто': [
+                ['Домашние маринады (целая тарелка)', 'тарелка', 2450, 1],
+                ['Антипасто деликатесное', 'тарелка', 3700, 1],
+                ['Славянская ярмарка', 'тарелка', 3000, 1],
+                ['Лукошко', 'тарелка', 2750, 1],
+                ['Боярский пир', 'тарелка', 3800, 1],
+                ['Флорентийское плато', 'тарелка', 5850, 1],
+                ['Царская закуска', 'тарелка', 3500, 1],
+                ['Морское плато', 'тарелка', 3500, 1],
+                ['Королевский коктейль (креветки)', 'тарелка', 3800, 1],
+                ['Креветки Песто', 'тарелка', 4300, 1]
+            ],
+            'Салаты': [
+                ['Салат «Алый»', 'порция', 315, 1],
+                ['Салат «Арно»', 'порция', 300, 1],
+                ['Салат «Европа»', 'порция', 270, 1],
+                ['Салат «Пражский»', 'порция', 310, 1],
+                ['Салат «Куранов»', 'порция', 270, 1],
+                ['Салат «Королевский»', 'порция', 325, 1],
+                ['Салат «Греческий»', 'порция', 270, 1],
+                ['Салат «Английский»', 'порция', 290, 1],
+                ['Салат «Застолье»', 'порция', 275, 1],
+                ['Салат «Канада»', 'порция', 270, 1],
+                ['Салат «Мексиканский»', 'порция', 275, 1],
+                ['Салат «Сытный»', 'порция', 265, 1],
+                ['Салат «Мальта»', 'порция', 280, 1],
+                ['Салат-коктейль «Нежность»', 'порция', 280, 1],
+                ['Салат «Немецкий»', 'порция', 265, 1],
+                ['Салат «Овощное изобилие»', 'порция', 250, 1],
+                ['Салат «Оливье» с говядиной и языком', 'порция', 300, 1],
+                ['Салат «Сельдь под шубой»', 'порция', 280, 1],
+                ['Салат «Сёмга под шубой»', 'порция', 480, 1],
+                ['Салат «Цезарь»', 'порция', 285, 1],
+                ['Салат «Гармония»', 'порция', 270, 1],
+                ['Салат «Зимний вечер»', 'порция', 275, 1],
+                ['Салат «Сицилиано» (креветки)', 'порция', 680, 1],
+                ['Салат «Итальянские каникулы»', 'порция', 550, 1],
+                ['Салат «Морской бриз»', 'порция', 604, 1],
+                ['Салат «Елисейские поля»', 'порция', 580, 1],
+                ['Салат «Средиземноморье» (сёмга)', 'порция', 685, 1],
+                ['Салат «Ницца» (форель)', 'порция', 650, 1],
+                ['Салат «Режю»', 'порция', 560, 1],
+                ['Салат «Губернский»', 'порция', 550, 1],
+                ['Салат «Брайтон»', 'порция', 440, 1],
+                ['Салат «Кайенский»', 'порция', 565, 1],
+                ['Салат «Дуэт»', 'порция', 580, 1],
+                ['Салат «Шанхай»', 'порция', 600, 1],
+                ['Салат «Вольдорф»', 'порция', 580, 1]
+            ],
+            'Горячее': [
+                ['Жульен с курицей и грибами (кокотница)', 'порция', 250, 1],
+                ['Жульен с курицей и грибами (тарталетка)', 'порция', 150, 1],
+                ['Жульен с морепродуктами', 'порция', 390, 1],
+                ['Жульен с языком', 'порция', 475, 1],
+                ['Королевские креветки-гриль', 'тарелка', 1800, 1],
+                ['Шампиньоны фаршированные говядиной', 'шт', 105, 1],
+                ['Шампиньоны с творожным сыром', 'шт', 130, 1],
+                ['Язык запечённый (мисо)', 'шт', 250, 1],
+                ['Форель Аппетитная (мисо)', 'шт', 330, 1],
+                ['Крокеты из говядины в шотах', 'шт', 140, 1],
+                ['Рулет из куриной грудки в беконе (мисо)', 'шт', 200, 1],
+                ['Куриная грудка по-пекински (мисо)', 'шт', 205, 1],
+                ['Кесадилья с курицей', 'порция', 270, 1],
+                ['Овощные шашлычки', 'шт', 220, 1],
+                ['Шашлычок из свежих овощей', 'шт', 150, 1],
+                ['Шашлычок из свинины', 'шт', 400, 1],
+                ['Шашлычок из свинины (мини)', 'шт', 250, 1],
+                ['Шашлычок из куриного филе', 'шт', 300, 1],
+                ['Шашлычок из куриного филе (мини)', 'шт', 185, 1],
+                ['Шашлычок из курицы с ананасами', 'шт', 355, 1],
+                ['Шашлычок из курицы с ананасами (мини)', 'шт', 220, 1],
+                ['Шашлычок из форели/семги', 'шт', 850, 1],
+                ['Шашлычок из форели/семги (мини)', 'шт', 550, 1],
+                ['Ножки куриные на гриле', 'шт', 275, 1],
+                ['Бедрышки куриные на гриле', 'шт', 285, 1],
+                ['Крылышки по-мексикански', 'шт', 250, 1],
+                ['Крылышки Buffalo', 'шт', 260, 1],
+                ['Стейк из форели на гриле', 'шт', 900, 1],
+                ['Купаты баварские на гриле', 'шт', 300, 1],
+                ['Овощи на гриле', 'шт', 200, 1],
+                ['Вегетарианская рыба (адыгейский сыр)', 'шт', 500, 1],
+                ['Медальоны из свинины в белых грибах', 'порция', 650, 1],
+                ['Телячий язык под картофельно-сырной шапкой', 'порция', 850, 1],
+                ['Говядина тушёная с тимьяном', 'порция', 600, 1],
+                ['Телячий язык с грибами и орехом', 'порция', 700, 1],
+                ['Баклажаны фаршированные телятиной', 'порция', 650, 1],
+                ['Каррера из свинины с Чеддером', 'порция', 630, 1],
+                ['Телятина под сливочно-горчичным соусом', 'порция', 600, 1],
+                ['Пряная свинина с сыром и грибами', 'порция', 580, 1],
+                ['Дорада-гриль с Песто и рисом', 'порция', 1100, 1],
+                ['Форель под сырной шапкой', 'порция', 1150, 1],
+                ['Филе норвежской семги в икорном соусе', 'порция', 1050, 1],
+                ['Куриный стейк с сальсой', 'порция', 520, 1],
+                ['Куриное филе под шапкой из грибов', 'порция', 510, 1],
+                ['Рулет из куриной грудки в беконе', 'порция', 505, 1],
+                ['Филе цыплёнка в миндале', 'порция', 540, 1],
+                ['Куриная грудка по-пекински', 'порция', 530, 1],
+                ['Куриная грудка под шапкой из томатов', 'порция', 510, 1],
+                ['Картофель с травами', 'порция', 190, 1],
+                ['Овощные шашлычки', 'порция', 200, 1],
+                ['Итальянский рататуй', 'порция', 400, 1],
+                ['Пикантные баклажаны', 'порция', 350, 1],
+                ['Брокколи на пару', 'порция', 1885, 1],
+                ['Дикий рис', 'порция', 275, 1],
+                ['Капуста цветная в сухарях', 'порция', 200, 1],
+                ['Картофель запечённый', 'порция', 180, 1],
+                ['Картофель по-деревенски', 'порция', 195, 1],
+                ['Картофель Гратен', 'порция', 250, 1],
+                ['Овощи тушёные', 'порция', 195, 1],
+                ['Овощи на гриле', 'порция', 200, 1],
+                ['Плов с говядиной', 'порция', 470, 1],
+                ['Плов со свининой', 'порция', 450, 1],
+                ['Плов с курицей', 'порция', 420, 1],
+                ['Соус Южный', 'порция', 55, 1],
+                ['Соус Летний', 'порция', 70, 1],
+                ['Соус Пикантный', 'порция', 55, 1],
+                ['Соус грибной', 'порция', 70, 1],
+                ['Соус Шашлычный', 'порция', 60, 1],
+                ['Соус Тар-тар', 'порция', 60, 1],
+                ['Соус чесночный', 'порция', 55, 1],
+                ['Маринованный лук', 'порция', 35, 1],
+                ['Морковь по-корейски', 'порция', 40, 1]
+            ],
+            'Десерт': [
+                ['Фруктовое желе с вишней и клубникой', 'порция', 350, 1],
+                ['Фруктовое желе с апельсинами', 'порция', 380, 1],
+                ['Тарталетки с творожным муссом', 'шт', 300, 1],
+                ['Тарталетки MINI с творожным муссом', 'шт', 160, 1],
+                ['Тарталетки с Маскарпоне', 'шт', 350, 1],
+                ['Тарталетки MINI с Маскарпоне', 'шт', 180, 1],
+                ['Ассорти мини-пирожных', 'шт', 100, 1],
+                ['Пирожное Картошка', 'шт', 90, 1],
+                ['Пирожное Корзиночка', 'шт', 100, 1],
+                ['Пирожное Корзиночка MINI', 'шт', 60, 1],
+                ['Корзиночка с фруктами', 'шт', 180, 1],
+                ['Пирожное Медовик', 'шт', 180, 1],
+                ['Панна-котта с ягодным соусом', 'порция', 400, 1]
+            ],
+            'Напитки': [
+                ['Морс ягодный', 'порция', 70, 1],
+                ['Имбирный лимонад', 'порция', 80, 1],
+                ['Соки в ассортименте', 'порция', 75, 1],
+                ['Минеральная вода', 'порция', 95, 1],
+                ['Лимонад с апельсином', 'порция', 150, 1],
+                ['Безалкогольный Мохито', 'порция', 170, 1],
+                ['Холодный ягодный чай', 'порция', 110, 1],
+                ['Эспрессо', 'порция', 160, 1],
+                ['Американо', 'порция', 200, 1],
+                ['Капучино', 'порция', 225, 1],
+                ['Латте', 'порция', 230, 1],
+                ['Растворимый кофе', 'порция', 70, 1],
+                ['Сливки порционные', 'порция', 20, 1],
+                ['Чай в ассортименте', 'порция', 60, 1],
+                ['Глинтвейн яблочный', 'порция', 300, 1],
+                ['Глинтвейн классический', 'порция', 300, 1]
+            ],
+            'Хлеб': [
+                ['Блинчики на кефире', 'шт', 85, 1],
+                ['Печенье Кукисы с орехами', 'шт', 120, 1],
+                ['Печенье Кукисы с шоколадом', 'шт', 140, 1],
+                ['Печенье M&M\'s', 'шт', 165, 1],
+                ['Беляш с мясом', 'шт', 110, 1],
+                ['Посикунчики', 'шт', 90, 1],
+                ['Пирожок с луком и яйцом', 'шт', 75, 1],
+                ['Пирожок с красной рыбой', 'шт', 120, 1],
+                ['Пирожок с капустой', 'шт', 80, 1],
+                ['Пирожок с картофелем и грибами', 'шт', 80, 1],
+                ['Пирожок с мясом', 'шт', 110, 1],
+                ['Пирожок с печенью', 'шт', 85, 1],
+                ['Пирожок с яблоком', 'шт', 80, 1],
+                ['Профитроли со сгущёнкой', 'шт', 95, 1],
+                ['Слойка с ветчиной и сыром', 'шт', 100, 1],
+                ['Слойка с курицей и сыром', 'шт', 100, 1],
+                ['Слойка с творогом', 'шт', 90, 1],
+                ['Слойка с яблоком', 'шт', 90, 1],
+                ['Слойка со сгущёнкой', 'шт', 100, 1],
+                ['Слойка с салатом и ветчиной', 'шт', 130, 1],
+                ['Сочник с творогом', 'шт', 95, 1],
+                ['Сочник с вишней', 'шт', 100, 1],
+                ['Шаньга с картофелем', 'шт', 95, 1],
+                ['Шаньга с картофелем (mini)', 'шт', 75, 1],
+                ['Профитроли с творогом', 'шт', 95, 1],
+                ['Хлебная корзинка', 'тарелка', 600, 1]
+            ]
+        };
+
+        function getLocalDishes(cat) {
+            const raw = LOCAL_DISHES[cat];
+            if (!raw) return [];
+            return raw.map(a => ({ name: a[0], unit: a[1], price: a[2], package_size: a[3] || 1 }));
+        }
+
+        /* ============================================================
+           КОНСТАНТЫ
+        ============================================================ */
         const EVENTS = [
             { id: 'SC101', icon: '🎂', label: 'День рождения', desc: 'Банкет с закусками и горячим', random: true },
             { id: 'SC102', icon: '🏢', label: 'Корпоратив', desc: 'Банкет с закусками и горячим', random: true },
             { id: 'SC103', icon: '💍', label: 'Свадьба', desc: 'Расширенный банкетный стол', random: true },
             { id: 'SC104', icon: '🎉', label: 'Юбилей', desc: 'Праздничный банкет', random: true },
             { id: 'SC100', icon: '🍢', label: 'Фуршет', desc: 'Канапе, закуски, напитки', random: true },
-            { id: 'SC105', icon: '✨', label: 'Другое', desc: 'Настроим под вас', random: true },
+            { id: 'SC105', icon: '✨', label: 'Другое', desc: 'Настроим под вас', random: true }
         ];
-        const DURATIONS = [
-            { value: 2, label: '⏱ 1–2 часа' },
-            { value: 4, label: '⏱ 3–4 часа' },
-            { value: 6, label: '⏱ 5–6 часов' },
-            { value: 8, label: '⏱ 7–8 часов' },
-        ];
-
+        const DURATIONS = [{ value: 2, label: '⏱ 1–2 часа' }, { value: 4, label: '⏱ 3–4 часа' }, { value: 6, label: '⏱ 5–6 часов' }, { value: 8, label: '⏱ 7–8 часов' }];
         const BUDGETS = [10000, 20000, 30000, 50000, 100000];
-
         const PREFS = [
             { id: 'meat', icon: '🥩', label: 'Мясо' },
             { id: 'fish', icon: '🐟', label: 'Рыба' },
             { id: 'veg', icon: '🥬', label: 'Вегетарианское' },
-            { id: 'auto', icon: '✨', label: 'Авто-подбор' },
+            { id: 'auto', icon: '✨', label: 'Авто-подбор' }
         ];
 
         const state = {
-            eventId: null,
-            isRandom: false,
-            adults: 10,
-            hours: 4,
-            eventDate: '',
-            budget: 20000,
-            customBudget: null,
-            prefs: [],
-            lastResult: null,
-            lastPayload: null,
-            isCalculating: false,
-            tooltipShown: false
+            eventId: null, isRandom: false, adults: 12, hours: 4, eventDate: '', budget: 20000, customBudget: null,
+            prefs: [], lastResult: null, lastPayload: null, isCalculating: false
         };
 
-        /* ================= СОХРАНЕНИЕ СОСТОЯНИЯ ================= */
+        /* ============================================================
+           СОХРАНЕНИЕ СОСТОЯНИЯ
+        ============================================================ */
         function saveState() {
             try {
                 const form = {
                     name: document.getElementById('req-name')?.value || '',
                     phone: document.getElementById('req-phone')?.value || '',
                     email: document.getElementById('req-email')?.value || '',
-                    comment: document.getElementById('req-comment')?.value || '',
+                    comment: document.getElementById('req-comment')?.value || ''
                 };
                 const currentScreen = document.querySelector('.screen.active')?.id || 'screen-event';
                 sessionStorage.setItem(STORAGE_KEY, JSON.stringify({
-                    screen: currentScreen,
-                    eventId: state.eventId,
-                    isRandom: state.isRandom,
-                    adults: state.adults,
-                    hours: state.hours,
-                    eventDate: state.eventDate,
-                    budget: state.budget,
-                    customBudget: state.customBudget,
-                    prefs: state.prefs,
-                    lastResult: state.lastResult,
-                    lastPayload: state.lastPayload,
-                    tooltipShown: state.tooltipShown,
-                    form,
+                    screen: currentScreen, eventId: state.eventId, isRandom: state.isRandom, adults: state.adults,
+                    hours: state.hours, eventDate: state.eventDate, budget: state.budget, customBudget: state.customBudget,
+                    prefs: state.prefs, lastResult: state.lastResult, lastPayload: state.lastPayload, form
                 }));
             } catch (e) { }
         }
@@ -1283,7 +1483,6 @@
                 if (Array.isArray(s.prefs)) state.prefs = s.prefs;
                 if (s.lastResult) state.lastResult = s.lastResult;
                 if (s.lastPayload) state.lastPayload = s.lastPayload;
-                if (typeof s.tooltipShown === 'boolean') state.tooltipShown = s.tooltipShown;
                 if (s.form) {
                     const ni = document.getElementById('req-name');
                     const pi = document.getElementById('req-phone');
@@ -1300,8 +1499,8 @@
 
         function showScreen(id) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-            const target = document.getElementById(id);
-            if (target) target.classList.add('active');
+            const t = document.getElementById(id);
+            if (t) t.classList.add('active');
             window.scrollTo(0, 0);
             saveState();
         }
@@ -1309,7 +1508,6 @@
         function formatMoney(n) { return Math.round(n).toLocaleString('ru-RU') + ' ₽'; }
         function getTotalGuests() { return state.adults; }
         function updateTotalGuests() { document.getElementById('total-guests').textContent = getTotalGuests(); }
-
         function showToast(text) {
             const t = document.getElementById('toast');
             t.textContent = text;
@@ -1317,53 +1515,31 @@
             clearTimeout(showToast._timer);
             showToast._timer = setTimeout(() => t.classList.remove('show'), 2200);
         }
-
         function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
 
         function getCategoryStyle(cat) {
             const c = (cat || '').toLowerCase();
             if (c.includes('горяч') || c.includes('мясо')) return { cls: 'cat-hot', icon: '🥩' };
             if (c.includes('салат')) return { cls: 'cat-salads', icon: '🥗' };
-            if (c.includes('закус') || c.includes('холодн')) return { cls: 'cat-snacks', icon: '🧀' };
+            if (c.includes('закус') || c.includes('холодн') || c.includes('антипасто') || c.includes('нарезк')) return { cls: 'cat-snacks', icon: '🧀' };
             if (c.includes('десерт') || c.includes('сладк')) return { cls: 'cat-dessert', icon: '🍰' };
             if (c.includes('напит')) return { cls: 'cat-drinks', icon: '🥤' };
-            if (c.includes('хлеб')) return { cls: 'cat-bread', icon: '🍞' };
+            if (c.includes('хлеб') || c.includes('выпеч')) return { cls: 'cat-bread', icon: '🍞' };
             if (c.includes('гарнир') || c.includes('овощ')) return { cls: 'cat-garnish', icon: '🥔' };
             return { cls: 'cat-default', icon: '🍽️' };
         }
 
-        /* ================= ВАЛИДАЦИЯ ДАТЫ ================= */
-        function updateDateValidity() {
-            const input = document.getElementById('event-date');
-            const hint = document.getElementById('date-hint');
-            if (!input || !hint) return false;
-
-            const filled = !!input.value;
-            state.eventDate = input.value || '';
-
-            if (filled) {
-                hint.textContent = 'Дата выбрана: ' + new Date(input.value).toLocaleDateString('ru-RU');
-                hint.classList.remove('error');
-                input.style.borderColor = '';
-            } else {
-                hint.textContent = 'Укажите дату — это обязательно';
-                hint.classList.add('error');
-                input.style.borderColor = '#fca5a5';
-            }
-            saveState();
-            return filled;
-        }
-
-        /* ================= РЕНДЕР ЭКРАНОВ ================= */
+        /* ============================================================
+           РЕНДЕР
+        ============================================================ */
         function renderEvents() {
             const grid = document.getElementById('event-grid');
             grid.innerHTML = EVENTS.map(e => `
-                <div class="option-card ${state.eventId === e.id ? 'selected' : ''}" data-id="${e.id}" data-random="${e.random ? '1' : '0'}">
-                    <div class="option-icon">${e.icon}</div>
-                    <div class="option-label">${e.label}</div>
-                    <div class="option-desc">${e.desc}</div>
-                </div>
-            `).join('');
+    <div class="option-card ${state.eventId === e.id ? 'selected' : ''}" data-id="${e.id}" data-random="${e.random ? '1' : '0'}">
+      <div class="option-icon">${e.icon}</div>
+      <div class="option-label">${e.label}</div>
+      <div class="option-desc">${e.desc}</div>
+    </div>`).join('');
             grid.querySelectorAll('.option-card').forEach(card => {
                 card.addEventListener('click', () => {
                     state.eventId = card.dataset.id;
@@ -1378,10 +1554,9 @@
         function renderDurations() {
             const grid = document.getElementById('duration-grid');
             grid.innerHTML = DURATIONS.map(d => `
-                <div class="option-card ${state.hours === d.value ? 'selected' : ''}" data-value="${d.value}">
-                    <div class="option-label">${d.label}</div>
-                </div>
-            `).join('');
+    <div class="option-card ${state.hours === d.value ? 'selected' : ''}" data-value="${d.value}">
+      <div class="option-label">${d.label}</div>
+    </div>`).join('');
             grid.querySelectorAll('.option-card').forEach(card => {
                 card.addEventListener('click', () => {
                     state.hours = parseInt(card.dataset.value);
@@ -1396,8 +1571,8 @@
         function renderBudgets() {
             const grid = document.getElementById('budget-grid');
             grid.innerHTML = BUDGETS.map(b => `
-                <button class="budget-btn ${state.budget === b && !state.customBudget ? 'selected' : ''}" data-value="${b}">${b.toLocaleString('ru-RU')} ₽</button>
-            `).join('') + `<button class="budget-btn ${state.customBudget ? 'selected' : ''}" data-value="custom" style="grid-column: span 2;">💰 Свой бюджет</button>`;
+    <button class="budget-btn ${state.budget === b && !state.customBudget ? 'selected' : ''}" data-value="${b}">${b.toLocaleString('ru-RU')} ₽</button>
+  `).join('') + `<button class="budget-btn ${state.customBudget ? 'selected' : ''}" data-value="custom" style="grid-column:span 2;">💰 Свой бюджет</button>`;
             grid.querySelectorAll('.budget-btn').forEach(btn => {
                 btn.addEventListener('click', () => {
                     const val = btn.dataset.value;
@@ -1422,17 +1597,15 @@
         function renderPrefs() {
             const grid = document.getElementById('prefs-grid');
             grid.innerHTML = PREFS.map(p => `
-                <div class="option-card ${state.prefs.includes(p.id) ? 'selected' : ''}" data-id="${p.id}">
-                    <div class="option-icon">${p.icon}</div>
-                    <div class="option-label">${p.label}</div>
-                </div>
-            `).join('');
+    <div class="option-card ${state.prefs.includes(p.id) ? 'selected' : ''}" data-id="${p.id}">
+      <div class="option-icon">${p.icon}</div>
+      <div class="option-label">${p.label}</div>
+    </div>`).join('');
             grid.querySelectorAll('.option-card').forEach(card => {
                 card.addEventListener('click', () => {
                     const id = card.dataset.id;
-                    if (id === 'auto') {
-                        state.prefs = state.prefs.includes('auto') ? [] : ['auto'];
-                    } else {
+                    if (id === 'auto') state.prefs = state.prefs.includes('auto') ? [] : ['auto'];
+                    else {
                         state.prefs = state.prefs.filter(p => p !== 'auto');
                         if (state.prefs.includes(id)) state.prefs = state.prefs.filter(p => p !== id);
                         else state.prefs.push(id);
@@ -1446,49 +1619,55 @@
 
         function updateSummary() {
             const b = state.customBudget || state.budget;
-            const dateStr = state.eventDate
-                ? new Date(state.eventDate).toLocaleDateString('ru-RU')
-                : 'дата не выбрана';
+            const dateStr = state.eventDate ? new Date(state.eventDate).toLocaleDateString('ru-RU') : 'дата не выбрана';
             document.getElementById('summary-text').textContent =
                 `${state.adults} взрослых, ${state.hours} часа, ${dateStr}, бюджет ${formatMoney(b)}`;
         }
 
-        /* ================= РАСЧЁТ ================= */
+        function updateDateValidity() {
+            const input = document.getElementById('event-date');
+            const hint = document.getElementById('date-hint');
+            const filled = !!input.value;
+            state.eventDate = input.value || '';
+            if (filled) {
+                hint.textContent = 'Дата выбрана: ' + new Date(input.value).toLocaleDateString('ru-RU');
+                hint.classList.remove('error');
+                input.style.borderColor = '';
+            } else {
+                hint.textContent = 'Укажите дату — это обязательно';
+                hint.classList.add('error');
+                input.style.borderColor = '#fca5a5';
+            }
+            saveState();
+            return filled;
+        }
+
+        /* ============================================================
+           РАСЧЁТ
+        ============================================================ */
         async function calculate() {
             if (state.isCalculating) return;
             if (!state.eventId) { showToast('Выберите мероприятие'); return; }
             if (!state.eventDate) {
                 showToast('Укажите дату мероприятия');
                 showScreen('screen-guests');
-                setTimeout(() => {
-                    const d = document.getElementById('event-date');
-                    if (d) d.focus();
-                }, 300);
+                setTimeout(() => document.getElementById('event-date')?.focus(), 300);
                 return;
             }
-
             state.isCalculating = true;
             showScreen('screen-loading');
-
             const payload = {
-                scenario_id: state.eventId,
-                adults: state.adults,
-                hours: state.hours,
-                budget: state.customBudget || state.budget,
-                preferences: state.prefs,
+                scenario_id: state.eventId, adults: state.adults, hours: state.hours,
+                budget: state.customBudget || state.budget, preferences: state.prefs
             };
             state.lastPayload = payload;
-
             const endpoint = state.isRandom ? '/calculate_random' : '/calculate';
-
             try {
                 const controller = new AbortController();
                 const timeout = setTimeout(() => controller.abort(), 65000);
                 const res = await fetch(`${API_URL}${endpoint}`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload),
-                    signal: controller.signal,
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload), signal: controller.signal
                 });
                 clearTimeout(timeout);
                 if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -1500,8 +1679,9 @@
             } catch (err) {
                 state.isCalculating = false;
                 showScreen('screen-prefs');
-                let msg = 'Не удалось выполнить расчёт. Проверьте интернет и попробуйте ещё раз.';
-                if (err.name === 'AbortError') msg = 'Сервер не ответил вовремя. Попробуйте ещё раз.';
+                const msg = err.name === 'AbortError'
+                    ? 'Сервер не ответил вовремя. Попробуйте ещё раз.'
+                    : 'Не удалось выполнить расчёт. Проверьте интернет и попробуйте ещё раз.';
                 document.querySelectorAll('.error-box').forEach(e => e.remove());
                 const errBox = document.createElement('div');
                 errBox.className = 'error-box';
@@ -1513,159 +1693,113 @@
         }
 
         function renderResult(data) {
-            document.getElementById('result-subtitle').textContent =
-                `${data.adults} взрослых · ${data.hours} часа`;
+            document.getElementById('result-subtitle').textContent = `${data.adults} взрослых · ${data.hours} часа`;
             document.getElementById('result-total').textContent = formatMoney(data.total_cost);
             document.getElementById('result-total-bottom').textContent = formatMoney(data.total_cost);
-
             const perGuest = data.price_per_guest || Math.round(data.total_cost / Math.max(1, data.total_guests));
             document.getElementById('result-per-guest').textContent = `👤 ${formatMoney(perGuest)} на человека`;
-
             const badgeContainer = document.getElementById('result-badge-container');
             const remainingEl = document.getElementById('result-remaining');
-            const btnExpand = document.getElementById('btn-expand');
             const btnIncrease = document.getElementById('btn-increase');
             const btnReroll = document.getElementById('btn-reroll');
-
-            btnExpand.style.display = 'none';
             btnIncrease.style.display = 'none';
             btnReroll.style.display = state.isRandom ? 'block' : 'none';
-
             const ratio = data.total_cost / data.budget;
             if (data.is_within_budget) {
-                if (ratio > 0.9) {
-                    badgeContainer.innerHTML = '<span class="badge badge-warning">🟡 Почти в бюджете</span>';
-                } else {
-                    badgeContainer.innerHTML = '<span class="badge badge-success">🟢 В бюджете</span>';
-                    if (data.remaining > data.budget * 0.03 && state.isRandom) {
-                        btnExpand.style.display = 'block';
-                    }
-                }
+                if (ratio > 0.9) badgeContainer.innerHTML = '<span class="badge badge-warning">🟡 Почти в бюджете</span>';
+                else badgeContainer.innerHTML = '<span class="badge badge-success">🟢 В бюджете</span>';
                 remainingEl.textContent = `Осталось: ${formatMoney(data.remaining)}`;
             } else {
                 badgeContainer.innerHTML = '<span class="badge badge-error">🔴 Бюджет превышен</span>';
                 remainingEl.textContent = `На: ${formatMoney(data.shortfall)}`;
                 btnIncrease.style.display = 'block';
             }
-
             const categories = {};
             (data.items || []).forEach(item => {
                 if (!categories[item.category]) categories[item.category] = [];
                 categories[item.category].push(item);
             });
-
             let html = '';
             for (const [cat, items] of Object.entries(categories)) {
                 const style = getCategoryStyle(cat);
                 html += `<div class="category-block ${style.cls}">
-                    <div class="category-title">
-                        <span class="cat-icon">${style.icon}</span>
-                        <span>${cat}</span>
-                    </div>`;
+      <div class="category-title"><span class="cat-icon">${style.icon}</span><span>${cat}</span></div>`;
                 items.forEach((item) => {
                     const qty = item.packages > 1
                         ? `${item.packages} × ${item.package_size} ${item.unit}`
                         : `${item.final_amount} ${item.unit}`;
-                    const offFilter = item.off_filter ? '<span class="off-filter-mark">вне фильтра</span>' : '';
                     html += `<div class="item-row">
-                        <div class="item-info">
-                            <div class="item-name">${item.name}${offFilter}</div>
-                            <div class="item-qty">${qty}</div>
-                        </div>
-                        <span class="item-price">${formatMoney(item.total_price)}</span>
-                        <button class="item-edit" data-cat="${cat}" data-name="${item.name.replace(/"/g, '&quot;')}" title="Заменить">✏️</button>
-                    </div>`;
+        <div class="item-info">
+          <div class="item-name">${item.name}</div>
+          <div class="item-qty">${qty}</div>
+        </div>
+        <span class="item-price">${formatMoney(item.total_price)}</span>
+        <button class="item-edit" data-cat="${cat}" data-name="${item.name.replace(/"/g, '&quot;')}" title="Заменить">✏️</button>
+      </div>`;
                 });
                 html += `</div>`;
             }
             document.getElementById('result-items').innerHTML = html;
-
             document.querySelectorAll('.item-edit').forEach(btn => {
                 btn.addEventListener('click', () => openEditor(btn.dataset.cat, btn.dataset.name));
             });
-
-            // Облачко-подсказка один раз за сессию
-            if (!state.tooltipShown) {
-                state.tooltipShown = true;
-                setTimeout(() => {
-                    const firstEditBtn = document.querySelector('.item-edit');
-                    if (!firstEditBtn) return;
-                    const tooltip = document.createElement('div');
-                    tooltip.style.cssText = `
-                        position: absolute;
-                        background: #1f2937;
-                        color: white;
-                        padding: 8px 12px;
-                        border-radius: 8px;
-                        font-size: 12px;
-                        z-index: 1000;
-                        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-                        white-space: nowrap;
-                        pointer-events: none;
-                    `;
-                    tooltip.textContent = '👆 Нажмите, чтобы заменить блюдо';
-                    const rect = firstEditBtn.getBoundingClientRect();
-                    tooltip.style.top = (rect.top + window.scrollY - 40) + 'px';
-                    tooltip.style.left = Math.max(8, rect.left + window.scrollX - 100) + 'px';
-                    document.body.appendChild(tooltip);
-                    setTimeout(() => { if (tooltip.parentNode) tooltip.remove(); }, 5000);
-                    firstEditBtn.addEventListener('click', () => {
-                        if (tooltip.parentNode) tooltip.remove();
-                    }, { once: true });
-                }, 500);
-            }
-
             saveState();
         }
 
-        /* ================= МОДАЛКА РЕДАКТИРОВАНИЯ ================= */
+        /* ============================================================
+           РЕДАКТОР: ЛОКАЛЬНЫЕ БЛЮДА ИЗ ПРАЙСА
+        ============================================================ */
         let editingContext = null;
 
-        async function openEditor(category, currentName) {
+        function openEditor(category, currentName) {
             const overlay = document.getElementById('modal-overlay');
             const title = document.getElementById('modal-title');
             const body = document.getElementById('modal-body');
-
             title.textContent = `${category} — заменить блюдо`;
-            body.innerHTML = `<div class="modal-loading"><div class="modal-loader"></div>Загружаем варианты…</div>`;
             overlay.classList.add('active');
 
-            const prefsStr = state.prefs.filter(p => p !== 'auto').join(',');
-            const scenario = state.eventId || '';
-
-            try {
-                const url = `${API_URL}/alternatives?category=${encodeURIComponent(category)}&exclude=${encodeURIComponent(currentName)}&preferences=${encodeURIComponent(prefsStr)}&scenario_id=${encodeURIComponent(scenario)}`;
-                const res = await fetch(url);
-                if (!res.ok) throw new Error(`HTTP ${res.status}`);
-                const items = await res.json();
-                if (!items || items.length === 0) {
-                    body.innerHTML = `<div class="modal-empty">Нет других блюд в этой категории</div>`;
-                    return;
-                }
-                editingContext = { category, currentName };
-                const tagMap = { meat: '🥩 мясо', fish: '🐟 рыба', veg: '🥬 вег.' };
-                body.innerHTML = `<p class="modal-hint">Сортировка — от дорогих к дешёвым.</p>` +
-                    items.map(it => {
-                        const tags = (it.tags || '').split(',').filter(t => t).map(t => tagMap[t] || t).join(' · ');
-                        return `<div class="alt-item" data-name="${it.name.replace(/"/g, '&quot;')}" data-price="${it.price_per_unit}" data-unit="${it.unit}" data-pkg="${it.package_size}">
-                            <div>
-                                <div class="alt-name">${it.name}</div>
-                                ${tags ? `<div class="alt-tags">${tags}</div>` : ''}
-                            </div>
-                            <div class="alt-price">${formatMoney(it.price_per_unit)}/${it.unit}</div>
-                        </div>`;
-                    }).join('');
-                document.querySelectorAll('.alt-item').forEach(el => {
-                    el.addEventListener('click', () => replaceDish({
-                        name: el.dataset.name,
-                        price_per_unit: parseFloat(el.dataset.price),
-                        unit: el.dataset.unit,
-                        package_size: parseFloat(el.dataset.pkg),
-                    }));
-                });
-            } catch (err) {
-                body.innerHTML = `<div class="modal-empty">Не удалось загрузить варианты</div>`;
+            // Пытаемся найти блюда по точному названию категории, затем по частичному совпадению
+            let dishes = getLocalDishes(category);
+            if (!dishes.length) {
+                // Например, "Холодные закуски" приходят с бэка — попробуем найти нечётко
+                const keys = Object.keys(LOCAL_DISHES);
+                const lower = category.toLowerCase();
+                let matchKey = keys.find(k => k.toLowerCase() === lower);
+                if (!matchKey) matchKey = keys.find(k => lower.includes(k.toLowerCase()) || k.toLowerCase().includes(lower));
+                if (matchKey) dishes = getLocalDishes(matchKey);
             }
+
+            if (!dishes.length) {
+                body.innerHTML = `<div class="modal-empty">Для категории «${category}» нет локальной базы блюд</div>`;
+                return;
+            }
+
+            // Убираем текущее блюдо из списка
+            const filtered = dishes.filter(d => d.name !== currentName);
+            editingContext = { category, currentName };
+
+            if (!filtered.length) {
+                body.innerHTML = `<div class="modal-empty">В этой категории больше нет блюд для замены</div>`;
+                return;
+            }
+
+            body.innerHTML = `<p class="modal-hint">База «Вкусно». Нажмите на блюдо для замены. Цена пересчитается автоматически.</p>` +
+                filtered.map(d => {
+                    const safeName = d.name.replace(/"/g, '&quot;');
+                    return `<div class="alt-item" data-name="${safeName}" data-price="${d.price}" data-unit="${d.unit}" data-pkg="${d.package_size}">
+        <div class="alt-name">${d.name}</div>
+        <div class="alt-price">${formatMoney(d.price)}/${d.unit}</div>
+      </div>`;
+                }).join('');
+
+            document.querySelectorAll('.alt-item').forEach(el => {
+                el.addEventListener('click', () => replaceDish({
+                    name: el.dataset.name,
+                    price_per_unit: parseFloat(el.dataset.price),
+                    unit: el.dataset.unit,
+                    package_size: parseFloat(el.dataset.pkg)
+                }));
+            });
         }
 
         function closeModal() {
@@ -1678,12 +1812,12 @@
             if (e.target.id === 'modal-overlay') closeModal();
         });
 
-        async function replaceDish(newDish) {
+        function replaceDish(newDish) {
             if (!editingContext || !state.lastResult) return;
             const { category, currentName } = editingContext;
             const items = state.lastResult.items;
             const target = items.find(i => i.category === category && i.name === currentName);
-            if (!target) { closeModal(); return; }
+            if (!target) { closeModal(); showToast('Блюдо не найдено'); return; }
 
             const packages = target.packages || 1;
             target.name = newDish.name;
@@ -1691,7 +1825,6 @@
             target.unit = newDish.unit;
             target.package_size = newDish.package_size;
             target.total_price = Math.round(packages * newDish.price_per_unit * 100) / 100;
-            target.off_filter = false;
 
             const total = items.reduce((s, i) => s + i.total_price, 0);
             state.lastResult.total_cost = Math.round(total * 100) / 100;
@@ -1705,124 +1838,63 @@
             showToast('✓ Блюдо заменено');
         }
 
-        /* ================= РАСШИРИТЬ ================= */
-        async function expandMenu() {
-            if (state.isCalculating || !state.lastResult || !state.lastPayload) return;
-            state.isCalculating = true;
-            showScreen('screen-loading');
-            try {
-                const res = await fetch(`${API_URL}/expand`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        scenario_id: state.eventId,
-                        adults: state.adults,
-                        hours: state.hours, budget: state.customBudget || state.budget,
-                        preferences: state.prefs,
-                        current_items: state.lastResult.items,
-                    }),
-                });
-                if (!res.ok) throw new Error(`HTTP ${res.status}`);
-                const data = await res.json();
-                const before = state.lastResult.items.length;
-                const after = data.items.length;
-                state.lastResult = data;
-                state.isCalculating = false;
-                renderResult(data);
-                showScreen('screen-result');
-                if (after > before) showToast('✨ Меню расширено');
-                else showToast('Нечего добавить в остаток бюджета');
-            } catch (err) {
-                state.isCalculating = false;
-                renderResult(state.lastResult);
-                showScreen('screen-result');
-                showToast('Не удалось расширить меню');
-            }
-        }
-
+        /* ============================================================
+           БЮДЖЕТ / REROLL
+        ============================================================ */
         function openBudgetModal() {
             const overlay = document.getElementById('modal-overlay');
             const title = document.getElementById('modal-title');
             const body = document.getElementById('modal-body');
             const r = state.lastResult;
-
             const shortfall = Math.max(0, r.total_cost - r.budget);
             const minAdd = Math.max(500, Math.ceil(shortfall / 500) * 500);
-
             title.textContent = '💰 Увеличить бюджет';
             body.innerHTML = `
-                <div class="modal-info">
-                    Текущий бюджет
-                    <strong>${formatMoney(r.budget)}</strong>
-                </div>
-                <p class="modal-hint">
-                    Меню: ${formatMoney(r.total_cost)}<br>
-                    Нужно добавить минимум: <b>${formatMoney(minAdd)}</b>
-                </p>
-                <div style="margin-bottom:10px;">
-                    <label style="font-size:13px;color:var(--text-muted);display:block;margin-bottom:6px;">
-                        Сколько готовы добавить?
-                    </label>
-                    <input type="number" inputmode="numeric" class="budget-input" id="add-budget-input"
-                        value="${minAdd}" min="500" step="500" placeholder="Сумма в ₽">
-                </div>
-                <div style="display:flex;gap:8px;margin-bottom:16px;">
-                    <button type="button" class="budget-btn" data-add="1000" style="flex:1;padding:12px 8px;font-size:14px;">+1 000</button>
-                    <button type="button" class="budget-btn" data-add="5000" style="flex:1;padding:12px 8px;font-size:14px;">+5 000</button>
-                    <button type="button" class="budget-btn" data-add="10000" style="flex:1;padding:12px 8px;font-size:14px;">+10 000</button>
-                </div>
-                <div class="modal-actions">
-                    <button class="btn btn-secondary" id="modal-cancel">Отмена</button>
-                    <button class="btn btn-primary" id="modal-apply">Применить</button>
-                </div>
-            `;
+    <div class="modal-info">Текущий бюджет<strong>${formatMoney(r.budget)}</strong></div>
+    <p class="modal-hint">Меню: ${formatMoney(r.total_cost)}<br>Нужно добавить минимум: <b>${formatMoney(minAdd)}</b></p>
+    <div style="margin-bottom:10px;">
+      <label style="font-size:13px;color:var(--text-muted);display:block;margin-bottom:6px;">Сколько готовы добавить?</label>
+      <input type="number" inputmode="numeric" class="budget-input" id="add-budget-input" value="${minAdd}" min="500" step="500">
+    </div>
+    <div style="display:flex;gap:8px;margin-bottom:16px;">
+      <button type="button" class="budget-btn" data-add="1000" style="flex:1;padding:12px 8px;font-size:14px;">+1 000</button>
+      <button type="button" class="budget-btn" data-add="5000" style="flex:1;padding:12px 8px;font-size:14px;">+5 000</button>
+      <button type="button" class="budget-btn" data-add="10000" style="flex:1;padding:12px 8px;font-size:14px;">+10 000</button>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" id="modal-cancel">Отмена</button>
+      <button class="btn btn-primary" id="modal-apply">Применить</button>
+    </div>`;
             overlay.classList.add('active');
-
             const input = document.getElementById('add-budget-input');
-
             body.querySelectorAll('[data-add]').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const val = parseInt(btn.dataset.add, 10);
-                    input.value = val;
-                    input.focus();
-                });
+                btn.addEventListener('click', () => { input.value = parseInt(btn.dataset.add, 10); input.focus(); });
             });
-
             document.getElementById('modal-cancel').onclick = closeModal;
-
             document.getElementById('modal-apply').onclick = () => {
-                let addAmount = parseInt(input.value, 10);
-                if (isNaN(addAmount) || addAmount < 500) {
-                    showToast('Минимум 500 ₽');
-                    return;
-                }
-                if (addAmount > 10000000) addAmount = 10000000;
-
+                const addAmount = parseInt(input.value, 10);
+                if (isNaN(addAmount) || addAmount < 500) { showToast('Минимум 500 ₽'); return; }
                 const newBudget = r.budget + addAmount;
                 state.budget = newBudget;
                 state.customBudget = newBudget;
-
                 r.budget = newBudget;
                 r.is_within_budget = r.total_cost <= newBudget;
                 r.remaining = Math.max(0, newBudget - r.total_cost);
                 r.shortfall = Math.max(0, r.total_cost - newBudget);
-
                 closeModal();
                 renderResult(r);
                 showToast(`✓ Бюджет увеличен на ${formatMoney(addAmount)}`);
             };
         }
 
-        /* ================= REROLL ================= */
         async function reroll() {
             if (state.isCalculating || !state.lastPayload) return;
             state.isCalculating = true;
             showScreen('screen-loading');
             try {
                 const res = await fetch(`${API_URL}/reroll`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(state.lastPayload),
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(state.lastPayload)
                 });
                 if (!res.ok) throw new Error(`HTTP ${res.status}`);
                 const data = await res.json();
@@ -1839,72 +1911,55 @@
             }
         }
 
-        /* ================= ОТПРАВКА ЗАЯВКИ ================= */
-        document.getElementById('btn-send-request').addEventListener('click', () => {
-            showScreen('screen-send-request');
-        });
-
-        document.getElementById('back-from-request').addEventListener('click', () => {
-            showScreen('screen-result');
-        });
-
-        document.getElementById('btn-close-success').addEventListener('click', () => {
-            showScreen('screen-result');
-        });
+        /* ============================================================
+           ОТПРАВКА ЗАЯВКИ
+        ============================================================ */
+        document.getElementById('btn-send-request').addEventListener('click', () => showScreen('screen-send-request'));
+        document.getElementById('back-from-request').addEventListener('click', () => showScreen('screen-result'));
+        document.getElementById('btn-close-success').addEventListener('click', () => showScreen('screen-result'));
 
         document.getElementById('btn-submit-request').addEventListener('click', async () => {
             const name = document.getElementById('req-name').value.trim();
             const phone = document.getElementById('req-phone').value.trim();
             const email = document.getElementById('req-email').value.trim();
             const comment = document.getElementById('req-comment').value.trim();
-
             if (!name) { showToast('Укажите имя'); return; }
             if (!phone) { showToast('Укажите телефон'); return; }
             if (!state.lastResult) { showToast('Сначала рассчитайте меню'); return; }
-
             const btn = document.getElementById('btn-submit-request');
             btn.disabled = true;
             btn.textContent = 'Отправляем…';
-
             const scenarioObj = EVENTS.find(e => e.id === state.eventId) || {};
-
             const payload = {
-                client_name: name,
-                client_phone: phone,
-                client_email: email,
-                client_comment: comment,
+                client_name: name, client_phone: phone, client_email: email, client_comment: comment,
                 event_date: state.eventDate || '',
-                scenario_id: state.eventId,
-                scenario_name: scenarioObj.label || '',
-                adults: state.adults,
-                hours: state.hours,
-                budget: state.customBudget || state.budget,
+                scenario_id: state.eventId, scenario_name: scenarioObj.label || '',
+                adults: state.adults, hours: state.hours, budget: state.customBudget || state.budget,
                 total_cost: state.lastResult.total_cost,
                 price_per_guest: state.lastResult.price_per_guest || 0,
-                items: state.lastResult.items,
+                items: state.lastResult.items
             };
-
             try {
                 const res = await fetch(`${API_URL}/send_request`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload),
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
                 });
                 if (!res.ok) throw new Error(`HTTP ${res.status}`);
                 const data = await res.json();
-
-                document.getElementById('success-text').textContent =
-                    `Заявка №${data.request_id || ''} принята.`.replace(' №', ' №').replace('№ ', '№ ');
+                document.getElementById('success-text').textContent = data.request_id
+                    ? `Заявка №${data.request_id} принята.`
+                    : 'Ваша заявка принята.';
                 showScreen('screen-send-success');
             } catch (err) {
-                console.error(err);
                 btn.disabled = false;
                 btn.textContent = 'Отправить заявку';
                 showToast('Не удалось отправить. Проверьте интернет.');
             }
         });
 
-        /* ================= СЧЁТЧИК ГОСТЕЙ ================= */
+        /* ============================================================
+           СЧЁТЧИК ГОСТЕЙ
+        ============================================================ */
         function setupCounter(name, min, max, stateKey) {
             const minus = document.getElementById(`${name}-minus`);
             const plus = document.getElementById(`${name}-plus`);
@@ -1920,7 +1975,7 @@
             minus.addEventListener('click', () => { state[stateKey] = clamp(state[stateKey] - 1, min, max); update(); });
             plus.addEventListener('click', () => { state[stateKey] = clamp(state[stateKey] + 1, min, max); update(); });
             input.addEventListener('input', () => {
-                let v = parseInt(input.value, 10);
+                const v = parseInt(input.value, 10);
                 if (isNaN(v)) return;
                 state[stateKey] = v;
                 minus.disabled = v <= min;
@@ -1939,13 +1994,13 @@
             update();
         }
 
-        /* ================= НАВИГАЦИЯ ================= */
+        /* ============================================================
+           НАВИГАЦИЯ
+        ============================================================ */
         document.getElementById('btn-next-event').addEventListener('click', () => {
             showScreen('screen-guests');
-            // при переходе сразу проверим дату — если пусто, подсветим
             updateDateValidity();
         });
-
         document.getElementById('btn-next-guests').addEventListener('click', () => {
             if (!updateDateValidity()) {
                 showToast('Укажите дату мероприятия');
@@ -1954,20 +2009,16 @@
             }
             showScreen('screen-duration');
         });
-
         document.getElementById('btn-next-duration').addEventListener('click', () => showScreen('screen-budget'));
         document.getElementById('btn-next-budget').addEventListener('click', () => showScreen('screen-prefs'));
         document.getElementById('btn-calculate').addEventListener('click', calculate);
         document.getElementById('btn-back').addEventListener('click', () => showScreen('screen-prefs'));
         document.getElementById('btn-reroll').addEventListener('click', reroll);
-        document.getElementById('btn-expand').addEventListener('click', expandMenu);
         document.getElementById('btn-increase').addEventListener('click', openBudgetModal);
 
         document.querySelectorAll('.back-btn').forEach(btn => {
             const target = btn.dataset.back;
-            if (target) {
-                btn.addEventListener('click', () => showScreen(target));
-            }
+            if (target) btn.addEventListener('click', () => showScreen(target));
         });
 
         document.getElementById('event-date').addEventListener('change', () => {
@@ -1984,13 +2035,13 @@
             saveState();
         });
 
-        /* ================= SHARE / COPY ================= */
+        /* ============================================================
+           SHARE / COPY
+        ============================================================ */
         function buildShareText() {
             if (!state.lastResult) return '';
             const r = state.lastResult;
-            const dateStr = state.eventDate
-                ? new Date(state.eventDate).toLocaleDateString('ru-RU')
-                : 'без даты';
+            const dateStr = state.eventDate ? new Date(state.eventDate).toLocaleDateString('ru-RU') : 'без даты';
             let t = `Мой расчёт на мероприятие в Хватит всем 🥂\n\n`;
             t += `Гостей: ${getTotalGuests()}\n`;
             t += `Дата: ${dateStr}\n`;
@@ -2015,16 +2066,9 @@
             const text = buildShareText();
             if (!text) return;
             if (navigator.share) {
-                try {
-                    await navigator.share({ title: 'Хватит всем', text, url: 'https://hvatitfrontend.onrender.com' });
-                } catch (e) { }
+                try { await navigator.share({ title: 'Хватит всем', text, url: 'https://hvatitfrontend.onrender.com' }); } catch (e) { }
             } else {
-                try {
-                    await navigator.clipboard.writeText(text);
-                    showToast('✓ Скопировано');
-                } catch {
-                    showToast('Не удалось скопировать');
-                }
+                try { await navigator.clipboard.writeText(text); showToast('✓ Скопировано'); } catch { showToast('Не удалось скопировать'); }
             }
         });
 
@@ -2032,35 +2076,25 @@
             const text = buildShareText();
             if (!text) return;
             try {
-                if (navigator.clipboard && window.isSecureContext) {
-                    await navigator.clipboard.writeText(text);
-                } else {
+                if (navigator.clipboard && window.isSecureContext) await navigator.clipboard.writeText(text);
+                else {
                     const ta = document.createElement('textarea');
-                    ta.value = text;
-                    ta.style.position = 'fixed';
-                    ta.style.left = '-9999px';
-                    document.body.appendChild(ta);
-                    ta.select();
-                    document.execCommand('copy');
-                    ta.remove();
+                    ta.value = text; ta.style.position = 'fixed'; ta.style.left = '-9999px';
+                    document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
                 }
                 showToast('✓ Список скопирован');
-            } catch {
-                showToast('Не удалось скопировать');
-            }
+            } catch { showToast('Не удалось скопировать'); }
         });
 
-        /* ================= СОХРАНЕНИЕ ФОРМЫ + СТАРТ ================= */
+        /* ============================================================
+           СОХРАНЕНИЕ ФОРМЫ + СТАРТ
+        ============================================================ */
         ['req-name', 'req-phone', 'req-email', 'req-comment'].forEach(id => {
             const el = document.getElementById(id);
             if (el) el.addEventListener('input', saveState);
         });
-
-        document.addEventListener('visibilitychange', () => {
-            if (document.visibilityState === 'hidden') saveState();
-        });
+        document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') saveState(); });
         window.addEventListener('beforeunload', saveState);
-
         document.getElementById('btn-restart').addEventListener('click', () => {
             try { sessionStorage.removeItem(STORAGE_KEY); } catch (e) { }
             location.reload();
@@ -2072,30 +2106,18 @@
         renderDurations();
         renderBudgets();
         renderPrefs();
-        setupCounter('adults', 1, 500, 'adults');
+        setupCounter('adults', 12, 500, 'adults');
         updateTotalGuests();
 
-        // восстанавливаем дату в инпут
-        if (state.eventDate) {
-            document.getElementById('event-date').value = state.eventDate;
-        }
+        if (state.eventDate) document.getElementById('event-date').value = state.eventDate;
         updateDateValidity();
         updateSummary();
 
-        // восстанавливаем доступность кнопок
-        if (state.eventId) {
-            document.getElementById('btn-next-event').disabled = false;
-        }
-        if (state.hours) {
-            document.getElementById('btn-next-duration').disabled = false;
-        }
-        if (state.budget || state.customBudget) {
-            document.getElementById('btn-next-budget').disabled = false;
-        }
+        if (state.eventId) document.getElementById('btn-next-event').disabled = false;
+        if (state.hours) document.getElementById('btn-next-duration').disabled = false;
+        if (state.budget || state.customBudget) document.getElementById('btn-next-budget').disabled = false;
 
-        if (savedScreen === 'screen-result' && state.lastResult) {
-            renderResult(state.lastResult);
-        }
+        if (savedScreen === 'screen-result' && state.lastResult) renderResult(state.lastResult);
 
         if (savedScreen && savedScreen !== 'screen-event' && document.getElementById(savedScreen)) {
             showScreen(savedScreen);
