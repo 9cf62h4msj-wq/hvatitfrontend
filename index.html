@@ -1091,12 +1091,36 @@
             z-index: 200;
             opacity: 0;
             transition: all .3s ease;
-            pointer-events: none
+            pointer-events: none;
+            max-width: 90vw;
+            text-align: center
         }
 
         .toast.show {
             opacity: 1;
             transform: translateX(-50%) translateY(0)
+        }
+
+        .checkbox-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin: 0 0 16px;
+            font-size: 13px;
+            color: var(--text-muted)
+        }
+
+        .checkbox-row input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            margin-top: 2px;
+            accent-color: #6366f1
+        }
+
+        .checkbox-row a {
+            color: #6366f1;
+            text-decoration: underline
         }
     </style>
 </head>
@@ -1109,6 +1133,7 @@
     </div>
 
     <div class="app" id="app">
+        <!-- ЭКРАН 1 -->
         <div class="screen active" id="screen-event">
             <div class="progress">
                 <div class="progress-dot active"></div>
@@ -1130,6 +1155,7 @@
             <button class="btn btn-primary" id="btn-next-event" disabled>Далее →</button>
         </div>
 
+        <!-- ЭКРАН 2 -->
         <div class="screen" id="screen-guests">
             <div class="progress">
                 <div class="progress-dot active"></div>
@@ -1163,6 +1189,7 @@
             <button class="btn btn-primary" id="btn-next-guests">Далее →</button>
         </div>
 
+        <!-- ЭКРАН 3 -->
         <div class="screen" id="screen-duration">
             <div class="progress">
                 <div class="progress-dot active"></div>
@@ -1181,6 +1208,7 @@
             <button class="btn btn-primary" id="btn-next-duration" disabled>Далее →</button>
         </div>
 
+        <!-- ЭКРАН 4 -->
         <div class="screen" id="screen-budget">
             <div class="progress">
                 <div class="progress-dot active"></div>
@@ -1201,6 +1229,7 @@
             <button class="btn btn-primary" id="btn-next-budget" disabled>Далее →</button>
         </div>
 
+        <!-- ЭКРАН 5 -->
         <div class="screen" id="screen-prefs">
             <div class="progress">
                 <div class="progress-dot active"></div>
@@ -1224,10 +1253,12 @@
             <button class="btn btn-primary" id="btn-calculate">Рассчитать</button>
         </div>
 
+        <!-- ЭКРАН 6 -->
         <div class="screen" id="screen-loading">
             <div class="loader">⏳ Считаем ваш стол…</div>
         </div>
 
+        <!-- ЭКРАН 7 -->
         <div class="screen" id="screen-result">
             <div class="card">
                 <div class="result-header">
@@ -1243,11 +1274,8 @@
                 <div
                     style="background:linear-gradient(135deg,#eef2ff 0%,#f5f3ff 100%);border-radius:14px;padding:14px 16px;margin-bottom:16px;font-size:13px;color:#4338ca;text-align:left;border:1px solid #e0e7ff;display:flex;gap:12px;align-items:center;">
                     <div style="font-size:26px;flex-shrink:0;">✏️</div>
-                    <div>
-                        <b>Заменить любое блюдо?</b><br>
-                        Нажмите круглую фиолетовую кнопку справа от блюда — откроется список с фильтрами (мясо / рыба /
-                        вегетарианское).
-                    </div>
+                    <div><b>Заменить любое блюдо?</b><br>Нажмите круглую фиолетовую кнопку справа от блюда — откроется
+                        список с фильтрами (мясо / рыба / вегетарианское).</div>
                 </div>
                 <div id="result-items"></div>
                 <div class="total-row"><span>Итого:</span><span id="result-total-bottom">0 ₽</span></div>
@@ -1266,6 +1294,7 @@
                 «Вкусно». Цена без учёта обслуживания.</p>
         </div>
 
+        <!-- ЭКРАН 8: Заявка -->
         <div class="screen" id="screen-send-request">
             <div class="top-bar"><button class="back-btn" id="back-from-request">← Назад</button></div>
             <div class="card">
@@ -1285,10 +1314,17 @@
                 <div style="margin-bottom:16px;"><label
                         style="font-size:13px;color:var(--text-muted);display:block;margin-bottom:6px;">Комментарий</label><textarea
                         class="budget-input" id="req-comment" rows="3" placeholder="Пожелания..."></textarea></div>
+                <div class="checkbox-row">
+                    <input type="checkbox" id="req-agree">
+                    <label for="req-agree">Я согласен на <a href="/privacy.html" target="_blank"
+                            rel="noopener noreferrer" onclick="event.stopPropagation()">обработку и передачу
+                            персональных данных</a></label>
+                </div>
                 <button class="btn btn-primary" id="btn-submit-request">Отправить заявку</button>
             </div>
         </div>
 
+        <!-- ЭКРАН 9 -->
         <div class="screen" id="screen-send-success">
             <div class="card" style="text-align:center;padding:40px 24px;">
                 <div style="font-size:64px;margin-bottom:16px;">✅</div>
@@ -1314,18 +1350,14 @@
 
     <script>
         const API_URL = 'https://hvatitvsem.onrender.com';
-        const STORAGE_KEY = 'hvatit_state_v4';
+        const STORAGE_KEY = 'hvatit_state_v5';
 
-        /* ============================================================
-           ОПРЕДЕЛЕНИЕ ТЕГА (порядок: veg-исключения → sweet → drink → fish → meat)
-        ============================================================ */
+        /* ============ ТЕГИ ============ */
         const TAG_EMOJI = { meat: '🥩', fish: '🐟', veg: '🥬', sweet: '🍰', drink: '🥤' };
         const TAG_LABEL = { meat: 'Мясо', fish: 'Рыба', veg: 'Вегетарианское', sweet: 'Сладкое', drink: 'Напиток' };
 
         function detectTag(name) {
             const n = (name || '').toLowerCase();
-
-            // 1. Явные вегетарианские (проверяются до мяса, чтобы «Овощные шашлычки» не стали мясом)
             if (/вегетарианск/.test(n)) return 'veg';
             if (/шашлыч.*(овощ|свеж)|овощн.*шашлыч|овощ.*на грил|овощ.*гриль|овощ.*тушен|овощ.*тушён/.test(n)) return 'veg';
             if (/^овощн|овощн.*нарезк|овощ.*микс|овощ.*смесь|овощное изобилие/.test(n)) return 'veg';
@@ -1333,19 +1365,10 @@
             if (/рататуй|брокколи|дикий рис|капуст.*цвет|рис жасмин/.test(n)) return 'veg';
             if (/картофел|картошк/.test(n)) return 'veg';
             if (/виноград|оливк|маслин|маринованн.*лук|морковь по-корейск|маринад/.test(n) && !/мяс|курин|говяд|свинин|рыб/.test(n)) return 'veg';
-
-            // 2. Сладкое
             if (/торт[аы]|пирожн|десерт|желе|панна|котт|зефир|морожен|медовик|конфет|шоколад|кукис|тирамису|маскарпоне|печень|мусс|сгущ|сочник|слойка.*творог|слойка.*яблок|слойка.*сгущ|пирож.*яблок|шаньг|корзиночк/.test(n)) return 'sweet';
-
-            // 3. Напитки
             if (/лимонад|морс|сок[аи]|вода|кофе|чай|капучино|латте|эспрессо|американо|глинтвейн|мохито|квас|компот|сливк|напит/.test(n)) return 'drink';
-
-            // 4. Рыба (до мяса, чтобы «Стейк из форели» стал рыбой)
             if (/сёмг|семг|форел|лосос|сельд|икр|кревет|миди|кальмар|дорад|рыб[аыу]|тунец|скумбри|осетр|горбуш|нерк|треск|палтус|камбал|морск|крабов|лангустин|гребешк|устриц/.test(n)) return 'fish';
-
-            // 5. Мясо
             if (/говяд|свинин|кур[аыое]|куриц|курин|телятин|язык|ветчин|бекон|колбас|сосис|буженин|прошутт|карбонат|окорок|купат|шашлык|шашлыч|крылыш|крыл[оа]|бедрышк|бедр[оа]|ножк|заливн|паштет|пастром|балык|грудин|стейк|медальон|каррер|цыплен|цыпл|утк|индейк|бастурм|хамон|салями|сервелат|колбаск|котлет|бифштекс|ростбиф|мяс[оа]|мясом|мясн|жульен/.test(n)) return 'meat';
-
             return 'veg';
         }
 
@@ -1354,10 +1377,7 @@
             return `<span class="${extraClass || 'item-tag'} ${tag}">${TAG_EMOJI[tag]} ${TAG_LABEL[tag]}</span>`;
         }
 
-        /* ============================================================
-           ЛОКАЛЬНАЯ БАЗА БЛЮД «ВКУСНО»
-           Формат: [name, unit, price, package_size, subcategory]
-        ============================================================ */
+        /* ============ ЛОКАЛЬНАЯ БАЗА «ВКУСНО» ============ */
         const LOCAL_DISHES = {
             'Холодные закуски': [
                 ['Канапе с ветчиной и маслинами', 'шт', 60, 1], ['Канапе с сыром и ветчиной', 'шт', 60, 1], ['Канапе с сыром Маасдам, Фета и виноградом', 'шт', 60, 1], ['Канапе овощные с черри и перцем', 'шт', 83, 1], ['Канапе фруктовые', 'шт', 60, 1], ['Фруктовые шашлычки', 'шт', 100, 1], ['Канапе-десерт Медовик сметанный', 'шт', 85, 1], ['Канапе с зефиром, бананами и виноградом', 'шт', 60, 1], ['Розочка слабосолёной семги на тосте', 'шт', 130, 1], ['Тарталетка-mini с сёмгой и творожным сыром', 'шт', 150, 1], ['Волованы с креветкой, красной икрой и сыром', 'шт', 230, 1], ['Королевская креветка на тосте', 'шт', 180, 1], ['Канапе с креветкой на творожном сыре', 'шт', 190, 1], ['Канапе с мидией, цитрусом и яблоком', 'шт', 115, 1], ['Волованы с красной икрой и икорным муссом', 'шт', 190, 1], ['Волованы с чёрной осетровой икрой и Маскарпоне', 'шт', 1700, 1], ['Волованы с красной икрой', 'шт', 190, 1], ['Ломтики подкопчёного кальмара на тосте', 'шт', 135, 1], ['Волованы с муссом из семги и сыра', 'шт', 100, 1], ['Волованы с красной икрой и муссом из сёмги', 'шт', 195, 1], ['Профитроли с муссом из семги', 'шт', 130, 1], ['Профитроли с красной икрой и сёмгой', 'шт', 180, 1], ['Канапе с исландской сельдью', 'шт', 80, 1], ['Канапе с говядиной и черри', 'шт', 135, 1], ['Канапе с ветчиной и черри', 'шт', 95, 1], ['Канапе Цезарь с куриной грудкой', 'шт', 100, 1], ['Канапе с бужениной и корнишонами', 'шт', 215, 1], ['Канапе с окороком и виноградом', 'шт', 95, 1], ['Канапе с телячьим языком', 'шт', 140, 1], ['Канапе с карбонатом и горчицей', 'шт', 95, 1], ['Канапе с карбонатом, сулугуни и маслинами', 'шт', 97, 1], ['Канапе с прошутто, грушей и Дор Блю', 'шт', 150, 1], ['Профитроли с муссом из телятины', 'шт', 100, 1], ['Профитроли с муссом из курицы и грибов', 'шт', 90, 1], ['Заливное с телятиной, языком, курочкой', 'шт', 350, 1], ['Кубики сыра Фета в зелени', 'шт', 60, 1], ['Итальянская закуска с оливками', 'шт', 70, 1], ['Канапе с Дор Блю, орехом и виноградом', 'шт', 280, 1], ['Канапе с Камамбером и виноградом', 'шт', 220, 1], ['Закуска с Моцареллой, базиликом и черри', 'шт', 130, 1], ['Закуска с Моцареллой, черри и маслинами', 'шт', 105, 1], ['Закуска Итальяно', 'шт', 110, 1], ['Закуска Капрезе в шоте', 'шт', 150, 1], ['Тарталетки с муссом из Эдам', 'шт', 125, 1], ['Волованы с грибным муссом и ветчиной', 'шт', 130, 1], ['Мини-бутерброд с говядиной и огурцом', 'шт', 116, 1], ['Мини-бутерброд с тремя сырами', 'шт', 145, 1], ['Мини-бутерброд с сёмгой', 'шт', 170, 1], ['Мини-бутерброд с красной икрой', 'шт', 215, 1], ['Мини-бутерброд с сервелатом', 'шт', 115, 1], ['Мини-бутерброд с сельдью', 'шт', 95, 1], ['Мини-сэндвич с салями', 'шт', 150, 1], ['Мини-сэндвич с ветчиной и сыром', 'шт', 115, 1], ['Бутерброд с ветчиной', 'шт', 120, 1], ['Бутерброд с сыром', 'шт', 120, 1], ['Бутерброд с говяжим окороком', 'шт', 275, 1], ['Бутерброд с семгой', 'шт', 260, 1], ['Бутерброд с копчёной колбасой', 'шт', 170, 1], ['Сэндвич с ветчиной, овощами и сыром', 'шт', 250, 1], ['Клаб-сэндвич с мясом и овощами', 'шт', 350, 1], ['Клаб-сэндвич с ветчиной и овощами', 'шт', 200, 1], ['Багет с говядиной, огурцом и томатом', 'шт', 350, 1], ['Брускетта с красной рыбой', 'шт', 250, 1], ['Брускетта с паштетом из курицы', 'шт', 150, 1], ['Брускетта с шампиньонами и трюфелем', 'шт', 180, 1], ['Брускетта с персиками и мятой', 'шт', 155, 1], ['Куриные рулетики с перцем и сыром', 'шт', 130, 1], ['Куриные рулетики с ветчиной и беконом', 'шт', 155, 1], ['Рулетики из баклажанов с орехами', 'шт', 100, 1], ['Мини-блинчики с красной икрой', 'шт', 250, 1], ['Рулетики с семужкой и брынзой', 'шт', 130, 1], ['Рулетики с курицей и грибами', 'шт', 80, 1], ['Рулетики из ветчины с сыром', 'шт', 70, 1], ['Пикантный рулетик из говядины', 'шт', 100, 1]
@@ -1372,7 +1392,7 @@
                 ['Салат «Алый»', 'порция', 315, 1], ['Салат «Арно»', 'порция', 300, 1], ['Салат «Европа»', 'порция', 270, 1], ['Салат «Пражский»', 'порция', 310, 1], ['Салат «Куранов»', 'порция', 270, 1], ['Салат «Королевский»', 'порция', 325, 1], ['Салат «Греческий»', 'порция', 270, 1], ['Салат «Английский»', 'порция', 290, 1], ['Салат «Застолье»', 'порция', 275, 1], ['Салат «Канада»', 'порция', 270, 1], ['Салат «Мексиканский»', 'порция', 275, 1], ['Салат «Сытный»', 'порция', 265, 1], ['Салат «Мальта»', 'порция', 280, 1], ['Салат-коктейль «Нежность»', 'порция', 280, 1], ['Салат «Немецкий»', 'порция', 265, 1], ['Салат «Овощное изобилие»', 'порция', 250, 1], ['Салат «Оливье» с говядиной и языком', 'порция', 300, 1], ['Салат «Сельдь под шубой»', 'порция', 280, 1], ['Салат «Сёмга под шубой»', 'порция', 480, 1], ['Салат «Цезарь»', 'порция', 285, 1], ['Салат «Гармония»', 'порция', 270, 1], ['Салат «Зимний вечер»', 'порция', 275, 1], ['Салат «Сицилиано» (креветки)', 'порция', 680, 1], ['Салат «Итальянские каникулы»', 'порция', 550, 1], ['Салат «Морской бриз»', 'порция', 604, 1], ['Салат «Елисейские поля»', 'порция', 580, 1], ['Салат «Средиземноморье» (сёмга)', 'порция', 685, 1], ['Салат «Ницца» (форель)', 'порция', 650, 1], ['Салат «Режю»', 'порция', 560, 1], ['Салат «Губернский»', 'порция', 550, 1], ['Салат «Брайтон»', 'порция', 440, 1], ['Салат «Кайенский»', 'порция', 565, 1], ['Салат «Дуэт»', 'порция', 580, 1], ['Салат «Шанхай»', 'порция', 600, 1], ['Салат «Вольдорф»', 'порция', 580, 1]
             ],
             'Горячее': [
-                // ---- Горячие блюда ----
+                // Горячие блюда
                 ['Жульен с курицей и грибами (кокотница)', 'порция', 250, 1, 'Горячие блюда'],
                 ['Жульен с курицей и грибами (тарталетка)', 'порция', 150, 1, 'Горячие блюда'],
                 ['Жульен с морепродуктами', 'порция', 390, 1, 'Горячие блюда'],
@@ -1421,7 +1441,7 @@
                 ['Филе цыплёнка в миндале', 'порция', 540, 1, 'Горячие блюда'],
                 ['Куриная грудка по-пекински', 'порция', 530, 1, 'Горячие блюда'],
                 ['Куриная грудка под шапкой из томатов', 'порция', 510, 1, 'Горячие блюда'],
-                // ---- Гарниры и плов ----
+                // Гарниры и плов
                 ['Картофель с травами', 'порция', 190, 1, 'Гарниры и плов'],
                 ['Овощные шашлычки (гарнир)', 'порция', 200, 1, 'Гарниры и плов'],
                 ['Итальянский рататуй', 'порция', 400, 1, 'Гарниры и плов'],
@@ -1437,7 +1457,7 @@
                 ['Плов с говядиной', 'порция', 470, 1, 'Гарниры и плов'],
                 ['Плов со свининой', 'порция', 450, 1, 'Гарниры и плов'],
                 ['Плов с курицей', 'порция', 420, 1, 'Гарниры и плов'],
-                // ---- Соусы и добавки ----
+                // Соусы и добавки
                 ['Соус Южный', 'порция', 55, 1, 'Соусы и добавки'],
                 ['Соус Летний', 'порция', 70, 1, 'Соусы и добавки'],
                 ['Соус Пикантный', 'порция', 55, 1, 'Соусы и добавки'],
@@ -1465,9 +1485,7 @@
             return raw.map(a => ({ name: a[0], unit: a[1], price: a[2], package_size: a[3] || 1, sub: a[4] || '' }));
         }
 
-        /* ============================================================
-           КОНСТАНТЫ
-        ============================================================ */
+        /* ============ КОНСТАНТЫ ============ */
         const EVENTS = [
             { id: 'SC101', icon: '🎂', label: 'День рождения', desc: 'Банкет с закусками и горячим', random: true },
             { id: 'SC102', icon: '🏢', label: 'Корпоратив', desc: 'Банкет с закусками и горячим', random: true },
@@ -1490,12 +1508,16 @@
             prefs: [], lastResult: null, lastPayload: null, isCalculating: false
         };
 
-        /* ============================================================
-           СОХРАНЕНИЕ
-        ============================================================ */
+        /* ============ СОХРАНЕНИЕ ============ */
         function saveState() {
             try {
-                const form = { name: document.getElementById('req-name')?.value || '', phone: document.getElementById('req-phone')?.value || '', email: document.getElementById('req-email')?.value || '', comment: document.getElementById('req-comment')?.value || '' };
+                const form = {
+                    name: document.getElementById('req-name')?.value || '',
+                    phone: document.getElementById('req-phone')?.value || '',
+                    email: document.getElementById('req-email')?.value || '',
+                    comment: document.getElementById('req-comment')?.value || '',
+                    agree: document.getElementById('req-agree')?.checked || false
+                };
                 const currentScreen = document.querySelector('.screen.active')?.id || 'screen-event';
                 sessionStorage.setItem(STORAGE_KEY, JSON.stringify({ screen: currentScreen, eventId: state.eventId, isRandom: state.isRandom, adults: state.adults, hours: state.hours, eventDate: state.eventDate, budget: state.budget, customBudget: state.customBudget, prefs: state.prefs, lastResult: state.lastResult, lastPayload: state.lastPayload, form }));
             } catch (e) { }
@@ -1516,8 +1538,8 @@
                 if (s.lastResult) state.lastResult = s.lastResult;
                 if (s.lastPayload) state.lastPayload = s.lastPayload;
                 if (s.form) {
-                    const ni = document.getElementById('req-name'), pi = document.getElementById('req-phone'), ei = document.getElementById('req-email'), ci = document.getElementById('req-comment');
-                    if (ni) ni.value = s.form.name || ''; if (pi) pi.value = s.form.phone || ''; if (ei) ei.value = s.form.email || ''; if (ci) ci.value = s.form.comment || '';
+                    const ni = document.getElementById('req-name'), pi = document.getElementById('req-phone'), ei = document.getElementById('req-email'), ci = document.getElementById('req-comment'), ai = document.getElementById('req-agree');
+                    if (ni) ni.value = s.form.name || ''; if (pi) pi.value = s.form.phone || ''; if (ei) ei.value = s.form.email || ''; if (ci) ci.value = s.form.comment || ''; if (ai) ai.checked = !!s.form.agree;
                 }
                 return s.screen || null;
             } catch (e) { return null; }
@@ -1537,7 +1559,7 @@
             const t = document.getElementById('toast');
             t.textContent = text; t.classList.add('show');
             clearTimeout(showToast._timer);
-            showToast._timer = setTimeout(() => t.classList.remove('show'), 2200);
+            showToast._timer = setTimeout(() => t.classList.remove('show'), 2400);
         }
         function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
         function getCategoryStyle(cat) {
@@ -1552,9 +1574,7 @@
             return { cls: 'cat-default', icon: '🍽️' };
         }
 
-        /* ============================================================
-           РЕНДЕР
-        ============================================================ */
+        /* ============ РЕНДЕР ============ */
         function renderEvents() {
             const grid = document.getElementById('event-grid');
             grid.innerHTML = EVENTS.map(e => `<div class="option-card ${state.eventId === e.id ? 'selected' : ''}" data-id="${e.id}" data-random="${e.random ? '1' : '0'}"><div class="option-icon">${e.icon}</div><div class="option-label">${e.label}</div><div class="option-desc">${e.desc}</div></div>`).join('');
@@ -1617,9 +1637,7 @@
             return filled;
         }
 
-        /* ============================================================
-           РАСЧЁТ
-        ============================================================ */
+        /* ============ РАСЧЁТ ============ */
         async function calculate() {
             if (state.isCalculating) return;
             if (!state.eventId) { showToast('Выберите мероприятие'); return; }
@@ -1693,10 +1711,17 @@
             saveState();
         }
 
-        /* ============================================================
-           РЕДАКТОР: локальные блюда + фильтр + группировка по подкатегориям
-        ============================================================ */
+        /* ============ РЕДАКТОР ============ */
         let editingContext = null;
+
+        function renderAltItem(d) {
+            const tag = detectTag(d.name);
+            const safeName = d.name.replace(/"/g, '&quot;');
+            return `<div class="alt-item" data-name="${safeName}" data-price="${d.price}" data-unit="${d.unit}" data-pkg="${d.package_size}" data-tag="${tag}">
+    <div class="alt-info"><div class="alt-name">${d.name}</div><div class="alt-meta"><span class="alt-tag ${tag}">${TAG_EMOJI[tag]} ${TAG_LABEL[tag]}</span></div></div>
+    <div class="alt-price">${formatMoney(d.price)}/${d.unit}</div>
+  </div>`;
+        }
 
         function openEditor(category, currentName) {
             const overlay = document.getElementById('modal-overlay');
@@ -1727,28 +1752,18 @@
                 return;
             }
 
-            // Определяем, есть ли подкатегории
             const hasSubs = filtered.some(d => d.sub && d.sub.length > 0);
-
-            // Группировка
             let html = '';
             if (hasSubs) {
                 const groups = {};
-                filtered.forEach(d => {
-                    const key = d.sub || 'Прочее';
-                    (groups[key] = groups[key] || []).push(d);
-                });
+                filtered.forEach(d => { const key = d.sub || 'Прочее'; (groups[key] = groups[key] || []).push(d); });
                 for (const [subName, subItems] of Object.entries(groups)) {
-                    html += `<div class="modal-group">
-        <div class="modal-sub">${subName}</div>
-        ${subItems.map(d => renderAltItem(d)).join('')}
-      </div>`;
+                    html += `<div class="modal-group"><div class="modal-sub">${subName}</div>${subItems.map(d => renderAltItem(d)).join('')}</div>`;
                 }
             } else {
                 html = filtered.map(d => renderAltItem(d)).join('');
             }
 
-            // Набор тегов для фильтра
             const presentTags = new Set(filtered.map(d => detectTag(d.name)));
             const filterChips = [['all', 'Все']];
             if (presentTags.has('meat')) filterChips.push(['meat', '🥩 Мясо']);
@@ -1765,19 +1780,15 @@
     <div id="modal-list">${html}</div>
   `;
 
-            // Фильтр по тегам
             body.querySelectorAll('.modal-tag').forEach(tagBtn => {
                 tagBtn.addEventListener('click', () => {
                     body.querySelectorAll('.modal-tag').forEach(b => b.classList.remove('active'));
                     tagBtn.classList.add('active');
                     const filter = tagBtn.dataset.filter;
-
                     body.querySelectorAll('.alt-item').forEach(item => {
                         if (filter === 'all' || item.dataset.tag === filter) item.classList.remove('hidden');
                         else item.classList.add('hidden');
                     });
-
-                    // Скрываем пустые группы
                     body.querySelectorAll('.modal-group').forEach(group => {
                         const hasVisible = Array.from(group.querySelectorAll('.alt-item')).some(i => !i.classList.contains('hidden'));
                         group.classList.toggle('hidden', !hasVisible);
@@ -1785,7 +1796,6 @@
                 });
             });
 
-            // Клик по блюду
             body.querySelectorAll('.alt-item').forEach(el => {
                 el.addEventListener('click', () => replaceDish({
                     name: el.dataset.name,
@@ -1794,18 +1804,6 @@
                     package_size: parseFloat(el.dataset.pkg)
                 }));
             });
-        }
-
-        function renderAltItem(d) {
-            const tag = detectTag(d.name);
-            const safeName = d.name.replace(/"/g, '&quot;');
-            return `<div class="alt-item" data-name="${safeName}" data-price="${d.price}" data-unit="${d.unit}" data-pkg="${d.package_size}" data-tag="${tag}">
-    <div class="alt-info">
-      <div class="alt-name">${d.name}</div>
-      <div class="alt-meta"><span class="alt-tag ${tag}">${TAG_EMOJI[tag]} ${TAG_LABEL[tag]}</span></div>
-    </div>
-    <div class="alt-price">${formatMoney(d.price)}/${d.unit}</div>
-  </div>`;
         }
 
         function closeModal() {
@@ -1821,29 +1819,24 @@
             const items = state.lastResult.items;
             const target = items.find(i => i.category === category && i.name === currentName);
             if (!target) { closeModal(); showToast('Блюдо не найдено'); return; }
-
             const packages = target.packages || 1;
             target.name = newDish.name;
             target.cost_per_unit = newDish.price_per_unit;
             target.unit = newDish.unit;
             target.package_size = newDish.package_size;
             target.total_price = Math.round(packages * newDish.price_per_unit * 100) / 100;
-
             const total = items.reduce((s, i) => s + i.total_price, 0);
             state.lastResult.total_cost = Math.round(total * 100) / 100;
             state.lastResult.is_within_budget = total <= state.lastResult.budget;
             state.lastResult.remaining = Math.max(0, state.lastResult.budget - total);
             state.lastResult.shortfall = Math.max(0, total - state.lastResult.budget);
             state.lastResult.price_per_guest = Math.round(total / Math.max(1, state.lastResult.total_guests));
-
             closeModal();
             renderResult(state.lastResult);
             showToast('✓ Блюдо заменено');
         }
 
-        /* ============================================================
-           БЮДЖЕТ / REROLL
-        ============================================================ */
+        /* ============ БЮДЖЕТ ============ */
         function openBudgetModal() {
             const overlay = document.getElementById('modal-overlay');
             const title = document.getElementById('modal-title');
@@ -1888,9 +1881,7 @@
             }
         }
 
-        /* ============================================================
-           ОТПРАВКА ЗАЯВКИ
-        ============================================================ */
+        /* ============ ЗАЯВКА ============ */
         document.getElementById('btn-send-request').addEventListener('click', () => showScreen('screen-send-request'));
         document.getElementById('back-from-request').addEventListener('click', () => showScreen('screen-result'));
         document.getElementById('btn-close-success').addEventListener('click', () => showScreen('screen-result'));
@@ -1900,36 +1891,60 @@
             const phone = document.getElementById('req-phone').value.trim();
             const email = document.getElementById('req-email').value.trim();
             const comment = document.getElementById('req-comment').value.trim();
+            const agree = document.getElementById('req-agree')?.checked || false;
+
             if (!name) { showToast('Укажите имя'); return; }
             if (!phone) { showToast('Укажите телефон'); return; }
+            if (!agree) { showToast('Нужно согласие на обработку данных'); return; }
             if (!state.lastResult) { showToast('Сначала рассчитайте меню'); return; }
+
             const btn = document.getElementById('btn-submit-request');
             btn.disabled = true; btn.textContent = 'Отправляем…';
+
             const scenarioObj = EVENTS.find(e => e.id === state.eventId) || {};
             const payload = {
-                client_name: name, client_phone: phone, client_email: email, client_comment: comment,
+                client_name: name,
+                client_phone: phone,
+                client_email: email || '',
+                client_comment: comment || 'без комментария',
                 event_date: state.eventDate || '',
-                scenario_id: state.eventId, scenario_name: scenarioObj.label || '',
-                adults: state.adults, hours: state.hours, budget: state.customBudget || state.budget,
+                consent: true,
+                scenario_id: state.eventId,
+                scenario_name: scenarioObj.label || '',
+                adults: state.adults,
+                children: 0,
+                hours: state.hours,
+                budget: state.customBudget || state.budget,
                 total_cost: state.lastResult.total_cost,
                 price_per_guest: state.lastResult.price_per_guest || 0,
                 items: state.lastResult.items
             };
+
+            console.log('send_request →', payload);
+
             try {
                 const res = await fetch(`${API_URL}/send_request`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-                if (!res.ok) throw new Error(`HTTP ${res.status}`);
-                const data = await res.json();
+                const text = await res.text();
+                let data = {};
+                try { data = JSON.parse(text); } catch (e) { }
+                console.log('send_request ←', res.status, data);
+
+                if (!res.ok) {
+                    const detail = data.detail ? (Array.isArray(data.detail) ? data.detail.map(d => d.msg).join('; ') : data.detail) : `HTTP ${res.status}`;
+                    throw new Error(detail);
+                }
+
                 document.getElementById('success-text').textContent = data.request_id ? `Заявка №${data.request_id} принята.` : 'Ваша заявка принята.';
                 showScreen('screen-send-success');
             } catch (err) {
+                console.error('send_request ERROR', err);
+                showToast('Не удалось отправить: ' + (err.message || 'проверьте интернет'));
+            } finally {
                 btn.disabled = false; btn.textContent = 'Отправить заявку';
-                showToast('Не удалось отправить. Проверьте интернет.');
             }
         });
 
-        /* ============================================================
-           СЧЁТЧИК
-        ============================================================ */
+        /* ============ СЧЁТЧИК ============ */
         function setupCounter(name, min, max, stateKey) {
             const minus = document.getElementById(`${name}-minus`);
             const plus = document.getElementById(`${name}-plus`);
@@ -1958,9 +1973,7 @@
             update();
         }
 
-        /* ============================================================
-           НАВИГАЦИЯ
-        ============================================================ */
+        /* ============ НАВИГАЦИЯ ============ */
         document.getElementById('btn-next-event').addEventListener('click', () => { showScreen('screen-guests'); updateDateValidity(); });
         document.getElementById('btn-next-guests').addEventListener('click', () => { if (!updateDateValidity()) { showToast('Укажите дату мероприятия'); document.getElementById('event-date').focus(); return; } showScreen('screen-duration'); });
         document.getElementById('btn-next-duration').addEventListener('click', () => showScreen('screen-budget'));
@@ -1977,9 +1990,7 @@
             state.customBudget = v; state.budget = v; updateSummary(); saveState();
         });
 
-        /* ============================================================
-           SHARE / COPY
-        ============================================================ */
+        /* ============ SHARE / COPY ============ */
         function buildShareText() {
             if (!state.lastResult) return '';
             const r = state.lastResult;
@@ -2010,10 +2021,9 @@
             } catch { showToast('Не удалось скопировать'); }
         });
 
-        /* ============================================================
-           СТАРТ
-        ============================================================ */
+        /* ============ СТАРТ ============ */
         ['req-name', 'req-phone', 'req-email', 'req-comment'].forEach(id => { const el = document.getElementById(id); if (el) el.addEventListener('input', saveState); });
+        document.getElementById('req-agree').addEventListener('change', saveState);
         document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') saveState(); });
         window.addEventListener('beforeunload', saveState);
         document.getElementById('btn-restart').addEventListener('click', () => { try { sessionStorage.removeItem(STORAGE_KEY); } catch (e) { } location.reload(); });
